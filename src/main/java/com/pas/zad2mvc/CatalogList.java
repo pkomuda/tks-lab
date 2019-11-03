@@ -1,23 +1,21 @@
 package com.pas.zad2mvc;
 
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
-import java.io.Serializable;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Named(value = "catalogList")
-@SessionScoped
-public class CatalogList implements Serializable
+@ApplicationScoped
+public class CatalogList
 {
     private List<Catalog> catalogs;
 
     public CatalogList()
     {
-        this.catalogs = new ArrayList<>();
+        catalogs = new ArrayList<>();
     }
 
     public List<Catalog> getCatalogs()
@@ -27,14 +25,12 @@ public class CatalogList implements Serializable
 
     public void addBook(String title, String author, int releaseYear)
     {
-        Catalog book = new Book(title, author, Year.of(releaseYear));
-        catalogs.add(book);
+        catalogs.add(new Book(title, author, Year.of(releaseYear)));
     }
 
     public void addMovie(String title, String director, int releaseYear)
     {
-        Catalog movie = new Movie(title, director, Year.of(releaseYear));
-        catalogs.add(movie);
+        catalogs.add(new Movie(title, director, Year.of(releaseYear)));
     }
 
     public Catalog get(String id)
@@ -47,9 +43,18 @@ public class CatalogList implements Serializable
         throw new NoSuchElementException("No catalog with id: " + id + " found.");
     }
 
-    public void update(String id)
+    public void updateBook(String id, String title, String author, int releaseYear)
     {
-        //TODO
+        get(id).setTitle(title);
+        ((Book)get(id)).setAuthor(author);
+        get(id).setReleaseYear(releaseYear);
+    }
+
+    public void updateMovie(String id, String title, String director, int releaseYear)
+    {
+        get(id).setTitle(title);
+        ((Movie)get(id)).setDirector(director);
+        get(id).setReleaseYear(releaseYear);
     }
 
     public boolean remove(String id)

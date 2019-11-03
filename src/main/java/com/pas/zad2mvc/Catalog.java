@@ -32,13 +32,11 @@ public abstract class Catalog
     {
         return title;
     }
-    public Year getReleaseYear()
+    public int getReleaseYear()
     {
-        return releaseYear;
-    }
-    public int getReleaseYearValue()
-    {
-        return releaseYear.getValue();
+        if (releaseYear != null)
+            return releaseYear.getValue();
+        return 0;
     }
     //endregion
 
