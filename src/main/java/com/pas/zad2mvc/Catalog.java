@@ -1,6 +1,7 @@
 package com.pas.zad2mvc;
 
 import java.time.Year;
+import java.util.Objects;
 import java.util.UUID;
 
 public abstract class Catalog
@@ -35,6 +36,10 @@ public abstract class Catalog
     {
         return releaseYear;
     }
+    public int getReleaseYearValue()
+    {
+        return releaseYear.getValue();
+    }
     //endregion
 
     //region setters
@@ -51,4 +56,19 @@ public abstract class Catalog
         this.releaseYear = Year.of(releaseYear);
     }
     //endregion
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Catalog catalog = (Catalog) o;
+        return id.equals(catalog.id);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(id);
+    }
 }

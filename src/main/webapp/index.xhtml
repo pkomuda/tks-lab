@@ -8,20 +8,29 @@
     <h:body>
         <h:form>
             <div>
-                Nazwa użytkownika:
-                <h:inputText value="#{client.username}"/>
+                Tytuł:
+                <h:inputText value="#{book.title}" />
             </div>
             <div>
-                Aktywny:
-                <h:selectBooleanCheckbox value="#{client.active}"/>
+                Autor:
+                <h:inputText value="#{book.author}"/>
             </div>
+<!--            <div>-->
+<!--                Rok wydania:-->
+<!--                <h:inputText value="#{book.releaseYear}"/>-->
+<!--            </div>-->
             <div>
-                <h:commandButton value="OK"/>
+                <h:commandButton value="OK" action="#{catalogList.addBook(book.title, book.author, 2000)}"/>
             </div>
         </h:form>
         <div>
-            <h:outputText value="#{client}"/>
+            <h:outputText value="#{catalogList}"/>
         </div>
     </h:body>
 </html>
 
+
+<!--            <div>-->
+<!--                Aktywny:-->
+<!--                <h:selectBooleanCheckbox value="#{client.active}"/>-->
+<!--            </div>-->
