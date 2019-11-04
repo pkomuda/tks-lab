@@ -23,12 +23,12 @@
                  <h:commandButton value="Client" action="index.xhtml">
                     <f:actionListener binding="#{manager.setActive(active)}"/>
                 </h:commandButton>-->
-                <h:selectOneMenu value="#{controller.no}">
+                <h:selectOneMenu value="#{book.id}">
    			<f:selectItem itemValue="1" itemLabel="Manager" />
    			<f:selectItem itemValue="Admin" itemLabel="Admin" />
    			<f:selectItem itemValue="Client" itemLabel="Client" />
    		</h:selectOneMenu>
-                <!--<h:commandButton value="OK" action="#{controller.name}"/>-->
+                <h:commandButton value="OK" action="adminlogin.xhtml"/>
             </div>
          </h:form>
     </h:body>
