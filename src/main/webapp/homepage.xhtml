@@ -13,22 +13,14 @@
             <div>
                 Wybierz dostęp:
             </div>
-            <div>
-<!--                <h:commandButton value="Manager" action="index.xhtml">
-                    <f:actionListener binding="#{manager.setActive(active)}"/>
-                </h:commandButton>
-                 <h:commandButton value="Admin" action="index.xhtml">
-                    <f:actionListener binding="#{manager.setActive(active)}"/>
-                </h:commandButton>
-                 <h:commandButton value="Client" action="index.xhtml">
-                    <f:actionListener binding="#{manager.setActive(active)}"/>
-                </h:commandButton>-->
-                <h:selectOneMenu value="#{book.id}">
+             <div>
+                 <h:selectOneMenu value="#{login.no}">
+                   
    			<f:selectItem itemValue="1" itemLabel="Manager" />
-   			<f:selectItem itemValue="Admin" itemLabel="Admin" />
-   			<f:selectItem itemValue="Client" itemLabel="Client" />
+   			<f:selectItem itemValue="2" itemLabel="Admin" />
+   			<f:selectItem itemValue="3" itemLabel="Client" />
    		</h:selectOneMenu>
-                <h:commandButton value="OK" action="adminlogin.xhtml"/>
+                <h:commandButton value="OK" action="#{login.getPage}"/>
             </div>
          </h:form>
     </h:body>
