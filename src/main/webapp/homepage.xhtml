@@ -14,14 +14,14 @@
                 Wybierz dostęp:
             </div>
              <div>
-                 <h:selectOneMenu value="#{login.no}">
-                   
-   			<f:selectItem itemValue="1" itemLabel="Manager" />
-   			<f:selectItem itemValue="2" itemLabel="Admin" />
-   			<f:selectItem itemValue="3" itemLabel="Client" />
-   		</h:selectOneMenu>
-                <h:commandButton value="OK" action="#{login.getPage}"/>
+                 <h:commandButton value="Client" action="clientlogin.xhtml"/>
+             </div>
+             <div>                 
+                <h:commandButton value="Manager" action="managerlogin.xhtml"/>
             </div>
+             <div>
+                 <h:commandButton value="Admin" action="adminlogin.xhtml"/>
+             </div>
          </h:form>
     </h:body>
 </html>
