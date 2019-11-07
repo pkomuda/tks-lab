@@ -15,11 +15,6 @@ public abstract class Login {
         return userlist;
     }
 
-    public void setUserlist(UserList userlist)
-    {
-        this.userlist = userlist;
-    }
-
     public boolean isUserExists()
     {
         return userExists;
@@ -34,12 +29,8 @@ public abstract class Login {
 
     public abstract void checkIfUserExists(String username);
 
-    public String redirect()
-    {
-        if (userExists)
-            return "index.html";
-        return "index.html";
-    }
+    public abstract String redirect();
+
     //do sprawdzenia
     public String getOneUsername()
     {

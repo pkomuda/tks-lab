@@ -44,4 +44,12 @@ public class LoginClient extends Login
         if (!getUserlist().getUsers().containsAll(users))
             getUserlist().getUsers().addAll(users);
     }
+
+    @Override
+    public String redirect()
+    {
+        if (isUserExists())
+            return "index.html";
+        return "clientlogin.xhtml";
+    }
 }
