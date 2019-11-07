@@ -14,7 +14,9 @@
                 Wybierz dostęp:
             </div>
              <div>
-                 <h:commandButton value="Client" action="clientlogin.xhtml"/>
+                 <h:commandButton value="Client" action="clientlogin.xhtml" actionListener="#{login.addUserPool()}"/>
+                     
+              
              </div>
              <div>                 
                 <h:commandButton value="Manager" action="managerlogin.xhtml"/>

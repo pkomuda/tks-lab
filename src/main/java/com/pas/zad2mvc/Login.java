@@ -5,6 +5,7 @@
  */
 package com.pas.zad2mvc;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 
@@ -13,40 +14,43 @@ import javax.enterprise.context.Dependent;
  * @author Szymi
  */
 @Named(value = "login")
-@Dependent
+@ApplicationScoped
 public class Login {
-      private int no;
-      private String page;
+     
+    private UserList userlist;
+    private boolean userExists;
     /**
      * Creates a new instance of Login
      */
     public Login() {
-  
+       userlist = new UserList();
+      
+       
     }
-
-    public int getNo() {
-        return no;
+    public void addUserPool(){
+       userlist.addClient("herb", true);
+       userlist.addClient("papaj", true);
     }
-
-    public void setNo(int no) {
-        this.no = no;
-        if(no==1)
-        this.page="managerlogin.xhtml";
-        if(no==2)
-        this.page="adminlogin.xhtml";
-        if(no==3)
-        this.page="clientlogin.xhtml";
-        else 
-        this.page="index.html";
+    public void checkIfUserExists(String username)
+    {
+        for(User user : userlist.getUsers()){
+            if(username==user.getUsername())
+            {
+               this.userExists=true;
+            }
+        }
+        this.userExists=false;
     }
-
-    public String getPage() {
-        return page;
+    public String redirect()
+    {
+        if (userExists)
+            return "index.html";
+        return "index.html";
     }
-
-    public void setPage(String page) {
-        this.page = page;
+    //do sprawdzenia
+    public String getOneUsername()
+    {
+        return userlist.getUsers().get(0).getUsername();
     }
-    
     
 }
