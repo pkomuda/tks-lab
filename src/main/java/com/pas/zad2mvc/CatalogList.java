@@ -23,45 +23,54 @@ public class CatalogList
         return catalogs;
     }
 
-    public void addBook(String title, String author, int releaseYear)
+    public void addBook(int id, String title, String author, int releaseYear)
     {
-        catalogs.add(new Book(title, author, Year.of(releaseYear)));
+        catalogs.add(new Book(id, title, author, Year.of(releaseYear)));
     }
 
-    public void addMovie(String title, String director, int releaseYear)
+    public void addMovie(int id, String title, String director, int releaseYear)
     {
-        catalogs.add(new Movie(title, director, Year.of(releaseYear)));
+        catalogs.add(new Movie(id, title, director, Year.of(releaseYear)));
     }
 
-    public Catalog get(String id)
+    public Catalog get(int id)
     {
         for (Catalog catalog : catalogs)
         {
-            if (catalog.getId().equals(id))
+            if (catalog.getId() == id)
                 return catalog;
         }
         throw new NoSuchElementException("No catalog with id: " + id + " found.");
     }
 
-    public void updateBook(String id, String title, String author, int releaseYear)
+    public void updateBook(int id, String title, String author, int releaseYear)
     {
-        get(id).setTitle(title);
-        ((Book)get(id)).setAuthor(author);
-        get(id).setReleaseYear(releaseYear);
+        if (get(id).getClass().getName().equals("com.pas.zad2mvc.Book"))
+        {
+            get(id).setTitle(title);
+            ((Book) get(id)).setAuthor(author);
+            get(id).setReleaseYear(releaseYear);
+        }
+        else
+            throw new IllegalArgumentException("Catalog with id: " + id + " is not a book.");
     }
 
-    public void updateMovie(String id, String title, String director, int releaseYear)
+    public void updateMovie(int id, String title, String director, int releaseYear)
     {
-        get(id).setTitle(title);
-        ((Movie)get(id)).setDirector(director);
-        get(id).setReleaseYear(releaseYear);
+        if (get(id).getClass().getName().equals("com.pas.zad2mvc.Movie"))
+        {
+            get(id).setTitle(title);
+            ((Movie) get(id)).setDirector(director);
+            get(id).setReleaseYear(releaseYear);
+        }
+        else throw new IllegalArgumentException("Catalog with id: " + id + " is not a movie.");
     }
 
-    public boolean remove(String id)
+    public boolean remove(int id)
     {
         for (Catalog catalog : catalogs)
         {
-            if (catalog.getId().equals(id))
+            if (catalog.getId() == id)
             {
                 catalogs.remove(catalog);
                 return true;

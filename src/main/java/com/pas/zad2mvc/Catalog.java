@@ -2,29 +2,25 @@ package com.pas.zad2mvc;
 
 import java.time.Year;
 import java.util.Objects;
-import java.util.UUID;
 
 public abstract class Catalog
 {
-    private String id;
+    private int id;
     private String title;
     private Year releaseYear;
 
     //region constructors
-    public Catalog()
+    public Catalog() {}
+    public Catalog(int id, String title, Year releaseYear)
     {
-        this.id = UUID.randomUUID().toString().replace("-", "");
-    }
-    public Catalog(String title, Year releaseYear)
-    {
-        this.id = UUID.randomUUID().toString().replace("-", "");
+        this.id = id;
         this.title = title;
         this.releaseYear = releaseYear;
     }
     //endregion
 
     //region getters
-    public String getId()
+    public int getId()
     {
         return id;
     }
@@ -41,7 +37,7 @@ public abstract class Catalog
     //endregion
 
     //region setters
-    public void setId(String id)
+    public void setId(int id)
     {
         this.id = id;
     }
@@ -61,7 +57,7 @@ public abstract class Catalog
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Catalog catalog = (Catalog) o;
-        return id.equals(catalog.id);
+        return id == catalog.id;
     }
 
     @Override

@@ -8,6 +8,11 @@
     <h:body>
         <h:form>
             <div>
+                ID:
+                <h:inputText value="#{book.id}"/>
+            </div>
+
+            <div>
                 Tytuł:
                 <h:inputText value="#{book.title}"/>
             </div>
@@ -23,7 +28,7 @@
             </div>
 
             <div>
-                <h:commandButton value="OK" action="#{catalogList.addBook(book.title, book.author, book.releaseYear)}"/>
+                <h:commandButton value="OK" action="#{catalogList.addBook(book.id, book.title, book.author, book.releaseYear)}"/>
             </div>
         </h:form>
         <div>

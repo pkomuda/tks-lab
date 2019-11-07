@@ -15,9 +15,9 @@ public class Book extends Catalog
     {
         super();
     }
-    public Book(String title, String author, Year releaseYear)
+    public Book(int id, String title, String author, Year releaseYear)
     {
-        super(title, releaseYear);
+        super(id, title, releaseYear);
         this.author = author;
     }
     //endregion

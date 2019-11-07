@@ -21,6 +21,6 @@ public class Admin extends User
     @Override
     public String toString()
     {
-        return "Admin(id: " + getId() + ", username: " + getUsername() + ", active: " + isActive() + ")";
+        return "Admin(username: " + getUsername() + ", active: " + isActive() + ")";
     }
 }

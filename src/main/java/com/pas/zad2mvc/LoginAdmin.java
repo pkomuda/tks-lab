@@ -1,36 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.pas.zad2mvc;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- *
- * @author Szymi
- */
 @Named(value = "loginAdmin")
 @ApplicationScoped
-public class LoginAdmin extends Login{
-
-    /**
-     * Creates a new instance of LoginAdmin
-     */
-    public LoginAdmin(){
+public class LoginAdmin extends Login
+{
+    public LoginAdmin()
+    {
         super();
     }
+
     @Override
     public void checkIfUserExists(String username)
     {
-        for(User user : getUserlist().getUsers()){
-            if(username.equals(user.getUsername()) && user.getClass().getName().equals("Admin"))
+        for(User user : getUserlist().getUsers())
+        {
+            if(username.equals(user.getUsername()) && user.getClass().getName().equals("com.pas.zad2mvc.Admin"))
             {
                 setUserExists(true);
+                return;
             }
         }
         setUserExists(false);
@@ -46,4 +38,11 @@ public class LoginAdmin extends Login{
             getUserlist().getUsers().addAll(users);
     }
 
-}  
+    @Override
+    public String redirect()
+    {
+        if (isUserExists())
+            return "index.html";
+        return "adminlogin.xhtml";
+    }
+}

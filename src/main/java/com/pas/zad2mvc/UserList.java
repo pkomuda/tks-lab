@@ -24,50 +24,71 @@ public class UserList
 
     public void addAdmin(String username, boolean active)
     {
-        users.add(new Admin(username, active));
+        try
+        {
+            get(username);
+        }
+        catch (NoSuchElementException e)
+        {
+            users.add(new Admin(username, active));
+            return;
+        }
+        throw new IllegalArgumentException("User with username: " + username + " already exists.");
     }
 
     public void addManager(String username, boolean active)
     {
-        users.add(new Manager(username, active));
+        try
+        {
+            get(username);
+        }
+        catch (NoSuchElementException e)
+        {
+            users.add(new Manager(username, active));
+            return;
+        }
+        throw new IllegalArgumentException("User with username: " + username + " already exists.");
     }
 
     public void addClient(String username, boolean active)
     {
-        users.add(new Client(username, active));
+        try
+        {
+            get(username);
+        }
+        catch (NoSuchElementException e)
+        {
+            users.add(new Client(username, active));
+            return;
+        }
+        throw new IllegalArgumentException("User with username: " + username + " already exists.");
     }
 
-    public User get(String id)
+    public User get(String username)
     {
         for (User user : users)
         {
-            if (user.getId().equals(id))
+            if (user.getUsername().equals(username))
                 return user;
         }
-        throw new NoSuchElementException("No user with id: " + id + " found.");
+        throw new NoSuchElementException("No user with username: " + username + " found.");
     }
 
-    public void update(String id, String username, boolean active)
+    public boolean activate(String username)
     {
-        get(id).setUsername(username);
-        get(id).setActive(active);
-    }
-
-    public boolean activate(String id)
-    {
-        if (!get(id).isActive())
+        if (!get(username).isActive())
         {
-            get(id).setActive(true);
+            get(username).setActive(true);
             return true;
         }
         return false;
     }
 
-    public boolean deactivate(String id)
+    public boolean deactivate(String username)
     {
-        if (get(id).isActive())
+        if (get(username).isActive())
         {
-            get(id).setActive(false);
+            get(username).setActive(false);
             return true;
         }
         return false;

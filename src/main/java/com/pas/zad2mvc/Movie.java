@@ -15,9 +15,9 @@ public class Movie extends Catalog
     {
         super();
     }
-    public Movie(String title, String director, Year releaseYear)
+    public Movie(int id, String title, String director, Year releaseYear)
     {
-        super(title, releaseYear);
+        super(id, title, releaseYear);
         this.director = director;
     }
     //endregion

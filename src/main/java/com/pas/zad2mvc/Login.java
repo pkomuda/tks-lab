@@ -1,20 +1,19 @@
 package com.pas.zad2mvc;
 
-public abstract class Login {
-     
-    private UserList userlist;
+public abstract class Login
+{
+    private UserList userList;
     private boolean userExists;
 
     public Login()
     {
-       userlist = new UserList();
+       userList = new UserList();
     }
 
     public UserList getUserlist()
     {
-        return userlist;
+        return userList;
     }
-
     public boolean isUserExists()
     {
         return userExists;
@@ -26,14 +25,12 @@ public abstract class Login {
     }
 
     public abstract void addUserPool();
-
     public abstract void checkIfUserExists(String username);
-
     public abstract String redirect();
 
     //do sprawdzenia
     public String getOneUsername()
     {
-        return userlist.getUsers().get(0).getUsername();
+        return userList.getUsers().get(0).getUsername();
     }
 }

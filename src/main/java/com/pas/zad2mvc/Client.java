@@ -21,6 +21,6 @@ public class Client extends User
     @Override
     public String toString()
     {
-        return "Client(id: " + getId() + ", username: " + getUsername() + ", active: " + isActive() + ")";
+        return "Client(username: " + getUsername() + ", active: " + isActive() + ")";
     }
 }

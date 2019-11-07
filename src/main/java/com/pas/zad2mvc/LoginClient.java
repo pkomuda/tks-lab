@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.pas.zad2mvc;
 
 import javax.inject.Named;
@@ -10,10 +5,6 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author przemek
- */
 @Named(value = "loginClient")
 @ApplicationScoped
 public class LoginClient extends Login
@@ -26,10 +17,12 @@ public class LoginClient extends Login
     @Override
     public void checkIfUserExists(String username)
     {
-        for(User user : getUserlist().getUsers()){
-            if(username.equals(user.getUsername()) && user.getClass().getName().equals("Client"))
+        for(User user : getUserlist().getUsers())
+        {
+            if(username.equals(user.getUsername()) && user.getClass().getName().equals("com.pas.zad2mvc.Client"))
             {
                 setUserExists(true);
+                return;
             }
         }
         setUserExists(false);

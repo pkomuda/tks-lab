@@ -21,6 +21,6 @@ public class Manager extends User
     @Override
     public String toString()
     {
-        return "Manager(id: " + getId() + ", username: " + getUsername() + ", active: " + isActive() + ")";
+        return "Manager(username: " + getUsername() + ", active: " + isActive() + ")";
     }
 }
