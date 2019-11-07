@@ -1,5 +1,6 @@
 package com.pas.zad2mvc;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public abstract class User
@@ -51,4 +52,19 @@ public abstract class User
         this.active = active;
     }
     //endregion
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return username.equals(user.username);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(username);
+    }
 }

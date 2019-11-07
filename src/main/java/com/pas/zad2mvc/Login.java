@@ -1,46 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.pas.zad2mvc;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
-
-/**
- *
- * @author Szymi
- */
-@Named(value = "login")
-@ApplicationScoped
-public class Login {
+public abstract class Login {
      
     private UserList userlist;
     private boolean userExists;
-    /**
-     * Creates a new instance of Login
-     */
-    public Login() {
-       userlist = new UserList();
-      
-       
-    }
-    public void addUserPool(){
-       userlist.addClient("herb", true);
-       userlist.addClient("papaj", true);
-    }
-    public void checkIfUserExists(String username)
+
+    public Login()
     {
-        for(User user : userlist.getUsers()){
-            if(username==user.getUsername())
-            {
-               this.userExists=true;
-            }
-        }
-        this.userExists=false;
+       userlist = new UserList();
     }
+
+    public UserList getUserlist()
+    {
+        return userlist;
+    }
+
+    public void setUserlist(UserList userlist)
+    {
+        this.userlist = userlist;
+    }
+
+    public boolean isUserExists()
+    {
+        return userExists;
+    }
+
+    public void setUserExists(boolean userExists)
+    {
+        this.userExists = userExists;
+    }
+
+    public abstract void addUserPool();
+
+    public abstract void checkIfUserExists(String username);
+
     public String redirect()
     {
         if (userExists)
@@ -52,5 +45,4 @@ public class Login {
     {
         return userlist.getUsers().get(0).getUsername();
     }
-    
 }

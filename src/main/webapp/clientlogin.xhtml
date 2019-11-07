@@ -9,9 +9,9 @@
       <h:form>
             <div>
             username:
-            <h:inputText value="#{client.username}"/>
+            <h:inputText value="#{loginClient.getOneUsername()}"/>
             </div>
-          <h:commandButton value="login" actionListener="#{login.checkIfUserExists(client.username)}" action="#{login.redirect()}" />
+<!--          <h:commandButton value="login" actionListener="#{loginClient.checkIfUserExists(client.username)}" action="#{loginClient.redirect()}" />-->
           
         </h:form>
     </h:body>
