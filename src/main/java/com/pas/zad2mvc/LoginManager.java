@@ -32,8 +32,8 @@ public class LoginManager extends Login
     public void addUserPool()
     {
         List<User> users = new ArrayList<>();
-        users.add(new Client("menago", true));
-        users.add(new Client("wozny", true));
+        users.add(new Manager("menago", true));
+        users.add(new Manager("wozny", true));
         if (!getUserlist().getUsers().containsAll(users))
             getUserlist().getUsers().addAll(users);
     }
