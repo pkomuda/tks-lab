@@ -19,7 +19,7 @@ public class LoginAdmin extends Login
     {
         for(User user : getUserlist().getUsers())
         {
-            if(username.equals(user.getUsername()) && user.getClass().getName().equals("com.pas.zad2mvc.Admin"))
+            if(username.equals(user.getUsername())/* && user.getClass().getName().equals("com.pas.zad2mvc.Admin")*/)
             {
                 setUserExists(true);
                 return;
@@ -34,7 +34,7 @@ public class LoginAdmin extends Login
         List<User> users = new ArrayList<>();
         users.add(new Admin("pokazny", true));
         users.add(new Admin("chefe", true));
-        if (!getUserlist().getUsers().containsAll(users))
+//        if (!getUserlist().getUsers().containsAll(users))
             getUserlist().getUsers().addAll(users);
     }
 
@@ -42,7 +42,10 @@ public class LoginAdmin extends Login
     public String redirect()
     {
         if (isUserExists())
-            return "index.html";
+        {
+            AdminPanelPageBean admin = new AdminPanelPageBean(this);
+            return "adminpanel.xhtml";
+        }
         return "adminlogin.xhtml";
     }
 }
