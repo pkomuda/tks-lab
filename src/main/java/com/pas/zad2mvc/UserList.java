@@ -4,7 +4,6 @@ import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Named(value = "userList")
 @ApplicationScoped
@@ -24,44 +23,20 @@ public class UserList
 
     public void addAdmin(String username, boolean active)
     {
-        try
-        {
-            get(username);
-        }
-        catch (NoSuchElementException e)
-        {
+        if (get(username) == null)
             users.add(new Admin(username, active));
-            return;
-        }
-        throw new IllegalArgumentException("User with username: " + username + " already exists.");
     }
 
     public void addManager(String username, boolean active)
     {
-        try
-        {
-            get(username);
-        }
-        catch (NoSuchElementException e)
-        {
+        if (get(username) == null)
             users.add(new Manager(username, active));
-            return;
-        }
-        throw new IllegalArgumentException("User with username: " + username + " already exists.");
     }
 
     public void addClient(String username, boolean active)
     {
-        try
-        {
-            get(username);
-        }
-        catch (NoSuchElementException e)
-        {
+        if (get(username) == null)
             users.add(new Client(username, active));
-            return;
-        }
-        throw new IllegalArgumentException("User with username: " + username + " already exists.");
     }
 
     public User get(String username)
@@ -71,12 +46,12 @@ public class UserList
             if (user.getUsername().equals(username))
                 return user;
         }
-        throw new NoSuchElementException("No user with username: " + username + " found.");
+        return null;
     }
 
     public boolean activate(String username)
     {
-        if (!get(username).isActive())
+        if (get(username) != null && !get(username).isActive())
         {
             get(username).setActive(true);
             return true;
@@ -86,7 +61,7 @@ public class UserList
 
     public boolean deactivate(String username)
     {
-        if (get(username).isActive())
+        if (get(username) != null && get(username).isActive())
         {
             get(username).setActive(false);
             return true;
@@ -98,7 +73,7 @@ public class UserList
     public String toString()
     {
         String str = "";
-        for (int i=0; i<users.size(); i++)
+        for (int i = 0; i < users.size(); i++)
         {
             if (i == 0)
                 str = str.concat(users.get(i).toString() + "\n");
