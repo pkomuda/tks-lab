@@ -12,6 +12,10 @@
             <h:inputText value="#{admin.username}"/>
             </div>
             <h:commandButton value="login" actionListener="#{loginAdmin.checkIfUserExists(admin.username)}" action="#{loginAdmin.redirect()}" />
+             <div>
+              <h:link value="Log out" outcome="homepage"/> 
+          </div>
+
         </h:form>
     </h:body>
 </html>

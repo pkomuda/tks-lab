@@ -42,7 +42,7 @@ public class LoginClient extends Login
     public String redirect()
     {
         if (isUserExists())
-            return "index.html";
+            return "clientpanel.xhtml";
         return "clientlogin.xhtml";
     }
 }
