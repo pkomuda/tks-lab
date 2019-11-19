@@ -1,10 +1,5 @@
-package com.pas.zad2mvc;
+package com.pas.zad2mvc.data;
 
-import javax.inject.Named;
-import javax.enterprise.context.ApplicationScoped;
-
-@Named(value = "client")
-@ApplicationScoped
 public class Client extends User
 {
     //region constructors

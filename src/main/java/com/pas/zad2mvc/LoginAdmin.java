@@ -1,11 +1,14 @@
 package com.pas.zad2mvc;
 
+import com.pas.zad2mvc.data.Admin;
+import com.pas.zad2mvc.data.User;
+
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.List;
 
-@Named(value = "loginAdmin")
+@Named
 @ApplicationScoped
 public class LoginAdmin extends Login
 {
@@ -19,7 +22,7 @@ public class LoginAdmin extends Login
     {
         for(User user : getUserlist().getUsers())
         {
-            if(username.equals(user.getUsername())/* && user.getClass().getName().equals("com.pas.zad2mvc.Admin")*/)
+            if(username.equals(user.getUsername())/* && user.getClass().getName().equals("com.pas.zad2mvc.data.Admin")*/)
             {
                 setUserExists(true);
                 return;
@@ -44,7 +47,7 @@ public class LoginAdmin extends Login
         if (isUserExists())
         {
             AdminPanelPageBean admin = new AdminPanelPageBean(this);
-            return "adminpanel.xhtml";
+            return "adduser.xhtml";
         }
         return "adminlogin.xhtml";
     }

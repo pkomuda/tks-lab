@@ -1,18 +1,20 @@
 package com.pas.zad2mvc;
 
+import com.pas.zad2mvc.repositories.UserRepository;
+
 public abstract class Login
 {
-    private UserList userList;
+    private UserRepository userRepository;
     private boolean userExists;
 
     public Login()
     {
-       userList = new UserList();
+       userRepository = new UserRepository();
     }
 
-    public UserList getUserlist()
+    public UserRepository getUserlist()
     {
-        return userList;
+        return userRepository;
     }
     public boolean isUserExists()
     {
@@ -31,6 +33,6 @@ public abstract class Login
     //do sprawdzenia
     public String getOneUsername()
     {
-        return userList.getUsers().get(0).getUsername();
+        return userRepository.getUsers().get(0).getUsername();
     }
 }

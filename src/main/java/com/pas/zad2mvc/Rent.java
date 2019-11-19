@@ -1,11 +1,14 @@
 package com.pas.zad2mvc;
 
+import com.pas.zad2mvc.data.Catalog;
+import com.pas.zad2mvc.data.Client;
+
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Named(value = "rent")
+@Named
 @ApplicationScoped
 public class Rent
 {

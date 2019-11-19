@@ -1,4 +1,4 @@
-package com.pas.zad2mvc;
+package com.pas.zad2mvc.data;
 
 import java.time.Year;
 import java.util.Objects;

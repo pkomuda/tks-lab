@@ -1,11 +1,7 @@
-package com.pas.zad2mvc;
+package com.pas.zad2mvc.data;
 
-import javax.inject.Named;
-import javax.enterprise.context.ApplicationScoped;
 import java.time.Year;
 
-@Named(value = "movie")
-@ApplicationScoped
 public class Movie extends Catalog
 {
     private String director;

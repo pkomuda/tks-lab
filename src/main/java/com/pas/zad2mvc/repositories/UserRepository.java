@@ -1,24 +1,30 @@
-package com.pas.zad2mvc;
+package com.pas.zad2mvc.repositories;
 
+import com.pas.zad2mvc.data.Admin;
+import com.pas.zad2mvc.data.Client;
+import com.pas.zad2mvc.data.Manager;
+import com.pas.zad2mvc.data.User;
+
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.List;
 
-@Named(value = "userList")
+@Named
 @ApplicationScoped
-public class UserList
+public class UserRepository
 {
     private List<User> users;
 
-    public UserList()
+    public UserRepository()
     {
         users = new ArrayList<>();
     }
 
     public List<User> getUsers()
     {
-        return users;
+        return new ArrayList<>(users);
     }
 
     public void addAdmin(String username, boolean active)
@@ -85,5 +91,16 @@ public class UserList
             }
         }
         return "UserList[" + str + "]";
+    }
+
+    @PostConstruct
+    private void addUserPool()
+    {
+        addAdmin("admin1", true);
+        addAdmin("admin2", true);
+        addManager("manager1", true);
+        addManager("manager2", true);
+        addClient("client1", true);
+        addClient("client2", true);
     }
 }

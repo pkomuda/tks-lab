@@ -1,11 +1,14 @@
 package com.pas.zad2mvc;
 
+import com.pas.zad2mvc.data.Client;
+import com.pas.zad2mvc.data.User;
+
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.List;
 
-@Named(value = "loginClient")
+@Named
 @ApplicationScoped
 public class LoginClient extends Login
 {
@@ -19,7 +22,7 @@ public class LoginClient extends Login
     {
         for(User user : getUserlist().getUsers())
         {
-            if(username.equals(user.getUsername()) && user.getClass().getName().equals("com.pas.zad2mvc.Client"))
+            if(username.equals(user.getUsername()) && user.getClass().getName().equals("com.pas.zad2mvc.data.Client"))
             {
                 setUserExists(true);
                 return;

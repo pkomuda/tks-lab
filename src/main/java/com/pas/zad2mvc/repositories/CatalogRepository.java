@@ -1,4 +1,8 @@
-package com.pas.zad2mvc;
+package com.pas.zad2mvc.repositories;
+
+import com.pas.zad2mvc.data.Book;
+import com.pas.zad2mvc.data.Catalog;
+import com.pas.zad2mvc.data.Movie;
 
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
@@ -6,13 +10,13 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
-@Named(value = "catalogList")
+@Named
 @ApplicationScoped
-public class CatalogList
+public class CatalogRepository
 {
     private List<Catalog> catalogs;
 
-    public CatalogList()
+    public CatalogRepository()
     {
         catalogs = new ArrayList<>();
     }
@@ -46,7 +50,7 @@ public class CatalogList
 
     public void updateBook(int id, String title, String author, int releaseYear)
     {
-        if (get(id) != null && get(id).getClass().getName().equals("com.pas.zad2mvc.Book"))
+        if (get(id) != null && get(id).getClass().getName().equals("com.pas.zad2mvc.data.Book"))
         {
             get(id).setTitle(title);
             ((Book) get(id)).setAuthor(author);
@@ -56,7 +60,7 @@ public class CatalogList
 
     public void updateMovie(int id, String title, String director, int releaseYear)
     {
-        if (get(id) != null && get(id).getClass().getName().equals("com.pas.zad2mvc.Movie"))
+        if (get(id) != null && get(id).getClass().getName().equals("com.pas.zad2mvc.data.Movie"))
         {
             get(id).setTitle(title);
             ((Movie) get(id)).setDirector(director);

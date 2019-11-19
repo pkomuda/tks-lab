@@ -1,11 +1,7 @@
-package com.pas.zad2mvc;
+package com.pas.zad2mvc.data;
 
-import javax.inject.Named;
-import javax.enterprise.context.ApplicationScoped;
 import java.time.Year;
 
-@Named(value = "book")
-@ApplicationScoped
 public class Book extends Catalog
 {
     private String author;

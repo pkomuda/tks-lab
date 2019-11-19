@@ -4,7 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 
-@Named(value = "adminPanelPageBean")
+@Named
 @ApplicationScoped
 public class AdminPanelPageBean
 {
