@@ -10,7 +10,7 @@
             Username:
             <h:inputText value="#{client.username}"/>
             Active:
-            <h:selectBooleanCheckbox value="#{client.active}"/>
+            <h:selectBooleanCheckbox value="#{addAdminController()}"/>
             <h:commandButton value="Add client" action="#{adminPanelPageBean.loginAdmin.userlist.addClient(client.username, client.active)}"/>
             <div>
             <h:link value="Log out" outcome="homepage"/>
