@@ -1,13 +1,16 @@
 package com.pas.zad2mvc.controllers;
 
-import com.pas.zad2mvc.data.User;
 import com.pas.zad2mvc.services.UserService;
 
 import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.Serializable;
 
-public abstract class AddUserController implements Serializable
+@Named
+@ConversationScoped
+public class AddUserController implements Serializable
 {
     @Inject
     private UserService userService;
@@ -15,17 +18,55 @@ public abstract class AddUserController implements Serializable
     @Inject
     private Conversation conversation;
 
-    public UserService getUserService()
+    private String username;
+    private boolean active;
+
+    //region getters
+    public String getUsername()
     {
-        return userService;
+        return username;
     }
-    public Conversation getConversation()
+    public boolean isActive()
     {
-        return conversation;
+        return active;
+    }
+    //endregion
+
+    //region setters
+    public void setUsername(String username)
+    {
+        this.username = username;
+    }
+    public void setActive(boolean active)
+    {
+        this.active = active;
+    }
+    //endregion
+
+    public String add()
+    {
+        conversation.begin();
+        return "add";
     }
 
-    public abstract User getUser();
+    public String confirmAdmin()
+    {
+        userService.addAdmin(username, active);
+        conversation.end();
+        return "home";
+    }
 
-    public abstract String add();
-    public abstract String confirm();
+    public String confirmManager()
+    {
+        userService.addManager(username, active);
+        conversation.end();
+        return "home";
+    }
+
+    public String confirmClient()
+    {
+        userService.addClient(username, active);
+        conversation.end();
+        return "home";
+    }
 }

@@ -47,7 +47,7 @@ public class LoginAdmin extends Login
         if (isUserExists())
         {
             AdminPanelPageBean admin = new AdminPanelPageBean(this);
-            return "adduser.xhtml";
+            return "addUser.xhtml";
         }
         return "adminlogin.xhtml";
     }
