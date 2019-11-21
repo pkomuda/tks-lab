@@ -11,13 +11,13 @@
                 Wybierz dostęp:
             </div>
              <div>
-                 <h:commandButton value="Client" actionListener="#{loginClient.addUserPool()}" action="clientlogin.xhtml"/>
+                 <h:commandButton value="Client" action="#{homepageController.client()}"/>
              </div>
              <div>                 
-                <h:commandButton value="Manager" actionListener="#{loginManager.addUserPool()}" action="managerlogin.xhtml"/>
+                <h:commandButton value="Manager" action="#{homepageController.manager()}"/>
             </div>
              <div>
-                 <h:commandButton value="Admin" actionListener="#{loginAdmin.addUserPool()}" action="adminlogin.xhtml"/>
+                 <h:commandButton value="Admin" action="#{homepageController.admin()}"/>
              </div>
          </h:form>
     </h:body>

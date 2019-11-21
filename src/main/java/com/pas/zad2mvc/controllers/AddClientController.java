@@ -35,7 +35,7 @@ public class AddClientController extends AddUserController
     @Override
     public String confirm()
     {
-        getUserService().addAdmin(client.getUsername(), client.isActive());
+        getUserService().addClient(client.getUsername(), client.isActive());
         getConversation().end();
         return "home";
     }

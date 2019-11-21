@@ -35,7 +35,7 @@ public class AddManagerController extends AddUserController
     @Override
     public String confirm()
     {
-        getUserService().addAdmin(manager.getUsername(), manager.isActive());
+        getUserService().addManager(manager.getUsername(), manager.isActive());
         getConversation().end();
         return "home";
     }
