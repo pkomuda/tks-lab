@@ -45,7 +45,7 @@ public class LoginManager extends Login
     public String redirect()
     {
         if (isUserExists())
-            return "index.html";
+            return "managerpanel.xhtml";
         return "managerlogin.xhtml";
     }
 }
