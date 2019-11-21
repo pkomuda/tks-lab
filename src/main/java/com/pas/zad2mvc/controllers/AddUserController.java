@@ -1,5 +1,6 @@
 package com.pas.zad2mvc.controllers;
 
+import com.pas.zad2mvc.data.User;
 import com.pas.zad2mvc.services.UserService;
 
 import javax.enterprise.context.Conversation;
@@ -18,11 +19,12 @@ public abstract class AddUserController implements Serializable
     {
         return userService;
     }
-
     public Conversation getConversation()
     {
         return conversation;
     }
+
+    public abstract User getUser();
 
     public abstract String add();
     public abstract String confirm();
