@@ -15,12 +15,12 @@ import java.util.List;
 @ApplicationScoped
 public class UserRepository
 {
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
 
-    public UserRepository()
-    {
-        users = new ArrayList<>();
-    }
+//    public UserRepository()
+//    {
+//        users = new ArrayList<>();
+//    }
 
     public List<User> getUsers()
     {

@@ -9,9 +9,9 @@
         <h:form>
             <div>
             username:
-            <h:inputText value="#{admin.username}"/>
+            <h:inputText value="#{loginAdminController.name}"/>
             </div>
-            <h:commandButton value="login" actionListener="#{loginAdmin.checkIfUserExists(admin.username)}" action="#{loginAdmin.redirect()}" />
+            <h:commandButton value="login" actionListener="#{loginAdminController.checkIfUserExists(loginAdminController.name)}" action="#{loginAdminController.redirect()}" />
              <div>
               <h:link value="Log out" outcome="homepage"/> 
           </div>
