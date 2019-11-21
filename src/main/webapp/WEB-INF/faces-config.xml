@@ -12,6 +12,7 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
+        <from-view-id>homepage.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>client</from-outcome>
             <to-view-id>clientlogin.xhtml</to-view-id>
@@ -19,6 +20,7 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
+        <from-view-id>homepage.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>manager</from-outcome>
             <to-view-id>managerlogin.xhtml</to-view-id>
