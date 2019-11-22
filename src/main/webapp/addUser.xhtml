@@ -9,8 +9,10 @@
         <h:form>
             Username:
             <h:inputText value="#{addUserController.username}"/>
+            <br/>
             Active:
             <h:selectBooleanCheckbox value="#{addUserController.active}"/>
+            <br/>
             <h:commandButton value="OK" action="#{addUserController.add()}"/>
         </h:form>
         <h:link value="Log out" outcome="index.xhtml"/>

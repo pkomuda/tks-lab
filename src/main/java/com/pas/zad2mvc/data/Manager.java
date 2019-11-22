@@ -5,8 +5,8 @@ public class Manager extends User
     public Manager(String username, boolean active) { super(username, active); }
 
     @Override
-    public String toString()
-    {
-        return "Manager(username: " + getUsername() + ", active: " + isActive() + ")";
-    }
+    public String getType() { return "Manager"; }
+
+    @Override
+    public String toString() { return "Manager(username: " + getUsername() + ", active: " + isActive() + ")"; }
 }

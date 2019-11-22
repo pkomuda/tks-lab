@@ -39,20 +39,20 @@ public class AddUserController implements Serializable
     {
         userService.addAdmin(username, active);
         conversation.end();
-        return "home";
+        return "admin";
     }
 
     public String confirmManager()
     {
         userService.addManager(username, active);
         conversation.end();
-        return "home";
+        return "admin";
     }
 
     public String confirmClient()
     {
         userService.addClient(username, active);
         conversation.end();
-        return "home";
+        return "admin";
     }
 }
