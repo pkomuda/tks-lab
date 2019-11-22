@@ -3,37 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Zadanie 2 (Aplikacja MVC)</title>
+        <title>MVC App</title>
     </h:head>
     <h:body>
+        <h1>Library homepage</h1>
         <h:form>
-            <div>
-                ID:
-                <h:inputText value="#{book.id}"/>
-            </div>
-
-            <div>
-                Tytuł:
-                <h:inputText value="#{book.title}"/>
-            </div>
-
-            <div>
-                Autor:
-                <h:inputText value="#{book.author}"/>
-            </div>
-
-            <div>
-                Rok wydania:
-                <h:inputText value="#{book.releaseYear}"/>
-            </div>
-
-            <div>
-                <h:commandButton value="OK" action="#{catalogList.addBook(book.id, book.title, book.author, book.releaseYear)}"/>
-            </div>
+            <h:commandButton value="Log in" action="login.xhtml"/>
         </h:form>
-        <div>
-            <h:outputText value="#{catalogList}"/>
-        </div>
     </h:body>
 </html>
-

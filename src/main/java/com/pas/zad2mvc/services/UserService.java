@@ -16,38 +16,17 @@ public class UserService implements Serializable
     @Inject
     private UserRepository userRepository;
 
-    public List<User> getUsers()
-    {
-        return userRepository.getUsers();
-    }
+    public List<User> getUsers() { return userRepository.getUsers(); }
+    public void addAdmin(String username, boolean active) { userRepository.addAdmin(username, active); }
+    public void addManager(String username, boolean active) { userRepository.addManager(username, active); }
+    public void addClient(String username, boolean active) { userRepository.addClient(username, active); }
+    public User getUser(String username) { return userRepository.get(username); }
+    public boolean activateUser(String username) { return userRepository.activate(username); }
+    public boolean deactivateUser(String username) { return userRepository.deactivate(username); }
 
-    public void addAdmin(String username, boolean active)
+    @Override
+    public String toString()
     {
-        userRepository.addAdmin(username, active);
-    }
-
-    public void addManager(String username, boolean active)
-    {
-        userRepository.addManager(username, active);
-    }
-
-    public void addClient(String username, boolean active)
-    {
-        userRepository.addClient(username, active);
-    }
-
-    public User getUser(String username)
-    {
-        return userRepository.get(username);
-    }
-
-    public boolean activateUser(String username)
-    {
-        return userRepository.activate(username);
-    }
-
-    public boolean deactivateUser(String username)
-    {
-        return userRepository.deactivate(username);
+        return userRepository.toString();
     }
 }

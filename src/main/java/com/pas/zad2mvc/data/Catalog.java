@@ -9,25 +9,16 @@ public abstract class Catalog
     private String title;
     private Year releaseYear;
 
-    //region constructors
-    public Catalog() {}
     public Catalog(int id, String title, Year releaseYear)
     {
         this.id = id;
         this.title = title;
         this.releaseYear = releaseYear;
     }
-    //endregion
 
     //region getters
-    public int getId()
-    {
-        return id;
-    }
-    public String getTitle()
-    {
-        return title;
-    }
+    public int getId() { return id; }
+    public String getTitle() { return title; }
     public int getReleaseYear()
     {
         if (releaseYear != null)
@@ -37,18 +28,9 @@ public abstract class Catalog
     //endregion
 
     //region setters
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }
-    public void setReleaseYear(int releaseYear)
-    {
-        this.releaseYear = Year.of(releaseYear);
-    }
+    public void setId(int id) { this.id = id; }
+    public void setTitle(String title) { this.title = title; }
+    public void setReleaseYear(int releaseYear) { this.releaseYear = Year.of(releaseYear); }
     //endregion
 
     @Override
@@ -61,8 +43,5 @@ public abstract class Catalog
     }
 
     @Override
-    public int hashCode()
-    {
-        return Objects.hash(id);
-    }
+    public int hashCode() { return Objects.hash(id); }
 }

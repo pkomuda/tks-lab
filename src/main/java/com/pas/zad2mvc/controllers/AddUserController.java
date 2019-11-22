@@ -14,33 +14,19 @@ public class AddUserController implements Serializable
 {
     @Inject
     private UserService userService;
-
     @Inject
     private Conversation conversation;
-
     private String username;
     private boolean active;
 
     //region getters
-    public String getUsername()
-    {
-        return username;
-    }
-    public boolean isActive()
-    {
-        return active;
-    }
+    public String getUsername() { return username; }
+    public boolean isActive() { return active; }
     //endregion
 
     //region setters
-    public void setUsername(String username)
-    {
-        this.username = username;
-    }
-    public void setActive(boolean active)
-    {
-        this.active = active;
-    }
+    public void setUsername(String username) { this.username = username; }
+    public void setActive(boolean active) { this.active = active; }
     //endregion
 
     public String add()

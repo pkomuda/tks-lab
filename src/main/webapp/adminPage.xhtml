@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Logged in as #{loginController.username}</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:dataTable value="#{listUsersController.users}" var="user">
+                <h:column><h:outputText value="#{user.username}"/></h:column>
+                <h:column><h:outputText value="#{user.active}"/></h:column>
+            </h:dataTable>
+            <h:commandButton value="Add a new user" action="addUser.xhtml"/>
+        </h:form>
+    </h:body>
+</html>

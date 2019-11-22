@@ -2,16 +2,7 @@ package com.pas.zad2mvc.data;
 
 public class Client extends User
 {
-    //region constructors
-    public Client()
-    {
-        super();
-    }
-    public Client(String username, boolean active)
-    {
-        super(username, active);
-    }
-    //endregion
+    public Client(String username, boolean active) { super(username, active); }
 
     @Override
     public String toString()

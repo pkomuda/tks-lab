@@ -17,15 +17,7 @@ public class UserRepository
 {
     private List<User> users = new ArrayList<>();
 
-//    public UserRepository()
-//    {
-//        users = new ArrayList<>();
-//    }
-
-    public List<User> getUsers()
-    {
-        return new ArrayList<>(users);
-    }
+    public List<User> getUsers() { return new ArrayList<>(users); }
 
     public void addAdmin(String username, boolean active)
     {
@@ -90,7 +82,7 @@ public class UserRepository
                     str = str.concat("\n");
             }
         }
-        return "UserList[" + str + "]";
+        return "UserRepo[" + str + "]";
     }
 
     @PostConstruct

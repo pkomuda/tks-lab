@@ -2,16 +2,7 @@ package com.pas.zad2mvc.data;
 
 public class Admin extends User
 {
-    //region constructors
-    public Admin()
-    {
-        super();
-    }
-    public Admin(String username, boolean active)
-    {
-        super(username, active);
-    }
-    //endregion
+    public Admin(String username, boolean active) { super(username, active); }
 
     @Override
     public String toString()

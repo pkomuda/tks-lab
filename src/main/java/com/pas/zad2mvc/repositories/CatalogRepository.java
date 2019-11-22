@@ -14,17 +14,9 @@ import java.util.List;
 @ApplicationScoped
 public class CatalogRepository
 {
-    private List<Catalog> catalogs;
+    private List<Catalog> catalogs = new ArrayList<>();
 
-    public CatalogRepository()
-    {
-        catalogs = new ArrayList<>();
-    }
-
-    public List<Catalog> getCatalogs()
-    {
-        return catalogs;
-    }
+    public List<Catalog> getCatalogs() { return catalogs; }
 
     public void addBook(int id, String title, String author, int releaseYear)
     {
@@ -96,6 +88,6 @@ public class CatalogRepository
                     str = str.concat("\n");
             }
         }
-        return "CatalogList[" + str + "]";
+        return "CatalogRepo[" + str + "]";
     }
 }
