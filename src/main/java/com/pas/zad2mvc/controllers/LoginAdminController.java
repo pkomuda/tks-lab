@@ -6,6 +6,7 @@ import com.pas.zad2mvc.data.Admin;
 import com.pas.zad2mvc.data.User;
 import com.pas.zad2mvc.services.UserService;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -19,7 +20,8 @@ public class LoginAdminController
     private boolean userExists;
     private String name;
 
-    public LoginAdminController()
+    @PostConstruct
+    public void showUsers()
     {
         for (User user : userService.getUsers())
         {
