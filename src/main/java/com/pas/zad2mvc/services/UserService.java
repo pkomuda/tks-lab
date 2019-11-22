@@ -28,12 +28,12 @@ public class UserService implements Serializable
 
     public void addManager(String username, boolean active)
     {
-        userRepository.addAdmin(username, active);
+        userRepository.addManager(username, active);
     }
 
     public void addClient(String username, boolean active)
     {
-        userRepository.addAdmin(username, active);
+        userRepository.addClient(username, active);
     }
 
     public User getUser(String username)
