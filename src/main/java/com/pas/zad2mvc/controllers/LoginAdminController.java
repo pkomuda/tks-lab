@@ -20,14 +20,14 @@ public class LoginAdminController
     private boolean userExists;
     private String name;
 
-    @PostConstruct
-    public void showUsers()
-    {
-        for (User user : userService.getUsers())
-        {
-            System.out.println(user);
-        }
-    }
+//    @PostConstruct
+//    public void showUsers()
+//    {
+//        for (User user : userService.getUsers())
+//        {
+//            System.out.println(user);
+//        }
+//    }
 
     public String getName()
     {
