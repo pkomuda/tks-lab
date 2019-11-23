@@ -1,12 +1,10 @@
 package com.pas.zad2mvc.data;
 
-import java.time.Year;
-
 public class Book extends Catalog
 {
     private String author;
 
-    public Book(int id, String title, String author, Year releaseYear)
+    public Book(int id, String title, String author, int releaseYear)
     {
         super(id, title, releaseYear);
         this.author = author;

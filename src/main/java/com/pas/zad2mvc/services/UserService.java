@@ -17,16 +17,13 @@ public class UserService implements Serializable
     private UserRepository userRepository;
 
     public List<User> getUsers() { return userRepository.getUsers(); }
+    public User getUser(String username) { return userRepository.get(username); }
     public void addAdmin(String username, boolean active) { userRepository.addAdmin(username, active); }
     public void addManager(String username, boolean active) { userRepository.addManager(username, active); }
     public void addClient(String username, boolean active) { userRepository.addClient(username, active); }
-    public User getUser(String username) { return userRepository.get(username); }
     public boolean activateUser(String username) { return userRepository.activate(username); }
     public boolean deactivateUser(String username) { return userRepository.deactivate(username); }
 
     @Override
-    public String toString()
-    {
-        return userRepository.toString();
-    }
+    public String toString() { return userRepository.toString(); }
 }

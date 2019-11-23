@@ -51,8 +51,5 @@ public class LoginController
         return "login.xhtml";
     }
 
-    public String goBack()
-    {
-        return "back";
-    }
+    public String goBack() { return "back"; }
 }

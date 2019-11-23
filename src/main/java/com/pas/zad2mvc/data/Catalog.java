@@ -1,36 +1,28 @@
 package com.pas.zad2mvc.data;
 
-import java.time.Year;
 import java.util.Objects;
 
 public abstract class Catalog
 {
     private int id;
-    private String title;
-    private Year releaseYear;
+    private CatalogInfo info;
 
-    public Catalog(int id, String title, Year releaseYear)
+    public Catalog(int id, String title, int releaseYear)
     {
         this.id = id;
-        this.title = title;
-        this.releaseYear = releaseYear;
+        this.info = new CatalogInfo(title, releaseYear);
     }
 
     //region getters
     public int getId() { return id; }
-    public String getTitle() { return title; }
-    public int getReleaseYear()
-    {
-        if (releaseYear != null)
-            return releaseYear.getValue();
-        return 0;
-    }
+    public String getTitle() { return info.getTitle(); }
+    public int getReleaseYear() { return info.getReleaseYear(); }
     //endregion
 
     //region setters
     public void setId(int id) { this.id = id; }
-    public void setTitle(String title) { this.title = title; }
-    public void setReleaseYear(int releaseYear) { this.releaseYear = Year.of(releaseYear); }
+    public void setTitle(String title) { info.setTitle(title); }
+    public void setReleaseYear(int releaseYear) { info.setReleaseYear(releaseYear); }
     //endregion
 
     @Override

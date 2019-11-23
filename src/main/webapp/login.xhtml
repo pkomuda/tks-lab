@@ -8,7 +8,7 @@
     <h:body>
         <h:form>
             Username:
-            <h:inputText value="#{loginController.username}"/>
+            <h:inputText value="#{loginController.username}" />
             <br/>
             <h:commandButton value="Log in" actionListener="#{loginController.checkIfUserExists(loginController.username)}" action="#{loginController.redirect()}"/>
             <br/>

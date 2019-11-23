@@ -19,6 +19,16 @@ public class UserRepository
 
     public List<User> getUsers() { return new ArrayList<>(users); }
 
+    public User get(String username)
+    {
+        for (User user : users)
+        {
+            if (user.getUsername().equals(username))
+                return user;
+        }
+        return null;
+    }
+
     public void addAdmin(String username, boolean active)
     {
         if (get(username) == null)
@@ -35,16 +45,6 @@ public class UserRepository
     {
         if (get(username) == null)
             users.add(new Client(username, active));
-    }
-
-    public User get(String username)
-    {
-        for (User user : users)
-        {
-            if (user.getUsername().equals(username))
-                return user;
-        }
-        return null;
     }
 
     public boolean activate(String username)
