@@ -9,42 +9,35 @@ import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @Named
 @ApplicationScoped
 public class UserRepository
 {
-    private List<User> users = new ArrayList<>();
+    private LinkedHashMap<String, User> users = new LinkedHashMap<>();
 
-    public List<User> getUsers() { return new ArrayList<>(users); }
+    public List<User> getUsers() { return new ArrayList<>(users.values()); }
 
-    public User get(String username)
-    {
-        for (User user : users)
-        {
-            if (user.getUsername().equals(username))
-                return user;
-        }
-        return null;
-    }
+    public User get(String username) { return users.get(username); }
 
     public void addAdmin(String username, boolean active)
     {
         if (get(username) == null)
-            users.add(new Admin(username, active));
+            users.put(username, new Admin(username, active));
     }
 
     public void addManager(String username, boolean active)
     {
         if (get(username) == null)
-            users.add(new Manager(username, active));
+            users.put(username, new Manager(username, active));
     }
 
     public void addClient(String username, boolean active)
     {
         if (get(username) == null)
-            users.add(new Client(username, active));
+            users.put(username, new Client(username, active));
     }
 
     public boolean activate(String username)
@@ -74,10 +67,10 @@ public class UserRepository
         for (int i = 0; i < users.size(); i++)
         {
             if (i == 0)
-                str = str.concat(users.get(i).toString() + "\n");
+                str = str.concat(getUsers().get(i).toString() + "\n");
             else
             {
-                str = str.concat("\t\t " + users.get(i).toString());
+                str = str.concat("\t\t " + getUsers().get(i).toString());
                 if (i != users.size() - 1)
                     str = str.concat("\n");
             }

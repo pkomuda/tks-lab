@@ -16,12 +16,6 @@ public abstract class User
     //region getters
     public String getUsername() { return username; }
     public boolean isActive() { return active; }
-    public String getActivity()
-    {
-        if (active)
-            return "active";
-        return "inactive";
-    }
     public abstract String getType();
     //endregion
 

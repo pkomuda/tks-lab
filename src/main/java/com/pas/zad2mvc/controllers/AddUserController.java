@@ -16,15 +16,19 @@ public class AddUserController implements Serializable
     private UserService userService;
     @Inject
     private Conversation conversation;
+    private String userType;
     private String username;
     private boolean active;
 
     //region getters
+    public String getUserType() { return userType; }
     public String getUsername() { return username; }
     public boolean isActive() { return active; }
     //endregion
 
     //region setters
+
+    public void setUserType(String userType) { this.userType = userType; }
     public void setUsername(String username) { this.username = username; }
     public void setActive(boolean active) { this.active = active; }
     //endregion
@@ -35,23 +39,17 @@ public class AddUserController implements Serializable
         return "add";
     }
 
-    public String confirmAdmin()
+    public String confirm(String userType)
     {
-        userService.addAdmin(username, active);
-        conversation.end();
-        return "admin";
-    }
-
-    public String confirmManager()
-    {
-        userService.addManager(username, active);
-        conversation.end();
-        return "admin";
-    }
-
-    public String confirmClient()
-    {
-        userService.addClient(username, active);
+        switch (userType)
+        {
+            case "admin":
+                userService.addAdmin(username, active);
+            case "manager":
+                userService.addManager(username, active);
+            case "client":
+                userService.addClient(username, active);
+        }
         conversation.end();
         return "admin";
     }

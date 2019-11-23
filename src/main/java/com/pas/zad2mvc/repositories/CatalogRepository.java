@@ -8,69 +8,46 @@ import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @Named
 @ApplicationScoped
 public class CatalogRepository
 {
-    private List<Catalog> catalogs = new ArrayList<>();
+    private LinkedHashMap<Integer, Catalog> catalogs = new LinkedHashMap<>();
 
-    public List<Catalog> getCatalogs() { return new ArrayList<>(catalogs); }
+    public List<Catalog> getCatalogs() { return new ArrayList<>(catalogs.values()); }
 
-    public Catalog get(int id)
-    {
-        for (Catalog catalog : catalogs)
-        {
-            if (catalog.getId() == id)
-                return catalog;
-        }
-        return null;
-    }
+    public Catalog get(int id) { return catalogs.get(id); }
 
-    public boolean remove(int id)
-    {
-        for (Catalog catalog : catalogs)
-        {
-            if (catalog.getId() == id)
-            {
-                catalogs.remove(catalog);
-                return true;
-            }
-        }
-        return false;
-    }
+    public boolean remove(int id) { return catalogs.remove(id) != null; }
 
     public void addBook(int id, String title, String author, int releaseYear)
     {
         if (get(id) == null)
-            catalogs.add(new Book(id, title, author, releaseYear));
+            catalogs.put(id, new Book(id, title, author, releaseYear));
     }
 
     public void addMovie(int id, String title, String director, int releaseYear, String format)
     {
         if (get(id) == null)
-            catalogs.add(new Movie(id, title, director, releaseYear, format));
+            catalogs.put(id, new Movie(id, title, director, releaseYear, format));
     }
 
     public void updateBook(int id, String title, String author, int releaseYear)
     {
-        if (get(id) != null && get(id).getClass().getName().equals("com.pas.zad2mvc.data.Book"))
+        if (get(id) != null && get(id) instanceof Book)
         {
-            get(id).setTitle(title);
-            ((Book) get(id)).setAuthor(author);
-            get(id).setReleaseYear(releaseYear);
+            catalogs.replace(id, new Book(id, title, author, releaseYear));
         }
     }
 
     public void updateMovie(int id, String title, String director, int releaseYear, String format)
     {
-        if (get(id) != null && get(id).getClass().getName().equals("com.pas.zad2mvc.data.Movie"))
+        if (get(id) != null && get(id) instanceof Movie)
         {
-            get(id).setTitle(title);
-            ((Movie) get(id)).setDirector(director);
-            get(id).setReleaseYear(releaseYear);
-            ((Movie) get(id)).setFormat(format);
+            catalogs.replace(id, new Movie(id, title, director, releaseYear, format));
         }
     }
 
@@ -81,10 +58,10 @@ public class CatalogRepository
         for (int i = 0; i < catalogs.size(); i++)
         {
             if (i == 0)
-                str = str.concat(catalogs.get(i).toString() + "\n");
+                str = str.concat(getCatalogs().get(i).toString() + "\n");
             else
             {
-                str = str.concat("\t\t\t" + catalogs.get(i).toString());
+                str = str.concat("\t\t\t" + getCatalogs().get(i).toString());
                 if (i != catalogs.size() - 1)
                     str = str.concat("\n");
             }

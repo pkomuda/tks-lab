@@ -10,8 +10,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Named
 @ViewScoped
@@ -23,24 +23,20 @@ public class ListCatalogsController implements Serializable
 
     public List<Book> getBooks()
     {
-        List<Book> books = new ArrayList<>();
-        for (Catalog catalog : catalogs)
-        {
-            if (catalog.getClass().getName().equals("com.pas.zad2mvc.data.Book"))
-                books.add((Book) catalog);
-        }
-        return books;
+        return catalogs
+                .stream()
+                .filter(catalog -> catalog instanceof Book)
+                .map(catalog -> (Book) catalog)
+                .collect(Collectors.toList());
     }
 
     public List<Movie> getMovies()
     {
-        List<Movie> movies = new ArrayList<>();
-        for (Catalog catalog : catalogs)
-        {
-            if (catalog.getClass().getName().equals("com.pas.zad2mvc.data.Movie"))
-                movies.add((Movie) catalog);
-        }
-        return movies;
+        return catalogs
+                .stream()
+                .filter(catalog -> catalog instanceof Movie)
+                .map(catalog -> (Movie) catalog)
+                .collect(Collectors.toList());
     }
 
     public void removeCatalog(int id)

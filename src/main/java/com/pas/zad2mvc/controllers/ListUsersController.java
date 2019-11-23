@@ -20,8 +20,6 @@ public class ListUsersController implements Serializable
 
     public List<User> getUsers() { return users; }
 
-    // Nie ma usuwania bo do uzytkownikow ma byc tylko CRU
-
     @PostConstruct
     public void loadUsers() { users = userService.getUsers(); }
 }

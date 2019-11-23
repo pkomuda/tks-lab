@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Confirm adding a new user</title>
     </h:head>
@@ -13,11 +14,13 @@
             Active:
             <h:outputText value="#{addUserController.active}"/>
             <br/>
-            <h:commandButton value="Confirm client" action="#{addUserController.confirmClient()}"/>
-            <br/>
-            <h:commandButton value="Confirm manager" action="#{addUserController.confirmManager()}"/>
-            <br/>
-            <h:commandButton value="Confirm admin" action="#{addUserController.confirmAdmin()}"/>
+            Permissions:
+            <h:selectOneMenu value="#{addUserController.userType}">
+                <f:selectItem itemValue="client" itemLabel="Client"/>
+                <f:selectItem itemValue="manager" itemLabel="Manager"/>
+                <f:selectItem itemValue="admin" itemLabel="Admin"/>
+            </h:selectOneMenu>
+            <h:commandButton value="Confrim" action="#{addUserController.confirm(addUserController.userType)}"/>
             <br/>
         </h:form>
         <h:link value="Admin page" outcome="adminPage.xhtml"/>

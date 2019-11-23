@@ -21,7 +21,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">Activity</f:facet>
-                    <h:outputText value="#{user.getActivity()}"/>
+                    <h:selectBooleanCheckbox value="#{user.active}"/>
                 </h:column>
             </h:dataTable>
             <h:commandButton value="Add a new user" action="addUser.xhtml"/>
