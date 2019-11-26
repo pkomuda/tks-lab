@@ -1,5 +1,8 @@
 package com.pas.zad2mvc.controllers;
 
+import com.pas.zad2mvc.data.Admin;
+import com.pas.zad2mvc.data.Client;
+import com.pas.zad2mvc.data.Manager;
 import com.pas.zad2mvc.data.User;
 import com.pas.zad2mvc.services.UserService;
 
@@ -9,47 +12,47 @@ import javax.inject.Named;
 
 @Named
 @RequestScoped
-public class LoginController
-{
+public class LoginController {
     @Inject
     private UserService userService;
-    private boolean userExists;
-    private String userType;
     private String username;
+    private boolean userExists;
+    private User user;
 
-    public String getUsername() { return username; }
-    public void setUsername(String name) { this.username = name; }
-
-    public void checkIfUserExists(String username)
-    {
-        for(User user : userService.getUsers())
-        {
-            if(username.equals(user.getUsername()))
-            {
-                userType = user.getClass().getName();
+    public void checkIfUserExists(String username) {
+        for(User u : userService.getUsers()) {
+            if(username.equals(u.getUsername())) {
                 userExists = true;
+                if (u instanceof Admin) {
+                    user = new Admin(u);
+                } else if (u instanceof Manager) {
+                    user = new Manager(u);
+                } else if (u instanceof Client) {
+                    user = new Client(u);
+                }
                 return;
             }
         }
         userExists = false;
     }
 
-    public String redirect()
-    {
-        if (userExists)
-        {
-            switch (userType)
-            {
-                case "com.pas.zad2mvc.data.Admin":
-                    return "admin";
-                case "com.pas.zad2mvc.data.Manager":
-                    return "manager";
-                case "com.pas.zad2mvc.data.Client":
-                    return "client";
-            }
+    public String redirect() {
+        if (userExists) {
+            return user.getType();
+        } else {
+            return "login.xhtml";
         }
-        return "login.xhtml";
     }
 
-    public String goBack() { return "back"; }
+    public String goBack() {
+        return "back";
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String name) {
+        this.username = name;
+    }
 }

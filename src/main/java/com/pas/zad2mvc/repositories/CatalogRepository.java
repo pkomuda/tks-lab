@@ -13,65 +13,63 @@ import java.util.List;
 
 @Named
 @ApplicationScoped
-public class CatalogRepository
-{
+public class CatalogRepository {
     private LinkedHashMap<Integer, Catalog> catalogs = new LinkedHashMap<>();
 
-    public List<Catalog> getCatalogs() { return new ArrayList<>(catalogs.values()); }
-
-    public Catalog get(int id) { return catalogs.get(id); }
-
-    public boolean remove(int id) { return catalogs.remove(id) != null; }
-
-    public void addBook(int id, String title, String author, int releaseYear)
-    {
-        if (get(id) == null)
+    public void addBook(int id, String title, String author, int releaseYear) {
+        if (getCatalog(id) == null) {
             catalogs.put(id, new Book(id, title, author, releaseYear));
+        }
     }
 
-    public void addMovie(int id, String title, String director, int releaseYear, String format)
-    {
-        if (get(id) == null)
+    public void addMovie(int id, String title, String director, int releaseYear, String format) {
+        if (getCatalog(id) == null) {
             catalogs.put(id, new Movie(id, title, director, releaseYear, format));
+        }
     }
 
-    public void updateBook(int id, String title, String author, int releaseYear)
-    {
-        if (get(id) != null && get(id) instanceof Book)
-        {
+    public Catalog getCatalog(int id) {
+        return catalogs.get(id);
+    }
+
+    public List<Catalog> getCatalogs() {
+        return new ArrayList<>(catalogs.values());
+    }
+
+    public void updateBook(int id, String title, String author, int releaseYear) {
+        if (getCatalog(id) != null && getCatalog(id) instanceof Book) {
             catalogs.replace(id, new Book(id, title, author, releaseYear));
         }
     }
 
-    public void updateMovie(int id, String title, String director, int releaseYear, String format)
-    {
-        if (get(id) != null && get(id) instanceof Movie)
-        {
+    public void updateMovie(int id, String title, String director, int releaseYear, String format) {
+        if (getCatalog(id) != null && getCatalog(id) instanceof Movie) {
             catalogs.replace(id, new Movie(id, title, director, releaseYear, format));
         }
     }
 
+    public boolean removeCatalog(int id) {
+        return catalogs.remove(id) != null;
+    }
+
     @Override
-    public String toString()
-    {
+    public String toString() {
         String str = "";
-        for (int i = 0; i < catalogs.size(); i++)
-        {
-            if (i == 0)
+        for (int i = 0; i < catalogs.size(); i++) {
+            if (i == 0) {
                 str = str.concat(getCatalogs().get(i).toString() + "\n");
-            else
-            {
+            } else {
                 str = str.concat("\t\t\t" + getCatalogs().get(i).toString());
-                if (i != catalogs.size() - 1)
+                if (i != catalogs.size() - 1) {
                     str = str.concat("\n");
+                }
             }
         }
         return "CatalogRepo[" + str + "]";
     }
 
     @PostConstruct
-    private void addCatalogPool()
-    {
+    private void addCatalogPool() {
         addBook(1, "The Shining", "Stephen King", 1997);
         addBook(2, "The Lord of the Rings", "J.R.R. Tolkien", 2015);
         addBook(3, "What Could Possibly Go Wrong", "Jeremy Clarkson", 2015);

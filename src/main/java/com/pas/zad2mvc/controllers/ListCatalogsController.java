@@ -15,14 +15,12 @@ import java.util.stream.Collectors;
 
 @Named
 @ViewScoped
-public class ListCatalogsController implements Serializable
-{
+public class ListCatalogsController implements Serializable {
     @Inject
     private CatalogService catalogService;
     private List<Catalog> catalogs;
 
-    public List<Book> getBooks()
-    {
+    public List<Book> getBooks() {
         return catalogs
                 .stream()
                 .filter(catalog -> catalog instanceof Book)
@@ -30,8 +28,7 @@ public class ListCatalogsController implements Serializable
                 .collect(Collectors.toList());
     }
 
-    public List<Movie> getMovies()
-    {
+    public List<Movie> getMovies() {
         return catalogs
                 .stream()
                 .filter(catalog -> catalog instanceof Movie)
@@ -39,12 +36,13 @@ public class ListCatalogsController implements Serializable
                 .collect(Collectors.toList());
     }
 
-    public void removeCatalog(int id)
-    {
+    public void removeCatalog(int id) {
         catalogService.removeCatalog(id);
         loadCatalogs();
     }
 
     @PostConstruct
-    public void loadCatalogs() { catalogs = catalogService.getCatalogs(); }
+    public void loadCatalogs() {
+        catalogs = catalogService.getCatalogs();
+    }
 }

@@ -15,17 +15,17 @@
     <navigation-rule>
         <from-view-id>/login.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>admin</from-outcome>
+            <from-outcome>Admin</from-outcome>
             <to-view-id>/adminPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
-            <from-outcome>manager</from-outcome>
+            <from-outcome>Manager</from-outcome>
             <to-view-id>/managerPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
-            <from-outcome>client</from-outcome>
+            <from-outcome>Client</from-outcome>
             <to-view-id>/clientPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>

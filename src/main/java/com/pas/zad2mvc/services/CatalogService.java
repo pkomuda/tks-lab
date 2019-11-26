@@ -11,33 +11,40 @@ import java.util.List;
 
 @Named
 @Dependent
-public class CatalogService implements Serializable
-{
+public class CatalogService implements Serializable {
     @Inject
     private CatalogRepository catalogRepository;
 
-    public List<Catalog> getCatalogs() { return catalogRepository.getCatalogs(); }
-    public Catalog getCatalog(int id) { return catalogRepository.get(id); }
-    public boolean removeCatalog(int id) { return catalogRepository.remove(id); }
-
-    public void addBook(int id, String title, String author, int releaseYear)
-    {
+    public void addBook(int id, String title, String author, int releaseYear) {
         catalogRepository.addBook(id, title, author, releaseYear);
     }
-    public void addMovie(int id, String title, String director, int releaseYear, String format)
-    {
+
+    public void addMovie(int id, String title, String director, int releaseYear, String format) {
         catalogRepository.addMovie(id, title, director, releaseYear, format);
     }
 
-    public void updateBook(int id, String title, String author, int releaseYear)
-    {
+    public Catalog getCatalog(int id) {
+        return catalogRepository.getCatalog(id);
+    }
+
+    public List<Catalog> getCatalogs() {
+        return catalogRepository.getCatalogs();
+    }
+
+    public void updateBook(int id, String title, String author, int releaseYear) {
         catalogRepository.updateBook(id, title, author, releaseYear);
     }
-    public void updateMovie(int id, String title, String director, int releaseYear, String format)
-    {
+
+    public void updateMovie(int id, String title, String director, int releaseYear, String format) {
         catalogRepository.updateMovie(id, title, director, releaseYear, format);
     }
 
+    public boolean removeCatalog(int id) {
+        return catalogRepository.removeCatalog(id);
+    }
+
     @Override
-    public String toString() { return catalogRepository.toString(); }
+    public String toString() {
+        return catalogRepository.toString();
+    }
 }

@@ -12,14 +12,17 @@ import java.util.List;
 
 @Named
 @ViewScoped
-public class ListUsersController implements Serializable
-{
+public class ListUsersController implements Serializable {
     @Inject
     private UserService userService;
     private List<User> users;
 
-    public List<User> getUsers() { return users; }
+    public List<User> getUsers() {
+        return users;
+    }
 
     @PostConstruct
-    public void loadUsers() { users = userService.getUsers(); }
+    public void loadUsers() {
+        users = userService.getUsers();
+    }
 }

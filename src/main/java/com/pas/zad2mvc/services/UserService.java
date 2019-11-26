@@ -11,19 +11,44 @@ import java.util.List;
 
 @Named
 @Dependent
-public class UserService implements Serializable
-{
+public class UserService implements Serializable {
     @Inject
     private UserRepository userRepository;
 
-    public List<User> getUsers() { return userRepository.getUsers(); }
-    public User getUser(String username) { return userRepository.get(username); }
-    public void addAdmin(String username, boolean active) { userRepository.addAdmin(username, active); }
-    public void addManager(String username, boolean active) { userRepository.addManager(username, active); }
-    public void addClient(String username, boolean active) { userRepository.addClient(username, active); }
-    public boolean activateUser(String username) { return userRepository.activate(username); }
-    public boolean deactivateUser(String username) { return userRepository.deactivate(username); }
+    public void addAdmin(String username, boolean active, String firstName, String lastName) {
+        userRepository.addAdmin(username, active, firstName, lastName);
+    }
+
+    public void addManager(String username, boolean active, String firstName, String lastName) {
+        userRepository.addManager(username, active, firstName, lastName);
+    }
+
+    public void addClient(String username, boolean active, String firstName, String lastName) {
+        userRepository.addClient(username, active, firstName, lastName);
+    }
+
+    public User getUser(String username) {
+        return userRepository.getUser(username);
+    }
+
+    public List<User> getUsers() {
+        return userRepository.getUsers();
+    }
+
+    public void updateUserInfo(String username, String firstName, String lastName) {
+        userRepository.updateUserInfo(username, firstName, lastName);
+    }
+
+    public boolean activateUser(String username) {
+        return userRepository.activateUser(username);
+    }
+
+    public boolean deactivateUser(String username) {
+        return userRepository.deactivateUser(username);
+    }
 
     @Override
-    public String toString() { return userRepository.toString(); }
+    public String toString() {
+        return userRepository.toString();
+    }
 }
