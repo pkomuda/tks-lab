@@ -23,6 +23,17 @@
                     <f:facet name="header">Activity</f:facet>
                     <h:selectBooleanCheckbox value="#{user.active}"/>
                 </h:column>
+                <h:column>
+                    <f:facet name="header">First name</f:facet>
+                    <h:outputText value="#{user.firstName}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Last name</f:facet>
+                    <h:outputText value="#{user.lastName}"/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Edit" actionListener="#{listUsersController.prepareUserInfo(user.username, user.firstName, user.lastName)}" action="#{listUsersController.editUser()}"/>
+                </h:column>
             </h:dataTable>
             <h:commandButton value="Add a new user" action="addUser.xhtml"/>
         </h:form>

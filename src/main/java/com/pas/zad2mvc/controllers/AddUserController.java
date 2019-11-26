@@ -18,6 +18,8 @@ public class AddUserController implements Serializable {
     private String userType;
     private String username;
     private boolean active;
+    private String firstName;
+    private String lastName;
 
     public String add() {
         conversation.begin();
@@ -27,13 +29,13 @@ public class AddUserController implements Serializable {
     public String confirm(String userType) {
         switch (userType) {
             case "admin":
-                userService.addAdmin(username, active);
+                userService.addAdmin(username, active, firstName, lastName);
                 break;
             case "manager":
-                userService.addManager(username, active);
+                userService.addManager(username, active, firstName, lastName);
                 break;
             case "client":
-                userService.addClient(username, active);
+                userService.addClient(username, active, firstName, lastName);
                 break;
         }
         conversation.end();
@@ -52,6 +54,14 @@ public class AddUserController implements Serializable {
     public boolean isActive() {
         return active;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
     //endregion
 
     //region setters
@@ -63,6 +73,14 @@ public class AddUserController implements Serializable {
     }
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
     //endregion
 }

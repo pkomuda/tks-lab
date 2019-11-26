@@ -1,6 +1,7 @@
 package com.pas.zad2mvc.data;
 
 public class Client extends User {
+    //region constructors
     public Client(String username, boolean active, String firstName, String lastName) {
         super(username, active, firstName, lastName);
     }
@@ -8,6 +9,7 @@ public class Client extends User {
     public Client(User other) {
         super(other);
     }
+    //endregion
 
     @Override
     public String getType() {
@@ -16,6 +18,6 @@ public class Client extends User {
 
     @Override
     public String toString() {
-        return "Client(username: " + getUsername() + ", active: " + isActive() + ")";
+        return "Client(username: " + getUsername() + ", active: " + isActive() + ", firstName: " + getFirstName() + ", lastName: " + getLastName() + ")";
     }
 }

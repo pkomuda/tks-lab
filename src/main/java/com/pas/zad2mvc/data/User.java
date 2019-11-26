@@ -7,6 +7,7 @@ public abstract class User {
     private boolean active;
     private UserInfo info;
 
+    //region constructors
     public User(String username, boolean active, String firstName, String lastName) {
         this.username = username;
         this.active = active;
@@ -19,6 +20,7 @@ public abstract class User {
         this.active = other.isActive();
         this.info = new UserInfo(other.getInfo());
     }
+    //endregion
 
     //region getters
     public String getUsername() {
