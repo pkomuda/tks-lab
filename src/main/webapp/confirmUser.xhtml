@@ -22,9 +22,8 @@
             </h:selectOneMenu>
             <h:commandButton value="Confrim" action="#{addUserController.confirm(addUserController.userType)}"/>
             <br/>
+            <h:commandButton value="Cancel" action="addUser.xhtml" immediate="true"/>
         </h:form>
-        <h:link value="Admin page" outcome="adminPage.xhtml"/>
-        <br/>
-        <h:link value="Log out" outcome="index.xhtml"/>
+        <h:commandButton value="Log out" action="#{loginController.logOut()}"/>
     </h:body>
 </html>

@@ -48,6 +48,11 @@
             <to-view-id>/editUser.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
@@ -81,6 +86,11 @@
         <from-view-id>/managerPage.xhtml</from-view-id>
         <navigation-case>
             <to-view-id>/addBook.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

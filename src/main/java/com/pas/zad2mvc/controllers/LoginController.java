@@ -6,13 +6,15 @@ import com.pas.zad2mvc.data.Manager;
 import com.pas.zad2mvc.data.User;
 import com.pas.zad2mvc.services.UserService;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 
 @Named
-@RequestScoped
-public class LoginController {
+@SessionScoped
+public class LoginController implements Serializable {
     @Inject
     private UserService userService;
     private String username;
@@ -46,6 +48,11 @@ public class LoginController {
 
     public String goBack() {
         return "back";
+    }
+
+    public String logOut() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "index";
     }
 
     public String getUsername() {

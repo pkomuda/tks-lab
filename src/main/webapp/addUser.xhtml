@@ -6,6 +6,7 @@
         <title>Add user</title>
     </h:head>
     <h:body>
+        Logged in as #{loginController.username}
         <h:form>
             Username:
             <h:inputText value="#{addUserController.username}"/>
@@ -13,8 +14,16 @@
             Active:
             <h:selectBooleanCheckbox value="#{addUserController.active}"/>
             <br/>
+            First name:
+            <h:inputText value="#{addUserController.firstName}"/>
+            <br/>
+            Last name:
+            <h:inputText value="#{addUserController.lastName}"/>
+            <br/>
             <h:commandButton value="OK" action="#{addUserController.add()}"/>
+            <br/>
+            <h:commandButton value="Cancel" action="adminPage.xhtml" immediate="true"/>
         </h:form>
-        <h:link value="Log out" outcome="index.xhtml"/>
+        <h:commandButton value="Log out" action="#{loginController.logOut()}"/>
     </h:body>
 </html>

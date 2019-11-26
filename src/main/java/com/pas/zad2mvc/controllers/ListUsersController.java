@@ -24,8 +24,10 @@ public class ListUsersController implements Serializable {
     private String firstName;
     private String lastName;
 
-    public List<User> getUsers() {
-        return users;
+    public void prepareUserInfo(String username, String firstName, String lastName) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String editUser() {
@@ -40,6 +42,10 @@ public class ListUsersController implements Serializable {
     }
 
     //region getters
+    public List<User> getUsers() {
+        return users;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -63,12 +69,6 @@ public class ListUsersController implements Serializable {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void prepareUserInfo(String username, String firstName, String lastName) {
-        this.username = username;
-        this.firstName = firstName;
         this.lastName = lastName;
     }
     //endregion

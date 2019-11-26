@@ -6,6 +6,7 @@
         <title>Edit user</title>
     </h:head>
     <h:body>
+        Logged in as #{loginController.username}
         <h:form>
             Username:
             <h:outputText value="#{listUsersController.username}"/>
@@ -17,7 +18,10 @@
             <h:inputText value="#{listUsersController.lastName}"/>
             <br/>
             <h:commandButton value="OK" action="#{listUsersController.confirmEdit()}"/>
+            <br/>
+            <h:commandButton value="Cancel" action="adminPage.xhtml" immediate="true"/>
+            <br/>
+            <h:commandButton value="Log out" action="#{loginController.logOut()}"/>
         </h:form>
-        <h:link value="Log out" outcome="index.xhtml"/>
     </h:body>
 </html>

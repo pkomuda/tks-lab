@@ -7,6 +7,7 @@
         <title>Admin page</title>
     </h:head>
     <h:body>
+        Logged in as #{loginController.username}
         <h:form>
             Users:
             <br/>
@@ -35,7 +36,9 @@
                     <h:commandButton value="Edit" actionListener="#{listUsersController.prepareUserInfo(user.username, user.firstName, user.lastName)}" action="#{listUsersController.editUser()}"/>
                 </h:column>
             </h:dataTable>
-            <h:commandButton value="Add a new user" action="addUser.xhtml"/>
+            <h:commandButton value="Add a new user" action="#{addUserController.add()}"/>
+            <br/>
+            <h:commandButton value="Log out" action="#{loginController.logOut()}"/>
         </h:form>
     </h:body>
 </html>
