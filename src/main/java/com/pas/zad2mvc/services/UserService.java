@@ -1,6 +1,7 @@
 package com.pas.zad2mvc.services;
 
 import com.pas.zad2mvc.data.User;
+import com.pas.zad2mvc.data.UserInfo;
 import com.pas.zad2mvc.repositories.UserRepository;
 
 import javax.enterprise.context.Dependent;
@@ -35,8 +36,8 @@ public class UserService implements Serializable {
         return userRepository.getUsers();
     }
 
-    public void updateUserInfo(String username, String firstName, String lastName) {
-        userRepository.updateUserInfo(username, firstName, lastName);
+    public void updateUserInfo(String username, UserInfo userInfo) {
+        userRepository.updateUserInfo(username, userInfo);
     }
 
     public boolean activateUser(String username) {

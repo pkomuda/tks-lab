@@ -9,15 +9,15 @@
         Logged in as #{loginController.username}
         <h:form>
             Username:
-            <h:outputText value="#{listUsersController.username}"/>
+            <h:outputText value="#{listUsersController.selectedUsername}"/>
             <br/>
             First name:
-            <h:inputText value="#{listUsersController.firstName}"/>
+            <h:inputText value="#{editUserController.firstName}"/>
             <br/>
             Last name:
-            <h:inputText value="#{listUsersController.lastName}"/>
+            <h:inputText value="#{editUserController.lastName}"/>
             <br/>
-            <h:commandButton value="OK" action="#{listUsersController.confirmEdit()}"/>
+            <h:commandButton value="OK" action="#{editUserController.confirmEdit(listUsersController.selectedUsername)}"/>
             <br/>
             <h:commandButton value="Cancel" action="adminPage.xhtml" immediate="true"/>
             <br/>

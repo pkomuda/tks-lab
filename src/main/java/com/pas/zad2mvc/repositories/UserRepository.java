@@ -40,9 +40,9 @@ public class UserRepository {
         return new ArrayList<>(users.values());
     }
 
-    public void updateUserInfo(String username, String firstName, String lastName) {
+    public void updateUserInfo(String username, UserInfo userInfo) {
         if (getUser(username) != null) {
-            getUser(username).setInfo(new UserInfo(firstName, lastName));
+            getUser(username).setInfo(userInfo);
         }
     }
 

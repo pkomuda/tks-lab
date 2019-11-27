@@ -33,7 +33,7 @@
                     <h:outputText value="#{user.lastName}"/>
                 </h:column>
                 <h:column>
-                    <h:commandButton value="Edit" actionListener="#{listUsersController.prepareUserInfo(user.username, user.firstName, user.lastName)}" action="#{listUsersController.editUser()}"/>
+                    <h:commandButton value="Edit" action="#{listUsersController.prepareUserInfo(user)}"/>
                 </h:column>
                 <h:column>
                     <h:commandButton value="Catalogs"/>
