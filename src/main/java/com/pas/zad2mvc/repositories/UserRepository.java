@@ -71,7 +71,7 @@ public class UserRepository {
             if (i == 0) {
                 str = str.concat(getUsers().get(i).toString() + "\n");
             } else {
-                str = str.concat("\t\t " + getUsers().get(i).toString());
+                str = str.concat("\t   " + getUsers().get(i).toString());
                 if (i != users.size() - 1) {
                     str = str.concat("\n");
                 }

@@ -23,7 +23,8 @@
             <h:commandButton value="Confrim" action="#{addUserController.confirm(addUserController.userType)}"/>
             <br/>
             <h:commandButton value="Cancel" action="addUser.xhtml" immediate="true"/>
+            <br/>
+            <h:commandButton value="Log out" action="#{loginController.logOut()}"/>
         </h:form>
-        <h:commandButton value="Log out" action="#{loginController.logOut()}"/>
     </h:body>
 </html>

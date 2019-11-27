@@ -59,7 +59,7 @@ public class CatalogRepository {
             if (i == 0) {
                 str = str.concat(getCatalogs().get(i).toString() + "\n");
             } else {
-                str = str.concat("\t\t\t" + getCatalogs().get(i).toString());
+                str = str.concat("\t      " + getCatalogs().get(i).toString());
                 if (i != catalogs.size() - 1) {
                     str = str.concat("\n");
                 }

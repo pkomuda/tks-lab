@@ -43,6 +43,14 @@ public abstract class User {
         return info.getLastName();
     }
 
+    public String getActivity() {
+        if (active) {
+            return "Active";
+        } else {
+            return "Inactive";
+        }
+    }
+
     public abstract String getType();
     //endregion
 

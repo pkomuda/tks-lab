@@ -8,9 +8,15 @@
     </h:head>
     <h:body>
         Logged in as #{loginController.username}
+        <br/>
+        <br/>
         <h:form>
-            Users:
+            Search:
+            <h:inputText value="#{listUsersController.userFilter}"/>
+            <h:commandButton value="Refresh" action="#{listUsersController.filterUsers()}"/>
             <br/>
+            <br/>
+            Users:
             <h:dataTable value="#{listUsersController.users}" var="user" border="1">
                 <h:column>
                     <f:facet name="header">Type</f:facet>
@@ -22,7 +28,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">Activity</f:facet>
-                    <h:selectBooleanCheckbox value="#{user.active}"/>
+                    <h:outputText value="#{user.getActivity()}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">First name</f:facet>
@@ -36,7 +42,7 @@
                     <h:commandButton value="Edit" action="#{listUsersController.prepareUserInfo(user)}"/>
                 </h:column>
                 <h:column>
-                    <h:commandButton value="Catalogs"/>
+                    <h:commandButton value="Rents"/>
                 </h:column>
             </h:dataTable>
             <h:commandButton value="Add a new user" action="#{addUserController.add()}"/>

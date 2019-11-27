@@ -4,6 +4,8 @@ import com.pas.zad2mvc.data.Book;
 import com.pas.zad2mvc.data.Catalog;
 import com.pas.zad2mvc.data.Movie;
 import com.pas.zad2mvc.services.CatalogService;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
@@ -28,6 +30,7 @@ public class ListCatalogsController implements Serializable {
     private int releaseYear;
     private String director;
     private String format;
+    private String catalogFilter;
 
     public void prepareBookInfo(int id, String title, String author, int releaseYear) {
         this.id = id;
@@ -42,6 +45,13 @@ public class ListCatalogsController implements Serializable {
         this.director = director;
         this.releaseYear = releaseYear;
         this.format = format;
+    }
+
+    public void filterCatalogs() {
+        catalogs = catalogService.getCatalogs()
+                .stream()
+                .filter(catalog -> StringUtils.containsIgnoreCase(catalog.toString(), catalogFilter))
+                .collect(Collectors.toList());
     }
 
     public List<Book> getBooks() {
@@ -117,6 +127,10 @@ public class ListCatalogsController implements Serializable {
     public String getFormat() {
         return format;
     }
+
+    public String getCatalogFilter() {
+        return catalogFilter;
+    }
     //endregion
 
     //region setters
@@ -142,6 +156,10 @@ public class ListCatalogsController implements Serializable {
 
     public void setFormat(String format) {
         this.format = format;
+    }
+
+    public void setCatalogFilter(String catalogFilter) {
+        this.catalogFilter = catalogFilter;
     }
     //endregion
 

@@ -8,7 +8,14 @@
     </h:head>
     <h:body>
         Logged in as #{loginController.username}
+        <br/>
+        <br/>
         <h:form>
+            Search:
+            <h:inputText value="#{listCatalogsController.catalogFilter}"/>
+            <h:commandButton value="Refresh" action="#{listCatalogsController.filterCatalogs()}"/>
+            <br/>
+            <br/>
             Books:
             <br/>
             <h:dataTable value="#{listCatalogsController.books}" var="book" border="1">

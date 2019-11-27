@@ -9,7 +9,7 @@
         Logged in as #{loginController.username}
         <h:form>
             Username:
-            <h:inputText value="#{addUserController.username}"/>
+            <h:inputText value="#{addUserController.username}" required="true"/>
             <br/>
             Active:
             <h:selectBooleanCheckbox value="#{addUserController.active}"/>
