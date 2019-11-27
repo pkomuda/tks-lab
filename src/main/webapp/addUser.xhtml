@@ -7,6 +7,8 @@
     </h:head>
     <h:body>
         Logged in as #{loginController.username}
+        <br/>
+        <br/>
         <h:form>
             Username:
             <h:inputText value="#{addUserController.username}" required="true"/>
@@ -23,6 +25,7 @@
             <h:commandButton value="OK" action="#{addUserController.add()}"/>
             <br/>
             <h:commandButton value="Cancel" action="adminPage.xhtml" immediate="true"/>
+            <br/>
             <br/>
             <h:commandButton value="Log out" action="#{loginController.logOut()}"/>
         </h:form>

@@ -48,6 +48,10 @@ public class UserService implements Serializable {
         return userRepository.deactivateUser(username);
     }
 
+    public void setUserActivity(String username, boolean active) {
+        userRepository.setUserActivity(username, active);
+    }
+
     @Override
     public String toString() {
         return userRepository.toString();

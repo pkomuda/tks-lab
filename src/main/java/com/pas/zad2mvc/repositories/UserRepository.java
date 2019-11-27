@@ -64,6 +64,12 @@ public class UserRepository {
         }
     }
 
+    public void setUserActivity(String username, boolean active) {
+        if (getUser(username) != null) {
+            getUser(username).setActive(active);
+        }
+    }
+
     @Override
     public String toString() {
         String str = "";

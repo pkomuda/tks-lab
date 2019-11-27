@@ -7,9 +7,14 @@
     </h:head>
     <h:body>
         Logged in as #{loginController.username}
+        <br/>
+        <br/>
         <h:form>
             Username:
             <h:outputText value="#{listUsersController.selectedUsername}"/>
+            <br/>
+            Activity:
+            <h:selectBooleanCheckbox value="#{editUserController.active}"/>
             <br/>
             First name:
             <h:inputText value="#{editUserController.firstName}"/>
@@ -20,6 +25,7 @@
             <h:commandButton value="OK" action="#{editUserController.confirmEdit(listUsersController.selectedUsername)}"/>
             <br/>
             <h:commandButton value="Cancel" action="adminPage.xhtml" immediate="true"/>
+            <br/>
             <br/>
             <h:commandButton value="Log out" action="#{loginController.logOut()}"/>
         </h:form>

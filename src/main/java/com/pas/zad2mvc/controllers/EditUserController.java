@@ -12,15 +12,21 @@ import javax.inject.Named;
 public class EditUserController {
     @Inject
     private ListUsersController listUsersController;
+    private boolean active;
     private UserInfo userInfo;
 
     public String confirmEdit(String username) {
+        listUsersController.getUserService().setUserActivity(username, active);
         listUsersController.getUserService().updateUserInfo(username, userInfo);
         listUsersController.endConversation();
         return "admin";
     }
 
     //region getters
+    public boolean isActive() {
+        return active;
+    }
+
     public String getFirstName() {
         return userInfo.getFirstName();
     }
@@ -31,6 +37,10 @@ public class EditUserController {
     //endregion
 
     //region setters
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     public void setFirstName(String firstName) {
         this.userInfo.setFirstName(firstName);
     }
@@ -42,6 +52,7 @@ public class EditUserController {
 
     @PostConstruct
     public void loadUserInfo() {
+        active = listUsersController.getSelectedUser().isActive();
         userInfo = listUsersController.getSelectedUserInfo();
     }
 }
