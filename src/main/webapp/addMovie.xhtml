@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Add book</title>
+        <title>Add movie</title>
     </h:head>
     <h:body>
         <h:form>
@@ -13,13 +13,16 @@
             Title:
             <h:inputText value="#{addCatalogController.title}"/>
             <br/>
-            Author:
+            Director:
             <h:inputText value="#{addCatalogController.author}"/>
             <br/>
             Release year:
             <h:inputText value="#{addCatalogController.releaseYear}" maxlength="4"/>
             <br/>
-            <h:commandButton value="OK" action="#{addCatalogController.addBook()}"/>
+            Format:
+            <h:inputText value="#{addCatalogController.format}"/>
+            <br/>
+            <h:commandButton value="OK" action="#{addCatalogController.addMovie()}"/>
             <br/>
             <h:commandButton value="Cancel" action="managerPage.xhtml" immediate="true"/>
             <br/>

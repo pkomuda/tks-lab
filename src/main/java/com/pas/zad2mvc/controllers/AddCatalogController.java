@@ -23,11 +23,17 @@ public class AddCatalogController implements Serializable {
     private String format;
 
     public String addBook() {
+        if (!conversation.isTransient()) {
+            conversation.end();
+        }
         conversation.begin();
         return "addBook";
     }
 
     public String addMovie() {
+        if (!conversation.isTransient()) {
+            conversation.end();
+        }
         conversation.begin();
         return "addMovie";
     }

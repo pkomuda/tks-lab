@@ -23,7 +23,7 @@ public class LoginController implements Serializable {
 
     public void checkIfUserExists(String username) {
         for(User u : userService.getUsers()) {
-            if(username.equals(u.getUsername())) {
+            if(username.equals(u.getUsername()) && u.isActive()) {
                 userExists = true;
                 if (u instanceof Admin) {
                     user = new Admin(u);

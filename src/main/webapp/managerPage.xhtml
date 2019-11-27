@@ -28,6 +28,12 @@
                     <f:facet name="header">Release year</f:facet>
                     <h:outputText value="#{book.releaseYear}"/>
                 </h:column>
+                <h:column>
+                    <h:commandButton value="Edit" actionListener="#{listCatalogsController.prepareBookInfo(book.id, book.title, book.author, book.releaseYear)}" action="#{listCatalogsController.editBook()}"/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Remove" action="#{listCatalogsController.removeCatalog(book.id)}"/>
+                </h:column>
             </h:dataTable>
             <h:commandButton value="Add a new book" action="addBook.xhtml"/>
             <br/>
@@ -55,7 +61,16 @@
                     <f:facet name="header">Format</f:facet>
                     <h:outputText value="#{movie.format}"/>
                 </h:column>
+                <h:column>
+                    <h:commandButton value="Edit" actionListener="#{listCatalogsController.prepareMovieInfo(movie.id, movie.title, movie.director, movie.releaseYear, movie.format)}" action="#{listCatalogsController.editMovie()}"/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Remove" action="#{listCatalogsController.removeCatalog(movie.id)}"/>
+                </h:column>
             </h:dataTable>
+            <h:commandButton value="Add a new movie" action="addMovie.xhtml"/>
+            <br/>
+            <h:commandButton value="Log out" action="#{loginController.logOut()}"/>
         </h:form>
     </h:body>
 </html>

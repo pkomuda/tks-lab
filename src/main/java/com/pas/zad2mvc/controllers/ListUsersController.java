@@ -31,6 +31,9 @@ public class ListUsersController implements Serializable {
     }
 
     public String editUser() {
+        if (!conversation.isTransient()) {
+            conversation.end();
+        }
         conversation.begin();
         return "edit";
     }

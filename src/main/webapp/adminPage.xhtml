@@ -35,6 +35,9 @@
                 <h:column>
                     <h:commandButton value="Edit" actionListener="#{listUsersController.prepareUserInfo(user.username, user.firstName, user.lastName)}" action="#{listUsersController.editUser()}"/>
                 </h:column>
+                <h:column>
+                    <h:commandButton value="Catalogs"/>
+                </h:column>
             </h:dataTable>
             <h:commandButton value="Add a new user" action="#{addUserController.add()}"/>
             <br/>

@@ -22,6 +22,9 @@ public class AddUserController implements Serializable {
     private String lastName;
 
     public String add() {
+        if (!conversation.isTransient()) {
+            conversation.end();
+        }
         conversation.begin();
         return "add";
     }
