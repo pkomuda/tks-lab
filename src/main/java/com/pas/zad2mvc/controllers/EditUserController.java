@@ -1,6 +1,5 @@
 package com.pas.zad2mvc.controllers;
 
-import com.pas.zad2mvc.data.User;
 import com.pas.zad2mvc.data.UserInfo;
 
 import javax.annotation.PostConstruct;
@@ -12,14 +11,14 @@ import javax.inject.Named;
 @RequestScoped
 public class EditUserController {
     @Inject
-    private ListUsersController listUsersController;
+    private AdminPageController adminPageController;
     private boolean active;
     private UserInfo userInfo;
 
     public String confirmEditUser(String username) {
-        listUsersController.getUserService().setUserActivity(username, active);
-        listUsersController.getUserService().updateUserInfo(username, userInfo);
-        listUsersController.endConversation();
+        adminPageController.getUserService().setUserActivity(username, active);
+        adminPageController.getUserService().updateUserInfo(username, userInfo);
+        adminPageController.endConversation();
         return "admin";
     }
 
@@ -57,7 +56,7 @@ public class EditUserController {
 
     @PostConstruct
     public void loadUserInfo() {
-        setActive(listUsersController.getSelectedUserActivity());
-        setUserInfo(listUsersController.getSelectedUserInfo());
+        setActive(adminPageController.getSelectedUserActivity());
+        setUserInfo(adminPageController.getSelectedUserInfo());
     }
 }

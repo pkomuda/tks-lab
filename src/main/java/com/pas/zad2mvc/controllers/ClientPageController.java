@@ -3,11 +3,11 @@ package com.pas.zad2mvc.controllers;
 import com.pas.zad2mvc.data.Book;
 import com.pas.zad2mvc.data.Catalog;
 import com.pas.zad2mvc.data.Movie;
+import com.pas.zad2mvc.data.Rent;
 import com.pas.zad2mvc.services.CatalogService;
-import org.apache.commons.lang3.StringUtils;
+import com.pas.zad2mvc.services.RentService;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,28 +21,20 @@ public class ClientPageController implements Serializable {
     @Inject
     private CatalogService catalogService;
     @Inject
-    private Conversation conversation;
+    private RentService rentService;
+    @Inject
+    private LoginController loginController;
     private List<Catalog> catalogs;
-    private Catalog selectedCatalog;
+    private List<Rent> rents;
     private String catalogFilter;
-
-    public String prepareCatalogInfo(Catalog selectedCatalog) {
-        beginConversation();
-        setSelectedCatalog(selectedCatalog);
-        if (selectedCatalog instanceof Book) {
-            return "editBook";
-        } else if (selectedCatalog instanceof Movie) {
-            return "editMovie";
-        } else {
-            return "";
-        }
-    }
+    private String rentFilter;
 
     public void filterCatalogs() {
-        catalogs = catalogService.getCatalogs()
-                .stream()
-                .filter(catalog -> StringUtils.containsIgnoreCase(catalog.toString(), catalogFilter))
-                .collect(Collectors.toList());
+        catalogs = catalogService.filterCatalogs(catalogFilter);
+    }
+
+    public void filterRentsForClient() {
+        rents = rentService.filterRentsForClient(loginController.getUsername(), rentFilter);
     }
 
     public List<Book> getBooks() {
@@ -61,90 +53,33 @@ public class ClientPageController implements Serializable {
                 .collect(Collectors.toList());
     }
 
-    public void removeCatalog(int id) {
-        catalogService.removeCatalog(id);
-        loadCatalogs();
-    }
-
-    //region conversation
-    public void beginConversation() {
-        if (!conversation.isTransient()) {
-            conversation.end();
-        }
-        conversation.begin();
-    }
-
-    public void endConversation() {
-        conversation.end();
-    }
-    //endregion
-
     //region getters
-    public CatalogService getCatalogService() {
-        return catalogService;
-    }
-
-    public List<Catalog> getCatalogs() {
-        return catalogs;
-    }
-
-    public Catalog getSelectedCatalog() {
-        return selectedCatalog;
-    }
-
-    public int getSelectedId() {
-        return selectedCatalog.getId();
-    }
-
-    public String getSelectedTitle() {
-        return selectedCatalog.getTitle();
-    }
-
-    public String getSelectedAuthor() {
-        if (selectedCatalog instanceof Book) {
-            return ((Book) selectedCatalog).getAuthor();
-        } else {
-            return "";
-        }
-    }
-
-    public int getSelectedReleaseYear() {
-        return selectedCatalog.getReleaseYear();
-    }
-
-    public String getSelectedDirector() {
-        if (selectedCatalog instanceof Movie) {
-            return ((Movie) selectedCatalog).getDirector();
-        } else {
-            return "";
-        }
-    }
-
-    public String getSelectedFormat() {
-        if (selectedCatalog instanceof Movie) {
-            return ((Movie) selectedCatalog).getFormat();
-        } else {
-            return "";
-        }
+    public List<Rent> getRents() {
+        return rents;
     }
 
     public String getCatalogFilter() {
         return catalogFilter;
     }
+
+    public String getRentFilter() {
+        return rentFilter;
+    }
     //endregion
 
     //region setters
-    public void setSelectedCatalog(Catalog selectedCatalog) {
-        this.selectedCatalog = selectedCatalog;
-    }
-
     public void setCatalogFilter(String catalogFilter) {
         this.catalogFilter = catalogFilter;
+    }
+
+    public void setRentFilter(String rentFilter) {
+        this.rentFilter = rentFilter;
     }
     //endregion
 
     @PostConstruct
-    public void loadCatalogs() {
+    public void loadData() {
         catalogs = catalogService.getCatalogs();
+        rents = rentService.getRentsForClient(loginController.getUsername());
     }
 }

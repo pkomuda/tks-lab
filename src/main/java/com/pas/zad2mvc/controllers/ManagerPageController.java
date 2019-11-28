@@ -4,7 +4,6 @@ import com.pas.zad2mvc.data.Book;
 import com.pas.zad2mvc.data.Catalog;
 import com.pas.zad2mvc.data.Movie;
 import com.pas.zad2mvc.services.CatalogService;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Named
 @ConversationScoped
-public class ListCatalogsController implements Serializable {
+public class ManagerPageController implements Serializable {
     @Inject
     private CatalogService catalogService;
     @Inject
@@ -40,10 +39,7 @@ public class ListCatalogsController implements Serializable {
     }
 
     public void filterCatalogs() {
-        catalogs = catalogService.getCatalogs()
-                .stream()
-                .filter(catalog -> StringUtils.containsIgnoreCase(catalog.toString(), catalogFilter))
-                .collect(Collectors.toList());
+        catalogs = catalogService.filterCatalogs(catalogFilter);
     }
 
     public List<Book> getBooks() {

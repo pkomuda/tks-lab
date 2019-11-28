@@ -9,7 +9,7 @@ import javax.inject.Named;
 @RequestScoped
 public class EditCatalogController {
     @Inject
-    private ListCatalogsController listCatalogsController;
+    private ManagerPageController managerPageController;
     private String title;
     private String author;
     private int releaseYear;
@@ -17,14 +17,14 @@ public class EditCatalogController {
     private String format;
 
     public String confirmEditBook(int id) {
-        listCatalogsController.getCatalogService().updateBook(id, title, author, releaseYear);
-        listCatalogsController.endConversation();
+        managerPageController.getCatalogService().updateBook(id, title, author, releaseYear);
+        managerPageController.endConversation();
         return "manager";
     }
 
     public String confirmEditMovie(int id) {
-        listCatalogsController.getCatalogService().updateMovie(id, title, director, releaseYear, format);
-        listCatalogsController.endConversation();
+        managerPageController.getCatalogService().updateMovie(id, title, director, releaseYear, format);
+        managerPageController.endConversation();
         return "manager";
     }
 
@@ -74,10 +74,10 @@ public class EditCatalogController {
 
     @PostConstruct
     public void loadCatalogInfo() {
-        setTitle(listCatalogsController.getSelectedTitle());
-        setAuthor(listCatalogsController.getSelectedAuthor());
-        setReleaseYear(listCatalogsController.getSelectedReleaseYear());
-        setDirector(listCatalogsController.getSelectedDirector());
-        setFormat(listCatalogsController.getSelectedFormat());
+        setTitle(managerPageController.getSelectedTitle());
+        setAuthor(managerPageController.getSelectedAuthor());
+        setReleaseYear(managerPageController.getSelectedReleaseYear());
+        setDirector(managerPageController.getSelectedDirector());
+        setFormat(managerPageController.getSelectedFormat());
     }
 }

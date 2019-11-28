@@ -3,7 +3,6 @@ package com.pas.zad2mvc.controllers;
 import com.pas.zad2mvc.data.User;
 import com.pas.zad2mvc.data.UserInfo;
 import com.pas.zad2mvc.services.UserService;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
@@ -12,11 +11,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Named
 @ConversationScoped
-public class ListUsersController implements Serializable {
+public class AdminPageController implements Serializable {
     @Inject
     private UserService userService;
     @Inject
@@ -32,10 +30,7 @@ public class ListUsersController implements Serializable {
     }
 
     public void filterUsers() {
-        users = userService.getUsers()
-                .stream()
-                .filter(user -> StringUtils.containsIgnoreCase(user.toString(), userFilter))
-                .collect(Collectors.toList());
+        users = userService.filterUsers(userFilter);
     }
 
     //region conversation
