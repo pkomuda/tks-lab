@@ -85,6 +85,9 @@ public class UserRepository {
         }
         return "UserRepo[" + str + "]";
     }
+    public void addRent(String username, int catalogId){
+        getUser(username).getRentList().add()
+    }
 
     @PostConstruct
     private void addUserPool() {

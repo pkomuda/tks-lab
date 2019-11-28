@@ -1,4 +1,4 @@
-package com.pas.zad2mvc;
+package com.pas.zad2mvc.data;
 
 import com.pas.zad2mvc.data.Catalog;
 import com.pas.zad2mvc.data.Client;
