@@ -3,6 +3,7 @@ package com.pas.zad2mvc.repositories;
 import com.pas.zad2mvc.data.Book;
 import com.pas.zad2mvc.data.Catalog;
 import com.pas.zad2mvc.data.Movie;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -10,6 +11,7 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Named
 @ApplicationScoped
@@ -34,6 +36,13 @@ public class CatalogRepository {
 
     public List<Catalog> getCatalogs() {
         return new ArrayList<>(catalogs.values());
+    }
+
+    public List<Catalog> filterCatalogs(String catalogFilter) {
+        return getCatalogs()
+                .stream()
+                .filter(catalog -> StringUtils.containsIgnoreCase(catalog.toString(), catalogFilter))
+                .collect(Collectors.toList());
     }
 
     public void updateBook(int id, String title, String author, int releaseYear) {

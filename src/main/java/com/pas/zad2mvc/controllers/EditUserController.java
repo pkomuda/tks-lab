@@ -1,5 +1,6 @@
 package com.pas.zad2mvc.controllers;
 
+import com.pas.zad2mvc.data.User;
 import com.pas.zad2mvc.data.UserInfo;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +16,7 @@ public class EditUserController {
     private boolean active;
     private UserInfo userInfo;
 
-    public String confirmEdit(String username) {
+    public String confirmEditUser(String username) {
         listUsersController.getUserService().setUserActivity(username, active);
         listUsersController.getUserService().updateUserInfo(username, userInfo);
         listUsersController.endConversation();
@@ -41,6 +42,10 @@ public class EditUserController {
         this.active = active;
     }
 
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
     public void setFirstName(String firstName) {
         this.userInfo.setFirstName(firstName);
     }
@@ -52,7 +57,7 @@ public class EditUserController {
 
     @PostConstruct
     public void loadUserInfo() {
-        active = listUsersController.getSelectedUser().isActive();
-        userInfo = listUsersController.getSelectedUserInfo();
+        setActive(listUsersController.getSelectedUserActivity());
+        setUserInfo(listUsersController.getSelectedUserInfo());
     }
 }

@@ -6,12 +6,12 @@
         <title>Edit user</title>
     </h:head>
     <h:body>
-        Logged in as #{loginController.username}
+        <h:outputText value="Logged in as #{loginController.username}"/>
         <br/>
         <br/>
         <h:form>
             Username:
-            <h:outputText value="#{listUsersController.selectedUsername}"/>
+            <h:outputText value="#{adminPageController.selectedUsername}"/>
             <br/>
             Activity:
             <h:selectBooleanCheckbox value="#{editUserController.active}"/>
@@ -22,7 +22,7 @@
             Last name:
             <h:inputText value="#{editUserController.lastName}"/>
             <br/>
-            <h:commandButton value="OK" action="#{editUserController.confirmEdit(listUsersController.selectedUsername)}"/>
+            <h:commandButton value="OK" action="#{editUserController.confirmEditUser(adminPageController.selectedUsername)}"/>
             <br/>
             <h:commandButton value="Cancel" action="adminPage.xhtml" immediate="true"/>
             <br/>

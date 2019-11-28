@@ -31,6 +31,10 @@ public class CatalogService implements Serializable {
         return catalogRepository.getCatalogs();
     }
 
+    public List<Catalog> filterCatalogs(String catalogFilter) {
+        return catalogRepository.filterCatalogs(catalogFilter);
+    }
+
     public void updateBook(int id, String title, String author, int releaseYear) {
         catalogRepository.updateBook(id, title, author, releaseYear);
     }

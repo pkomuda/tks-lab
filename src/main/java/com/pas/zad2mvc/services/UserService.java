@@ -36,6 +36,10 @@ public class UserService implements Serializable {
         return userRepository.getUsers();
     }
 
+    public List<User> filterUsers(String userFilter) {
+        return userRepository.filterUsers(userFilter);
+    }
+
     public void updateUserInfo(String username, UserInfo userInfo) {
         userRepository.updateUserInfo(username, userInfo);
     }

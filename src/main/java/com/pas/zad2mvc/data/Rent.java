@@ -1,9 +1,7 @@
 package com.pas.zad2mvc.data;
 
-import com.pas.zad2mvc.data.Catalog;
-import com.pas.zad2mvc.data.Client;
-
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Rent {
@@ -13,19 +11,15 @@ public class Rent {
     private LocalDateTime rentDateTime;
     private LocalDateTime returnDateTime;
 
-    //region constructors
-    public Rent() {
-        this.id = UUID.randomUUID().toString().replace("-", "");
+    public Rent(String id) {
+        this.id = id;
     }
 
-    public Rent(Client client, Catalog catalog, LocalDateTime rentDateTime, LocalDateTime returnDateTime) {
+    public Rent(Client client, Catalog catalog) {
         this.id = UUID.randomUUID().toString().replace("-", "");
         this.client = client;
         this.catalog = catalog;
-        this.rentDateTime = rentDateTime;
-        this.returnDateTime = returnDateTime;
     }
-    //endregion
 
     //region getters
     public String getId() {
@@ -78,4 +72,22 @@ public class Rent {
         this.returnDateTime = LocalDateTime.of(year, month, day, hour, minute);
     }
     //endregion
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rent rent = (Rent) o;
+        return id.equals(rent.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Rent(id: " + id + ", client: " + client.getUsername() + ", catalog: " + catalog.getId() + ", rent date: " + rentDateTime + ", return date: " + returnDateTime + ")";
+    }
 }

@@ -24,27 +24,19 @@ public class ListCatalogsController implements Serializable {
     @Inject
     private Conversation conversation;
     private List<Catalog> catalogs;
-    private int id;
-    private String title;
-    private String author;
-    private int releaseYear;
-    private String director;
-    private String format;
+    private Catalog selectedCatalog;
     private String catalogFilter;
 
-    public void prepareBookInfo(int id, String title, String author, int releaseYear) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.releaseYear = releaseYear;
-    }
-
-    public void prepareMovieInfo(int id, String title, String director, int releaseYear, String format) {
-        this.id = id;
-        this.title = title;
-        this.director = director;
-        this.releaseYear = releaseYear;
-        this.format = format;
+    public String prepareCatalogInfo(Catalog selectedCatalog) {
+        beginConversation();
+        setSelectedCatalog(selectedCatalog);
+        if (selectedCatalog instanceof Book) {
+            return "editBook";
+        } else if (selectedCatalog instanceof Movie) {
+            return "editMovie";
+        } else {
+            return "";
+        }
     }
 
     public void filterCatalogs() {
@@ -70,62 +62,71 @@ public class ListCatalogsController implements Serializable {
                 .collect(Collectors.toList());
     }
 
-    public String editBook() {
-        if (!conversation.isTransient()) {
-            conversation.end();
-        }
-        conversation.begin();
-        return "editBook";
-    }
-
-    public String editMovie() {
-        if (!conversation.isTransient()) {
-            conversation.end();
-        }
-        conversation.begin();
-        return "editMovie";
-    }
-
-    public String confirmEditBook() {
-        catalogService.updateBook(id, title, author, releaseYear);
-        conversation.end();
-        return "manager";
-    }
-
-    public String confirmEditMovie() {
-        catalogService.updateMovie(id, title, author, releaseYear, format);
-        conversation.end();
-        return "manager";
-    }
-
     public void removeCatalog(int id) {
         catalogService.removeCatalog(id);
         loadCatalogs();
     }
 
+    //region conversation
+    public void beginConversation() {
+        if (!conversation.isTransient()) {
+            conversation.end();
+        }
+        conversation.begin();
+    }
+
+    public void endConversation() {
+        conversation.end();
+    }
+    //endregion
+
     //region getters
-    public int getId() {
-        return id;
+    public CatalogService getCatalogService() {
+        return catalogService;
     }
 
-    public String getTitle() {
-        return title;
+    public List<Catalog> getCatalogs() {
+        return catalogs;
     }
 
-    public String getAuthor() {
-        return author;
+    public Catalog getSelectedCatalog() {
+        return selectedCatalog;
     }
 
-    public int getReleaseYear() {
-        return releaseYear;
+    public int getSelectedId() {
+        return selectedCatalog.getId();
     }
 
-    public String getDirector() {
-        return director;
+    public String getSelectedTitle() {
+        return selectedCatalog.getTitle();
     }
 
-    public String getFormat() {
-        return format;
+    public String getSelectedAuthor() {
+        if (selectedCatalog instanceof Book) {
+            return ((Book) selectedCatalog).getAuthor();
+        } else {
+            return "";
+        }
+    }
+
+    public int getSelectedReleaseYear() {
+        return selectedCatalog.getReleaseYear();
+    }
+
+    public String getSelectedDirector() {
+        if (selectedCatalog instanceof Movie) {
+            return ((Movie) selectedCatalog).getDirector();
+        } else {
+            return "";
+        }
+    }
+
+    public String getSelectedFormat() {
+        if (selectedCatalog instanceof Movie) {
+            return ((Movie) selectedCatalog).getFormat();
+        } else {
+            return "";
+        }
     }
 
     public String getCatalogFilter() {
@@ -134,28 +135,8 @@ public class ListCatalogsController implements Serializable {
     //endregion
 
     //region setters
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setReleaseYear(int releaseYear) {
-        this.releaseYear = releaseYear;
-    }
-
-    public void setDirector(String director) {
-        this.director = director;
-    }
-
-    public void setFormat(String format) {
-        this.format = format;
+    public void setSelectedCatalog(Catalog selectedCatalog) {
+        this.selectedCatalog = selectedCatalog;
     }
 
     public void setCatalogFilter(String catalogFilter) {

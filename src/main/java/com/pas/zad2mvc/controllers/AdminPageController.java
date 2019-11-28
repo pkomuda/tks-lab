@@ -68,6 +68,10 @@ public class ListUsersController implements Serializable {
         return selectedUser.getUsername();
     }
 
+    public boolean getSelectedUserActivity() {
+        return selectedUser.isActive();
+    }
+
     public UserInfo getSelectedUserInfo() {
         return selectedUser.getInfo();
     }

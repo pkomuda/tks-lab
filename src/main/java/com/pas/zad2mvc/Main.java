@@ -1,13 +1,8 @@
 package com.pas.zad2mvc;
 
-import com.pas.zad2mvc.data.Admin;
-import com.pas.zad2mvc.data.Manager;
-import com.pas.zad2mvc.data.User;
+import com.pas.zad2mvc.data.*;
 import com.pas.zad2mvc.repositories.CatalogRepository;
 import com.pas.zad2mvc.repositories.UserRepository;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -28,14 +23,9 @@ public class Main {
         userRepo.addClient("client1", true, "Kim", "Wexler");
         userRepo.addClient("client2", true, "Gustavo", "Fring");
         System.out.println(userRepo + "\n");
-        
-        User u1 = new Admin("admin1", true, "Walter", "White");
-        User u2 = new Manager("manager1", true, "Marie", "Schrader");
-        u1 = u2;
-        List<User> users = new ArrayList<>();
-        users.add(u1);
-        users.add(u2);
-        System.out.println(Arrays.toString(users.toArray()));
-        
+
+        Rent r1 = new Rent((Client) userRepo.getUser("client1"), catalogRepo.getCatalog(1));
+        r1.setRentDateTime(2019, 11, 28, 18, 42);
+        System.out.println(r1);
     }
 }

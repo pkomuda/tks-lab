@@ -1,6 +1,7 @@
 package com.pas.zad2mvc.repositories;
 
 import com.pas.zad2mvc.data.*;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -8,6 +9,7 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Named
 @ApplicationScoped
@@ -38,6 +40,13 @@ public class UserRepository {
 
     public List<User> getUsers() {
         return new ArrayList<>(users.values());
+    }
+
+    public List<User> filterUsers(String userFilter) {
+        return getUsers()
+                .stream()
+                .filter(user -> StringUtils.containsIgnoreCase(user.toString(), userFilter))
+                .collect(Collectors.toList());
     }
 
     public void updateUserInfo(String username, UserInfo userInfo) {
@@ -84,9 +93,6 @@ public class UserRepository {
             }
         }
         return "UserRepo[" + str + "]";
-    }
-    public void addRent(String username, int catalogId){
-        getUser(username).getRentList().add()
     }
 
     @PostConstruct

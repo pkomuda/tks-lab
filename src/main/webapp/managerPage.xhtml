@@ -7,18 +7,18 @@
         <title>Manager page</title>
     </h:head>
     <h:body>
-        Logged in as #{loginController.username}
+        <h:outputText value="Logged in as #{loginController.username}"/>
         <br/>
         <br/>
         <h:form>
             Search:
-            <h:inputText value="#{listCatalogsController.catalogFilter}"/>
-            <h:commandButton value="Refresh" action="#{listCatalogsController.filterCatalogs()}"/>
+            <h:inputText value="#{managerPageController.catalogFilter}"/>
+            <h:commandButton value="Refresh" action="#{managerPageController.filterCatalogs()}"/>
             <br/>
             <br/>
             Books:
             <br/>
-            <h:dataTable value="#{listCatalogsController.books}" var="book" border="1">
+            <h:dataTable value="#{managerPageController.books}" var="book" border="1">
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                     <h:outputText value="#{book.id}"/>
@@ -36,10 +36,10 @@
                     <h:outputText value="#{book.releaseYear}"/>
                 </h:column>
                 <h:column>
-                    <h:commandButton value="Edit" actionListener="#{listCatalogsController.prepareBookInfo(book.id, book.title, book.author, book.releaseYear)}" action="#{listCatalogsController.editBook()}"/>
+                    <h:commandButton value="Edit" action="#{managerPageController.prepareCatalogInfo(book)}"/>
                 </h:column>
                 <h:column>
-                    <h:commandButton value="Remove" action="#{listCatalogsController.removeCatalog(book.id)}"/>
+                    <h:commandButton value="Remove" action="#{managerPageController.removeCatalog(book.id)}"/>
                 </h:column>
             </h:dataTable>
             <h:commandButton value="Add a new book" action="addBook.xhtml"/>
@@ -47,7 +47,7 @@
             <br/>
             Movies:
             <br/>
-            <h:dataTable value="#{listCatalogsController.movies}" var="movie" border="1">
+            <h:dataTable value="#{managerPageController.movies}" var="movie" border="1">
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                     <h:outputText value="#{movie.id}"/>
@@ -69,10 +69,10 @@
                     <h:outputText value="#{movie.format}"/>
                 </h:column>
                 <h:column>
-                    <h:commandButton value="Edit" actionListener="#{listCatalogsController.prepareMovieInfo(movie.id, movie.title, movie.director, movie.releaseYear, movie.format)}" action="#{listCatalogsController.editMovie()}"/>
+                    <h:commandButton value="Edit" action="#{managerPageController.prepareCatalogInfo(movie)}"/>
                 </h:column>
                 <h:column>
-                    <h:commandButton value="Remove" action="#{listCatalogsController.removeCatalog(movie.id)}"/>
+                    <h:commandButton value="Remove" action="#{managerPageController.removeCatalog(movie.id)}"/>
                 </h:column>
             </h:dataTable>
             <h:commandButton value="Add a new movie" action="addMovie.xhtml"/>

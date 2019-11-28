@@ -1,25 +1,17 @@
 package com.pas.zad2mvc.data;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public abstract class User {
     private String username;
     private boolean active;
     private UserInfo info;
-    
 
     //region constructors
     public User(String username, boolean active, String firstName, String lastName) {
         this.username = username;
         this.active = active;
         this.info = new UserInfo(firstName, lastName);
-        
-    }
-
-     
-    public void addRent(){
         
     }
     
@@ -51,7 +43,6 @@ public abstract class User {
     public String getLastName() {
         return info.getLastName();
     }
-   
 
     public String getActivity() {
         if (active) {

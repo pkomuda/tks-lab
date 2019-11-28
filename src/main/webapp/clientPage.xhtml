@@ -6,19 +6,19 @@
     <h:head>
         <title>Client page</title>
     </h:head>
-     <h:head>
-        <title>Admin page</title>
-    </h:head>
     <h:body>
+        <h:outputText value="Logged in as #{loginController.username}"/>
+        <br/>
+        <br/>
         <h:form>
-            Search:
-            <h:inputText value="#{listCatalogsController.catalogFilter}"/>
-            <h:commandButton value="Refresh" action="#{listCatalogsController.filterCatalogs()}"/>
+            Search catalogs:
+            <h:inputText value="#{clientPageController.catalogFilter}"/>
+            <h:commandButton value="Refresh" action="#{clientPageController.filterCatalogs()}"/>
             <br/>
             <br/>
             Books:
             <br/>
-            <h:dataTable value="#{listCatalogsController.books}" var="book" border="1">
+            <h:dataTable value="#{clientPageController.books}" var="book" border="1">
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                     <h:outputText value="#{book.id}"/>
@@ -35,19 +35,15 @@
                     <f:facet name="header">Release year</f:facet>
                     <h:outputText value="#{book.releaseYear}"/>
                 </h:column>
-                <h:column>
-                    <h:commandButton value="Edit" actionListener="#{listCatalogsController.prepareBookInfo(book.id, book.title, book.author, book.releaseYear)}" action="#{listCatalogsController.editBook()}"/>
-                </h:column>
-                <h:column>
-                    <h:commandButton value="Remove" action="#{listCatalogsController.removeCatalog(book.id)}"/>
-                </h:column>
+<!--                <h:column>-->
+<!--                    <h:commandButton value="Rent" actionListener="" action=""/>-->
+<!--                </h:column>-->
             </h:dataTable>
-            <h:commandButton value="Add a new book" action="addBook.xhtml"/>
             <br/>
             <br/>
             Movies:
             <br/>
-            <h:dataTable value="#{listCatalogsController.movies}" var="movie" border="1">
+            <h:dataTable value="#{clientPageController.movies}" var="movie" border="1">
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                     <h:outputText value="#{movie.id}"/>
@@ -68,13 +64,37 @@
                     <f:facet name="header">Format</f:facet>
                     <h:outputText value="#{movie.format}"/>
                 </h:column>
+<!--                <h:column>-->
+<!--                    <h:commandButton value="Rent" actionListener="" action=""/>-->
+<!--                </h:column>-->
+            </h:dataTable>
+            <br/>
+            <br/>
+            Search rents:
+            <h:inputText value="#{clientPageController.rentFilter}"/>
+            <h:commandButton value="Refresh" action="#{clientPageController.filterRentsForClient()}"/>
+            <br/>
+            <br/>
+            Rents:
+            <br/>
+            <h:dataTable value="#{clientPageController.rents}" var="rent" border="1">
                 <h:column>
-                    <h:commandButton value="Rent" actionListener="" action=""/>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{rent.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Catalog</f:facet>
+                    <h:outputText value="#{rent.catalog}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rent date</f:facet>
+                    <h:outputText value="#{rent.rentDateTime}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Return date</f:facet>
+                    <h:outputText value="#{rent.returnDateTime}"/>
                 </h:column>
             </h:dataTable>
-            <h:commandButton value="Add a new movie" action="addMovie.xhtml"/>
-            <br/>
-            <br/>
             <h:commandButton value="Log out" action="#{loginController.logOut()}"/>
         </h:form>
     </h:body>

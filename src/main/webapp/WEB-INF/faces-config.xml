@@ -110,6 +110,11 @@
             <redirect/>
         </navigation-case>
         <navigation-case>
+            <from-outcome>addMovie</from-outcome>
+            <to-view-id>/addMovie.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>editMovie</from-outcome>
             <to-view-id>/editMovie.xhtml</to-view-id>
             <redirect/>
