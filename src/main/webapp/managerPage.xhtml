@@ -78,6 +78,59 @@
             <h:commandButton value="Add a new movie" action="addMovie.xhtml"/>
             <br/>
             <br/>
+            Search rents:
+            <h:inputText value="#{managerPageController.filterName}"/>
+            <h:commandButton value="Refresh" action="#{managerPageController.filterRents()}"/>
+            <br/>
+            Current rents:
+            <br/>
+            <h:dataTable value="#{managerPageController.unfinishedRents}" var="rent" border="1">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{rent.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Catalog</f:facet>
+                    <h:outputText value="#{rent.catalog}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rent date</f:facet>
+                    <h:outputText value="#{rent.rentDateTime}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Return date</f:facet>
+                    <h:outputText value="#{rent.returnDateTime}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Client</f:facet>
+                    <h:outputText value="#{rent.client.username}"/>
+                </h:column>
+                <h:column>
+                   <h:commandButton value="Finish Rent" action="index.xhtml"/>
+                </h:column>
+
+            </h:dataTable>
+            Rent history:
+            <br/>
+            <h:dataTable value="#{managerPageController.finishedRents}" var="rent" border="1">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{rent.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Catalog</f:facet>
+                    <h:outputText value="#{rent.catalog}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rent date</f:facet>
+                    <h:outputText value="#{rent.rentDateTime}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Return date</f:facet>
+                    <h:outputText value="#{rent.returnDateTime}"/>
+                </h:column>
+            </h:dataTable>
+            <br/>
             <h:commandButton value="Log out" action="#{loginController.logOut()}"/>
         </h:form>
     </h:body>

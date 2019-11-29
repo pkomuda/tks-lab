@@ -3,7 +3,9 @@ package com.pas.zad2mvc.controllers;
 import com.pas.zad2mvc.data.Book;
 import com.pas.zad2mvc.data.Catalog;
 import com.pas.zad2mvc.data.Movie;
+import com.pas.zad2mvc.data.Rent;
 import com.pas.zad2mvc.services.CatalogService;
+import com.pas.zad2mvc.services.RentService;
 
 import java.io.Serializable;
 
@@ -21,10 +23,14 @@ public class ManagerPageController implements Serializable {
     @Inject
     private CatalogService catalogService;
     @Inject
+    private RentService rentService;
+    @Inject
     private Conversation conversation;
     private List<Catalog> catalogs;
+    private List<Rent> rents;
     private Catalog selectedCatalog;
     private String catalogFilter;
+    private String filterName;
 
     public String prepareCatalogInfo(Catalog selectedCatalog) {
         beginConversation();
@@ -42,6 +48,9 @@ public class ManagerPageController implements Serializable {
         catalogs = catalogService.filterCatalogs(catalogFilter);
     }
 
+    public void fiterRents(){
+        rents= rentService.filterRents(filterName);
+    }
     public List<Book> getBooks() {
         return catalogs
                 .stream()
@@ -105,6 +114,20 @@ public class ManagerPageController implements Serializable {
         }
     }
 
+    public List<Rent> getFinishedRents(){
+        return rents
+                .stream()
+                .filter(rent -> rent.getReturnDateTime()!=null)
+                .collect(Collectors.toList());
+    }
+
+    public List<Rent> getUnfinishedRents(){
+        return rents
+                .stream()
+                .filter(rent -> rent.getReturnDateTime()==null)
+                .collect(Collectors.toList());
+    }
+
     public int getSelectedReleaseYear() {
         return selectedCatalog.getReleaseYear();
     }
@@ -140,8 +163,10 @@ public class ManagerPageController implements Serializable {
     }
     //endregion
 
+
     @PostConstruct
     public void loadCatalogs() {
         catalogs = catalogService.getCatalogs();
+        rents = rentService.getRents();
     }
 }
