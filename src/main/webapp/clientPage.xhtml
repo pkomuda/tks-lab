@@ -36,6 +36,10 @@
                     <h:outputText value="#{book.releaseYear}"/>
                 </h:column>
                 <h:column>
+                    <f:facet name="header">Status</f:facet>
+                    <h:outputText value="#{clientPageController.getCatalogStatus(book)}"/>
+                </h:column>
+                <h:column>
                     <h:commandButton value="Rent" action="#{clientPageController.prepareRentInfo(book)}"/>
                 </h:column>
             </h:dataTable>
@@ -65,6 +69,10 @@
                     <h:outputText value="#{movie.format}"/>
                 </h:column>
                 <h:column>
+                    <f:facet name="header">Status</f:facet>
+                    <h:outputText value="#{clientPageController.getCatalogStatus(movie)}"/>
+                </h:column>
+                <h:column>
                     <h:commandButton value="Rent" action="#{clientPageController.prepareRentInfo(movie)}"/>
                 </h:column>
             </h:dataTable>
@@ -75,9 +83,9 @@
             <h:commandButton value="Refresh" action="#{clientPageController.filterRentsForClient()}"/>
             <br/>
             <br/>
-            Rents:
+            Current rents:
             <br/>
-            <h:dataTable value="#{clientPageController.rents}" var="rent" border="1">
+            <h:dataTable value="#{clientPageController.unfinishedRents}" var="rent" border="1">
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                     <h:outputText value="#{rent.id}"/>
@@ -96,6 +104,26 @@
                 </h:column>
                 <h:column>
                     <h:commandButton value="Return" action="#{clientPageController.finishRent(rent.id)}"/>
+                </h:column>
+            </h:dataTable>
+            Rent history:
+            <br/>
+            <h:dataTable value="#{clientPageController.finishedRents}" var="rent" border="1">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{rent.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Catalog</f:facet>
+                    <h:outputText value="#{rent.catalog}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rent date</f:facet>
+                    <h:outputText value="#{rent.rentDateTime}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Return date</f:facet>
+                    <h:outputText value="#{rent.returnDateTime}"/>
                 </h:column>
             </h:dataTable>
             <h:commandButton value="Log out" action="#{loginController.logOut()}"/>

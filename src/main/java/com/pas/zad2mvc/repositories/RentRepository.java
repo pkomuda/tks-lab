@@ -47,6 +47,22 @@ public class RentRepository {
                 .collect(Collectors.toList());
     }
 
+//    public List<Rent> getUnfinishedRentsForClient(String username) {
+//        return getRents()
+//                .stream()
+//                .filter(rent -> rent.getClient().getUsername().equals(username))
+//                .filter(rent -> rent.getReturnDateTime() == null)
+//                .collect(Collectors.toList());
+//    }
+//
+//    public List<Rent> getFinishedRentsForClient(String username) {
+//        return getRents()
+//                .stream()
+//                .filter(rent -> rent.getClient().getUsername().equals(username))
+//                .filter(rent -> rent.getReturnDateTime() != null)
+//                .collect(Collectors.toList());
+//    }
+
     public List<Rent> getUnfinishedRents() {
         return getRents()
                 .stream()

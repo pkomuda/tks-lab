@@ -43,6 +43,14 @@ public class ClientPageController implements Serializable {
         }
     }
 
+    public String getCatalogStatus(Catalog catalog) {
+        if (rentService.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
+            return "Free";
+        } else {
+            return "Rented";
+        }
+    }
+
     public void filterCatalogs() {
         catalogs = catalogService.filterCatalogs(catalogFilter);
     }
@@ -68,6 +76,20 @@ public class ClientPageController implements Serializable {
                 .stream()
                 .filter(catalog -> catalog instanceof Movie)
                 .map(catalog -> (Movie) catalog)
+                .collect(Collectors.toList());
+    }
+
+    public List<Rent> getUnfinishedRents() {
+        return rents
+                .stream()
+                .filter(rent -> rent.getReturnDateTime() == null)
+                .collect(Collectors.toList());
+    }
+
+    public List<Rent> getFinishedRents() {
+        return rents
+                .stream()
+                .filter(rent -> rent.getReturnDateTime() != null)
                 .collect(Collectors.toList());
     }
 
