@@ -103,8 +103,8 @@ public class RentRepository {
         }
     }
 
-    public boolean removeRent(String id) {
-        return rents.remove(id) != null;
+    public void removeRent(String id) {
+         rents.remove(id);
     }
 
     @Override

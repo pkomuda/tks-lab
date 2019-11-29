@@ -47,8 +47,8 @@ public class RentService implements Serializable {
         rentRepository.finishRent(id);
     }
 
-    public boolean removeRent(String id) {
-        return rentRepository.removeRent(id);
+    public void removeRent(String id) {
+        rentRepository.removeRent(id);
     }
 
     @Override
