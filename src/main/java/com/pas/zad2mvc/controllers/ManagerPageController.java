@@ -30,7 +30,7 @@ public class ManagerPageController implements Serializable {
     private List<Rent> rents;
     private Catalog selectedCatalog;
     private String catalogFilter;
-    private String filterName;
+    private String rentFilter;
 
     public String prepareCatalogInfo(Catalog selectedCatalog) {
         beginConversation();
@@ -44,12 +44,44 @@ public class ManagerPageController implements Serializable {
         }
     }
 
+    public void setCatalogService(CatalogService catalogService) {
+        this.catalogService = catalogService;
+    }
+
+    public RentService getRentService() {
+        return rentService;
+    }
+
+    public void setRentService(RentService rentService) {
+        this.rentService = rentService;
+    }
+
+    public void setCatalogs(List<Catalog> catalogs) {
+        this.catalogs = catalogs;
+    }
+
+    public List<Rent> getRents() {
+        return rents;
+    }
+
+    public void setRents(List<Rent> rents) {
+        this.rents = rents;
+    }
+
+    public String getRentFilter() {
+        return rentFilter;
+    }
+
+    public void setRentFilter(String rentFilter) {
+        this.rentFilter = rentFilter;
+    }
+
     public void filterCatalogs() {
         catalogs = catalogService.filterCatalogs(catalogFilter);
     }
 
     public void fiterRents(){
-        rents= rentService.filterRents(filterName);
+        rents= rentService.filterRents(rentFilter);
     }
     public List<Book> getBooks() {
         return catalogs
@@ -126,6 +158,10 @@ public class ManagerPageController implements Serializable {
                 .stream()
                 .filter(rent -> rent.getReturnDateTime()==null)
                 .collect(Collectors.toList());
+    }
+
+    public void RemoveRent(String rentId){
+        rentService.removeRent(rentId);
     }
 
     public int getSelectedReleaseYear() {

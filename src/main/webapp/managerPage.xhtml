@@ -79,7 +79,7 @@
             <br/>
             <br/>
             Search rents:
-            <h:inputText value="#{managerPageController.filterName}"/>
+            <h:inputText value="#{managerPageController.rentFilter}"/>
             <h:commandButton value="Refresh" action="#{managerPageController.filterRents()}"/>
             <br/>
             Current rents:
@@ -106,7 +106,7 @@
                     <h:outputText value="#{rent.client.username}"/>
                 </h:column>
                 <h:column>
-                   <h:commandButton value="Finish Rent" action="index.xhtml"/>
+                   <h:commandButton value="Finish Rent" action="#{managerPageController.RemoveRent(rent.id)}"/>
                 </h:column>
 
             </h:dataTable>
