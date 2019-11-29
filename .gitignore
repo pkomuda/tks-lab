@@ -26,5 +26,5 @@ hs_err_pid*
 target/
 *.iml
 nb-configuration.xml
-
 faces-config.NavData
+.DS_Store
