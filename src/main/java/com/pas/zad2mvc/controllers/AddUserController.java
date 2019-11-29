@@ -22,10 +22,7 @@ public class AddUserController implements Serializable {
     private String lastName;
 
     public String add() {
-        if (!conversation.isTransient()) {
-            conversation.end();
-        }
-        conversation.begin();
+        beginConversation();
         return "add";
     }
 
@@ -41,9 +38,22 @@ public class AddUserController implements Serializable {
                 userService.addClient(username, active, firstName, lastName);
                 break;
         }
-        conversation.end();
+        endConversation();
         return "admin";
     }
+
+    //region conversation
+    private void beginConversation() {
+        if (!conversation.isTransient()) {
+            conversation.end();
+        }
+        conversation.begin();
+    }
+
+    private void endConversation() {
+        conversation.end();
+    }
+    //endregion
 
     //region getters
     public String getUserType() {

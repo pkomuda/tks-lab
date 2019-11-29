@@ -1,4 +1,4 @@
-package com.pas.zad2mvc.data;
+package com.pas.zad2mvc.model;
 
 import java.util.Objects;
 
@@ -8,14 +8,14 @@ public abstract class User {
     private UserInfo info;
 
     //region constructors
-    public User(String username, boolean active, String firstName, String lastName) {
+    User(String username, boolean active, String firstName, String lastName) {
         this.username = username;
         this.active = active;
         this.info = new UserInfo(firstName, lastName);
         
     }
     
-    public User(User other)
+    User(User other)
     {
         this.username = other.getUsername();
         this.active = other.isActive();

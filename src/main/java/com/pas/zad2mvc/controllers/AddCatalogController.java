@@ -23,32 +23,39 @@ public class AddCatalogController implements Serializable {
     private String format;
 
     public String addBook() {
-        if (!conversation.isTransient()) {
-            conversation.end();
-        }
-        conversation.begin();
+        beginConversation();
         return "addBook";
     }
 
     public String addMovie() {
-        if (!conversation.isTransient()) {
-            conversation.end();
-        }
-        conversation.begin();
+        beginConversation();
         return "addMovie";
     }
 
     public String confirmBook() {
         catalogService.addBook(id, title, author, releaseYear);
-        conversation.end();
+        endConversation();
         return "manager";
     }
 
     public String confirmMovie() {
         catalogService.addMovie(id, title, director, releaseYear, format);
-        conversation.end();
+        endConversation();
         return "manager";
     }
+
+    //region conversation
+    private void beginConversation() {
+        if (!conversation.isTransient()) {
+            conversation.end();
+        }
+        conversation.begin();
+    }
+
+    private void endConversation() {
+        conversation.end();
+    }
+    //endregion
 
     //region getters
     public int getId() {

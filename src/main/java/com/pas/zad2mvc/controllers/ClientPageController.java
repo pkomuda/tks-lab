@@ -1,9 +1,9 @@
 package com.pas.zad2mvc.controllers;
 
-import com.pas.zad2mvc.data.Book;
-import com.pas.zad2mvc.data.Catalog;
-import com.pas.zad2mvc.data.Movie;
-import com.pas.zad2mvc.data.Rent;
+import com.pas.zad2mvc.model.Book;
+import com.pas.zad2mvc.model.Catalog;
+import com.pas.zad2mvc.model.Movie;
+import com.pas.zad2mvc.model.Rent;
 import com.pas.zad2mvc.services.CatalogService;
 import com.pas.zad2mvc.services.RentService;
 
@@ -94,25 +94,21 @@ public class ClientPageController implements Serializable {
     }
 
     //region conversation
-    public void beginConversation() {
+    private void beginConversation() {
         if (!conversation.isTransient()) {
             conversation.end();
         }
         conversation.begin();
     }
 
-    public void endConversation() {
+    void endConversation() {
         conversation.end();
     }
     //endregion
 
     //region getters
-    public RentService getRentService() {
+    RentService getRentService() {
         return rentService;
-    }
-
-    public List<Rent> getRents() {
-        return rents;
     }
 
     public String getCatalogFilter() {
@@ -121,10 +117,6 @@ public class ClientPageController implements Serializable {
 
     public String getRentFilter() {
         return rentFilter;
-    }
-
-    public Catalog getSelectedCatalog() {
-        return selectedCatalog;
     }
 
     public int getSelectedCatalogId() {
@@ -139,10 +131,6 @@ public class ClientPageController implements Serializable {
 
     public void setRentFilter(String rentFilter) {
         this.rentFilter = rentFilter;
-    }
-
-    public void setSelectedCatalog(Catalog selectedCatalog) {
-        this.selectedCatalog = selectedCatalog;
     }
     //endregion
 

@@ -1,9 +1,9 @@
 package com.pas.zad2mvc.controllers;
 
-import com.pas.zad2mvc.data.Admin;
-import com.pas.zad2mvc.data.Client;
-import com.pas.zad2mvc.data.Manager;
-import com.pas.zad2mvc.data.User;
+import com.pas.zad2mvc.model.Admin;
+import com.pas.zad2mvc.model.Client;
+import com.pas.zad2mvc.model.Manager;
+import com.pas.zad2mvc.model.User;
 import com.pas.zad2mvc.services.UserService;
 
 import javax.enterprise.context.SessionScoped;

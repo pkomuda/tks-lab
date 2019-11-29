@@ -1,18 +1,20 @@
-package com.pas.zad2mvc.data;
+package com.pas.zad2mvc.model;
 
 public class UserInfo {
     private String firstName;
     private String lastName;
 
-    public UserInfo(String firstName, String lastName) {
+    //region constructors
+    UserInfo(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public UserInfo(UserInfo other) {
+    UserInfo(UserInfo other) {
         this.firstName = other.getFirstName();
         this.lastName = other.getLastName();
     }
+    //endregion
 
     //region getters
     public String getFirstName() {

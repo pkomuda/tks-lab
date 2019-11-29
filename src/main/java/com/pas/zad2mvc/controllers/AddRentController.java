@@ -1,6 +1,5 @@
 package com.pas.zad2mvc.controllers;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,7 +20,7 @@ public class AddRentController {
     public String confirmRent(int catalogId) {
         clientPageController.getRentService().addRent(loginController.getUsername(), catalogId, year, month, day, hour, minute);
         clientPageController.endConversation();
-        return "manager";
+        return "client";
     }
 
     //region getters
@@ -67,9 +66,4 @@ public class AddRentController {
         this.minute = minute;
     }
     //endregion
-
-    @PostConstruct
-    public void loadCatalogInfo() {
-//        catalogId = clientPageController.getSelectedCatalogId();
-    }
 }

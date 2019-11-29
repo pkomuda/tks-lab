@@ -1,7 +1,6 @@
-package com.pas.zad2mvc.data;
+package com.pas.zad2mvc.model;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -12,6 +11,7 @@ public class Rent {
     private LocalDateTime rentDateTime;
     private LocalDateTime returnDateTime;
 
+    //region constructors
     public Rent(String id) {
         this.id = id;
     }
@@ -21,6 +21,7 @@ public class Rent {
         this.client = client;
         this.catalog = catalog;
     }
+    //endregion
 
     //region getters
     public String getId() {
@@ -89,6 +90,6 @@ public class Rent {
 
     @Override
     public String toString() {
-        return "Rent(id: " + id + ", client: " + client.getUsername() + ", catalog: " + catalog.getId() + ", rent date: " + rentDateTime + ", return date: " + returnDateTime + ")";
+        return "Rent(id: " + id + ", client: " + client.getUsername() + ", catalog: " + catalog + ", rent date: " + rentDateTime + ", return date: " + returnDateTime + ")";
     }
 }

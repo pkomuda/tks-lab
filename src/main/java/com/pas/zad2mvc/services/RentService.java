@@ -1,6 +1,6 @@
 package com.pas.zad2mvc.services;
 
-import com.pas.zad2mvc.data.Rent;
+import com.pas.zad2mvc.model.Rent;
 import com.pas.zad2mvc.repositories.RentRepository;
 
 import javax.inject.Inject;

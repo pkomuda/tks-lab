@@ -1,4 +1,4 @@
-package com.pas.zad2mvc.data;
+package com.pas.zad2mvc.model;
 
 import java.util.Objects;
 

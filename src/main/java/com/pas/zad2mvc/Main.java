@@ -1,7 +1,7 @@
 package com.pas.zad2mvc;
 
-import com.pas.zad2mvc.data.*;
 import com.pas.zad2mvc.repositories.CatalogRepository;
+import com.pas.zad2mvc.repositories.RentRepository;
 import com.pas.zad2mvc.repositories.UserRepository;
 
 public class Main {
@@ -24,8 +24,9 @@ public class Main {
         userRepo.addClient("client2", true, "Gustavo", "Fring");
         System.out.println(userRepo + "\n");
 
-        Rent r1 = new Rent((Client) userRepo.getUser("client1"), catalogRepo.getCatalog(1));
-        r1.setRentDateTime(2019, 11, 28, 18, 42);
-        System.out.println(r1);
+//        RentRepository rentRepo = new RentRepository();
+//        rentRepo.addRent("client1", 1, 2019, 11, 28, 17, 30);
+//        rentRepo.addRent("client1", 4, 2019, 12, 1, 13, 25);
+//        rentRepo.addRent("client2", 2, 2019, 12, 5, 10, 11);
     }
 }

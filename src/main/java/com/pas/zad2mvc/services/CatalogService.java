@@ -1,6 +1,6 @@
 package com.pas.zad2mvc.services;
 
-import com.pas.zad2mvc.data.Catalog;
+import com.pas.zad2mvc.model.Catalog;
 import com.pas.zad2mvc.repositories.CatalogRepository;
 
 import javax.enterprise.context.Dependent;
@@ -43,8 +43,8 @@ public class CatalogService implements Serializable {
         catalogRepository.updateMovie(id, title, director, releaseYear, format);
     }
 
-    public boolean removeCatalog(int id) {
-        return catalogRepository.removeCatalog(id);
+    public void removeCatalog(int id) {
+        catalogRepository.removeCatalog(id);
     }
 
     @Override

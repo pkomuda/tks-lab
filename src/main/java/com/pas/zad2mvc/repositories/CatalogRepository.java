@@ -1,8 +1,8 @@
 package com.pas.zad2mvc.repositories;
 
-import com.pas.zad2mvc.data.Book;
-import com.pas.zad2mvc.data.Catalog;
-import com.pas.zad2mvc.data.Movie;
+import com.pas.zad2mvc.model.Book;
+import com.pas.zad2mvc.model.Catalog;
+import com.pas.zad2mvc.model.Movie;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.PostConstruct;
@@ -57,8 +57,8 @@ public class CatalogRepository {
         }
     }
 
-    public boolean removeCatalog(int id) {
-        return catalogs.remove(id) != null;
+    public void removeCatalog(int id) {
+        catalogs.remove(id);
     }
 
     @Override

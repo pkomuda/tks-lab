@@ -1,6 +1,6 @@
 package com.pas.zad2mvc.controllers;
 
-import com.pas.zad2mvc.data.UserInfo;
+import com.pas.zad2mvc.model.UserInfo;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -12,8 +12,8 @@ import javax.inject.Named;
 public class EditUserController {
     @Inject
     private AdminPageController adminPageController;
-    private boolean active;
     private UserInfo userInfo;
+    private boolean active;
 
     public String confirmEditUser(String username) {
         adminPageController.getUserService().setUserActivity(username, active);
@@ -37,12 +37,12 @@ public class EditUserController {
     //endregion
 
     //region setters
-    public void setActive(boolean active) {
-        this.active = active;
+    private void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public void setFirstName(String firstName) {

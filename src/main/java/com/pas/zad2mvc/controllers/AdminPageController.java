@@ -1,7 +1,7 @@
 package com.pas.zad2mvc.controllers;
 
-import com.pas.zad2mvc.data.User;
-import com.pas.zad2mvc.data.UserInfo;
+import com.pas.zad2mvc.model.User;
+import com.pas.zad2mvc.model.UserInfo;
 import com.pas.zad2mvc.services.UserService;
 
 import javax.annotation.PostConstruct;
@@ -25,7 +25,7 @@ public class AdminPageController implements Serializable {
 
     public String prepareUserInfo(User selectedUser) {
         beginConversation();
-        setSelectedUser(selectedUser);
+        this.selectedUser = selectedUser;
         return "edit";
     }
 
@@ -34,41 +34,37 @@ public class AdminPageController implements Serializable {
     }
 
     //region conversation
-    public void beginConversation() {
+    private void beginConversation() {
         if (!conversation.isTransient()) {
             conversation.end();
         }
         conversation.begin();
     }
 
-    public void endConversation() {
+    void endConversation() {
         conversation.end();
     }
     //endregion
 
     //region getters
-    public UserService getUserService() {
+    UserService getUserService() {
         return userService;
     }
 
-    public List<User> getUsers() {
-        return users;
+    boolean getSelectedUserActivity() {
+        return selectedUser.isActive();
     }
 
-    public User getSelectedUser() {
-        return selectedUser;
+    UserInfo getSelectedUserInfo() {
+        return selectedUser.getInfo();
     }
 
     public String getSelectedUsername() {
         return selectedUser.getUsername();
     }
 
-    public boolean getSelectedUserActivity() {
-        return selectedUser.isActive();
-    }
-
-    public UserInfo getSelectedUserInfo() {
-        return selectedUser.getInfo();
+    public List<User> getUsers() {
+        return users;
     }
 
     public String getUserFilter() {
@@ -76,15 +72,9 @@ public class AdminPageController implements Serializable {
     }
     //endregion
 
-    //region setters
-    public void setSelectedUser(User selectedUser) {
-        this.selectedUser = selectedUser;
-    }
-
     public void setUserFilter(String userFilter) {
         this.userFilter = userFilter;
     }
-    //endregion
 
     @PostConstruct
     public void loadUsers() {

@@ -11,7 +11,7 @@
         <br/>
         <br/>
         <h:form>
-            Search:
+            Search catalogs:
             <h:inputText value="#{managerPageController.catalogFilter}"/>
             <h:commandButton value="Refresh" action="#{managerPageController.filterCatalogs()}"/>
             <br/>
@@ -78,9 +78,11 @@
             <h:commandButton value="Add a new movie" action="addMovie.xhtml"/>
             <br/>
             <br/>
+            <br/>
             Search rents:
             <h:inputText value="#{managerPageController.rentFilter}"/>
             <h:commandButton value="Refresh" action="#{managerPageController.filterRents()}"/>
+            <br/>
             <br/>
             Current rents:
             <br/>
@@ -88,6 +90,10 @@
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                     <h:outputText value="#{rent.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Client</f:facet>
+                    <h:outputText value="#{rent.client.username}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">Catalog</f:facet>
@@ -102,13 +108,8 @@
                     <h:outputText value="#{rent.returnDateTime}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Client</f:facet>
-                    <h:outputText value="#{rent.client.username}"/>
+                   <h:commandButton value="Remove" action="#{managerPageController.RemoveRent(rent.id)}"/>
                 </h:column>
-                <h:column>
-                   <h:commandButton value="Finish Rent" action="#{managerPageController.fiterRents()}" actionListener="#{managerPageController.RemoveRent(rent.id)}"/>
-                </h:column>
-
             </h:dataTable>
             Rent history:
             <br/>
@@ -116,6 +117,10 @@
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                     <h:outputText value="#{rent.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Client</f:facet>
+                    <h:outputText value="#{rent.client.username}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">Catalog</f:facet>

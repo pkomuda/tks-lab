@@ -1,6 +1,6 @@
 package com.pas.zad2mvc.repositories;
 
-import com.pas.zad2mvc.data.*;
+import com.pas.zad2mvc.model.*;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.PostConstruct;

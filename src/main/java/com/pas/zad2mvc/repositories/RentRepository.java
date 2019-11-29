@@ -1,6 +1,6 @@
 package com.pas.zad2mvc.repositories;
 
-import com.pas.zad2mvc.data.*;
+import com.pas.zad2mvc.model.*;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.PostConstruct;
@@ -21,6 +21,13 @@ public class RentRepository {
     @Inject
     private CatalogRepository catalogRepository;
     private LinkedHashMap<String, Rent> rents = new LinkedHashMap<>();
+
+    private List<Rent> getUnfinishedRents() {
+        return getRents()
+                .stream()
+                .filter(rent -> rent.getReturnDateTime() == null)
+                .collect(Collectors.toList());
+    }
 
     public void addRent(String username, int catalogId, int year, int month, int day, int hour, int minute) {
         if (userRepository.getUser(username) instanceof Client
@@ -44,29 +51,6 @@ public class RentRepository {
         return getRents()
                 .stream()
                 .filter(rent -> rent.getClient().getUsername().equals(username))
-                .collect(Collectors.toList());
-    }
-
-//    public List<Rent> getUnfinishedRentsForClient(String username) {
-//        return getRents()
-//                .stream()
-//                .filter(rent -> rent.getClient().getUsername().equals(username))
-//                .filter(rent -> rent.getReturnDateTime() == null)
-//                .collect(Collectors.toList());
-//    }
-//
-//    public List<Rent> getFinishedRentsForClient(String username) {
-//        return getRents()
-//                .stream()
-//                .filter(rent -> rent.getClient().getUsername().equals(username))
-//                .filter(rent -> rent.getReturnDateTime() != null)
-//                .collect(Collectors.toList());
-//    }
-
-    public List<Rent> getUnfinishedRents() {
-        return getRents()
-                .stream()
-                .filter(rent -> rent.getReturnDateTime() == null)
                 .collect(Collectors.toList());
     }
 
@@ -94,7 +78,11 @@ public class RentRepository {
     }
 
     public void finishRent(String id) {
-        if (getUnfinishedRents().contains(new Rent(id))) {
+        Rent temp = new Rent(id);
+        if (getUnfinishedRents().contains(temp)) {
+            if (getUnfinishedRents().get(getUnfinishedRents().indexOf(temp)).getRentDateTime().isAfter(LocalDateTime.now())) {
+                return;
+            }
             getRent(id).setReturnDateTime(LocalDateTime.now().getYear()
                     , LocalDateTime.now().getMonthValue()
                     , LocalDateTime.now().getDayOfMonth()
@@ -104,7 +92,7 @@ public class RentRepository {
     }
 
     public void removeRent(String id) {
-         rents.remove(id);
+        rents.remove(id);
     }
 
     @Override
