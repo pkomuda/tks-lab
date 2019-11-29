@@ -43,8 +43,8 @@ public class RentService implements Serializable {
         return rentRepository.filterRentsForClient(username, rentFilter);
     }
 
-    public void finishRent(String id, int year, int month, int day, int hour, int minute) {
-        rentRepository.finishRent(id, year, month, day, hour, minute);
+    public void finishRent(String id) {
+        rentRepository.finishRent(id);
     }
 
     public boolean removeRent(String id) {

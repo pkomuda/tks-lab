@@ -94,6 +94,9 @@
                     <f:facet name="header">Return date</f:facet>
                     <h:outputText value="#{rent.returnDateTime}"/>
                 </h:column>
+                <h:column>
+                    <h:commandButton value="Return" action="#{clientPageController.finishRent(rent.id)}"/>
+                </h:column>
             </h:dataTable>
             <h:commandButton value="Log out" action="#{loginController.logOut()}"/>
         </h:form>

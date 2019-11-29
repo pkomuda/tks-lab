@@ -51,6 +51,10 @@ public class ClientPageController implements Serializable {
         rents = rentService.filterRentsForClient(loginController.getUsername(), rentFilter);
     }
 
+    public void finishRent(String rentId) {
+        rentService.finishRent(rentId);
+    }
+
     public List<Book> getBooks() {
         return catalogs
                 .stream()

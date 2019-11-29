@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -76,9 +77,13 @@ public class RentRepository {
                 .collect(Collectors.toList());
     }
 
-    public void finishRent(String id, int year, int month, int day, int hour, int minute) {
+    public void finishRent(String id) {
         if (getUnfinishedRents().contains(new Rent(id))) {
-            getRent(id).setReturnDateTime(year, month, day, hour, minute);
+            getRent(id).setReturnDateTime(LocalDateTime.now().getYear()
+                    , LocalDateTime.now().getMonthValue()
+                    , LocalDateTime.now().getDayOfMonth()
+                    , LocalDateTime.now().getHour()
+                    , LocalDateTime.now().getMinute());
         }
     }
 
