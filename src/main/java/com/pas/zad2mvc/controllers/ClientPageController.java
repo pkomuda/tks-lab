@@ -8,6 +8,7 @@ import com.pas.zad2mvc.services.CatalogService;
 import com.pas.zad2mvc.services.RentService;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,10 +25,23 @@ public class ClientPageController implements Serializable {
     private RentService rentService;
     @Inject
     private LoginController loginController;
+    @Inject
+    private Conversation conversation;
     private List<Catalog> catalogs;
     private List<Rent> rents;
+    private Catalog selectedCatalog;
     private String catalogFilter;
     private String rentFilter;
+
+    public String prepareRentInfo(Catalog catalog) {
+        if (rentService.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
+            beginConversation();
+            selectedCatalog = catalog;
+            return "addRent";
+        } else {
+            return "clientPage.xhtml";
+        }
+    }
 
     public void filterCatalogs() {
         catalogs = catalogService.filterCatalogs(catalogFilter);
@@ -53,7 +67,24 @@ public class ClientPageController implements Serializable {
                 .collect(Collectors.toList());
     }
 
+    //region conversation
+    public void beginConversation() {
+        if (!conversation.isTransient()) {
+            conversation.end();
+        }
+        conversation.begin();
+    }
+
+    public void endConversation() {
+        conversation.end();
+    }
+    //endregion
+
     //region getters
+    public RentService getRentService() {
+        return rentService;
+    }
+
     public List<Rent> getRents() {
         return rents;
     }
@@ -65,6 +96,14 @@ public class ClientPageController implements Serializable {
     public String getRentFilter() {
         return rentFilter;
     }
+
+    public Catalog getSelectedCatalog() {
+        return selectedCatalog;
+    }
+
+    public int getSelectedCatalogId() {
+        return selectedCatalog.getId();
+    }
     //endregion
 
     //region setters
@@ -74,6 +113,10 @@ public class ClientPageController implements Serializable {
 
     public void setRentFilter(String rentFilter) {
         this.rentFilter = rentFilter;
+    }
+
+    public void setSelectedCatalog(Catalog selectedCatalog) {
+        this.selectedCatalog = selectedCatalog;
     }
     //endregion
 

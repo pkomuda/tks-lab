@@ -196,4 +196,22 @@
         </navigation-case>
     </navigation-rule>
 
+    <navigation-rule>
+        <from-view-id>/clientPage.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>addRent</from-outcome>
+            <to-view-id>/addRent.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/addRent.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>manager</from-outcome>
+            <to-view-id>/clientPage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
 </faces-config>

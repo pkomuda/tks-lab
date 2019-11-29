@@ -31,6 +31,10 @@ public class RentService implements Serializable {
         return rentRepository.getRentsForClient(username);
     }
 
+    public List<Rent> getUnfinishedRentsForCatalog(int id) {
+        return rentRepository.getUnfinishedRentsForCatalog(id);
+    }
+
     public List<Rent> filterRents(String rentFilter) {
         return rentRepository.filterRents(rentFilter);
     }

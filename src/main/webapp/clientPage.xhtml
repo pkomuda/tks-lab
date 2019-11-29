@@ -35,9 +35,9 @@
                     <f:facet name="header">Release year</f:facet>
                     <h:outputText value="#{book.releaseYear}"/>
                 </h:column>
-<!--                <h:column>-->
-<!--                    <h:commandButton value="Rent" actionListener="" action=""/>-->
-<!--                </h:column>-->
+                <h:column>
+                    <h:commandButton value="Rent" action="#{clientPageController.prepareRentInfo(book)}"/>
+                </h:column>
             </h:dataTable>
             <br/>
             <br/>
@@ -64,9 +64,9 @@
                     <f:facet name="header">Format</f:facet>
                     <h:outputText value="#{movie.format}"/>
                 </h:column>
-<!--                <h:column>-->
-<!--                    <h:commandButton value="Rent" actionListener="" action=""/>-->
-<!--                </h:column>-->
+                <h:column>
+                    <h:commandButton value="Rent" action="#{clientPageController.prepareRentInfo(movie)}"/>
+                </h:column>
             </h:dataTable>
             <br/>
             <br/>
