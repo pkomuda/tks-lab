@@ -100,13 +100,10 @@
                     <h:outputText value="#{rent.rentDateTime}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Return date</f:facet>
-                    <h:outputText value="#{rent.returnDateTime}"/>
-                </h:column>
-                <h:column>
                     <h:commandButton value="Return" action="#{clientPageController.finishRent(rent.id)}"/>
                 </h:column>
             </h:dataTable>
+            <br/>
             Rent history:
             <br/>
             <h:dataTable value="#{clientPageController.finishedRents}" var="rent" border="1">

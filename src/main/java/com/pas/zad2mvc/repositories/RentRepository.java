@@ -102,7 +102,7 @@ public class RentRepository {
             if (i == 0) {
                 str = str.concat(getRents().get(i).toString() + "\n");
             } else {
-                str = str.concat("\t" + getRents().get(i).toString());
+                str = str.concat("\t   " + getRents().get(i).toString());
                 if (i != rents.size() - 1) {
                     str = str.concat("\n");
                 }

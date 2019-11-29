@@ -3,9 +3,11 @@ package com.pas.zad2mvc.repositories;
 import com.pas.zad2mvc.model.Book;
 import com.pas.zad2mvc.model.Catalog;
 import com.pas.zad2mvc.model.Movie;
+import com.pas.zad2mvc.model.NoCatalog;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ import java.util.stream.Collectors;
 @Named
 @ApplicationScoped
 public class CatalogRepository {
+    @Inject
+    private RentRepository rentRepository;
     private LinkedHashMap<Integer, Catalog> catalogs = new LinkedHashMap<>();
 
     public void addBook(int id, String title, String author, int releaseYear) {
@@ -58,6 +62,8 @@ public class CatalogRepository {
     }
 
     public void removeCatalog(int id) {
+        rentRepository.getUnfinishedRentsForCatalog(id)
+                .forEach(rent -> rent.setCatalog(new NoCatalog()));
         catalogs.remove(id);
     }
 

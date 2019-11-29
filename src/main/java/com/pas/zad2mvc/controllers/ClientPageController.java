@@ -136,6 +136,7 @@ public class ClientPageController implements Serializable {
 
     @PostConstruct
     public void loadData() {
+        System.out.println(rentService);
         catalogs = catalogService.getCatalogs();
         rents = rentService.getRentsForClient(loginController.getUsername());
     }

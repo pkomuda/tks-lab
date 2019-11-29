@@ -24,9 +24,10 @@
             <br/>
             <h:commandButton value="Confirm book" action="#{addCatalogController.confirmBook()}"/>
             <br/>
+            <h:commandButton value="Cancel" action="managerPage.xhtml" immediate="true"/>
+            <br/>
+            <br/>
+            <h:commandButton value="Log out" action="#{loginController.logOut()}"/>
         </h:form>
-        <h:link value="Manager page" outcome="managerPage.xhtml"/>
-        <br/>
-        <h:link value="Log out" outcome="index.xhtml"/>
     </h:body>
 </html>

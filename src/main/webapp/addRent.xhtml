@@ -14,15 +14,15 @@
             <h:outputText value="#{clientPageController.selectedCatalogId}"/>
             <br/>
             Year:
-            <h:inputText value="#{addRentController.year}" maxlength="4"/>
+            <h:inputText value="#{addRentController.year}" maxlength="4" size="4"/>
             Month:
-            <h:inputText value="#{addRentController.month}" maxlength="2"/>
+            <h:inputText value="#{addRentController.month}" maxlength="2" size="2"/>
             Day:
-            <h:inputText value="#{addRentController.day}" maxlength="2"/>
+            <h:inputText value="#{addRentController.day}" maxlength="2" size="2"/>
             Hour:
-            <h:inputText value="#{addRentController.hour}" maxlength="2"/>
+            <h:inputText value="#{addRentController.hour}" maxlength="2" size="2"/>
             Minute:
-            <h:inputText value="#{addRentController.minute}" maxlength="2"/>
+            <h:inputText value="#{addRentController.minute}" maxlength="2" size="2"/>
             <br/>
             <h:commandButton value="OK" action="#{addRentController.confirmRent(clientPageController.selectedCatalogId)}"/>
             <br/>
