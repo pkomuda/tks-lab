@@ -51,18 +51,24 @@ public class CatalogRepository {
 
     public void updateBook(int id, String title, String author, int releaseYear) {
         if (getCatalog(id) != null && getCatalog(id) instanceof Book) {
-            catalogs.replace(id, new Book(id, title, author, releaseYear));
+            Catalog temp = new Book(id, title, author, releaseYear);
+            catalogs.replace(id, temp);
+            rentRepository.getRentsForCatalog(id)
+                    .forEach(rent -> rent.setCatalog(temp));
         }
     }
 
     public void updateMovie(int id, String title, String director, int releaseYear, String format) {
         if (getCatalog(id) != null && getCatalog(id) instanceof Movie) {
-            catalogs.replace(id, new Movie(id, title, director, releaseYear, format));
+            Catalog temp = new Movie(id, title, director, releaseYear, format);
+            catalogs.replace(id, temp);
+            rentRepository.getRentsForCatalog(id)
+                    .forEach(rent -> rent.setCatalog(temp));
         }
     }
 
     public void removeCatalog(int id) {
-        rentRepository.getUnfinishedRentsForCatalog(id)
+        rentRepository.getRentsForCatalog(id)
                 .forEach(rent -> rent.setCatalog(new NoCatalog()));
         catalogs.remove(id);
     }

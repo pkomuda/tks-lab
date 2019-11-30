@@ -62,6 +62,13 @@ public class RentRepository {
                 .collect(Collectors.toList());
     }
 
+    public List<Rent> getRentsForCatalog(int id) {
+        return getRents()
+                .stream()
+                .filter(rent -> rent.getCatalog().getId() == id)
+                .collect(Collectors.toList());
+    }
+
     public List<Rent> filterRents(String rentFilter) {
         return getRents()
                 .stream()
