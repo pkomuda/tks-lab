@@ -120,6 +120,11 @@
             <redirect/>
         </navigation-case>
         <navigation-case>
+            <from-outcome>rentsForCatalog</from-outcome>
+            <to-view-id>/rentsForCatalog.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>index</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
             <redirect/>
@@ -186,6 +191,20 @@
         <from-view-id>/editMovie.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>manager</from-outcome>
+            <to-view-id>/managerPage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/rentsForCatalog.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>back</from-outcome>
             <to-view-id>/managerPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>

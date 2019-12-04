@@ -84,6 +84,14 @@ public class RentRepository {
                 .collect(Collectors.toList());
     }
 
+    public List<Rent> filterRentsForCatalog(int id, String rentFilter) {
+        return getRents()
+                .stream()
+                .filter(rent -> rent.getCatalog().getId() == id)
+                .filter(rent -> StringUtils.containsIgnoreCase(rent.toString(), rentFilter))
+                .collect(Collectors.toList());
+    }
+
     public void finishRent(String id) {
         Rent temp = new Rent(id);
         if (getUnfinishedRents().contains(temp)) {

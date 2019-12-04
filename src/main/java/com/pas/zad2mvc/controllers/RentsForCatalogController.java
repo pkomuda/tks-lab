@@ -1,69 +1,60 @@
 package com.pas.zad2mvc.controllers;
 
+import com.pas.zad2mvc.model.Rent;
+import com.pas.zad2mvc.services.RentService;
+
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Named
 @RequestScoped
 public class RentsForCatalogController {
     @Inject
-    private ClientPageController clientPageController;
+    private ManagerPageController managerPageController;
     @Inject
-    private LoginController loginController;
-    private int year;
-    private int month;
-    private int day;
-    private int hour;
-    private int minute;
+    private RentService rentService;
+    private List<Rent> rents;
+    private String rentFilter;
 
-    public String confirmRent(int catalogId) {
-        clientPageController.getRentService().addRent(loginController.getUsername(), catalogId, year, month, day, hour, minute);
-        clientPageController.endConversation();
-        return "client";
+    public void filterRents() {
+        rentService.filterRentsForCatalog(managerPageController.getSelectedId(), rentFilter);
     }
 
-    //region getters
-    public int getYear() {
-        return year;
+    public String goBack() {
+        managerPageController.endConversation();
+        return "back";
     }
 
-    public int getMonth() {
-        return month;
+    public List<Rent> getFinishedRents() {
+        return rents
+                .stream()
+                .filter(rent -> rent.getReturnDateTime() != null)
+                .collect(Collectors.toList());
     }
 
-    public int getDay() {
-        return day;
+    public List<Rent> getUnfinishedRents() {
+        return rents
+                .stream()
+                .filter(rent -> rent.getReturnDateTime() == null)
+                .collect(Collectors.toList());
     }
 
-    public int getHour() {
-        return hour;
+    public String getRentFilter() {
+        return rentFilter;
     }
-
-    public int getMinute() {
-        return minute;
-    }
-    //endregion
 
     //region setters
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public void setHour(int hour) {
-        this.hour = hour;
-    }
-
-    public void setMinute(int minute) {
-        this.minute = minute;
+    public void setRentFilter(String rentFilter) {
+        this.rentFilter = rentFilter;
     }
     //endregion
+
+    @PostConstruct
+    public void loadData() {
+        rents = rentService.getRentsForCatalog(managerPageController.getSelectedId());
+    }
 }

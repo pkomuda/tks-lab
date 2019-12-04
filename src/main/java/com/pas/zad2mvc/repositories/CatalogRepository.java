@@ -23,13 +23,13 @@ public class CatalogRepository {
     private LinkedHashMap<Integer, Catalog> catalogs = new LinkedHashMap<>();
 
     public void addBook(int id, String title, String author, int releaseYear) {
-        if (getCatalog(id) == null) {
+        if (getCatalog(id) == null && id != 0) {
             catalogs.put(id, new Book(id, title, author, releaseYear));
         }
     }
 
     public void addMovie(int id, String title, String director, int releaseYear, String format) {
-        if (getCatalog(id) == null) {
+        if (getCatalog(id) == null && id != 0) {
             catalogs.put(id, new Movie(id, title, director, releaseYear, format));
         }
     }

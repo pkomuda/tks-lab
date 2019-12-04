@@ -43,14 +43,6 @@ public class ClientPageController implements Serializable {
         }
     }
 
-    public String getCatalogStatus(Catalog catalog) {
-        if (rentService.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
-            return "Free";
-        } else {
-            return "Rented";
-        }
-    }
-
     public void filterCatalogs() {
         catalogs = catalogService.filterCatalogs(catalogFilter);
     }
@@ -61,6 +53,32 @@ public class ClientPageController implements Serializable {
 
     public void finishRent(String rentId) {
         rentService.finishRent(rentId);
+    }
+
+    //region conversation
+    private void beginConversation() {
+        if (!conversation.isTransient()) {
+            conversation.end();
+        }
+        conversation.begin();
+    }
+
+    void endConversation() {
+        conversation.end();
+    }
+    //endregion
+
+    //region getters
+    RentService getRentService() {
+        return rentService;
+    }
+
+    public String getCatalogStatus(Catalog catalog) {
+        if (rentService.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
+            return "Free";
+        } else {
+            return "Rented";
+        }
     }
 
     public List<Book> getBooks() {
@@ -93,24 +111,6 @@ public class ClientPageController implements Serializable {
                 .collect(Collectors.toList());
     }
 
-    //region conversation
-    private void beginConversation() {
-        if (!conversation.isTransient()) {
-            conversation.end();
-        }
-        conversation.begin();
-    }
-
-    void endConversation() {
-        conversation.end();
-    }
-    //endregion
-
-    //region getters
-    RentService getRentService() {
-        return rentService;
-    }
-
     public String getCatalogFilter() {
         return catalogFilter;
     }
@@ -136,7 +136,6 @@ public class ClientPageController implements Serializable {
 
     @PostConstruct
     public void loadData() {
-        System.out.println(rentService);
         catalogs = catalogService.getCatalogs();
         rents = rentService.getRentsForClient(loginController.getUsername());
     }

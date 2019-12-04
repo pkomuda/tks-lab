@@ -43,12 +43,74 @@ public class ManagerPageController implements Serializable {
         }
     }
 
+    public String prepareRentsInfo(Catalog selectedCatalog) {
+        beginConversation();
+        this.selectedCatalog = selectedCatalog;
+        return "rentsForCatalog";
+    }
+
     public void filterCatalogs() {
         catalogs = catalogService.filterCatalogs(catalogFilter);
     }
 
     public void filterRents() {
         rents= rentService.filterRents(rentFilter);
+    }
+
+    public void removeCatalog(int id) {
+        catalogService.removeCatalog(id);
+        loadData();
+    }
+
+    public void removeRent(String rentId) {
+        rentService.removeRent(rentId);
+        loadData();
+    }
+
+    //region conversation
+    private void beginConversation() {
+        if (!conversation.isTransient()) {
+            conversation.end();
+        }
+        conversation.begin();
+    }
+
+    void endConversation() {
+        conversation.end();
+    }
+    //endregion
+
+    //region getters
+    CatalogService getCatalogService() {
+        return catalogService;
+    }
+
+    String getSelectedAuthor() {
+        if (selectedCatalog instanceof Book) {
+            return ((Book) selectedCatalog).getAuthor();
+        } else {
+            return "";
+        }
+    }
+
+    int getSelectedReleaseYear() {
+        return selectedCatalog.getReleaseYear();
+    }
+
+    String getSelectedDirector() {
+        if (selectedCatalog instanceof Movie) {
+            return ((Movie) selectedCatalog).getDirector();
+        } else {
+            return "";
+        }
+    }
+
+    String getSelectedFormat() {
+        if (selectedCatalog instanceof Movie) {
+            return ((Movie) selectedCatalog).getFormat();
+        } else {
+            return "";
+        }
     }
 
     public List<Book> getBooks() {
@@ -81,68 +143,12 @@ public class ManagerPageController implements Serializable {
                 .collect(Collectors.toList());
     }
 
-    public void removeCatalog(int id) {
-        catalogService.removeCatalog(id);
-        loadData();
-    }
-
-    public void RemoveRent(String rentId) {
-        rentService.removeRent(rentId);
-        loadData();
-    }
-
-    //region conversation
-    private void beginConversation() {
-        if (!conversation.isTransient()) {
-            conversation.end();
-        }
-        conversation.begin();
-    }
-
-    void endConversation() {
-        conversation.end();
-    }
-    //endregion
-
-    //region getters
-    CatalogService getCatalogService() {
-        return catalogService;
-    }
-
-    String getSelectedTitle() {
-        return selectedCatalog.getTitle();
-    }
-
-    String getSelectedAuthor() {
-        if (selectedCatalog instanceof Book) {
-            return ((Book) selectedCatalog).getAuthor();
-        } else {
-            return "";
-        }
-    }
-
-    int getSelectedReleaseYear() {
-        return selectedCatalog.getReleaseYear();
-    }
-
-    String getSelectedDirector() {
-        if (selectedCatalog instanceof Movie) {
-            return ((Movie) selectedCatalog).getDirector();
-        } else {
-            return "";
-        }
-    }
-
-    String getSelectedFormat() {
-        if (selectedCatalog instanceof Movie) {
-            return ((Movie) selectedCatalog).getFormat();
-        } else {
-            return "";
-        }
-    }
-
     public int getSelectedId() {
         return selectedCatalog.getId();
+    }
+
+    public String getSelectedTitle() {
+        return selectedCatalog.getTitle();
     }
 
     public String getCatalogFilter() {
