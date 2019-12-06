@@ -20,12 +20,13 @@ public class RentsForCatalogController {
     private List<Rent> rents;
     private String rentFilter;
 
+    //KWESTIA
     public void filterRents() {
-        rentService.filterRentsForCatalog(managerPageController.getSelectedId(), rentFilter);
+        rentService.filterRentsForCatalog(1, rentFilter);
     }
 
     public String goBack() {
-        managerPageController.endConversation();
+//        managerPageController.endConversation();
         return "back";
     }
 
@@ -55,6 +56,6 @@ public class RentsForCatalogController {
 
     @PostConstruct
     public void loadData() {
-        rents = rentService.getRentsForCatalog(managerPageController.getSelectedId());
+        rents = rentService.getRentsForCatalog(1);
     }
 }

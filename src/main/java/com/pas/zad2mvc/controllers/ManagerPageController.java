@@ -10,6 +10,8 @@ import com.pas.zad2mvc.services.RentService;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -17,23 +19,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Named
-@ConversationScoped
+@ViewScoped
 public class ManagerPageController implements Serializable {
     @Inject
     private CatalogService catalogService;
     @Inject
     private RentService rentService;
-    @Inject
-    private Conversation conversation;
-    private List<Catalog> catalogs;
+//    @Inject
+//    private Conversation conversation;
+    private List<Book> books;
+    private List<Movie> movies;
     private List<Rent> rents;
     private Catalog selectedCatalog;
     private String catalogFilter;
     private String rentFilter;
 
     public String prepareCatalogInfo(Catalog selectedCatalog) {
-        beginConversation();
+//        beginConversation();
         this.selectedCatalog = selectedCatalog;
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("selectedId", selectedCatalog.getId());
         if (selectedCatalog instanceof Book) {
             return "editBook";
         } else if (selectedCatalog instanceof Movie) {
@@ -44,17 +48,18 @@ public class ManagerPageController implements Serializable {
     }
 
     public String prepareRentsInfo(Catalog selectedCatalog) {
-        beginConversation();
+//        beginConversation();
         this.selectedCatalog = selectedCatalog;
         return "rentsForCatalog";
     }
 
     public void filterCatalogs() {
-        catalogs = catalogService.filterCatalogs(catalogFilter);
+        books = catalogService.filterBooks(catalogFilter);
+        movies = catalogService.filterMovies(catalogFilter);
     }
 
     public void filterRents() {
-        rents= rentService.filterRents(rentFilter);
+        rents = rentService.filterRents(rentFilter);
     }
 
     public void removeCatalog(int id) {
@@ -67,18 +72,18 @@ public class ManagerPageController implements Serializable {
         loadData();
     }
 
-    //region conversation
-    private void beginConversation() {
-        if (!conversation.isTransient()) {
-            conversation.end();
-        }
-        conversation.begin();
-    }
-
-    void endConversation() {
-        conversation.end();
-    }
-    //endregion
+//    //region conversation
+//    private void beginConversation() {
+//        if (!conversation.isTransient()) {
+//            conversation.end();
+//        }
+//        conversation.begin();
+//    }
+//
+//    void endConversation() {
+//        conversation.end();
+//    }
+//    //endregion
 
     //region getters
     CatalogService getCatalogService() {
@@ -112,21 +117,13 @@ public class ManagerPageController implements Serializable {
             return "";
         }
     }
-
+    
     public List<Book> getBooks() {
-        return catalogs
-                .stream()
-                .filter(catalog -> catalog instanceof Book)
-                .map(catalog -> (Book) catalog)
-                .collect(Collectors.toList());
+        return books;
     }
-
+    
     public List<Movie> getMovies() {
-        return catalogs
-                .stream()
-                .filter(catalog -> catalog instanceof Movie)
-                .map(catalog -> (Movie) catalog)
-                .collect(Collectors.toList());
+        return movies;
     }
 
     public List<Rent> getFinishedRents() {
@@ -143,9 +140,9 @@ public class ManagerPageController implements Serializable {
                 .collect(Collectors.toList());
     }
 
-    public int getSelectedId() {
-        return selectedCatalog.getId();
-    }
+//    public int getSelectedId() {
+//        return selectedCatalog.getId();
+//    }
 
     public String getSelectedTitle() {
         return selectedCatalog.getTitle();
@@ -172,7 +169,9 @@ public class ManagerPageController implements Serializable {
 
     @PostConstruct
     public void loadData() {
-        catalogs = catalogService.getCatalogs();
+//        beginConversation();
+        books = catalogService.getBooks();
+        movies = catalogService.getMovies();
         rents = rentService.getRents();
     }
 }

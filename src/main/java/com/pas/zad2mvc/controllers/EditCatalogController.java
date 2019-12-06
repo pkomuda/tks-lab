@@ -1,7 +1,12 @@
 package com.pas.zad2mvc.controllers;
 
+import com.pas.zad2mvc.model.Book;
+import com.pas.zad2mvc.model.Movie;
+import com.pas.zad2mvc.services.CatalogService;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -10,25 +15,32 @@ import javax.inject.Named;
 public class EditCatalogController {
     @Inject
     private ManagerPageController managerPageController;
+    @Inject
+    private CatalogService catalogService;
+    private int id;
     private String title;
     private String author;
     private int releaseYear;
     private String director;
     private String format;
 
-    public String confirmEditBook(int id) {
+    public String confirmEditBook() {
         managerPageController.getCatalogService().updateBook(id, title, author, releaseYear);
-        managerPageController.endConversation();
+//        managerPageController.endConversation();
         return "manager";
     }
 
-    public String confirmEditMovie(int id) {
+    public String confirmEditMovie() {
         managerPageController.getCatalogService().updateMovie(id, title, director, releaseYear, format);
-        managerPageController.endConversation();
+//        managerPageController.endConversation();
         return "manager";
     }
 
     //region getters
+    public int getId() {
+        return id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -74,10 +86,14 @@ public class EditCatalogController {
 
     @PostConstruct
     public void loadCatalogInfo() {
-        setTitle(managerPageController.getSelectedTitle());
-        setAuthor(managerPageController.getSelectedAuthor());
-        setReleaseYear(managerPageController.getSelectedReleaseYear());
-        setDirector(managerPageController.getSelectedDirector());
-        setFormat(managerPageController.getSelectedFormat());
+        id = (int) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("selectedId");
+        setTitle(catalogService.getCatalog(id).getTitle());
+        setReleaseYear(catalogService.getCatalog(id).getReleaseYear());
+        if (catalogService.getCatalog(id) instanceof Book) {
+            setAuthor(((Book) catalogService.getCatalog(id)).getAuthor());
+        } else if (catalogService.getCatalog(id) instanceof Movie) {
+            setDirector(((Movie) catalogService.getCatalog(id)).getDirector());
+            setFormat(((Movie) catalogService.getCatalog(id)).getFormat());
+        }
     }
 }

@@ -11,7 +11,7 @@
         <br/>
         <h:form>
             ID:
-            <h:outputText value="#{managerPageController.selectedId}"/>
+            <h:outputText value="#{editCatalogController.id}"/>
             <br/>
             Title:
             <h:inputText value="#{editCatalogController.title}"/>
@@ -22,7 +22,7 @@
             Release year:
             <h:inputText value="#{editCatalogController.releaseYear}" maxlength="4"/>
             <br/>
-            <h:commandButton value="OK" action="#{editCatalogController.confirmEditBook(managerPageController.selectedId)}"/>
+            <h:commandButton value="OK" action="#{editCatalogController.confirmEditBook()}"/>
             <br/>
             <h:commandButton value="Cancel" action="managerPage.xhtml" immediate="true"/>
             <br/>

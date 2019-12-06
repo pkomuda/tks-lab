@@ -11,7 +11,7 @@
         <br/>
         <h:form>
             ID:
-            <h:outputText value="#{managerPageController.selectedId}"/>
+            <h:outputText value="#{editCatalogController.id}"/>
             <br/>
             Title:
             <h:inputText value="#{editCatalogController.title}"/>
@@ -25,7 +25,7 @@
             Format:
             <h:inputText value="#{editCatalogController.format}"/>
             <br/>
-            <h:commandButton value="OK" action="#{editCatalogController.confirmEditMovie(managerPageController.selectedId)}"/>
+            <h:commandButton value="OK" action="#{editCatalogController.confirmEditMovie()}"/>
             <br/>
             <h:commandButton value="Cancel" action="managerPage.xhtml" immediate="true"/>
             <br/>
