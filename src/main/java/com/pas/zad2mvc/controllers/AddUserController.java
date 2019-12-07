@@ -42,6 +42,14 @@ public class AddUserController implements Serializable {
         return "admin";
     }
 
+    public String cancel() {
+        return "cancel";
+    }
+
+    public String cancelConfirm() {
+        return "cancelConfirm";
+    }
+
     //region conversation
     private void beginConversation() {
         if (!conversation.isTransient()) {

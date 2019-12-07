@@ -1,6 +1,6 @@
 package com.pas.zad2mvc.controllers;
 
-import com.pas.zad2mvc.model.User;
+import com.pas.zad2mvc.model.*;
 import com.pas.zad2mvc.services.UserService;
 
 import javax.annotation.PostConstruct;
@@ -17,7 +17,9 @@ public class AdminPageController implements Serializable {
     private UserService userService;
     @Inject
     private ViewAccessController viewAccessController;
-    private List<User> users;
+    private List<Admin> admins;
+    private List<Manager> managers;
+    private List<Client> clients;
     private String userFilter;
 
     public String addUser() {
@@ -29,13 +31,28 @@ public class AdminPageController implements Serializable {
         return "edit";
     }
 
+    public String prepareRentsInfo(Client selectedClient) {
+        viewAccessController.setSelectedUsername(selectedClient.getUsername());
+        return "rentsForClient";
+    }
+
     public void filterUsers() {
-        users = userService.filterUsers(userFilter);
+        admins = userService.filterAdmins(userFilter);
+        managers = userService.filterManagers(userFilter);
+        clients = userService.filterClients(userFilter);
     }
 
     //region getters
-    public List<User> getUsers() {
-        return users;
+    public List<Admin> getAdmins() {
+        return admins;
+    }
+
+    public List<Manager> getManagers() {
+        return managers;
+    }
+
+    public List<Client> getClients() {
+        return clients;
     }
 
     public String getUserFilter() {
@@ -49,6 +66,8 @@ public class AdminPageController implements Serializable {
 
     @PostConstruct
     public void loadUsers() {
-        users = userService.getUsers();
+        admins = userService.getAdmins();
+        managers = userService.getManagers();
+        clients = userService.getClients();
     }
 }

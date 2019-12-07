@@ -33,6 +33,10 @@ public class EditCatalogController {
         return "manager";
     }
 
+    public String cancel() {
+        return "cancel";
+    }
+
     //region getters
     public int getId() {
         return id;

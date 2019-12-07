@@ -25,6 +25,10 @@ public class EditUserController {
         return "admin";
     }
 
+    public String cancel() {
+        return "cancel";
+    }
+
     //region getters
     public String getUsername() {
         return username;

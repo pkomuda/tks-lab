@@ -16,30 +16,80 @@
             <h:commandButton value="Refresh" action="#{adminPageController.filterUsers()}"/>
             <br/>
             <br/>
-            Users:
-            <h:dataTable value="#{adminPageController.users}" var="user" border="1">
-                <h:column>
-                    <f:facet name="header">Type</f:facet>
-                    <h:outputText value="#{user.getType()}"/>
-                </h:column>
+            Admins:
+            <br/>
+            <h:dataTable value="#{adminPageController.admins}" var="admin" border="1">
                 <h:column>
                     <f:facet name="header">Username</f:facet>
-                    <h:outputText value="#{user.username}"/>
+                    <h:outputText value="#{admin.username}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">Activity</f:facet>
-                    <h:outputText value="#{user.getActivity()}"/>
+                    <h:outputText value="#{admin.getActivity()}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">First name</f:facet>
-                    <h:outputText value="#{user.firstName}"/>
+                    <h:outputText value="#{admin.firstName}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">Last name</f:facet>
-                    <h:outputText value="#{user.lastName}"/>
+                    <h:outputText value="#{admin.lastName}"/>
                 </h:column>
                 <h:column>
-                    <h:commandButton value="Edit" action="#{adminPageController.prepareUserInfo(user)}"/>
+                    <h:commandButton value="Edit" action="#{adminPageController.prepareUserInfo(admin)}"/>
+                </h:column>
+            </h:dataTable>
+            <br/>
+            <br/>
+            Managers:
+            <br/>
+            <h:dataTable value="#{adminPageController.managers}" var="manager" border="1">
+                <h:column>
+                    <f:facet name="header">Username</f:facet>
+                    <h:outputText value="#{manager.username}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Activity</f:facet>
+                    <h:outputText value="#{manager.getActivity()}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">First name</f:facet>
+                    <h:outputText value="#{manager.firstName}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Last name</f:facet>
+                    <h:outputText value="#{manager.lastName}"/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Edit" action="#{adminPageController.prepareUserInfo(manager)}"/>
+                </h:column>
+            </h:dataTable>
+            <br/>
+            <br/>
+            Clients:
+            <br/>
+            <h:dataTable value="#{adminPageController.clients}" var="client" border="1">
+                <h:column>
+                    <f:facet name="header">Username</f:facet>
+                    <h:outputText value="#{client.username}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Activity</f:facet>
+                    <h:outputText value="#{client.getActivity()}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">First name</f:facet>
+                    <h:outputText value="#{client.firstName}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Last name</f:facet>
+                    <h:outputText value="#{client.lastName}"/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Edit" action="#{adminPageController.prepareUserInfo(client)}"/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Rents" action="#{adminPageController.prepareRentsInfo(client)}"/>
                 </h:column>
             </h:dataTable>
             <h:commandButton value="Add a new user" action="#{adminPageController.addUser()}"/>

@@ -35,10 +35,55 @@ public class UserRepository {
         return new ArrayList<>(users.values());
     }
 
+    public List<Admin> getAdmins() {
+        return getUsers()
+                .stream()
+                .filter(user -> user instanceof Admin)
+                .map(user -> (Admin) user)
+                .collect(Collectors.toList());
+    }
+
+    public List<Manager> getManagers() {
+        return getUsers()
+                .stream()
+                .filter(user -> user instanceof Manager)
+                .map(user -> (Manager) user)
+                .collect(Collectors.toList());
+    }
+
+    public List<Client> getClients() {
+        return getUsers()
+                .stream()
+                .filter(user -> user instanceof Client)
+                .map(user -> (Client) user)
+                .collect(Collectors.toList());
+    }
+
     public List<User> filterUsers(String userFilter) {
         return getUsers()
                 .stream()
                 .filter(user -> StringUtils.containsIgnoreCase(user.toString(), userFilter))
+                .collect(Collectors.toList());
+    }
+
+    public List<Admin> filterAdmins(String adminFilter) {
+        return getAdmins()
+                .stream()
+                .filter(user -> StringUtils.containsIgnoreCase(user.toString(), adminFilter))
+                .collect(Collectors.toList());
+    }
+
+    public List<Manager> filterManagers(String managerFilter) {
+        return getManagers()
+                .stream()
+                .filter(user -> StringUtils.containsIgnoreCase(user.toString(), managerFilter))
+                .collect(Collectors.toList());
+    }
+
+    public List<Client> filterClients(String clientFilter) {
+        return getClients()
+                .stream()
+                .filter(user -> StringUtils.containsIgnoreCase(user.toString(), clientFilter))
                 .collect(Collectors.toList());
     }
 

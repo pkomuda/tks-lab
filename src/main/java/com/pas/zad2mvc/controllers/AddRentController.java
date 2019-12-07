@@ -28,6 +28,10 @@ public class AddRentController {
         return "client";
     }
 
+    public String cancel() {
+        return "cancel";
+    }
+
     //region getters
     public int getId() {
         return id;

@@ -5,7 +5,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>
-        <h:outputText value="Rents for #{rentsForCatalogController.title}"/>
+        <h:outputText value="Rents for #{rentsForClientController.username}"/>
     </title>
 </h:head>
 <h:body>
@@ -14,13 +14,13 @@
     <br/>
     <h:form>
         Search rents:
-        <h:inputText value="#{rentsForCatalogController.rentFilter}"/>
-        <h:commandButton value="Refresh" action="#{rentsForCatalogController.filterRents()}"/>
+        <h:inputText value="#{rentsForClientController.rentFilter}"/>
+        <h:commandButton value="Refresh" action="#{rentsForClientController.filterRents()}"/>
         <br/>
         <br/>
-        Current rent:
+        Current rents:
         <br/>
-        <h:dataTable value="#{rentsForCatalogController.unfinishedRents}" var="rent" border="1">
+        <h:dataTable value="#{rentsForClientController.unfinishedRents}" var="rent" border="1">
             <h:column>
                 <f:facet name="header">ID</f:facet>
                 <h:outputText value="#{rent.id}"/>
@@ -34,13 +34,13 @@
                 <h:outputText value="#{rent.rentDateTime}"/>
             </h:column>
             <h:column>
-                <h:commandButton value="Remove" action="#{rentsForCatalogController.removeRent(rent.id)}"/>
+                <h:commandButton value="Remove" action="#{rentsForClientController.removeRent(rent.id)}"/>
             </h:column>
         </h:dataTable>
         <br/>
         Rent history:
         <br/>
-        <h:dataTable value="#{rentsForCatalogController.finishedRents}" var="rent" border="1">
+        <h:dataTable value="#{rentsForClientController.finishedRents}" var="rent" border="1">
             <h:column>
                 <f:facet name="header">ID</f:facet>
                 <h:outputText value="#{rent.id}"/>
@@ -59,7 +59,7 @@
             </h:column>
         </h:dataTable>
         <br/>
-        <h:commandButton value="Back" action="#{rentsForCatalogController.goBack()}"/>
+        <h:commandButton value="Back" action="#{rentsForClientController.goBack()}"/>
         <br/>
         <h:commandButton value="Log out" action="#{loginController.logOut()}"/>
     </h:form>

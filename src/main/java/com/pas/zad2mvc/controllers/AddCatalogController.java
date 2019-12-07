@@ -44,6 +44,14 @@ public class AddCatalogController implements Serializable {
         return "manager";
     }
 
+    public String cancel() {
+        return "cancel";
+    }
+
+    public String cancelConfirm() {
+        return "cancelConfirm";
+    }
+
     //region conversation
     private void beginConversation() {
         if (!conversation.isTransient()) {

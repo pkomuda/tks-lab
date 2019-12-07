@@ -41,8 +41,32 @@ public class UserService implements Serializable {
         return userRepository.getUsers();
     }
 
+    public List<Admin> getAdmins() {
+        return userRepository.getAdmins();
+    }
+
+    public List<Manager> getManagers() {
+        return userRepository.getManagers();
+    }
+
+    public List<Client> getClients() {
+        return userRepository.getClients();
+    }
+
     public List<User> filterUsers(String userFilter) {
         return userRepository.filterUsers(userFilter);
+    }
+
+    public List<Admin> filterAdmins(String adminFilter) {
+        return userRepository.filterAdmins(adminFilter);
+    }
+
+    public List<Manager> filterManagers(String managerFilter) {
+        return userRepository.filterManagers(managerFilter);
+    }
+
+    public List<Client> filterClients(String clientFilter) {
+        return userRepository.filterClients(clientFilter);
     }
 
     public void updateUserInfo(String username, UserInfo userInfo) {
