@@ -81,9 +81,11 @@ public class AddUserController implements Serializable {
     public void setUserType(String userType) {
         this.userType = userType;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
+
     public void setActive(boolean active) {
         this.active = active;
     }

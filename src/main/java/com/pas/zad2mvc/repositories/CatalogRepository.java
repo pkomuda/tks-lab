@@ -3,11 +3,9 @@ package com.pas.zad2mvc.repositories;
 import com.pas.zad2mvc.model.Book;
 import com.pas.zad2mvc.model.Catalog;
 import com.pas.zad2mvc.model.Movie;
-import com.pas.zad2mvc.model.NoCatalog;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
@@ -18,30 +16,28 @@ import java.util.stream.Collectors;
 @Named
 @ApplicationScoped
 public class CatalogRepository {
-    @Inject
-    private RentRepository rentRepository;
     private LinkedHashMap<Integer, Catalog> catalogs = new LinkedHashMap<>();
 
-    public void addBook(int id, String title, String author, int releaseYear) {
-        if (getCatalog(id) == null && id != 0) {
-            catalogs.put(id, new Book(id, title, author, releaseYear));
-        }
+    public synchronized void addCatalog(Catalog catalog) {
+        catalogs.put(catalog.getId(), catalog);
     }
 
-    public void addMovie(int id, String title, String director, int releaseYear, String format) {
-        if (getCatalog(id) == null && id != 0) {
-            catalogs.put(id, new Movie(id, title, director, releaseYear, format));
-        }
-    }
-
-    public Catalog getCatalog(int id) {
+    public synchronized Catalog getCatalog(int id) {
         return catalogs.get(id);
     }
 
-    public List<Catalog> getCatalogs() {
+    public synchronized void updateCatalog(int id, Catalog catalog) {
+        catalogs.replace(id, catalog);
+    }
+
+    public synchronized void removeCatalog(int id) {
+        catalogs.remove(id);
+    }
+
+    public synchronized List<Catalog> getCatalogs() {
         return new ArrayList<>(catalogs.values());
     }
-    
+
     public List<Book> getBooks() {
         return getCatalogs()
                 .stream()
@@ -65,42 +61,18 @@ public class CatalogRepository {
                 .collect(Collectors.toList());
     }
     
-    public List<Book> filterBooks(String catalogFilter) {
+    public List<Book> filterBooks(String bookFilter) {
         return getBooks()
                 .stream()
-                .filter(book -> StringUtils.containsIgnoreCase(book.toString(), catalogFilter))
+                .filter(book -> StringUtils.containsIgnoreCase(book.toString(), bookFilter))
                 .collect(Collectors.toList());
     }
     
-    public List<Movie> filterMovies(String catalogFilter) {
+    public List<Movie> filterMovies(String movieFilter) {
         return getMovies()
                 .stream()
-                .filter(movie -> StringUtils.containsIgnoreCase(movie.toString(), catalogFilter))
+                .filter(movie -> StringUtils.containsIgnoreCase(movie.toString(), movieFilter))
                 .collect(Collectors.toList());
-    }
-
-    public void updateBook(int id, String title, String author, int releaseYear) {
-        if (getCatalog(id) != null && getCatalog(id) instanceof Book) {
-            Catalog temp = new Book(id, title, author, releaseYear);
-            catalogs.replace(id, temp);
-            rentRepository.getRentsForCatalog(id)
-                    .forEach(rent -> rent.setCatalog(temp));
-        }
-    }
-
-    public void updateMovie(int id, String title, String director, int releaseYear, String format) {
-        if (getCatalog(id) != null && getCatalog(id) instanceof Movie) {
-            Catalog temp = new Movie(id, title, director, releaseYear, format);
-            catalogs.replace(id, temp);
-            rentRepository.getRentsForCatalog(id)
-                    .forEach(rent -> rent.setCatalog(temp));
-        }
-    }
-
-    public void removeCatalog(int id) {
-        rentRepository.getRentsForCatalog(id)
-                .forEach(rent -> rent.setCatalog(new NoCatalog()));
-        catalogs.remove(id);
     }
 
     @Override
@@ -121,11 +93,11 @@ public class CatalogRepository {
 
     @PostConstruct
     private void addCatalogPool() {
-        addBook(1, "The Shining", "Stephen King", 1997);
-        addBook(2, "The Lord of the Rings", "J.R.R. Tolkien", 2015);
-        addBook(3, "What Could Possibly Go Wrong", "Jeremy Clarkson", 2015);
-        addMovie(4, "Trainspotting", "Danny Boyle", 1996, "DVD");
-        addMovie(5, "Pulp Fiction", "Quentin Tarantino", 1994, "Blu-ray");
-        addMovie(6, "The Graduate", "Mike Nichols", 1967, "VHS");
+        addCatalog(new Book(1, "The Shining", "Stephen King", 1997));
+        addCatalog(new Book(2, "The Lord of the Rings", "J.R.R. Tolkien", 2015));
+        addCatalog(new Book(3, "What Could Possibly Go Wrong", "Jeremy Clarkson", 2015));
+        addCatalog(new Movie(4, "Trainspotting", "Danny Boyle", 1996, "DVD"));
+        addCatalog(new Movie(5, "Pulp Fiction", "Quentin Tarantino", 1994, "Blu-ray"));
+        addCatalog(new Movie(6, "The Graduate", "Mike Nichols", 1967, "VHS"));
     }
 }

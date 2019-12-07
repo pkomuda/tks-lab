@@ -6,7 +6,6 @@ import com.pas.zad2mvc.services.CatalogService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -14,9 +13,9 @@ import javax.inject.Named;
 @RequestScoped
 public class EditCatalogController {
     @Inject
-    private ManagerPageController managerPageController;
-    @Inject
     private CatalogService catalogService;
+    @Inject
+    private ViewAccessController viewAccessController;
     private int id;
     private String title;
     private String author;
@@ -25,14 +24,12 @@ public class EditCatalogController {
     private String format;
 
     public String confirmEditBook() {
-        managerPageController.getCatalogService().updateBook(id, title, author, releaseYear);
-//        managerPageController.endConversation();
+        catalogService.updateBook(id, title, author, releaseYear);
         return "manager";
     }
 
     public String confirmEditMovie() {
-        managerPageController.getCatalogService().updateMovie(id, title, director, releaseYear, format);
-//        managerPageController.endConversation();
+        catalogService.updateMovie(id, title, director, releaseYear, format);
         return "manager";
     }
 
@@ -63,6 +60,10 @@ public class EditCatalogController {
     //endregion
 
     //region setters
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -86,14 +87,14 @@ public class EditCatalogController {
 
     @PostConstruct
     public void loadCatalogInfo() {
-        id = (int) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("selectedId");
-        setTitle(catalogService.getCatalog(id).getTitle());
-        setReleaseYear(catalogService.getCatalog(id).getReleaseYear());
+        id = viewAccessController.getSelectedCatalogId();
+        title = catalogService.getCatalog(id).getTitle();
+        releaseYear = catalogService.getCatalog(id).getReleaseYear();
         if (catalogService.getCatalog(id) instanceof Book) {
-            setAuthor(((Book) catalogService.getCatalog(id)).getAuthor());
+            author = ((Book) catalogService.getCatalog(id)).getAuthor();
         } else if (catalogService.getCatalog(id) instanceof Movie) {
-            setDirector(((Movie) catalogService.getCatalog(id)).getDirector());
-            setFormat(((Movie) catalogService.getCatalog(id)).getFormat());
+            director = ((Movie) catalogService.getCatalog(id)).getDirector();
+            format = ((Movie) catalogService.getCatalog(id)).getFormat();
         }
     }
 }

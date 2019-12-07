@@ -4,17 +4,10 @@ public class UserInfo {
     private String firstName;
     private String lastName;
 
-    //region constructors
     UserInfo(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
-    UserInfo(UserInfo other) {
-        this.firstName = other.getFirstName();
-        this.lastName = other.getLastName();
-    }
-    //endregion
 
     //region getters
     public String getFirstName() {

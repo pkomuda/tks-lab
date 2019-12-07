@@ -8,15 +8,11 @@ import com.pas.zad2mvc.services.CatalogService;
 import com.pas.zad2mvc.services.RentService;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Named
 @ViewScoped
@@ -25,19 +21,25 @@ public class ManagerPageController implements Serializable {
     private CatalogService catalogService;
     @Inject
     private RentService rentService;
-//    @Inject
-//    private Conversation conversation;
+    @Inject
+    private ViewAccessController viewAccessController;
     private List<Book> books;
     private List<Movie> movies;
-    private List<Rent> rents;
-    private Catalog selectedCatalog;
+    private List<Rent> unfinishedRents;
+    private List<Rent> finishedRents;
     private String catalogFilter;
     private String rentFilter;
 
+    public String addBook() {
+        return "addBook";
+    }
+
+    public String addMovie() {
+        return "addMovie";
+    }
+
     public String prepareCatalogInfo(Catalog selectedCatalog) {
-//        beginConversation();
-        this.selectedCatalog = selectedCatalog;
-        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("selectedId", selectedCatalog.getId());
+        viewAccessController.setSelectedCatalogId(selectedCatalog.getId());
         if (selectedCatalog instanceof Book) {
             return "editBook";
         } else if (selectedCatalog instanceof Movie) {
@@ -48,8 +50,7 @@ public class ManagerPageController implements Serializable {
     }
 
     public String prepareRentsInfo(Catalog selectedCatalog) {
-//        beginConversation();
-        this.selectedCatalog = selectedCatalog;
+        viewAccessController.setSelectedCatalogId(selectedCatalog.getId());
         return "rentsForCatalog";
     }
 
@@ -59,7 +60,8 @@ public class ManagerPageController implements Serializable {
     }
 
     public void filterRents() {
-        rents = rentService.filterRents(rentFilter);
+        unfinishedRents = rentService.filterUnfinishedRents(rentFilter);
+        finishedRents = rentService.filterFinishedRents(rentFilter);
     }
 
     public void removeCatalog(int id) {
@@ -72,52 +74,7 @@ public class ManagerPageController implements Serializable {
         loadData();
     }
 
-//    //region conversation
-//    private void beginConversation() {
-//        if (!conversation.isTransient()) {
-//            conversation.end();
-//        }
-//        conversation.begin();
-//    }
-//
-//    void endConversation() {
-//        conversation.end();
-//    }
-//    //endregion
-
     //region getters
-    CatalogService getCatalogService() {
-        return catalogService;
-    }
-
-    String getSelectedAuthor() {
-        if (selectedCatalog instanceof Book) {
-            return ((Book) selectedCatalog).getAuthor();
-        } else {
-            return "";
-        }
-    }
-
-    int getSelectedReleaseYear() {
-        return selectedCatalog.getReleaseYear();
-    }
-
-    String getSelectedDirector() {
-        if (selectedCatalog instanceof Movie) {
-            return ((Movie) selectedCatalog).getDirector();
-        } else {
-            return "";
-        }
-    }
-
-    String getSelectedFormat() {
-        if (selectedCatalog instanceof Movie) {
-            return ((Movie) selectedCatalog).getFormat();
-        } else {
-            return "";
-        }
-    }
-    
     public List<Book> getBooks() {
         return books;
     }
@@ -126,26 +83,12 @@ public class ManagerPageController implements Serializable {
         return movies;
     }
 
-    public List<Rent> getFinishedRents() {
-        return rents
-                .stream()
-                .filter(rent -> rent.getReturnDateTime() != null)
-                .collect(Collectors.toList());
-    }
-
     public List<Rent> getUnfinishedRents() {
-        return rents
-                .stream()
-                .filter(rent -> rent.getReturnDateTime() == null)
-                .collect(Collectors.toList());
+        return unfinishedRents;
     }
 
-//    public int getSelectedId() {
-//        return selectedCatalog.getId();
-//    }
-
-    public String getSelectedTitle() {
-        return selectedCatalog.getTitle();
+    public List<Rent> getFinishedRents() {
+        return finishedRents;
     }
 
     public String getCatalogFilter() {
@@ -169,9 +112,9 @@ public class ManagerPageController implements Serializable {
 
     @PostConstruct
     public void loadData() {
-//        beginConversation();
         books = catalogService.getBooks();
         movies = catalogService.getMovies();
-        rents = rentService.getRents();
+        unfinishedRents = rentService.getUnfinishedRents();
+        finishedRents = rentService.getFinishedRents();
     }
 }

@@ -8,35 +8,33 @@ import com.pas.zad2mvc.services.CatalogService;
 import com.pas.zad2mvc.services.RentService;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Named
-@ConversationScoped
+@ViewScoped
 public class ClientPageController implements Serializable {
     @Inject
     private CatalogService catalogService;
     @Inject
     private RentService rentService;
     @Inject
-    private LoginController loginController;
+    ViewAccessController viewAccessController;
     @Inject
-    private Conversation conversation;
-    private List<Catalog> catalogs;
-    private List<Rent> rents;
-    private Catalog selectedCatalog;
+    private LoginController loginController;
+    private List<Book> books;
+    private List<Movie> movies;
+    private List<Rent> unfinishedRents;
+    private List<Rent> finishedRents;
     private String catalogFilter;
     private String rentFilter;
 
     public String prepareRentInfo(Catalog catalog) {
         if (rentService.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
-            beginConversation();
-            selectedCatalog = catalog;
+            viewAccessController.setSelectedCatalogId(catalog.getId());
             return "addRent";
         } else {
             return "clientPage.xhtml";
@@ -44,35 +42,20 @@ public class ClientPageController implements Serializable {
     }
 
     public void filterCatalogs() {
-        catalogs = catalogService.filterCatalogs(catalogFilter);
+        books = catalogService.filterBooks(catalogFilter);
+        movies = catalogService.filterMovies(catalogFilter);
     }
 
     public void filterRentsForClient() {
-        rents = rentService.filterRentsForClient(loginController.getUsername(), rentFilter);
+        unfinishedRents = rentService.filterUnfinishedRentsForClient(loginController.getUsername(), rentFilter);
+        finishedRents = rentService.filterFinishedRentsForClient(loginController.getUsername(), rentFilter);
     }
 
     public void finishRent(String rentId) {
         rentService.finishRent(rentId);
     }
 
-    //region conversation
-    private void beginConversation() {
-        if (!conversation.isTransient()) {
-            conversation.end();
-        }
-        conversation.begin();
-    }
-
-    void endConversation() {
-        conversation.end();
-    }
-    //endregion
-
     //region getters
-    RentService getRentService() {
-        return rentService;
-    }
-
     public String getCatalogStatus(Catalog catalog) {
         if (rentService.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
             return "Free";
@@ -82,33 +65,19 @@ public class ClientPageController implements Serializable {
     }
 
     public List<Book> getBooks() {
-        return catalogs
-                .stream()
-                .filter(catalog -> catalog instanceof Book)
-                .map(catalog -> (Book) catalog)
-                .collect(Collectors.toList());
+        return books;
     }
 
     public List<Movie> getMovies() {
-        return catalogs
-                .stream()
-                .filter(catalog -> catalog instanceof Movie)
-                .map(catalog -> (Movie) catalog)
-                .collect(Collectors.toList());
+        return movies;
     }
 
     public List<Rent> getUnfinishedRents() {
-        return rents
-                .stream()
-                .filter(rent -> rent.getReturnDateTime() == null)
-                .collect(Collectors.toList());
+        return unfinishedRents;
     }
 
     public List<Rent> getFinishedRents() {
-        return rents
-                .stream()
-                .filter(rent -> rent.getReturnDateTime() != null)
-                .collect(Collectors.toList());
+        return finishedRents;
     }
 
     public String getCatalogFilter() {
@@ -117,10 +86,6 @@ public class ClientPageController implements Serializable {
 
     public String getRentFilter() {
         return rentFilter;
-    }
-
-    public int getSelectedCatalogId() {
-        return selectedCatalog.getId();
     }
     //endregion
 
@@ -136,7 +101,9 @@ public class ClientPageController implements Serializable {
 
     @PostConstruct
     public void loadData() {
-        catalogs = catalogService.getCatalogs();
-        rents = rentService.getRentsForClient(loginController.getUsername());
+        books = catalogService.getBooks();
+        movies = catalogService.getMovies();
+        unfinishedRents = rentService.getUnfinishedRentsForClient(loginController.getUsername());
+        finishedRents = rentService.getFinishedRentsForClient(loginController.getUsername());
     }
 }

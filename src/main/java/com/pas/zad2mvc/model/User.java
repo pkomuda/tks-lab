@@ -18,7 +18,7 @@ public abstract class User {
     User(User other) {
         this.username = other.getUsername();
         this.active = other.isActive();
-        this.info = new UserInfo(other.getInfo());
+        this.info = other.getInfo();
     }
     //endregion
 

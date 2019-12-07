@@ -1,6 +1,7 @@
 package com.pas.zad2mvc.controllers;
 
 import com.pas.zad2mvc.model.UserInfo;
+import com.pas.zad2mvc.services.UserService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -11,18 +12,24 @@ import javax.inject.Named;
 @RequestScoped
 public class EditUserController {
     @Inject
-    private AdminPageController adminPageController;
-    private UserInfo userInfo;
+    private UserService userService;
+    @Inject
+    private ViewAccessController viewAccessController;
+    private String username;
     private boolean active;
+    private UserInfo userInfo;
 
-    public String confirmEditUser(String username) {
-        adminPageController.getUserService().setUserActivity(username, active);
-        adminPageController.getUserService().updateUserInfo(username, userInfo);
-        adminPageController.endConversation();
+    public String confirmEditUser() {
+        userService.setUserActivity(username, active);
+        userService.updateUserInfo(username, userInfo);
         return "admin";
     }
 
     //region getters
+    public String getUsername() {
+        return username;
+    }
+
     public boolean isActive() {
         return active;
     }
@@ -37,8 +44,8 @@ public class EditUserController {
     //endregion
 
     //region setters
-    private void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setActive(boolean active) {
@@ -56,7 +63,8 @@ public class EditUserController {
 
     @PostConstruct
     public void loadUserInfo() {
-        setActive(adminPageController.getSelectedUserActivity());
-        setUserInfo(adminPageController.getSelectedUserInfo());
+        username = viewAccessController.getSelectedUsername();
+        active = userService.getUser(username).isActive();
+        userInfo = userService.getUser(username).getInfo();
     }
 }

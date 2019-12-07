@@ -1,11 +1,14 @@
 package com.pas.zad2mvc.repositories;
 
-import com.pas.zad2mvc.model.*;
+import com.pas.zad2mvc.model.Admin;
+import com.pas.zad2mvc.model.Client;
+import com.pas.zad2mvc.model.Manager;
+import com.pas.zad2mvc.model.User;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -16,29 +19,19 @@ import java.util.stream.Collectors;
 public class UserRepository {
     private LinkedHashMap<String, User> users = new LinkedHashMap<>();
 
-    public void addAdmin(String username, boolean active, String firstName, String lastName) {
-        if (getUser(username) == null) {
-            users.put(username, new Admin(username, active, firstName, lastName));
-        }
+    public synchronized void addUser(User user) {
+        users.put(user.getUsername(), user);
     }
 
-    public void addManager(String username, boolean active, String firstName, String lastName) {
-        if (getUser(username) == null) {
-            users.put(username, new Manager(username, active, firstName, lastName));
-        }
-    }
-
-    public void addClient(String username, boolean active, String firstName, String lastName) {
-        if (getUser(username) == null) {
-            users.put(username, new Client(username, active, firstName, lastName));
-        }
-    }
-
-    public User getUser(String username) {
+    public synchronized User getUser(String username) {
         return users.get(username);
     }
 
-    public List<User> getUsers() {
+    public synchronized void updateUser(String username, User user) {
+        users.replace(username, user);
+    }
+
+    public synchronized List<User> getUsers() {
         return new ArrayList<>(users.values());
     }
 
@@ -47,36 +40,6 @@ public class UserRepository {
                 .stream()
                 .filter(user -> StringUtils.containsIgnoreCase(user.toString(), userFilter))
                 .collect(Collectors.toList());
-    }
-
-    public void updateUserInfo(String username, UserInfo userInfo) {
-        if (getUser(username) != null) {
-            getUser(username).setInfo(userInfo);
-        }
-    }
-
-    public boolean activateUser(String username) {
-        if (getUser(username) != null && !getUser(username).isActive()) {
-            getUser(username).setActive(true);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean deactivateUser(String username) {
-        if (getUser(username) != null && getUser(username).isActive()) {
-            getUser(username).setActive(false);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public void setUserActivity(String username, boolean active) {
-        if (getUser(username) != null) {
-            getUser(username).setActive(active);
-        }
     }
 
     @Override
@@ -97,11 +60,11 @@ public class UserRepository {
 
     @PostConstruct
     private void addUserPool() {
-        addAdmin("admin1", true, "Walter", "White");
-        addAdmin("admin2", true, "Jesse", "Pinkman");
-        addManager("manager1", true, "Marie", "Schrader");
-        addManager("manager2", true,"Jimmy", "McGill");
-        addClient("client1", true, "Kim", "Wexler");
-        addClient("client2", true, "Gustavo", "Fring");
+        addUser(new Admin("admin1", true, "Walter", "White"));
+        addUser(new Admin("admin2", true, "Jesse", "Pinkman"));
+        addUser(new Manager("manager1", true, "Marie", "Schrader"));
+        addUser(new Manager("manager2", true,"Jimmy", "McGill"));
+        addUser(new Client("client1", true, "Kim", "Wexler"));
+        addUser(new Client("client2", true, "Gustavo", "Fring"));
     }
 }

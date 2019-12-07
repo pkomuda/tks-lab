@@ -11,11 +11,11 @@
         <br/>
         <h:form>
             Catalog ID:
-            <h:outputText value="#{clientPageController.selectedCatalogId}"/>
+            <h:outputText value="#{addRentController.id}"/>
             <br/>
             yyyy-MM-dd-HH-mm: <h:inputText value="#{addRentController.year}" maxlength="4" size="4"/>-<h:inputText value="#{addRentController.month}" maxlength="2" size="2"/>-<h:inputText value="#{addRentController.day}" maxlength="2" size="2"/>-<h:inputText value="#{addRentController.hour}" maxlength="2" size="2"/>-<h:inputText value="#{addRentController.minute}" maxlength="2" size="2"/>
             <br/>
-            <h:commandButton value="OK" action="#{addRentController.confirmRent(clientPageController.selectedCatalogId)}"/>
+            <h:commandButton value="OK" action="#{addRentController.confirmRent()}"/>
             <br/>
             <h:commandButton value="Cancel" action="clientPage.xhtml" immediate="true"/>
             <br/>

@@ -45,7 +45,7 @@
                     <h:commandButton value="Rents" action="#{managerPageController.prepareRentsInfo(book)}"/>
                 </h:column>
             </h:dataTable>
-            <h:commandButton value="Add a new book" action="addBook.xhtml"/>
+            <h:commandButton value="Add a new book" action="#{managerPageController.addBook()}"/>
             <br/>
             <br/>
             Movies:
@@ -81,7 +81,7 @@
                     <h:commandButton value="Rents" action="#{managerPageController.prepareRentsInfo(movie)}"/>
                 </h:column>
             </h:dataTable>
-            <h:commandButton value="Add a new movie" action="addMovie.xhtml"/>
+            <h:commandButton value="Add a new movie" action="#{managerPageController.addMovie()}"/>
             <br/>
             <br/>
             <br/>

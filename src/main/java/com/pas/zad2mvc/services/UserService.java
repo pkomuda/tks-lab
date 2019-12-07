@@ -1,7 +1,6 @@
 package com.pas.zad2mvc.services;
 
-import com.pas.zad2mvc.model.User;
-import com.pas.zad2mvc.model.UserInfo;
+import com.pas.zad2mvc.model.*;
 import com.pas.zad2mvc.repositories.UserRepository;
 
 import javax.enterprise.context.Dependent;
@@ -17,15 +16,21 @@ public class UserService implements Serializable {
     private UserRepository userRepository;
 
     public void addAdmin(String username, boolean active, String firstName, String lastName) {
-        userRepository.addAdmin(username, active, firstName, lastName);
+        if (getUser(username) == null) {
+            userRepository.addUser(new Admin(username, active, firstName, lastName));
+        }
     }
 
     public void addManager(String username, boolean active, String firstName, String lastName) {
-        userRepository.addManager(username, active, firstName, lastName);
+        if (getUser(username) == null) {
+            userRepository.addUser(new Manager(username, active, firstName, lastName));
+        }
     }
 
     public void addClient(String username, boolean active, String firstName, String lastName) {
-        userRepository.addClient(username, active, firstName, lastName);
+        if (getUser(username) == null) {
+            userRepository.addUser(new Client(username, active, firstName, lastName));
+        }
     }
 
     public User getUser(String username) {
@@ -41,19 +46,27 @@ public class UserService implements Serializable {
     }
 
     public void updateUserInfo(String username, UserInfo userInfo) {
-        userRepository.updateUserInfo(username, userInfo);
-    }
-
-    public boolean activateUser(String username) {
-        return userRepository.activateUser(username);
-    }
-
-    public boolean deactivateUser(String username) {
-        return userRepository.deactivateUser(username);
+        if (getUser(username) != null) {
+            getUser(username).setInfo(userInfo);
+        }
     }
 
     public void setUserActivity(String username, boolean active) {
-        userRepository.setUserActivity(username, active);
+        if (getUser(username) != null) {
+            getUser(username).setActive(active);
+        }
+    }
+
+    public void activateUser(String username) {
+        if (getUser(username) != null && !getUser(username).isActive()) {
+            getUser(username).setActive(true);
+        }
+    }
+
+    public void deactivateUser(String username) {
+        if (getUser(username) != null && getUser(username).isActive()) {
+            getUser(username).setActive(false);
+        }
     }
 
     @Override

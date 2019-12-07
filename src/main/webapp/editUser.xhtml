@@ -11,7 +11,7 @@
         <br/>
         <h:form>
             Username:
-            <h:outputText value="#{adminPageController.selectedUsername}"/>
+            <h:outputText value="#{editUserController.username}"/>
             <br/>
             Activity:
             <h:selectBooleanCheckbox value="#{editUserController.active}"/>
@@ -22,7 +22,7 @@
             Last name:
             <h:inputText value="#{editUserController.lastName}"/>
             <br/>
-            <h:commandButton value="OK" action="#{editUserController.confirmEditUser(adminPageController.selectedUsername)}"/>
+            <h:commandButton value="OK" action="#{editUserController.confirmEditUser()}"/>
             <br/>
             <h:commandButton value="Cancel" action="adminPage.xhtml" immediate="true"/>
             <br/>

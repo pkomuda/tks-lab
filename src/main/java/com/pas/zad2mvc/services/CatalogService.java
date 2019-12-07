@@ -3,7 +3,9 @@ package com.pas.zad2mvc.services;
 import com.pas.zad2mvc.model.Book;
 import com.pas.zad2mvc.model.Catalog;
 import com.pas.zad2mvc.model.Movie;
+import com.pas.zad2mvc.model.NoCatalog;
 import com.pas.zad2mvc.repositories.CatalogRepository;
+import com.pas.zad2mvc.repositories.RentRepository;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -16,17 +18,47 @@ import java.util.List;
 public class CatalogService implements Serializable {
     @Inject
     private CatalogRepository catalogRepository;
+    @Inject
+    private RentRepository rentRepository;
 
     public void addBook(int id, String title, String author, int releaseYear) {
-        catalogRepository.addBook(id, title, author, releaseYear);
+        if (getCatalog(id) == null && id != 0) {
+            catalogRepository.addCatalog(new Book(id, title, author, releaseYear));
+        }
     }
 
     public void addMovie(int id, String title, String director, int releaseYear, String format) {
-        catalogRepository.addMovie(id, title, director, releaseYear, format);
+        if (getCatalog(id) == null && id != 0) {
+            catalogRepository.addCatalog(new Movie(id, title, director, releaseYear, format));
+        }
     }
 
     public Catalog getCatalog(int id) {
         return catalogRepository.getCatalog(id);
+    }
+
+    public void updateBook(int id, String title, String author, int releaseYear) {
+        if (getCatalog(id) != null && getCatalog(id) instanceof Book) {
+            Catalog temp = new Book(id, title, author, releaseYear);
+            catalogRepository.updateCatalog(id, temp);
+            rentRepository.getRentsForCatalog(id)
+                    .forEach(rent -> rent.setCatalog(temp));
+        }
+    }
+
+    public void updateMovie(int id, String title, String director, int releaseYear, String format) {
+        if (getCatalog(id) != null && getCatalog(id) instanceof Movie) {
+            Catalog temp = new Movie(id, title, director, releaseYear, format);
+            catalogRepository.updateCatalog(id, temp);
+            rentRepository.getRentsForCatalog(id)
+                    .forEach(rent -> rent.setCatalog(temp));
+        }
+    }
+
+    public void removeCatalog(int id) {
+        rentRepository.getRentsForCatalog(id)
+                .forEach(rent -> rent.setCatalog(new NoCatalog()));
+        catalogRepository.removeCatalog(id);
     }
 
     public List<Catalog> getCatalogs() {
@@ -36,7 +68,7 @@ public class CatalogService implements Serializable {
     public List<Book> getBooks() {
         return catalogRepository.getBooks();
     }
-    
+
     public List<Movie> getMovies() {
         return catalogRepository.getMovies();
     }
@@ -51,18 +83,6 @@ public class CatalogService implements Serializable {
     
     public List<Movie> filterMovies(String catalogFilter) {
         return catalogRepository.filterMovies(catalogFilter);
-    }
-
-    public void updateBook(int id, String title, String author, int releaseYear) {
-        catalogRepository.updateBook(id, title, author, releaseYear);
-    }
-
-    public void updateMovie(int id, String title, String director, int releaseYear, String format) {
-        catalogRepository.updateMovie(id, title, director, releaseYear, format);
-    }
-
-    public void removeCatalog(int id) {
-        catalogRepository.removeCatalog(id);
     }
 
     @Override
