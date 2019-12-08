@@ -22,20 +22,20 @@ public class LoginController implements Serializable {
     private User user;
 
     public void checkIfUserExists(String username) {
-        for(User u : userService.getUsers()) {
-            if(username.equals(u.getUsername()) && u.isActive()) {
-                userExists = true;
-                if (u instanceof Admin) {
-                    user = new Admin(u);
-                } else if (u instanceof Manager) {
-                    user = new Manager(u);
-                } else if (u instanceof Client) {
-                    user = new Client(u);
-                }
-                return;
+        User temp = userService.getUser(username);
+        if (temp != null
+                && temp.isActive()) {
+            userExists = true;
+            if (temp instanceof Admin) {
+                user = new Admin(temp);
+            } else if (temp instanceof Manager) {
+                user = new Manager(temp);
+            } else if (temp instanceof Client) {
+                user = new Client(temp);
+            } else {
+                userExists = false;
             }
         }
-        userExists = false;
     }
 
     public String redirect() {
