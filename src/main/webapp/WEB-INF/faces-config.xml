@@ -16,17 +16,17 @@
         <from-view-id>/login.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>Admin</from-outcome>
-            <to-view-id>/adminPage.xhtml</to-view-id>
+            <to-view-id>/admin/adminPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>Manager</from-outcome>
-            <to-view-id>/managerPage.xhtml</to-view-id>
+            <to-view-id>/manager/managerPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>Client</from-outcome>
-            <to-view-id>/clientPage.xhtml</to-view-id>
+            <to-view-id>/client/clientPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -37,20 +37,20 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/adminPage.xhtml</from-view-id>
+        <from-view-id>/admin/adminPage.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>add</from-outcome>
-            <to-view-id>/addUser.xhtml</to-view-id>
+            <to-view-id>/admin/addUser.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>edit</from-outcome>
-            <to-view-id>/editUser.xhtml</to-view-id>
+            <to-view-id>/admin/editUser.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>rentsForClient</from-outcome>
-            <to-view-id>/rentsForClient.xhtml</to-view-id>
+            <to-view-id>/admin/rentsForClient.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -61,15 +61,15 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/addUser.xhtml</from-view-id>
+        <from-view-id>/admin/addUser.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>add</from-outcome>
-            <to-view-id>/confirmUser.xhtml</to-view-id>
+            <to-view-id>/admin/confirmUser.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>cancel</from-outcome>
-            <to-view-id>/adminPage.xhtml</to-view-id>
+            <to-view-id>/admin/adminPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -80,15 +80,15 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/confirmUser.xhtml</from-view-id>
+        <from-view-id>/admin/confirmUser.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>admin</from-outcome>
-            <to-view-id>/adminPage.xhtml</to-view-id>
+            <to-view-id>/admin/adminPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>cancelConfirm</from-outcome>
-            <to-view-id>/addUser.xhtml</to-view-id>
+            <to-view-id>/admin/addUser.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -99,15 +99,15 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/editUser.xhtml</from-view-id>
+        <from-view-id>/admin/editUser.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>admin</from-outcome>
-            <to-view-id>/adminPage.xhtml</to-view-id>
+            <to-view-id>/admin/adminPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>cancel</from-outcome>
-            <to-view-id>/adminPage.xhtml</to-view-id>
+            <to-view-id>/admin/adminPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -118,10 +118,10 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/rentsForClient.xhtml</from-view-id>
+        <from-view-id>/admin/rentsForClient.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>back</from-outcome>
-            <to-view-id>/adminPage.xhtml</to-view-id>
+            <to-view-id>/admin/adminPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -132,30 +132,30 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/managerPage.xhtml</from-view-id>
+        <from-view-id>/manager/managerPage.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>addBook</from-outcome>
-            <to-view-id>/addBook.xhtml</to-view-id>
+            <to-view-id>/manager/addBook.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>editBook</from-outcome>
-            <to-view-id>/editBook.xhtml</to-view-id>
+            <to-view-id>/manager/editBook.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>addMovie</from-outcome>
-            <to-view-id>/addMovie.xhtml</to-view-id>
+            <to-view-id>/manager/addMovie.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>editMovie</from-outcome>
-            <to-view-id>/editMovie.xhtml</to-view-id>
+            <to-view-id>/manager/editMovie.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>rentsForCatalog</from-outcome>
-            <to-view-id>/rentsForCatalog.xhtml</to-view-id>
+            <to-view-id>/manager/rentsForCatalog.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -166,15 +166,15 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/addBook.xhtml</from-view-id>
+        <from-view-id>/manager/addBook.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>addBook</from-outcome>
-            <to-view-id>/confirmBook.xhtml</to-view-id>
+            <to-view-id>/manager/confirmBook.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>cancel</from-outcome>
-            <to-view-id>/managerPage.xhtml</to-view-id>
+            <to-view-id>/manager/managerPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -185,15 +185,15 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/confirmBook.xhtml</from-view-id>
+        <from-view-id>/manager/confirmBook.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>manager</from-outcome>
-            <to-view-id>/managerPage.xhtml</to-view-id>
+            <to-view-id>/manager/managerPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>cancelConfirm</from-outcome>
-            <to-view-id>/addBook.xhtml</to-view-id>
+            <to-view-id>/manager/addBook.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -204,15 +204,15 @@
     </navigation-rule>
     
     <navigation-rule>
-        <from-view-id>/addMovie.xhtml</from-view-id>
+        <from-view-id>/manager/addMovie.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>addMovie</from-outcome>
-            <to-view-id>/confirmMovie.xhtml</to-view-id>
+            <to-view-id>/manager/confirmMovie.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>cancel</from-outcome>
-            <to-view-id>/managerPage.xhtml</to-view-id>
+            <to-view-id>/manager/managerPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -223,15 +223,15 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/confirmMovie.xhtml</from-view-id>
+        <from-view-id>/manager/confirmMovie.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>manager</from-outcome>
-            <to-view-id>/managerPage.xhtml</to-view-id>
+            <to-view-id>/manager/managerPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>cancelConfirm</from-outcome>
-            <to-view-id>/addBook.xhtml</to-view-id>
+            <to-view-id>/manager/addBook.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -242,15 +242,15 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/editBook.xhtml</from-view-id>
+        <from-view-id>/manager/editBook.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>manager</from-outcome>
-            <to-view-id>/managerPage.xhtml</to-view-id>
+            <to-view-id>/manager/managerPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>cancel</from-outcome>
-            <to-view-id>/managerPage.xhtml</to-view-id>
+            <to-view-id>/manager/managerPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -261,15 +261,15 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/editMovie.xhtml</from-view-id>
+        <from-view-id>/manager/editMovie.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>manager</from-outcome>
-            <to-view-id>/managerPage.xhtml</to-view-id>
+            <to-view-id>/manager/managerPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>cancel</from-outcome>
-            <to-view-id>/managerPage.xhtml</to-view-id>
+            <to-view-id>/manager/managerPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -280,10 +280,10 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/rentsForCatalog.xhtml</from-view-id>
+        <from-view-id>/manager/rentsForCatalog.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>back</from-outcome>
-            <to-view-id>/managerPage.xhtml</to-view-id>
+            <to-view-id>/manager/managerPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -294,10 +294,10 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/clientPage.xhtml</from-view-id>
+        <from-view-id>/client/clientPage.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>addRent</from-outcome>
-            <to-view-id>/addRent.xhtml</to-view-id>
+            <to-view-id>/client/addRent.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -308,15 +308,15 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/addRent.xhtml</from-view-id>
+        <from-view-id>/client/addRent.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>client</from-outcome>
-            <to-view-id>/clientPage.xhtml</to-view-id>
+            <to-view-id>/client/clientPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>cancel</from-outcome>
-            <to-view-id>/clientPage.xhtml</to-view-id>
+            <to-view-id>/client/clientPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
