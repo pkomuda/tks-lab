@@ -11,7 +11,15 @@
         <br/>
         Szymon Rutkowski 216881
         <h:form>
-            <h:commandButton value="Log in" action="login.xhtml"/>
+            <h:outputLabel for="username" value="Username" />
+            <h:inputText id="username" value="#{loginController.username}" required="true" />
+            <h:message for="username" />
+            <br />
+            <h:outputLabel for="password" value="Password" />
+            <h:inputSecret id="password" value="#{loginController.password}" required="true" />
+            <h:message for="password" />
+            <br />
+            <h:commandButton value="Log in" action="#{loginController.login()}" />
         </h:form>
     </h:body>
 </html>

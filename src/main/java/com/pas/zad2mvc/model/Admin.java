@@ -1,6 +1,8 @@
 package com.pas.zad2mvc.model;
 
-public class Admin extends User {
+import java.io.Serializable;
+
+public class Admin extends User implements Serializable {
     //region constructors
     public Admin(String username, boolean active, String firstName, String lastName) {
         super(username, active, firstName, lastName);

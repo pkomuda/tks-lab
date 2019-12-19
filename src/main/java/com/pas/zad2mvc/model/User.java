@@ -1,8 +1,9 @@
 package com.pas.zad2mvc.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class User {
+public abstract class User implements Serializable {
     private String username;
     private boolean active;
     private UserInfo info;
@@ -12,7 +13,6 @@ public abstract class User {
         this.username = username;
         this.active = active;
         this.info = new UserInfo(firstName, lastName);
-        
     }
     
     User(User other) {
