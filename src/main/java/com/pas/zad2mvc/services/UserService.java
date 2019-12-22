@@ -15,21 +15,24 @@ public class UserService implements Serializable {
     @Inject
     private UserRepository userRepository;
 
-    public void addAdmin(String username, boolean active, String firstName, String lastName) {
+    public void addAdmin(String username, boolean active, String firstName, String lastName, String password) {
         if (getUser(username) == null) {
             userRepository.addUser(new Admin(username, active, firstName, lastName));
+            userRepository.setUserPassword(username, password);
         }
     }
 
-    public void addManager(String username, boolean active, String firstName, String lastName) {
+    public void addManager(String username, boolean active, String firstName, String lastName, String password) {
         if (getUser(username) == null) {
             userRepository.addUser(new Manager(username, active, firstName, lastName));
+            userRepository.setUserPassword(username, password);
         }
     }
 
-    public void addClient(String username, boolean active, String firstName, String lastName) {
+    public void addClient(String username, boolean active, String firstName, String lastName, String password) {
         if (getUser(username) == null) {
             userRepository.addUser(new Client(username, active, firstName, lastName));
+            userRepository.setUserPassword(username, password);
         }
     }
 
@@ -71,25 +74,33 @@ public class UserService implements Serializable {
 
     public void updateUserInfo(String username, UserInfo userInfo) {
         if (getUser(username) != null) {
-            getUser(username).setInfo(userInfo);
+            User temp = getUser(username);
+            temp.setInfo(userInfo);
+            userRepository.updateUser(username, temp);
         }
     }
 
     public void setUserActivity(String username, boolean active) {
         if (getUser(username) != null) {
-            getUser(username).setActive(active);
+            User temp = getUser(username);
+            temp.setActive(active);
+            userRepository.updateUser(username, temp);
         }
     }
 
     public void activateUser(String username) {
         if (getUser(username) != null && !getUser(username).isActive()) {
-            getUser(username).setActive(true);
+            User temp = getUser(username);
+            temp.setActive(true);
+            userRepository.updateUser(username, temp);
         }
     }
 
     public void deactivateUser(String username) {
         if (getUser(username) != null && getUser(username).isActive()) {
-            getUser(username).setActive(false);
+            User temp = getUser(username);
+            temp.setActive(false);
+            userRepository.updateUser(username, temp);
         }
     }
 

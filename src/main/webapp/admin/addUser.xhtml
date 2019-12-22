@@ -13,6 +13,9 @@
             Username:
             <h:inputText value="#{addUserController.username}" required="true" requiredMessage="Username cannot be empty!"/>
             <br/>
+            Password:
+            <h:inputSecret value="#{addUserController.password}" required="true" requiredMessage="Password cannot be empty!"/>
+            <br/>
             Active:
             <h:selectBooleanCheckbox value="#{addUserController.active}"/>
             <br/>

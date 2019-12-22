@@ -17,6 +17,7 @@ public class AddUserController implements Serializable {
     private Conversation conversation;
     private String userType;
     private String username;
+    private String password;
     private boolean active;
     private String firstName;
     private String lastName;
@@ -29,13 +30,13 @@ public class AddUserController implements Serializable {
     public String confirm(String userType) {
         switch (userType) {
             case "admin":
-                userService.addAdmin(username, active, firstName, lastName);
+                userService.addAdmin(username, active, firstName, lastName, password);
                 break;
             case "manager":
-                userService.addManager(username, active, firstName, lastName);
+                userService.addManager(username, active, firstName, lastName, password);
                 break;
             case "client":
-                userService.addClient(username, active, firstName, lastName);
+                userService.addClient(username, active, firstName, lastName, password);
                 break;
         }
         endConversation();
@@ -72,6 +73,10 @@ public class AddUserController implements Serializable {
         return username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public boolean isActive() {
         return active;
     }
@@ -92,6 +97,10 @@ public class AddUserController implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setActive(boolean active) {
