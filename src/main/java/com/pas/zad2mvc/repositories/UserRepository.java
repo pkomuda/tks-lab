@@ -45,14 +45,18 @@ public class UserRepository {
 
     public synchronized void addUser(User user) {
         try (Connection connection = DriverManager.getConnection(url)) {
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO \"USER\"(USERNAME, ACTIVITY, GROUPNAME, FIRSTNAME, LASTNAME) VALUES(?,?,?,?,?)");
-            preparedStatement.setString(1, user.getUsername());
-            preparedStatement.setBoolean(2, user.isActive());
-            preparedStatement.setString(3, user.getType().toUpperCase());
-            preparedStatement.setString(4, user.getFirstName());
-            preparedStatement.setString(5, user.getLastName());
-            preparedStatement.execute();
+            PreparedStatement userStatement = connection.prepareStatement(
+                    "INSERT INTO USERTABLE(USERNAME, ACTIVITY, FIRSTNAME, LASTNAME) VALUES(?,?,?,?)");
+            userStatement.setString(1, user.getUsername());
+            userStatement.setBoolean(2, user.isActive());
+            userStatement.setString(3, user.getFirstName());
+            userStatement.setString(4, user.getLastName());
+            PreparedStatement groupStatement = connection.prepareStatement(
+                    "INSERT INTO GROUPTABLE(GROUPNAME, USERNAME) VALUES(?,?)");
+            groupStatement.setString(1, user.getType().toUpperCase());
+            groupStatement.setString(2, user.getUsername());
+            userStatement.execute();
+            groupStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -64,14 +68,15 @@ public class UserRepository {
         boolean activity;
         try (Connection connection = DriverManager.getConnection(url)) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT USERNAME, ACTIVITY, GROUPNAME, FIRSTNAME, LASTNAME FROM \"USER\" WHERE USERNAME = ?");
+                    "SELECT U.ACTIVITY, U.FIRSTNAME, U.LASTNAME, G.GROUPNAME FROM USERTABLE AS U " +
+                            "INNER JOIN GROUPTABLE AS G on U.USERNAME = G.USERNAME WHERE U.USERNAME=?");
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 activity = resultSet.getBoolean("ACTIVITY");
-                group = resultSet.getString("GROUPNAME");
                 firstName = resultSet.getString("FIRSTNAME");
                 lastName = resultSet.getString("LASTNAME");
+                group = resultSet.getString("GROUPNAME");
                 switch (group) {
                     case "ADMIN":
                         user = new Admin(username, activity, firstName, lastName);
@@ -93,7 +98,7 @@ public class UserRepository {
     public synchronized void updateUser(String username, User user) {
         try (Connection connection = DriverManager.getConnection(url)) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE \"USER\" SET ACTIVITY=?, FIRSTNAME=?, LASTNAME=? WHERE USERNAME=?");
+                    "UPDATE USERTABLE SET ACTIVITY=?, FIRSTNAME=?, LASTNAME=? WHERE USERNAME=?");
             preparedStatement.setBoolean(1, user.isActive());
             preparedStatement.setString(2, user.getFirstName());
             preparedStatement.setString(3, user.getLastName());
@@ -107,7 +112,7 @@ public class UserRepository {
     public synchronized void setUserPassword(String username, String password) {
         try (Connection connection = DriverManager.getConnection(url)) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE \"USER\" SET PASSWORD=? WHERE USERNAME=?");
+                    "UPDATE USERTABLE SET PASSWORD=? WHERE USERNAME=?");
             preparedStatement.setString(1, sha256(password));
             preparedStatement.setString(2, username);
             preparedStatement.execute();
@@ -122,14 +127,15 @@ public class UserRepository {
         boolean activity;
         try (Connection connection = DriverManager.getConnection(url)) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT USERNAME, ACTIVITY, GROUPNAME, FIRSTNAME, LASTNAME FROM \"USER\"");
+                    "SELECT U.USERNAME, U.ACTIVITY, U.FIRSTNAME, U.LASTNAME, G.GROUPNAME FROM USERTABLE AS U " +
+                            "INNER JOIN GROUPTABLE AS G on U.USERNAME = G.USERNAME");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 username = resultSet.getString("USERNAME");
                 activity = resultSet.getBoolean("ACTIVITY");
-                group = resultSet.getString("GROUPNAME");
                 firstName = resultSet.getString("FIRSTNAME");
                 lastName = resultSet.getString("LASTNAME");
+                group = resultSet.getString("GROUPNAME");
                 switch (group) {
                     case "ADMIN":
                         users.add(new Admin(username, activity, firstName, lastName));

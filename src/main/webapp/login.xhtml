@@ -18,7 +18,7 @@
         <h:form>
             <h:commandButton value="Back" action="#{loginController.logout()}"/>
             <br/>
-            <h:outputText value="An error occurred while logging in" style="color: red" rendered="#{param.error != null}"/>
+            <h:outputText value="Failed to log in" style="color: red" rendered="#{param.error == true}"/>
         </h:form>
     </h:body>
 </html>

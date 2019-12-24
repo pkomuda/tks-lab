@@ -6,7 +6,6 @@ import javax.inject.Named;
 @Named
 @RequestScoped
 public class IndexController {
-
     public String login() {
         return "login";
     }
