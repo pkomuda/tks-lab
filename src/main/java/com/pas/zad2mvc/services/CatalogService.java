@@ -1,9 +1,6 @@
 package com.pas.zad2mvc.services;
 
-import com.pas.zad2mvc.model.Book;
-import com.pas.zad2mvc.model.Catalog;
-import com.pas.zad2mvc.model.Movie;
-import com.pas.zad2mvc.model.NoCatalog;
+import com.pas.zad2mvc.model.*;
 import com.pas.zad2mvc.repositories.CatalogRepository;
 import com.pas.zad2mvc.repositories.RentRepository;
 
@@ -41,8 +38,12 @@ public class CatalogService implements Serializable {
         if (getCatalog(id) != null && getCatalog(id) instanceof Book) {
             Catalog temp = new Book(id, title, author, releaseYear);
             catalogRepository.updateCatalog(id, temp);
-            rentRepository.getRentsForCatalog(id)
-                    .forEach(rent -> rent.setCatalog(temp));
+//            rentRepository.getRentsForCatalog(id)
+//                    .forEach(rent -> rent.setCatalog(temp));
+            for (Rent rent : rentRepository.getRentsForCatalog(id)) {
+                rent.setCatalog(temp);
+                rentRepository.updateRent(rent.getId(), rent);
+            }
         }
     }
 
@@ -50,14 +51,22 @@ public class CatalogService implements Serializable {
         if (getCatalog(id) != null && getCatalog(id) instanceof Movie) {
             Catalog temp = new Movie(id, title, director, releaseYear, format);
             catalogRepository.updateCatalog(id, temp);
-            rentRepository.getRentsForCatalog(id)
-                    .forEach(rent -> rent.setCatalog(temp));
+//            rentRepository.getRentsForCatalog(id)
+//                    .forEach(rent -> rent.setCatalog(temp));
+            for (Rent rent : rentRepository.getRentsForCatalog(id)) {
+                rent.setCatalog(temp);
+                rentRepository.updateRent(rent.getId(), rent);
+            }
         }
     }
 
     public void removeCatalog(int id) {
-        rentRepository.getRentsForCatalog(id)
-                .forEach(rent -> rent.setCatalog(new NoCatalog()));
+//        rentRepository.getRentsForCatalog(id)
+//                .forEach(rent -> rent.setCatalog(new NoCatalog()));
+        for (Rent rent : rentRepository.getRentsForCatalog(id)) {
+            rent.setCatalog(new NoCatalog());
+            rentRepository.updateRent(rent.getId(), rent);
+        }
         catalogRepository.removeCatalog(id);
     }
 

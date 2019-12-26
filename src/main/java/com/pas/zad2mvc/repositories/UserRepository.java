@@ -8,40 +8,16 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Named
 @ApplicationScoped
 public class UserRepository {
     private final String url = "jdbc:derby://localhost:1527/PasDB";
-
-    private String sha256(String password) {
-        MessageDigest digest = null;
-        try {
-            digest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        byte[] hash = new byte[0];
-        if (digest != null) {
-            hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-        }
-        StringBuilder hexString = new StringBuilder();
-        for (byte b : hash) {
-            String hex = Integer.toHexString(0xff & b);
-            if (hex.length() == 1) {
-                hexString.append('0');
-            }
-            hexString.append(hex);
-        }
-        return hexString.toString();
-    }
 
     public synchronized void addUser(User user) {
         try (Connection connection = DriverManager.getConnection(url)) {
@@ -52,9 +28,10 @@ public class UserRepository {
             userStatement.setString(3, user.getFirstName());
             userStatement.setString(4, user.getLastName());
             PreparedStatement groupStatement = connection.prepareStatement(
-                    "INSERT INTO GROUPTABLE(GROUPNAME, USERNAME) VALUES(?,?)");
-            groupStatement.setString(1, user.getType().toUpperCase());
-            groupStatement.setString(2, user.getUsername());
+                    "INSERT INTO GROUPTABLE VALUES(?,?,?)");
+            groupStatement.setString(1, UUID.randomUUID().toString().replace("-", ""));
+            groupStatement.setString(2, user.getType().toUpperCase());
+            groupStatement.setString(3, user.getUsername());
             userStatement.execute();
             groupStatement.execute();
         } catch (SQLException e) {
@@ -109,11 +86,11 @@ public class UserRepository {
         }
     }
 
-    public synchronized void setUserPassword(String username, String password) {
+    public synchronized void updateUserPassword(String username, String password) {
         try (Connection connection = DriverManager.getConnection(url)) {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "UPDATE USERTABLE SET PASSWORD=? WHERE USERNAME=?");
-            preparedStatement.setString(1, sha256(password));
+            preparedStatement.setString(1, password);
             preparedStatement.setString(2, username);
             preparedStatement.execute();
         } catch (SQLException e) {

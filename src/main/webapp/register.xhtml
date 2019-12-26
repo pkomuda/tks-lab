@@ -7,7 +7,22 @@
     </h:head>
     <h:body>
         <h:form>
-
+            Username:
+            <h:inputText value="#{registerController.username}" required="true" requiredMessage="Username cannot be empty"/>
+            <br/>
+            Password:
+            <h:inputSecret value="#{registerController.password}" required="true" requiredMessage="Password cannot be empty"/>
+            <br/>
+            First name:
+            <h:inputText value="#{registerController.firstName}"/>
+            <br/>
+            Last name:
+            <h:inputText value="#{registerController.lastName}"/>
+            <br/>
+            <h:commandButton value="OK" action="#{registerController.register()}"/>
+            <br/>
+            <h:commandButton value="Cancel" action="#{loginController.logout()}" immediate="true"/>
+            <br/>
         </h:form>
     </h:body>
 </html>

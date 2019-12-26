@@ -16,7 +16,10 @@ public class RegisterController {
     private String firstName;
     private String lastName;
 
-
+    public String register() {
+        userService.addClient(username, false, firstName, lastName, password);
+        return "registered";
+    }
 
     //region getters
     public String getUsername() {

@@ -7,6 +7,9 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @Named
@@ -15,24 +18,46 @@ public class UserService implements Serializable {
     @Inject
     private UserRepository userRepository;
 
+    private String sha256(String password) {
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        byte[] hash = new byte[0];
+        if (digest != null) {
+            hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+        }
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : hash) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
+
     public void addAdmin(String username, boolean active, String firstName, String lastName, String password) {
         if (getUser(username) == null) {
             userRepository.addUser(new Admin(username, active, firstName, lastName));
-            userRepository.setUserPassword(username, password);
+            userRepository.updateUserPassword(username, sha256(password));
         }
     }
 
     public void addManager(String username, boolean active, String firstName, String lastName, String password) {
         if (getUser(username) == null) {
             userRepository.addUser(new Manager(username, active, firstName, lastName));
-            userRepository.setUserPassword(username, password);
+            userRepository.updateUserPassword(username, sha256(password));
         }
     }
 
     public void addClient(String username, boolean active, String firstName, String lastName, String password) {
         if (getUser(username) == null) {
             userRepository.addUser(new Client(username, active, firstName, lastName));
-            userRepository.setUserPassword(username, password);
+            userRepository.updateUserPassword(username, sha256(password));
         }
     }
 

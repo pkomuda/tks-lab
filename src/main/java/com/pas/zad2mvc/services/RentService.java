@@ -116,14 +116,16 @@ public class RentService implements Serializable {
     public void finishRent(String id) {
         Rent temp = new Rent(id);
         if (getUnfinishedRents().contains(temp)) {
-            if (getUnfinishedRents().get(getUnfinishedRents().indexOf(temp)).getRentDateTime().isAfter(LocalDateTime.now())) {
+            temp = getUnfinishedRents().get(getUnfinishedRents().indexOf(temp));
+            if (temp.getRentDateTime().isAfter(LocalDateTime.now())) {
                 return;
             }
-            getRent(id).setReturnDateTime(LocalDateTime.now().getYear(),
+            temp.setReturnDateTime(LocalDateTime.now().getYear(),
                     LocalDateTime.now().getMonthValue(),
                     LocalDateTime.now().getDayOfMonth(),
                     LocalDateTime.now().getHour(),
                     LocalDateTime.now().getMinute());
+            rentRepository.updateRent(id, temp);
         }
     }
 

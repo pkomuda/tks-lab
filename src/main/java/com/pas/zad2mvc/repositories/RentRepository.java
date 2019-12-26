@@ -1,38 +1,178 @@
 package com.pas.zad2mvc.repositories;
 
-import com.pas.zad2mvc.model.Book;
-import com.pas.zad2mvc.model.Client;
-import com.pas.zad2mvc.model.Movie;
-import com.pas.zad2mvc.model.Rent;
+import com.pas.zad2mvc.model.*;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Named
 @ApplicationScoped
 public class RentRepository {
-    private LinkedHashMap<String, Rent> rents = new LinkedHashMap<>();
+    private final String url = "jdbc:derby://localhost:1527/PasDB";
 
     public synchronized void addRent(Rent rent) {
-        rents.put(rent.getId(), rent);
+        try (Connection connection = DriverManager.getConnection(url)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "INSERT INTO RENTTABLE(ID, CLIENT, CATALOG, RENTDATE) VALUES(?,?,?,?)");
+            preparedStatement.setString(1, rent.getId());
+            preparedStatement.setString(2, rent.getClient().getUsername());
+            preparedStatement.setInt(3, rent.getCatalog().getId());
+            preparedStatement.setTimestamp(4, Timestamp.valueOf(rent.getRentDateTime()));
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public synchronized Rent getRent(String id) {
-        return rents.get(id);
+        Rent rent = null;
+        String username, firstName, lastName, catalogType, title, author, director, format;
+        int catalogId, releaseYear;
+        boolean activity;
+        LocalDateTime rentDateTime, returnDateTime = null;
+        try (Connection connection = DriverManager.getConnection(url)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT R.CLIENT, R.CATALOG, R.RENTDATE, R.RETURNDATE, " +
+                            "U.ACTIVITY, U.FIRSTNAME, U.LASTNAME, " +
+                            "C.TITLE, C.RELEASEYEAR, C.CATALOGTYPE, C.AUTHOR, C.DIRECTOR, C.FORMAT FROM RENTTABLE AS R " +
+                            "INNER JOIN USERTABLE AS U on U.USERNAME = R.CLIENT " +
+                            "INNER JOIN CATALOGTABLE AS C on C.ID = R.CATALOG WHERE R.ID = ?");
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                username = resultSet.getString("CLIENT");
+                firstName = resultSet.getString("FIRSTNAME");
+                lastName = resultSet.getString("LASTNAME");
+                catalogType = resultSet.getString("CATALOGTYPE");
+                title = resultSet.getString("TITLE");
+                catalogId = resultSet.getInt("CATALOG");
+                releaseYear = resultSet.getInt("RELEASEYEAR");
+                activity = resultSet.getBoolean("ACTIVITY");
+                rentDateTime = resultSet.getTimestamp("RENTDATE").toLocalDateTime();
+                if (resultSet.getTimestamp("RETURNDATE") != null) {
+                    returnDateTime = resultSet.getTimestamp("RENTDATE").toLocalDateTime();
+                }
+                switch (catalogType) {
+                    case "BOOK":
+                        author = resultSet.getString("AUTHOR");
+                        rent = new Rent(new Client(username, activity, firstName, lastName), new Book(catalogId, title, author, releaseYear));
+                        rent.setId(id);
+                        rent.setRentDateTime(rentDateTime);
+                        rent.setReturnDateTime(returnDateTime);
+                        break;
+                    case "MOVIE":
+                        director = resultSet.getString("DIRECTOR");
+                        format = resultSet.getString("FORMAT");
+                        rent = new Rent(new Client(username, activity, firstName, lastName), new Movie(catalogId, title, director, releaseYear, format));
+                        rent.setId(id);
+                        rent.setRentDateTime(rentDateTime);
+                        rent.setReturnDateTime(returnDateTime);
+                        break;
+                    case "NOCATALOG":
+                        rent = new Rent(new Client(username, activity, firstName, lastName), new NoCatalog());
+                        rent.setId(id);
+                        rent.setRentDateTime(rentDateTime);
+                        rent.setReturnDateTime(returnDateTime);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rent;
+    }
+
+    public synchronized void updateRent(String id, Rent rent) {
+        try (Connection connection = DriverManager.getConnection(url)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "UPDATE RENTTABLE SET CLIENT=?, CATALOG=?, RENTDATE=?, RETURNDATE=? WHERE ID=?");
+            preparedStatement.setString(1, rent.getClient().getUsername());
+            preparedStatement.setInt(2, rent.getCatalog().getId());
+            preparedStatement.setTimestamp(3, Timestamp.valueOf(rent.getRentDateTime()));
+            if (rent.getReturnDateTime() != null) {
+                preparedStatement.setTimestamp(4, Timestamp.valueOf(rent.getReturnDateTime()));
+            } else {
+                preparedStatement.setTimestamp(4, null);
+            }
+            preparedStatement.setString(5, id);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public synchronized void removeRent(String id) {
-        rents.remove(id);
+        try (Connection connection = DriverManager.getConnection(url)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "DELETE FROM RENTTABLE WHERE ID=?");
+            preparedStatement.setString(1, id);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public synchronized List<Rent> getRents() {
-        return new ArrayList<>(rents.values());
+        List<Rent> rents = new ArrayList<>();
+        String id, username, firstName, lastName, catalogType, title, author, director, format;
+        int catalogId, releaseYear;
+        boolean activity;
+        LocalDateTime rentDateTime, returnDateTime;
+        try (Connection connection = DriverManager.getConnection(url)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT R.ID, R.CLIENT, R.CATALOG, R.RENTDATE, R.RETURNDATE, " +
+                            "U.ACTIVITY, U.FIRSTNAME, U.LASTNAME, " +
+                            "C.TITLE, C.RELEASEYEAR, C.CATALOGTYPE, C.AUTHOR, C.DIRECTOR, C.FORMAT FROM RENTTABLE AS R " +
+                            "INNER JOIN USERTABLE AS U on U.USERNAME = R.CLIENT " +
+                            "INNER JOIN CATALOGTABLE AS C on C.ID = R.CATALOG");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                id = resultSet.getString("ID");
+                username = resultSet.getString("CLIENT");
+                firstName = resultSet.getString("FIRSTNAME");
+                lastName = resultSet.getString("LASTNAME");
+                catalogType = resultSet.getString("CATALOGTYPE");
+                title = resultSet.getString("TITLE");
+                catalogId = resultSet.getInt("CATALOG");
+                releaseYear = resultSet.getInt("RELEASEYEAR");
+                activity = resultSet.getBoolean("ACTIVITY");
+                rentDateTime = resultSet.getTimestamp("RENTDATE").toLocalDateTime();
+                returnDateTime = null;
+                if (resultSet.getTimestamp("RETURNDATE") != null) {
+                    returnDateTime = resultSet.getTimestamp("RENTDATE").toLocalDateTime();
+                }
+                switch (catalogType) {
+                    case "BOOK":
+                        author = resultSet.getString("AUTHOR");
+                        rents.add(new Rent(new Client(username, activity, firstName, lastName), new Book(catalogId, title, author, releaseYear)));
+                        rents.get(rents.size()-1).setId(id);
+                        rents.get(rents.size()-1).setRentDateTime(rentDateTime);
+                        rents.get(rents.size()-1).setReturnDateTime(returnDateTime);
+                        break;
+                    case "MOVIE":
+                        director = resultSet.getString("DIRECTOR");
+                        format = resultSet.getString("FORMAT");
+                        rents.add(new Rent(new Client(username, activity, firstName, lastName), new Movie(catalogId, title, director, releaseYear, format)));
+                        rents.get(rents.size()-1).setId(id);
+                        rents.get(rents.size()-1).setRentDateTime(rentDateTime);
+                        rents.get(rents.size()-1).setReturnDateTime(returnDateTime);
+                        break;
+                    case "NOCATALOG":
+                        rents.add(new Rent(new Client(username, activity, firstName, lastName), new NoCatalog()));
+                        rents.get(rents.size()-1).setId(id);
+                        rents.get(rents.size()-1).setRentDateTime(rentDateTime);
+                        rents.get(rents.size()-1).setReturnDateTime(returnDateTime);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rents;
     }
 
     public List<Rent> getUnfinishedRents() {
@@ -157,12 +297,12 @@ public class RentRepository {
     @Override
     public String toString() {
         String str = "";
-        for (int i = 0; i < rents.size(); i++) {
+        for (int i = 0; i < getRents().size(); i++) {
             if (i == 0) {
                 str = str.concat(getRents().get(i).toString() + "\n");
             } else {
                 str = str.concat("\t   " + getRents().get(i).toString());
-                if (i != rents.size() - 1) {
+                if (i != getRents().size() - 1) {
                     str = str.concat("\n");
                 }
             }
@@ -170,16 +310,16 @@ public class RentRepository {
         return "RentRepo[" + str + "]";
     }
 
-    @PostConstruct
-    private void addRentPool() {
-        Rent rent1 = new Rent(new Client("client1", true, "Kim", "Wexler"), new Book(1, "The Shining", "Stephen King", 1997));
-        rent1.setRentDateTime(2019, 11, 28, 17, 30);
-        addRent(rent1);
-        Rent rent2 = new Rent(new Client("client1", true, "Kim", "Wexler"), new Movie(4, "Trainspotting", "Danny Boyle", 1996, "DVD"));
-        rent2.setRentDateTime(2019, 12, 1, 13, 25);
-        addRent(rent2);
-        Rent rent3 = new Rent(new Client("client2", true, "Gustavo", "Fring"), new Book(2, "The Lord of the Rings", "J.R.R. Tolkien", 2015));
-        rent3.setRentDateTime(2019, 12, 5, 10, 11);
-        addRent(rent3);
-    }
+//    @PostConstruct
+//    private void addRentPool() {
+//        Rent rent1 = new Rent(new Client("client1", true, "Kim", "Wexler"), new Book(1, "The Shining", "Stephen King", 1997));
+//        rent1.setRentDateTime(2019, 11, 28, 17, 30);
+//        addRent(rent1);
+//        Rent rent2 = new Rent(new Client("client1", true, "Kim", "Wexler"), new Movie(4, "Trainspotting", "Danny Boyle", 1996, "DVD"));
+//        rent2.setRentDateTime(2019, 12, 1, 13, 25);
+//        addRent(rent2);
+//        Rent rent3 = new Rent(new Client("client2", true, "Gustavo", "Fring"), new Book(2, "The Lord of the Rings", "J.R.R. Tolkien", 2015));
+//        rent3.setRentDateTime(2019, 12, 5, 10, 11);
+//        addRent(rent3);
+//    }
 }
