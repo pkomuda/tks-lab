@@ -7,7 +7,7 @@
         <title>Confirm adding a new user</title>
     </h:head>
     <h:body>
-        <h:outputText value="Logged in as #{loginController.username}"/>
+        <h:outputText value="Logged in as: #{sessionScope.get('username')}, access level: #{sessionScope.get('role')}"/>
         <br/>
         <br/>
         <h:form>

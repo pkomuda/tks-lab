@@ -27,8 +27,11 @@ public class CatalogRepository {
             if (catalog instanceof Book) {
                 preparedStatement.setString(4, "BOOK");
                 preparedStatement.setString(5, ((Book) catalog).getAuthor());
+                preparedStatement.setString(6, null);
+                preparedStatement.setString(7, null);
             } else if (catalog instanceof Movie) {
                 preparedStatement.setString(4, "MOVIE");
+                preparedStatement.setString(5, null);
                 preparedStatement.setString(6, ((Movie) catalog).getDirector());
                 preparedStatement.setString(7, ((Movie) catalog).getFormat());
             }
@@ -78,7 +81,10 @@ public class CatalogRepository {
             preparedStatement.setInt(2, catalog.getReleaseYear());
             if (catalog instanceof Book) {
                 preparedStatement.setString(3, ((Book) catalog).getAuthor());
+                preparedStatement.setString(4, null);
+                preparedStatement.setString(5, null);
             } else if (catalog instanceof Movie) {
+                preparedStatement.setString(3, null);
                 preparedStatement.setString(4, ((Movie) catalog).getDirector());
                 preparedStatement.setString(5, ((Movie) catalog).getFormat());
             }
@@ -183,14 +189,4 @@ public class CatalogRepository {
         }
         return "CatalogRepo[" + str + "]";
     }
-
-//    @PostConstruct
-//    private void addCatalogPool() {
-//        addCatalog(new Book(1, "The Shining", "Stephen King", 1997));
-//        addCatalog(new Book(2, "The Lord of the Rings", "J.R.R. Tolkien", 2015));
-//        addCatalog(new Book(3, "What Could Possibly Go Wrong", "Jeremy Clarkson", 2015));
-//        addCatalog(new Movie(4, "Trainspotting", "Danny Boyle", 1996, "DVD"));
-//        addCatalog(new Movie(5, "Pulp Fiction", "Quentin Tarantino", 1994, "Blu-ray"));
-//        addCatalog(new Movie(6, "The Graduate", "Mike Nichols", 1967, "VHS"));
-//    }
 }

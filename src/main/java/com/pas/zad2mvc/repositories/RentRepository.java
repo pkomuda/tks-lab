@@ -309,17 +309,4 @@ public class RentRepository {
         }
         return "RentRepo[" + str + "]";
     }
-
-//    @PostConstruct
-//    private void addRentPool() {
-//        Rent rent1 = new Rent(new Client("client1", true, "Kim", "Wexler"), new Book(1, "The Shining", "Stephen King", 1997));
-//        rent1.setRentDateTime(2019, 11, 28, 17, 30);
-//        addRent(rent1);
-//        Rent rent2 = new Rent(new Client("client1", true, "Kim", "Wexler"), new Movie(4, "Trainspotting", "Danny Boyle", 1996, "DVD"));
-//        rent2.setRentDateTime(2019, 12, 1, 13, 25);
-//        addRent(rent2);
-//        Rent rent3 = new Rent(new Client("client2", true, "Gustavo", "Fring"), new Book(2, "The Lord of the Rings", "J.R.R. Tolkien", 2015));
-//        rent3.setRentDateTime(2019, 12, 5, 10, 11);
-//        addRent(rent3);
-//    }
 }

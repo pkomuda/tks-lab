@@ -31,13 +31,16 @@ public class LoginController implements Serializable {
         try {
             request.login(username, password);
             User user = userService.getUser(username);
-            externalContext.getSessionMap().put("user", user);
+            externalContext.getSessionMap().put("username", username);
             if (user != null && user.isActive()) {
                 if (user instanceof Admin) {
+                    externalContext.getSessionMap().put("role", "ADMIN");
                     externalContext.redirect(externalContext.getRequestContextPath() + "/admin/adminPage.xhtml");
                 } else if (user instanceof Manager) {
+                    externalContext.getSessionMap().put("role", "MANAGER");
                     externalContext.redirect(externalContext.getRequestContextPath() + "/manager/managerPage.xhtml");
                 } else if (user instanceof Client) {
+                    externalContext.getSessionMap().put("role", "CLIENT");
                     externalContext.redirect(externalContext.getRequestContextPath() + "/client/clientPage.xhtml");
                 } else {
                     externalContext.redirect(externalContext.getRequestContextPath() + "/login.xhtml?error=true");
