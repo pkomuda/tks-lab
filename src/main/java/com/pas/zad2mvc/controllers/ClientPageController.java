@@ -53,6 +53,7 @@ public class ClientPageController implements Serializable {
 
     public void finishRent(String rentId) {
         rentService.finishRent(rentId);
+        loadData();
     }
 
     //region getters
