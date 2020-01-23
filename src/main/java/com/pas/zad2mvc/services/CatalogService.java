@@ -38,8 +38,6 @@ public class CatalogService implements Serializable {
         if (getCatalog(id) != null && getCatalog(id) instanceof Book) {
             Catalog temp = new Book(id, title, author, releaseYear);
             catalogRepository.updateCatalog(id, temp);
-//            rentRepository.getRentsForCatalog(id)
-//                    .forEach(rent -> rent.setCatalog(temp));
             for (Rent rent : rentRepository.getRentsForCatalog(id)) {
                 rent.setCatalog(temp);
                 rentRepository.updateRent(rent.getId(), rent);
@@ -51,8 +49,6 @@ public class CatalogService implements Serializable {
         if (getCatalog(id) != null && getCatalog(id) instanceof Movie) {
             Catalog temp = new Movie(id, title, director, releaseYear, format);
             catalogRepository.updateCatalog(id, temp);
-//            rentRepository.getRentsForCatalog(id)
-//                    .forEach(rent -> rent.setCatalog(temp));
             for (Rent rent : rentRepository.getRentsForCatalog(id)) {
                 rent.setCatalog(temp);
                 rentRepository.updateRent(rent.getId(), rent);
@@ -61,8 +57,6 @@ public class CatalogService implements Serializable {
     }
 
     public void removeCatalog(int id) {
-//        rentRepository.getRentsForCatalog(id)
-//                .forEach(rent -> rent.setCatalog(new NoCatalog()));
         for (Rent rent : rentRepository.getRentsForCatalog(id)) {
             rent.setCatalog(new NoCatalog());
             rentRepository.updateRent(rent.getId(), rent);

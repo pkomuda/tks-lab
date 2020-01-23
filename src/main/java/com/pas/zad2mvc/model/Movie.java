@@ -1,8 +1,14 @@
 package com.pas.zad2mvc.model;
 
-public class Movie extends Catalog {
+import java.io.Serializable;
+
+public class Movie extends Catalog implements Serializable {
     private String director;
     private String format;
+
+    public Movie() {
+        super();
+    }
 
     public Movie(int id, String title, String director, int releaseYear, String format) {
         super(id, title, releaseYear);

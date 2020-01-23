@@ -1,7 +1,13 @@
 package com.pas.zad2mvc.model;
 
-public class Book extends Catalog {
+import java.io.Serializable;
+
+public class Book extends Catalog implements Serializable {
     private String author;
+
+    public Book() {
+        super();
+    }
 
     public Book(int id, String title, String author, int releaseYear) {
         super(id, title, releaseYear);

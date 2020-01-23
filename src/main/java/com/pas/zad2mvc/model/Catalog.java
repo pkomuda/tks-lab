@@ -1,11 +1,14 @@
 package com.pas.zad2mvc.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Catalog {
+public abstract class Catalog implements Serializable {
     private int id;
     private String title;
     private int releaseYear;
+
+    public Catalog() {}
 
     public Catalog(int id, String title, int releaseYear) {
         this.id = id;

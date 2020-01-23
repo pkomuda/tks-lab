@@ -1,6 +1,5 @@
 package com.pas.zad2mvc.services;
 
-
 import com.pas.zad2mvc.model.*;
 import com.pas.zad2mvc.repositories.CatalogRepository;
 import com.pas.zad2mvc.repositories.RentRepository;
@@ -14,19 +13,15 @@ import java.util.List;
 @RequestScoped
 @Path("model.catalog")
 public class CatalogRestService {
-
     @Inject
     private CatalogRepository catalogRepository;
-
-    public CatalogRestService(){}
-
     @Inject
     private RentRepository rentRepository;
 
     @POST
     @Path("/book")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void addBook( Book book) {
+    public void addBook(Book book) {
         if (getCatalog(book.getId()) == null && book.getId() != 0) {
             catalogRepository.addCatalog(book);
         }

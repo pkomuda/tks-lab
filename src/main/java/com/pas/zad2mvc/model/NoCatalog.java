@@ -1,6 +1,8 @@
 package com.pas.zad2mvc.model;
 
-public class NoCatalog extends Catalog {
+import java.io.Serializable;
+
+public class NoCatalog extends Catalog implements Serializable {
     public NoCatalog() {
         super(0, "", 0);
     }
