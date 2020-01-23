@@ -1,8 +1,5 @@
 package com.pas.zad2mvc.controllers;
 
-import com.pas.zad2mvc.model.Admin;
-import com.pas.zad2mvc.model.Client;
-import com.pas.zad2mvc.model.Manager;
 import com.pas.zad2mvc.model.User;
 import com.pas.zad2mvc.services.UserService;
 
@@ -31,15 +28,14 @@ public class LoginController implements Serializable {
         try {
             request.login(username, password);
             User user = userService.getUser(username);
-            externalContext.getSessionMap().put("username", username);
             if (user != null && user.isActive()) {
-                if (user instanceof Admin) {
+                if (request.isUserInRole("ADMIN")) {
                     externalContext.getSessionMap().put("role", "ADMIN");
                     externalContext.redirect(externalContext.getRequestContextPath() + "/admin/adminPage.xhtml");
-                } else if (user instanceof Manager) {
+                } else if (request.isUserInRole("MANAGER")) {
                     externalContext.getSessionMap().put("role", "MANAGER");
                     externalContext.redirect(externalContext.getRequestContextPath() + "/manager/managerPage.xhtml");
-                } else if (user instanceof Client) {
+                } else if (request.isUserInRole("CLIENT")) {
                     externalContext.getSessionMap().put("role", "CLIENT");
                     externalContext.redirect(externalContext.getRequestContextPath() + "/client/clientPage.xhtml");
                 } else {
