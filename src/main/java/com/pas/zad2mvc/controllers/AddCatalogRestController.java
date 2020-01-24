@@ -36,7 +36,6 @@ public class AddCatalogRestController implements Serializable {
     }
 
     public String confirmBook() {
-        System.out.println(Entity.json(new Book(id, title, author, releaseYear)).toString());
         base.path("book").request(MediaType.APPLICATION_JSON).post(Entity.json(new Book(id, title, author, releaseYear)), Book.class);
         endConversation();
         return "manager";

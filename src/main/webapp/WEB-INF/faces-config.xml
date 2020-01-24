@@ -248,6 +248,15 @@
     </navigation-rule>
 
     <navigation-rule>
+        <from-view-id>/client/clientPageRest.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>addRent</from-outcome>
+            <to-view-id>/client/addRent.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
         <from-view-id>/client/addRent.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>client</from-outcome>
@@ -257,6 +266,20 @@
         <navigation-case>
             <from-outcome>cancel</from-outcome>
             <to-view-id>/client/clientPage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/client/addRent.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>client</from-outcome>
+            <to-view-id>/client/clientPageRest.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cancel</from-outcome>
+            <to-view-id>/client/clientPageRest.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
