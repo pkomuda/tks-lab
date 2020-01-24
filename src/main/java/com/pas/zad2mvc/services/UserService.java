@@ -1,6 +1,6 @@
 package com.pas.zad2mvc.services;
 
-import com.pas.zad2mvc.model.*;
+import com.pas.zad2mvc.model.users.*;
 import com.pas.zad2mvc.repositories.UserRepository;
 
 import javax.enterprise.context.Dependent;

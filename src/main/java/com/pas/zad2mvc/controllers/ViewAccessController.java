@@ -11,11 +11,11 @@ public class ViewAccessController implements Serializable {
     private String selectedUsername;
 
     //region getters
-    int getSelectedCatalogId() {
+    public int getSelectedCatalogId() {
         return selectedCatalogId;
     }
 
-    String getSelectedUsername() {
+    public String getSelectedUsername() {
         return selectedUsername;
     }
     //endregion

@@ -1,8 +1,8 @@
 package com.pas.zad2mvc.repositories;
 
-import com.pas.zad2mvc.model.Book;
-import com.pas.zad2mvc.model.Catalog;
-import com.pas.zad2mvc.model.Movie;
+import com.pas.zad2mvc.model.catalogs.Book;
+import com.pas.zad2mvc.model.catalogs.Catalog;
+import com.pas.zad2mvc.model.catalogs.Movie;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Named;

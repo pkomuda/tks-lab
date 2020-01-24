@@ -1,4 +1,4 @@
-package com.pas.zad2mvc.controllers;
+package com.pas.zad2mvc.controllers.users;
 
 import com.pas.zad2mvc.services.UserService;
 

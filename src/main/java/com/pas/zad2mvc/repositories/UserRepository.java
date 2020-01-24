@@ -1,9 +1,9 @@
 package com.pas.zad2mvc.repositories;
 
-import com.pas.zad2mvc.model.Admin;
-import com.pas.zad2mvc.model.Client;
-import com.pas.zad2mvc.model.Manager;
-import com.pas.zad2mvc.model.User;
+import com.pas.zad2mvc.model.users.Admin;
+import com.pas.zad2mvc.model.users.Client;
+import com.pas.zad2mvc.model.users.Manager;
+import com.pas.zad2mvc.model.users.User;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.enterprise.context.ApplicationScoped;

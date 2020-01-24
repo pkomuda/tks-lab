@@ -1,5 +1,7 @@
-package com.pas.zad2mvc.controllers;
+package com.pas.zad2mvc.controllers.rents;
 
+import com.pas.zad2mvc.controllers.LoginController;
+import com.pas.zad2mvc.controllers.ViewAccessController;
 import com.pas.zad2mvc.services.RentService;
 
 import javax.annotation.PostConstruct;

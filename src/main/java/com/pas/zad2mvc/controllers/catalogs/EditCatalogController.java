@@ -1,7 +1,8 @@
-package com.pas.zad2mvc.controllers;
+package com.pas.zad2mvc.controllers.catalogs;
 
-import com.pas.zad2mvc.model.Book;
-import com.pas.zad2mvc.model.Movie;
+import com.pas.zad2mvc.controllers.ViewAccessController;
+import com.pas.zad2mvc.model.catalogs.Book;
+import com.pas.zad2mvc.model.catalogs.Movie;
 import com.pas.zad2mvc.services.CatalogService;
 
 import javax.annotation.PostConstruct;

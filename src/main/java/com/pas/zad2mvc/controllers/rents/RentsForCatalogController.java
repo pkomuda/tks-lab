@@ -1,5 +1,6 @@
-package com.pas.zad2mvc.controllers;
+package com.pas.zad2mvc.controllers.rents;
 
+import com.pas.zad2mvc.controllers.ViewAccessController;
 import com.pas.zad2mvc.model.Rent;
 import com.pas.zad2mvc.services.CatalogService;
 import com.pas.zad2mvc.services.RentService;

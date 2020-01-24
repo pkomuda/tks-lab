@@ -1,18 +1,19 @@
-package com.pas.zad2mvc.controllers;
+package com.pas.zad2mvc.controllers.catalogs;
 
-import com.pas.zad2mvc.services.CatalogService;
+import com.pas.zad2mvc.model.catalogs.Book;
+import com.pas.zad2mvc.model.catalogs.Movie;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.ws.rs.client.*;
+import javax.ws.rs.core.MediaType;
 import java.io.Serializable;
 
 @Named
 @ConversationScoped
-public class AddCatalogController implements Serializable {
-    @Inject
-    private CatalogService catalogService;
+public class AddCatalogRestController implements Serializable {
     @Inject
     private Conversation conversation;
     private int id;
@@ -21,6 +22,8 @@ public class AddCatalogController implements Serializable {
     private int releaseYear;
     private String director;
     private String format;
+    private Client client = ClientBuilder.newClient();
+    private WebTarget base = client.target("https://localhost:8181/zad2mvc/resources/api");
 
     public String addBook() {
         beginConversation();
@@ -33,13 +36,13 @@ public class AddCatalogController implements Serializable {
     }
 
     public String confirmBook() {
-        catalogService.addBook(id, title, author, releaseYear);
+        base.path("book").request(MediaType.APPLICATION_JSON).post(Entity.json(new Book(id, title, author, releaseYear)), Book.class);
         endConversation();
         return "manager";
     }
 
     public String confirmMovie() {
-        catalogService.addMovie(id, title, director, releaseYear, format);
+        base.path("movie").request(MediaType.APPLICATION_JSON).post(Entity.json(new Movie(id, title, director, releaseYear, format)), Movie.class);
         endConversation();
         return "manager";
     }

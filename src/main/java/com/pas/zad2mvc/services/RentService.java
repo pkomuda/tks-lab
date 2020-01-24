@@ -1,6 +1,6 @@
 package com.pas.zad2mvc.services;
 
-import com.pas.zad2mvc.model.Client;
+import com.pas.zad2mvc.model.users.Client;
 import com.pas.zad2mvc.model.Rent;
 import com.pas.zad2mvc.repositories.CatalogRepository;
 import com.pas.zad2mvc.repositories.RentRepository;

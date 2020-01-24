@@ -1,5 +1,8 @@
 package com.pas.zad2mvc.model;
 
+import com.pas.zad2mvc.model.catalogs.Catalog;
+import com.pas.zad2mvc.model.users.Client;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;

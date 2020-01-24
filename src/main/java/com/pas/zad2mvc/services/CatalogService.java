@@ -1,6 +1,10 @@
 package com.pas.zad2mvc.services;
 
 import com.pas.zad2mvc.model.*;
+import com.pas.zad2mvc.model.catalogs.Book;
+import com.pas.zad2mvc.model.catalogs.Catalog;
+import com.pas.zad2mvc.model.catalogs.Movie;
+import com.pas.zad2mvc.model.catalogs.NoCatalog;
 import com.pas.zad2mvc.repositories.CatalogRepository;
 import com.pas.zad2mvc.repositories.RentRepository;
 

@@ -1,4 +1,4 @@
-package com.pas.zad2mvc.model;
+package com.pas.zad2mvc.model.users;
 
 public class Client extends User {
     //region constructors

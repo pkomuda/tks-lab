@@ -1,6 +1,10 @@
 package com.pas.zad2mvc.services;
 
 import com.pas.zad2mvc.model.*;
+import com.pas.zad2mvc.model.catalogs.Book;
+import com.pas.zad2mvc.model.catalogs.Catalog;
+import com.pas.zad2mvc.model.catalogs.Movie;
+import com.pas.zad2mvc.model.catalogs.NoCatalog;
 import com.pas.zad2mvc.repositories.CatalogRepository;
 import com.pas.zad2mvc.repositories.RentRepository;
 
@@ -45,7 +49,7 @@ public class CatalogRestService {
 
     @PUT
     @Path("/catalog/{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes(MediaType.APPLICATION_JSON)
     public void updateBook(@PathParam("id") int id, Catalog catalog) {
         if (getCatalog(id) != null) {
             catalogRepository.updateCatalog(id, catalog);

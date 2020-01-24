@@ -1,6 +1,6 @@
 package com.pas.zad2mvc.controllers;
 
-import com.pas.zad2mvc.model.User;
+import com.pas.zad2mvc.model.users.User;
 import com.pas.zad2mvc.services.UserService;
 
 import javax.enterprise.context.SessionScoped;

@@ -1,6 +1,9 @@
 package com.pas.zad2mvc.controllers;
 
-import com.pas.zad2mvc.model.*;
+import com.pas.zad2mvc.model.users.Admin;
+import com.pas.zad2mvc.model.users.Client;
+import com.pas.zad2mvc.model.users.Manager;
+import com.pas.zad2mvc.model.users.User;
 import com.pas.zad2mvc.services.UserService;
 
 import javax.annotation.PostConstruct;

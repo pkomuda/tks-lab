@@ -1,6 +1,10 @@
 package com.pas.zad2mvc.repositories;
 
 import com.pas.zad2mvc.model.*;
+import com.pas.zad2mvc.model.catalogs.Book;
+import com.pas.zad2mvc.model.catalogs.Movie;
+import com.pas.zad2mvc.model.catalogs.NoCatalog;
+import com.pas.zad2mvc.model.users.Client;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.enterprise.context.ApplicationScoped;

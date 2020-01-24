@@ -1,8 +1,8 @@
 package com.pas.zad2mvc.controllers;
 
-import com.pas.zad2mvc.model.Book;
-import com.pas.zad2mvc.model.Catalog;
-import com.pas.zad2mvc.model.Movie;
+import com.pas.zad2mvc.model.catalogs.Book;
+import com.pas.zad2mvc.model.catalogs.Catalog;
+import com.pas.zad2mvc.model.catalogs.Movie;
 import com.pas.zad2mvc.model.Rent;
 import com.pas.zad2mvc.services.CatalogService;
 import com.pas.zad2mvc.services.RentService;
@@ -22,7 +22,7 @@ public class ClientPageController implements Serializable {
     @Inject
     private RentService rentService;
     @Inject
-    ViewAccessController viewAccessController;
+    private ViewAccessController viewAccessController;
     @Inject
     private LoginController loginController;
     private List<Book> books;

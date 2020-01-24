@@ -1,4 +1,4 @@
-package com.pas.zad2mvc.model;
+package com.pas.zad2mvc.model.users;
 
 import java.io.Serializable;
 import java.util.Objects;
