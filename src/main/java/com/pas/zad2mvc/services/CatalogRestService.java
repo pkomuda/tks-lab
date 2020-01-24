@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @RequestScoped
-@Path("model.catalog")
+@Path("api")
 public class CatalogRestService {
     @Inject
     private CatalogRepository catalogRepository;
@@ -20,7 +20,7 @@ public class CatalogRestService {
 
     @POST
     @Path("/book")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes(MediaType.APPLICATION_JSON)
     public void addBook(Book book) {
         if (getCatalog(book.getId()) == null && book.getId() != 0) {
             catalogRepository.addCatalog(book);
@@ -29,49 +29,36 @@ public class CatalogRestService {
 
     @POST
     @Path("/movie")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void addMovie( Movie movie) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addMovie(Movie movie) {
         if (getCatalog(movie.getId()) == null && movie.getId() != 0) {
             catalogRepository.addCatalog(movie);
         }
     }
 
     @GET
-    @Path("/catalog/{catalogid}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Catalog getCatalog(@PathParam("catalogid") int id) {
+    @Path("/catalog/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Catalog getCatalog(@PathParam("id") int id) {
         return catalogRepository.getCatalog(id);
     }
 
     @PUT
-    @Path("/book/{bookid}")
+    @Path("/catalog/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void updateBook(@PathParam("bookid") int id, Book book) {
-        if (getCatalog(id) != null && getCatalog(id) instanceof Book) {
-            catalogRepository.updateCatalog(id, book);
+    public void updateBook(@PathParam("id") int id, Catalog catalog) {
+        if (getCatalog(id) != null) {
+            catalogRepository.updateCatalog(id, catalog);
             for (Rent rent : rentRepository.getRentsForCatalog(id)) {
-                rent.setCatalog(book);
-                rentRepository.updateRent(rent.getId(), rent);
-            }
-        }
-    }
-
-    @PUT
-    @Path("/movie/{movieid}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void updateMovie(@PathParam("movieid") int id, Movie movie) {
-        if (getCatalog(id) != null && getCatalog(id) instanceof Movie) {
-            catalogRepository.updateCatalog(id, movie);
-            for (Rent rent : rentRepository.getRentsForCatalog(id)) {
-                rent.setCatalog(movie);
+                rent.setCatalog(catalog);
                 rentRepository.updateRent(rent.getId(), rent);
             }
         }
     }
 
     @DELETE
-    @Path("/catalog/{catalogid}")
-    public void removeCatalog(@PathParam("catalogid") int id) {
+    @Path("/catalog/{id}")
+    public void removeCatalog(@PathParam("id") int id) {
         for (Rent rent : rentRepository.getRentsForCatalog(id)) {
             rent.setCatalog(new NoCatalog());
             rentRepository.updateRent(rent.getId(), rent);
@@ -81,43 +68,43 @@ public class CatalogRestService {
 
     @GET
     @Path("/catalogs")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Catalog> getCatalogs() {
         return catalogRepository.getCatalogs();
     }
 
     @GET
     @Path("/books")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Book> getBooks() {
         return catalogRepository.getBooks();
     }
 
     @GET
     @Path("/movies")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Movie> getMovies() {
         return catalogRepository.getMovies();
     }
 
     @GET
-    @Path("{catalogfilter}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Catalog> filterCatalogs(@PathParam("catalogfilter") String catalogFilter) {
+    @Path("/catalogs/{filter}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Catalog> filterCatalogs(@PathParam("filter") String catalogFilter) {
         return catalogRepository.filterCatalogs(catalogFilter);
     }
 
     @GET
-    @Path("/books/{bookfilter}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Book> filterBooks(@PathParam("bookfilter") String catalogFilter) {
+    @Path("/books/{filter}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Book> filterBooks(@PathParam("filter") String catalogFilter) {
         return catalogRepository.filterBooks(catalogFilter);
     }
 
     @GET
-    @Path("/movies/{moviefilter}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Movie> filterMovies(@PathParam("moviefilter") String catalogFilter) {
+    @Path("/movies/{filter}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Movie> filterMovies(@PathParam("filter") String catalogFilter) {
         return catalogRepository.filterMovies(catalogFilter);
     }
 
@@ -126,4 +113,3 @@ public class CatalogRestService {
         return catalogRepository.toString();
     }
 }
-

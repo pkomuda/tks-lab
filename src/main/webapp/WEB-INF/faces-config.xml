@@ -92,7 +92,7 @@
         <from-view-id>/manager/managerPage.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>addBook</from-outcome>
-            <to-view-id>/manager/addBook.xhtml</to-view-id>
+            <to-view-id>/manager/addBookRest.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -132,6 +132,20 @@
     </navigation-rule>
 
     <navigation-rule>
+        <from-view-id>/manager/addBookRest.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>addBook</from-outcome>
+            <to-view-id>/manager/confirmBookRest.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cancel</from-outcome>
+            <to-view-id>/manager/managerPage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
         <from-view-id>/manager/confirmBook.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>manager</from-outcome>
@@ -141,6 +155,20 @@
         <navigation-case>
             <from-outcome>cancelConfirm</from-outcome>
             <to-view-id>/manager/addBook.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/manager/confirmBookRest.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>manager</from-outcome>
+            <to-view-id>/manager/managerPage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cancelConfirm</from-outcome>
+            <to-view-id>/manager/addBookRest.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -168,7 +196,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>cancelConfirm</from-outcome>
-            <to-view-id>/manager/addBook.xhtml</to-view-id>
+            <to-view-id>/manager/addMovie.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
