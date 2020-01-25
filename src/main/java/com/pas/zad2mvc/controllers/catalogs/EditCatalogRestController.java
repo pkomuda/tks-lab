@@ -104,17 +104,21 @@ public class EditCatalogRestController {
     @PostConstruct
     public void loadCatalogInfo() {
         id = viewAccessController.getSelectedCatalogId();
-        Catalog temp =  base.path("catalog/{id}")
+//        Catalog temp =  base.path("catalog/{id}")
+//                .resolveTemplate("id", id)
+//                .request(MediaType.APPLICATION_JSON)
+//                .get(new GenericType<Catalog>() {});
+        System.out.println(base.path("catalog/{id}")
                 .resolveTemplate("id", id)
                 .request(MediaType.APPLICATION_JSON)
-                .get(Catalog.class);
-        title = temp.getTitle();
-        releaseYear = temp.getReleaseYear();
-        if (temp instanceof Book) {
-            author = ((Book) temp).getAuthor();
-        } else if (temp instanceof Movie) {
-            director = ((Movie) temp).getDirector();
-            format = ((Movie) temp).getFormat();
-        }
+                .get(Catalog.class));
+//        title = temp.getTitle();
+//        releaseYear = temp.getReleaseYear();
+//        if (temp instanceof Book) {
+//            author = ((Book) temp).getAuthor();
+//        } else if (temp instanceof Movie) {
+//            director = ((Movie) temp).getDirector();
+//            format = ((Movie) temp).getFormat();
+//        }
     }
 }

@@ -1,8 +1,17 @@
 package com.pas.zad2mvc.model.catalogs;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.MINIMAL_CLASS)
+//@JsonSubTypes({
+//        @JsonSubTypes.Type(value = Book.class),
+//        @JsonSubTypes.Type(value = Movie.class),
+//        @JsonSubTypes.Type(value = NoCatalog.class)
+//})
 public abstract class Catalog implements Serializable {
     private int id;
     private String title;
