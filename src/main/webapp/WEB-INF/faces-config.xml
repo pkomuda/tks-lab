@@ -97,36 +97,22 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>editBook</from-outcome>
-            <to-view-id>/manager/editBook.xhtml</to-view-id>
+            <to-view-id>/manager/editBookRest.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>addMovie</from-outcome>
-            <to-view-id>/manager/addMovie.xhtml</to-view-id>
+            <to-view-id>/manager/addMovieRest.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>editMovie</from-outcome>
-            <to-view-id>/manager/editMovie.xhtml</to-view-id>
+            <to-view-id>/manager/editMovieRest.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>rentsForCatalog</from-outcome>
             <to-view-id>/manager/rentsForCatalog.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-    </navigation-rule>
-
-    <navigation-rule>
-        <from-view-id>/manager/addBook.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>addBook</from-outcome>
-            <to-view-id>/manager/confirmBook.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>cancel</from-outcome>
-            <to-view-id>/manager/managerPageRest.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -146,20 +132,6 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/manager/confirmBook.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>manager</from-outcome>
-            <to-view-id>/manager/managerPageRest.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>cancelConfirm</from-outcome>
-            <to-view-id>/manager/addBook.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-    </navigation-rule>
-
-    <navigation-rule>
         <from-view-id>/manager/confirmBookRest.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>manager</from-outcome>
@@ -172,12 +144,12 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
-    
+
     <navigation-rule>
-        <from-view-id>/manager/addMovie.xhtml</from-view-id>
+        <from-view-id>/manager/addMovieRest.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>addMovie</from-outcome>
-            <to-view-id>/manager/confirmMovie.xhtml</to-view-id>
+            <to-view-id>/manager/confirmMovieRest.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -188,7 +160,7 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/manager/confirmMovie.xhtml</from-view-id>
+        <from-view-id>/manager/confirmMovieRest.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>manager</from-outcome>
             <to-view-id>/manager/managerPageRest.xhtml</to-view-id>
@@ -196,13 +168,13 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>cancelConfirm</from-outcome>
-            <to-view-id>/manager/addMovie.xhtml</to-view-id>
+            <to-view-id>/manager/addMovieRest.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/manager/editBook.xhtml</from-view-id>
+        <from-view-id>/manager/editBookRest.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>manager</from-outcome>
             <to-view-id>/manager/managerPageRest.xhtml</to-view-id>
@@ -216,7 +188,7 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/manager/editMovie.xhtml</from-view-id>
+        <from-view-id>/manager/editMovieRest.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>manager</from-outcome>
             <to-view-id>/manager/managerPageRest.xhtml</to-view-id>
@@ -252,20 +224,6 @@
         <navigation-case>
             <from-outcome>addRent</from-outcome>
             <to-view-id>/client/addRent.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-    </navigation-rule>
-
-    <navigation-rule>
-        <from-view-id>/client/addRent.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>client</from-outcome>
-            <to-view-id>/client/clientPage.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>cancel</from-outcome>
-            <to-view-id>/client/clientPage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
