@@ -31,7 +31,7 @@ public class LoginController implements Serializable {
             if (user != null && user.isActive()) {
                 if (request.isUserInRole("ADMIN")) {
                     externalContext.getSessionMap().put("role", "ADMIN");
-                    externalContext.redirect(externalContext.getRequestContextPath() + "/admin/adminPageRest.xhtml");
+                    externalContext.redirect(externalContext.getRequestContextPath() + "/admin/adminPage.xhtml");
                 } else if (request.isUserInRole("MANAGER")) {
                     externalContext.getSessionMap().put("role", "MANAGER");
                     externalContext.redirect(externalContext.getRequestContextPath() + "/manager/managerPageRest.xhtml");
