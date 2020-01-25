@@ -32,6 +32,7 @@ public class ClientPageController implements Serializable {
     private String catalogFilter;
     private String rentFilter;
 
+
     public String prepareRentInfo(Catalog catalog) {
         if (rentService.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
             viewAccessController.setSelectedCatalogId(catalog.getId());
