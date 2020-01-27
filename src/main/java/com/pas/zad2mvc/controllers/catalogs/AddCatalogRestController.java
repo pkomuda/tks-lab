@@ -39,13 +39,17 @@ public class AddCatalogRestController implements Serializable {
     }
 
     public String confirmBook() {
-        base.path("book").request(MediaType.APPLICATION_JSON).post(Entity.json(new Book(id, title, author, releaseYear)), Book.class);
+        base.path("book")
+                .request(MediaType.APPLICATION_JSON)
+                .post(Entity.json(new Book(id, title, author, releaseYear)), Book.class);
         endConversation();
         return "manager";
     }
 
     public String confirmMovie() {
-        base.path("movie").request(MediaType.APPLICATION_JSON).post(Entity.json(new Movie(id, title, director, releaseYear, format)), Movie.class);
+        base.path("movie")
+                .request(MediaType.APPLICATION_JSON)
+                .post(Entity.json(new Movie(id, title, director, releaseYear, format)), Movie.class);
         endConversation();
         return "manager";
     }

@@ -174,6 +174,10 @@ public class CatalogRepository {
                 .collect(Collectors.toList());
     }
 
+    public int countCatalogs() {
+        return getCatalogs().size();
+    }
+
     @Override
     public String toString() {
         String str = "";

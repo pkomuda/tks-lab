@@ -112,8 +112,10 @@ public class CatalogRestService {
         return catalogRepository.filterMovies(catalogFilter);
     }
 
-    @Override
-    public String toString() {
-        return catalogRepository.toString();
+    @GET
+    @Path("count")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String count() {
+        return String.valueOf(catalogRepository.countCatalogs());
     }
 }

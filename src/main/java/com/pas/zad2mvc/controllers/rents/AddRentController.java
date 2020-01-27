@@ -84,6 +84,6 @@ public class AddRentController {
 
     @PostConstruct
     public void loadCatalogInfo() {
-        id = viewAccessController.getSelectedCatalogId();
+        id = viewAccessController.getSelectedCatalog().getId();
     }
 }

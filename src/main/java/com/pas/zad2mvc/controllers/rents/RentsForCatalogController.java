@@ -65,9 +65,9 @@ public class RentsForCatalogController implements Serializable {
 
     @PostConstruct
     public void loadData() {
-        id = viewAccessController.getSelectedCatalogId();
+        id = viewAccessController.getSelectedCatalog().getId();
         title = catalogService.getCatalog(id).getTitle();
-        unfinishedRents = rentService.getUnfinishedRentsForCatalog(viewAccessController.getSelectedCatalogId());
-        finishedRents = rentService.getFinishedRentsForCatalog(viewAccessController.getSelectedCatalogId());
+        unfinishedRents = rentService.getUnfinishedRentsForCatalog(viewAccessController.getSelectedCatalog().getId());
+        finishedRents = rentService.getFinishedRentsForCatalog(viewAccessController.getSelectedCatalog().getId());
     }
 }

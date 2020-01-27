@@ -30,6 +30,10 @@ public class EditCatalogRestController {
     private WebTarget base = client.target("https://localhost:8181/zad2mvc/resources/api");
 
     public String confirmEditBook() {
+        System.out.println(id);
+        System.out.println(title);
+        System.out.println(author);
+        System.out.println(releaseYear);
         base.path("catalog/{id}")
                 .resolveTemplate("id", id)
                 .request(MediaType.APPLICATION_JSON)
@@ -103,22 +107,15 @@ public class EditCatalogRestController {
 
     @PostConstruct
     public void loadCatalogInfo() {
-        id = viewAccessController.getSelectedCatalogId();
-//        Catalog temp =  base.path("catalog/{id}")
-//                .resolveTemplate("id", id)
-//                .request(MediaType.APPLICATION_JSON)
-//                .get(new GenericType<Catalog>() {});
-        System.out.println(base.path("catalog/{id}")
-                .resolveTemplate("id", id)
-                .request(MediaType.APPLICATION_JSON)
-                .get(Catalog.class));
-//        title = temp.getTitle();
-//        releaseYear = temp.getReleaseYear();
-//        if (temp instanceof Book) {
-//            author = ((Book) temp).getAuthor();
-//        } else if (temp instanceof Movie) {
-//            director = ((Movie) temp).getDirector();
-//            format = ((Movie) temp).getFormat();
-//        }
+        Catalog temp = viewAccessController.getSelectedCatalog();
+        id = temp.getId();
+        title = temp.getTitle();
+        releaseYear = temp.getReleaseYear();
+        if (temp instanceof Book) {
+            author = ((Book) temp).getAuthor();
+        } else if (temp instanceof Movie) {
+            director = ((Movie) temp).getDirector();
+            format = ((Movie) temp).getFormat();
+        }
     }
 }

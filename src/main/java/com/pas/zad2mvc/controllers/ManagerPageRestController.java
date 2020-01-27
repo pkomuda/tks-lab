@@ -43,7 +43,7 @@ public class ManagerPageRestController implements Serializable {
     }
 
     public String prepareCatalogInfo(Catalog selectedCatalog) {
-        viewAccessController.setSelectedCatalogId(selectedCatalog.getId());
+        viewAccessController.setSelectedCatalog(selectedCatalog);
         if (selectedCatalog instanceof Book) {
             return "editBook";
         } else if (selectedCatalog instanceof Movie) {
@@ -54,7 +54,7 @@ public class ManagerPageRestController implements Serializable {
     }
 
     public String prepareRentsInfo(Catalog selectedCatalog) {
-        viewAccessController.setSelectedCatalogId(selectedCatalog.getId());
+        viewAccessController.setSelectedCatalog(selectedCatalog);
         return "rentsForCatalog";
     }
 

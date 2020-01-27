@@ -92,6 +92,10 @@ public class CatalogService implements Serializable {
         return catalogRepository.filterMovies(catalogFilter);
     }
 
+    public int countCatalogs() {
+        return catalogRepository.countCatalogs();
+    }
+
     @Override
     public String toString() {
         return catalogRepository.toString();

@@ -12,7 +12,6 @@ import javax.inject.Named;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
 import java.io.Serializable;
 import java.util.List;
 
@@ -69,13 +68,10 @@ public class RentsForCatalogRestController implements Serializable {
 
     @PostConstruct
     public void loadData() {
-        id = viewAccessController.getSelectedCatalogId();
-        Catalog temp =  base.path("catalog/{id}")
-                .resolveTemplate("id", id)
-                .request(MediaType.APPLICATION_JSON)
-                .get(Catalog.class);
+        Catalog temp = viewAccessController.getSelectedCatalog();
+        id = temp.getId();
         title = temp.getTitle();
-        unfinishedRents = rentService.getUnfinishedRentsForCatalog(viewAccessController.getSelectedCatalogId());
-        finishedRents = rentService.getFinishedRentsForCatalog(viewAccessController.getSelectedCatalogId());
+        unfinishedRents = rentService.getUnfinishedRentsForCatalog(id);
+        finishedRents = rentService.getFinishedRentsForCatalog(id);
     }
 }

@@ -92,7 +92,7 @@ public class EditCatalogController {
 
     @PostConstruct
     public void loadCatalogInfo() {
-        id = viewAccessController.getSelectedCatalogId();
+        id = viewAccessController.getSelectedCatalog().getId();
         title = catalogService.getCatalog(id).getTitle();
         releaseYear = catalogService.getCatalog(id).getReleaseYear();
         if (catalogService.getCatalog(id) instanceof Book) {

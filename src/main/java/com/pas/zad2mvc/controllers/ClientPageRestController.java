@@ -38,7 +38,7 @@ public class ClientPageRestController implements Serializable {
 
     public String prepareRentInfo(Catalog catalog) {
         if (rentService.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
-            viewAccessController.setSelectedCatalogId(catalog.getId());
+            viewAccessController.setSelectedCatalog(catalog);
             return "addRent";
         } else {
             return "clientPageRest.xhtml";
