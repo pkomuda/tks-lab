@@ -50,7 +50,7 @@ public class CatalogRestService {
     @PUT
     @Path("/catalog/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updateBook(@PathParam("id") int id, Catalog catalog) {
+    public void updateCatalog(@PathParam("id") int id, Catalog catalog) {
         if (getCatalog(id) != null) {
             catalogRepository.updateCatalog(id, catalog);
             for (Rent rent : rentRepository.getRentsForCatalog(id)) {

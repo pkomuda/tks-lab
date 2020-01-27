@@ -17,6 +17,18 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+<!--    <servlet>-->
+<!--        <servlet-name>javax.ws.rs.core.Application</servlet-name>-->
+<!--        <init-param>-->
+<!--            <param-name>jersey.config.jsonFeature</param-name>-->
+<!--            <param-value>JacksonFeature</param-value>-->
+<!--        </init-param>-->
+<!--        <load-on-startup>1</load-on-startup>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>javax.ws.rs.core.Application</servlet-name>-->
+<!--        <url-pattern>/resources/*</url-pattern>-->
+<!--    </servlet-mapping>-->
     <session-config>
         <session-timeout>
             30
