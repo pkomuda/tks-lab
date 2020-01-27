@@ -60,6 +60,8 @@ public class CatalogRestService {
         }
     }
 
+
+
     @DELETE
     @Path("/catalog/{id}")
     public void removeCatalog(@PathParam("id") int id) {
@@ -113,9 +115,11 @@ public class CatalogRestService {
     }
 
     @GET
-    @Path("count")
+    @Path("/count")
     @Produces(MediaType.TEXT_PLAIN)
     public String count() {
-        return String.valueOf(catalogRepository.countCatalogs());
+        String str = "Number of Catalogs:";
+        str += String.valueOf(catalogRepository.countCatalogs());
+        return str;
     }
 }
