@@ -48,19 +48,30 @@ public class CatalogRestService {
     }
 
     @PUT
-    @Path("/catalog/{id}")
+    @Path("/book/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updateCatalog(@PathParam("id") int id, Catalog catalog) {
+    public void updateBook(@PathParam("id") int id, Book book) {
         if (getCatalog(id) != null) {
-            catalogRepository.updateCatalog(id, catalog);
+            catalogRepository.updateCatalog(id, book);
             for (Rent rent : rentRepository.getRentsForCatalog(id)) {
-                rent.setCatalog(catalog);
+                rent.setCatalog(book);
                 rentRepository.updateRent(rent.getId(), rent);
             }
         }
     }
 
-
+    @PUT
+    @Path("/movie/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateMovie(@PathParam("id") int id, Movie movie) {
+        if (getCatalog(id) != null) {
+            catalogRepository.updateCatalog(id, movie);
+            for (Rent rent : rentRepository.getRentsForCatalog(id)) {
+                rent.setCatalog(movie);
+                rentRepository.updateRent(rent.getId(), rent);
+            }
+        }
+    }
 
     @DELETE
     @Path("/catalog/{id}")
