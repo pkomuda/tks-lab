@@ -4,30 +4,53 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
     <title>Edit book</title>
+    <script type="text/javascript">
+        function przetwarzajDane(){
+            var correct=true;
+            var napis= "";
+            var tytul = document.getElementById("formularz:title123");
+            var year = document.getElementById("formularz:rok");
+            if(tytul.value === ""){
+                correct=false;
+                napis += "Title\n";
+            }
+            if(year.value === ""){
+                napis += "Release year";
+                correct=false;
+            }
+            if(correct) {
+                return true;
+            }else {
+                alert("Następujące pola nie mogą być puste:\n" + napis);
+                return false;
+            }
+
+        }
+    </script>
 </h:head>
 <h:body>
     <h:outputText value="Logged in as: #{request.getUserPrincipal().getName()}, access level: #{sessionScope.get('role')}"/>
     <br/>
     <br/>
-    <h:form>
+    <h:form id="formularz">
         ID:
         <h:outputText value="#{editCatalogRestController.id}"/>
         <br/>
         Title:
-        <h:inputText value="#{editCatalogRestController.title}"/>
+        <h:inputText id="title123" value="#{editCatalogRestController.title}"/>
         <br/>
         Author:
         <h:inputText value="#{editCatalogRestController.author}"/>
         <br/>
         Release year:
-        <h:inputText value="#{editCatalogRestController.releaseYear}" maxlength="4"/>
+        <h:inputText id="rok" value="#{editCatalogRestController.releaseYear}" maxlength="4"/>
         <br/>
-        <h:commandButton value="OK" action="#{editCatalogRestController.confirmEditBook()}"/>
+        <h:commandButton value="OK" action="#{editCatalogRestController.confirmEditBook()}" onclick="return przetwarzajDane()"/>
         <br/>
         <h:commandButton value="Cancel" action="#{editCatalogRestController.cancel()}"/>
         <br/>
         <br/>
-        <h:commandButton value="Log out" action="#{loginController.logout()}"/>
+        <h:commandButton value="Log out" action="#{loginController.logout()}" />
     </h:form>
 </h:body>
 </html>
