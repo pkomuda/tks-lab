@@ -30,11 +30,7 @@ public class EditCatalogRestController {
     private WebTarget base = client.target("https://localhost:8181/zad2mvc/resources/api");
 
     public String confirmEditBook() {
-        System.out.println(id);
-        System.out.println(title);
-        System.out.println(author);
-        System.out.println(releaseYear);
-        base.path("catalog/{id}")
+        base.path("book/{id}")
                 .resolveTemplate("id", id)
                 .request(MediaType.APPLICATION_JSON)
                 .put(Entity.json(new Book(id, title, author, releaseYear)), Book.class);
@@ -42,7 +38,7 @@ public class EditCatalogRestController {
     }
 
     public String confirmEditMovie() {
-        base.path("catalog/{id}")
+        base.path("movie/{id}")
                 .resolveTemplate("id", id)
                 .request(MediaType.APPLICATION_JSON)
                 .put(Entity.json(new Movie(id, title, director, releaseYear, format)), Movie.class);
