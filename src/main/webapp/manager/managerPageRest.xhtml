@@ -39,7 +39,7 @@
                 <h:commandButton value="Edit" action="#{managerPageRestController.prepareCatalogInfo(book)}"/>
             </h:column>
             <h:column>
-                <h:commandButton value="Remove" action="#{managerPageRestController.removeCatalog(book.id)}"/>
+                <h:commandButton value="Remove" action="#{managerPageRestController.removeCatalog(book.id)}" onclick="return window.confirm('Czy na pewno usunąć książkę o id: #{book.id}?')"/>
             </h:column>
             <h:column>
                 <h:commandButton value="Rents" action="#{managerPageRestController.prepareRentsInfo(book)}"/>
@@ -75,7 +75,7 @@
                 <h:commandButton value="Edit" action="#{managerPageRestController.prepareCatalogInfo(movie)}"/>
             </h:column>
             <h:column>
-                <h:commandButton value="Remove" action="#{managerPageRestController.removeCatalog(movie.id)}"/>
+                <h:commandButton value="Remove" action="#{managerPageRestController.removeCatalog(movie.id)}" onclick="return window.confirm('Czy na pewno usunąć film o id: #{book.id}?')"/>
             </h:column>
             <h:column>
                 <h:commandButton value="Rents" action="#{managerPageRestController.prepareRentsInfo(movie)}"/>
@@ -110,7 +110,7 @@
                 <h:outputText value="#{rent.rentDateTime}"/>
             </h:column>
             <h:column>
-                <h:commandButton value="Remove" action="#{managerPageRestController.removeRent(rent.id)}"/>
+                <h:commandButton value="Remove" action="#{managerPageRestController.removeRent(rent.id)}" onclick="return window.confirm('Czy na pewno usunąć wypożyczenie o id: #{rent.id}?')"/>
             </h:column>
         </h:dataTable>
         <br/>
