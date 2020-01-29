@@ -9,9 +9,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
 import java.io.Serializable;
 import java.util.List;
 
@@ -27,8 +24,6 @@ public class RentsForCatalogRestController implements Serializable {
     private int id;
     private String title;
     private String rentFilter;
-    private Client client = ClientBuilder.newClient();
-    private WebTarget base = client.target("https://localhost:8181/zad2mvc/resources/api");
 
     public void filterRents() {
         unfinishedRents = rentService.filterUnfinishedRentsForCatalog(id, rentFilter);

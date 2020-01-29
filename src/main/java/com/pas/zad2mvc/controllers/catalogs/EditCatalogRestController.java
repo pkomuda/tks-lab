@@ -14,6 +14,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Named
 @RequestScoped
@@ -33,7 +34,7 @@ public class EditCatalogRestController {
         base.path("book/{id}")
                 .resolveTemplate("id", id)
                 .request(MediaType.APPLICATION_JSON)
-                .put(Entity.json(new Book(id, title, author, releaseYear)), Book.class);
+                .put(Entity.json(new Book(id, title, author, releaseYear)), Response.class);
         return "manager";
     }
 
@@ -41,7 +42,7 @@ public class EditCatalogRestController {
         base.path("movie/{id}")
                 .resolveTemplate("id", id)
                 .request(MediaType.APPLICATION_JSON)
-                .put(Entity.json(new Movie(id, title, director, releaseYear, format)), Movie.class);
+                .put(Entity.json(new Movie(id, title, director, releaseYear, format)), Response.class);
         return "manager";
     }
 

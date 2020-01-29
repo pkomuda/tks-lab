@@ -2,7 +2,7 @@ package com.pas.zad2mvc.controllers.rents;
 
 import com.pas.zad2mvc.controllers.ViewAccessController;
 import com.pas.zad2mvc.model.Rent;
-import com.pas.zad2mvc.services.CatalogService;
+import com.pas.zad2mvc.model.catalogs.Catalog;
 import com.pas.zad2mvc.services.RentService;
 
 import javax.annotation.PostConstruct;
@@ -17,8 +17,6 @@ import java.util.List;
 public class RentsForCatalogController implements Serializable {
     @Inject
     private RentService rentService;
-    @Inject
-    private CatalogService catalogService;
     @Inject
     private ViewAccessController viewAccessController;
     private List<Rent> unfinishedRents;
@@ -65,9 +63,10 @@ public class RentsForCatalogController implements Serializable {
 
     @PostConstruct
     public void loadData() {
-        id = viewAccessController.getSelectedCatalog().getId();
-        title = catalogService.getCatalog(id).getTitle();
-        unfinishedRents = rentService.getUnfinishedRentsForCatalog(viewAccessController.getSelectedCatalog().getId());
-        finishedRents = rentService.getFinishedRentsForCatalog(viewAccessController.getSelectedCatalog().getId());
+        Catalog temp = viewAccessController.getSelectedCatalog();
+        id = temp.getId();
+        title = temp.getTitle();
+        unfinishedRents = rentService.getUnfinishedRentsForCatalog(id);
+        finishedRents = rentService.getFinishedRentsForCatalog(id);
     }
 }

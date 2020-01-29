@@ -12,6 +12,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.io.Serializable;
 
 @Named
@@ -41,7 +42,7 @@ public class AddCatalogRestController implements Serializable {
     public String confirmBook() {
         base.path("book")
                 .request(MediaType.APPLICATION_JSON)
-                .post(Entity.json(new Book(id, title, author, releaseYear)), Book.class);
+                .post(Entity.json(new Book(id, title, author, releaseYear)), Response.class);
         endConversation();
         return "manager";
     }
@@ -49,7 +50,7 @@ public class AddCatalogRestController implements Serializable {
     public String confirmMovie() {
         base.path("movie")
                 .request(MediaType.APPLICATION_JSON)
-                .post(Entity.json(new Movie(id, title, director, releaseYear, format)), Movie.class);
+                .post(Entity.json(new Movie(id, title, director, releaseYear, format)), Response.class);
         endConversation();
         return "manager";
     }

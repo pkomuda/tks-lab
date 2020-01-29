@@ -26,12 +26,12 @@ public class CatalogRestService {
     @POST
     @Path("/book")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addBook(Book book) {
+    public void addBook(Book book) {
         if (catalogRepository.getCatalog(book.getId()) == null && book.getId() != 0) {
             catalogRepository.addCatalog(book);
-            return Response.ok("Book with id: " + book.getId() + " added").build();
-        } else {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Catalog with id: " + book.getId() + " already exists").build();
+//            return Response.ok("Book with id: " + book.getId() + " added").build();
+//        } else {
+//            return Response.status(Response.Status.BAD_REQUEST).entity("Catalog with id: " + book.getId() + " already exists").build();
         }
     }
 
