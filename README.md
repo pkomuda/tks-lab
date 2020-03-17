@@ -1,1 +1,2 @@
-tks_mkwa_czw_15_07
+# Technologie Komponentów Sieciowych 2020 - Laboratorium
+PK 216802, SR 216881
