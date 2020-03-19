@@ -72,6 +72,7 @@ public class CatalogRepository {
 
     @Transactional
     public synchronized List<BookEntity> getBooks() {
+        System.out.println("BOOKS");
         return entityManager.createQuery("SELECT c FROM Book c", BookEntity.class).getResultList();
     }
 
@@ -83,7 +84,7 @@ public class CatalogRepository {
     public List<CatalogEntity> filterCatalogs(String catalogFilter) {
         return getCatalogs()
                 .stream()
-                .filter(catalog -> StringUtils.containsIgnoreCase(catalog.toString(), catalogFilter))
+                .filter(catalogEntity -> StringUtils.containsIgnoreCase(catalogEntity.toString(), catalogFilter))
                 .collect(Collectors.toList());
     }
 

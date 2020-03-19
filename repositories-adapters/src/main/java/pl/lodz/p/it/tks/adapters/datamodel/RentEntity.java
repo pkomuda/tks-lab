@@ -3,6 +3,7 @@ package pl.lodz.p.it.tks.adapters.datamodel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import pl.lodz.p.it.tks.adapters.datamodel.catalogs.CatalogEntity;
 import pl.lodz.p.it.tks.adapters.datamodel.users.ClientEntity;
 
@@ -12,9 +13,10 @@ import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Entity(name = "Rent")
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Rent")
+@ToString(includeFieldNames = false)
 public @Data class RentEntity {
 
     @Id

@@ -1,8 +1,11 @@
 package pl.lodz.p.it.tks.adapters.datamodel.users;
 
+import lombok.ToString;
+
 import javax.persistence.Entity;
 
 @Entity(name = "Client")
+@ToString(callSuper = true, includeFieldNames = false)
 public class ClientEntity extends UserEntity {
 
     public ClientEntity() {
