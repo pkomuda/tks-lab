@@ -112,7 +112,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>rentsForCatalog</from-outcome>
-            <to-view-id>/manager/rentsForCatalogRest.xhtml</to-view-id>
+            <to-view-id>/manager/rentsForCatalog.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -202,7 +202,7 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/manager/rentsForCatalogRest.xhtml</from-view-id>
+        <from-view-id>/manager/rentsForCatalog.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>back</from-outcome>
             <to-view-id>/manager/managerPageRest.xhtml</to-view-id>
