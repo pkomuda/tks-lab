@@ -3,6 +3,7 @@ package pl.lodz.p.it.tks.appservices.controllers.rents;
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.controllers.ViewAccessController;
 import pl.lodz.p.it.tks.appservices.services.RentService;
+import pl.lodz.p.it.tks.appservices.services.rent.*;
 import pl.lodz.p.it.tks.domainmodel.Rent;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Catalog;
 
@@ -18,7 +19,11 @@ import java.util.List;
 public @Data class RentsForCatalogController implements Serializable {
 
     @Inject
-    private RentService rentService;
+    private RentCrudService rentCrudService;
+    @Inject
+    private RentGetService rentGetService;
+    @Inject
+    private RentFilterService rentFilterService;
     @Inject
     private ViewAccessController viewAccessController;
     private List<Rent> unfinishedRents;
@@ -28,12 +33,12 @@ public @Data class RentsForCatalogController implements Serializable {
     private String rentFilter;
 
     public void filterRents() {
-        unfinishedRents = rentService.filterUnfinishedRentsForCatalog(id, rentFilter);
-        finishedRents = rentService.filterFinishedRentsForCatalog(id, rentFilter);
+        unfinishedRents = rentFilterService.filterUnfinishedRentsForCatalog(id, rentFilter);
+        finishedRents = rentFilterService.filterFinishedRentsForCatalog(id, rentFilter);
     }
 
     public void removeRent(String rentId) {
-        rentService.removeRent(rentId);
+        rentCrudService.removeRent(rentId);
         loadData();
     }
 
@@ -46,7 +51,7 @@ public @Data class RentsForCatalogController implements Serializable {
         Catalog temp = viewAccessController.getSelectedCatalog();
         id = temp.getId();
         title = temp.getTitle();
-        unfinishedRents = rentService.getUnfinishedRentsForCatalog(id);
-        finishedRents = rentService.getFinishedRentsForCatalog(id);
+        unfinishedRents = rentGetService.getUnfinishedRentsForCatalog(id);
+        finishedRents = rentGetService.getFinishedRentsForCatalog(id);
     }
 }

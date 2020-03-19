@@ -2,6 +2,7 @@ package pl.lodz.p.it.tks.appservices.controllers;
 
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.services.RentService;
+import pl.lodz.p.it.tks.appservices.services.rent.*;
 import pl.lodz.p.it.tks.domainmodel.Rent;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Book;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Catalog;
@@ -25,7 +26,11 @@ import java.util.stream.Collectors;
 public @Data class ManagerPageRestController implements Serializable {
 
     @Inject
-    private RentService rentService;
+    private RentCrudService rentCrudService;
+    @Inject
+    private RentGetService rentGetService;
+    @Inject
+    private RentFilterService rentFilterService;
     @Inject
     private ViewAccessController viewAccessController;
     private List<Book> books;
@@ -79,8 +84,8 @@ public @Data class ManagerPageRestController implements Serializable {
     }
 
     public void filterRents() {
-        unfinishedRents = rentService.filterUnfinishedRents(rentFilter);
-        finishedRents = rentService.filterFinishedRents(rentFilter);
+        unfinishedRents = rentFilterService.filterUnfinishedRents(rentFilter);
+        finishedRents = rentFilterService.filterFinishedRents(rentFilter);
     }
 
     public void removeCatalog(int id) {
@@ -91,7 +96,7 @@ public @Data class ManagerPageRestController implements Serializable {
     }
 
     public void removeRent(String rentId) {
-        rentService.removeRent(rentId);
+        rentCrudService.removeRent(rentId);
         loadData();
     }
 
@@ -99,7 +104,7 @@ public @Data class ManagerPageRestController implements Serializable {
     public void loadData() {
         books = base.path("books").request(MediaType.APPLICATION_JSON).get(new GenericType<>() {});
         movies = base.path("movies").request(MediaType.APPLICATION_JSON).get(new GenericType<>() {});
-        unfinishedRents = rentService.getUnfinishedRents();
-        finishedRents = rentService.getFinishedRents();
+        unfinishedRents = rentGetService.getUnfinishedRents();
+        finishedRents = rentGetService.getFinishedRents();
     }
 }

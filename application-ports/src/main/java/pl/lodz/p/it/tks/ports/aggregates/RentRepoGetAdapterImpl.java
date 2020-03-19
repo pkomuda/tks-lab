@@ -1,46 +1,25 @@
 package pl.lodz.p.it.tks.ports.aggregates;
 
+
 import pl.lodz.p.it.tks.adapters.repositories.RentRepository;
 import pl.lodz.p.it.tks.domainmodel.Rent;
 import pl.lodz.p.it.tks.ports.infrastructure.RentOutput;
-import pl.lodz.p.it.tks.ports.infrastructure.rentports.AddRentPort;
-import pl.lodz.p.it.tks.ports.infrastructure.rentports.RemoveRentPort;
-import pl.lodz.p.it.tks.ports.infrastructure.rentports.UpdateRentPort;
 import pl.lodz.p.it.tks.ports.userinterface.RentInput;
-import pl.lodz.p.it.tks.ports.userinterface.rentports.GetRentsPort;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Named
 @ApplicationScoped
-public class RentAdapter implements AddRentPort, UpdateRentPort, GetRentsPort, RemoveRentPort {
+public class RentRepoGetAdapterImpl implements RentRepoGetAdapter {
 
     @Inject
     private RentRepository rentRepository;
     @Inject
-    private RentOutput rentOutput;
-    @Inject
     private RentInput rentInput;
-
-    @Override
-    public void addRent(Rent rent) {
-        rentRepository.addRent(rentOutput.convert(rent));
-    }
-
-    @Override
-    public void updateRent(UUID id, Rent rent) {
-        rentRepository.updateRent(id, rentOutput.convert(rent));
-    }
-
-    @Override
-    public void removeRent(UUID id) {
-        rentRepository.removeRent(id);
-    }
 
     @Override
     public List<Rent> getUnfinishedRents() {
@@ -97,9 +76,4 @@ public class RentAdapter implements AddRentPort, UpdateRentPort, GetRentsPort, R
                 .map(rentEntity -> rentInput.convert(rentEntity))
                 .collect(Collectors.toList());
     }
-
-
-
-
-
 }

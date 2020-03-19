@@ -3,6 +3,7 @@ package pl.lodz.p.it.tks.appservices.controllers.rents;
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.controllers.ViewAccessController;
 import pl.lodz.p.it.tks.appservices.services.RentService;
+import pl.lodz.p.it.tks.appservices.services.rent.*;
 import pl.lodz.p.it.tks.domainmodel.Rent;
 
 import javax.annotation.PostConstruct;
@@ -17,7 +18,11 @@ import java.util.List;
 public @Data class RentsForClientController implements Serializable {
 
     @Inject
-    private RentService rentService;
+    private RentCrudService rentCrudService;
+    @Inject
+    private RentGetService rentGetService;
+    @Inject
+    private RentFilterService rentFilterService;
     @Inject
     private ViewAccessController viewAccessController;
     private List<Rent> unfinishedRents;
@@ -26,12 +31,12 @@ public @Data class RentsForClientController implements Serializable {
     private String rentFilter;
 
     public void filterRents() {
-        unfinishedRents = rentService.filterUnfinishedRentsForClient(username, rentFilter);
-        finishedRents = rentService.filterFinishedRentsForClient(username, rentFilter);
+        unfinishedRents = rentFilterService.filterUnfinishedRentsForClient(username, rentFilter);
+        finishedRents = rentFilterService.filterFinishedRentsForClient(username, rentFilter);
     }
 
     public void removeRent(String rentId) {
-        rentService.removeRent(rentId);
+        rentCrudService.removeRent(rentId);
         loadData();
     }
 
@@ -42,7 +47,7 @@ public @Data class RentsForClientController implements Serializable {
     @PostConstruct
     public void loadData() {
         username = viewAccessController.getSelectedUsername();
-        unfinishedRents = rentService.getUnfinishedRentsForClient(viewAccessController.getSelectedUsername());
-        finishedRents = rentService.getFinishedRentsForClient(viewAccessController.getSelectedUsername());
+        unfinishedRents = rentGetService.getUnfinishedRentsForClient(viewAccessController.getSelectedUsername());
+        finishedRents = rentGetService.getFinishedRentsForClient(viewAccessController.getSelectedUsername());
     }
 }
