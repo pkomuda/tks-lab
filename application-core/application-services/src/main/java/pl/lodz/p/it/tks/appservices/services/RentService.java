@@ -5,6 +5,12 @@ import pl.lodz.p.it.tks.domainmodel.users.Client;
 import pl.lodz.p.it.tks.ports.aggregates.CatalogAdapter;
 import pl.lodz.p.it.tks.ports.aggregates.RentAdapter;
 import pl.lodz.p.it.tks.ports.aggregates.UserAdapter;
+import pl.lodz.p.it.tks.ports.infrastructure.rentports.AddRentPort;
+import pl.lodz.p.it.tks.ports.infrastructure.rentports.RemoveRentPort;
+import pl.lodz.p.it.tks.ports.infrastructure.rentports.UpdateRentPort;
+import pl.lodz.p.it.tks.ports.userinterface.catalogports.GetCatalogsPort;
+import pl.lodz.p.it.tks.ports.userinterface.rentports.FilterRentsPort;
+import pl.lodz.p.it.tks.ports.userinterface.rentports.GetRentsPort;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -19,9 +25,17 @@ import java.util.UUID;
 public class RentService implements Serializable {
 
     @Inject
-    private RentAdapter rentAdapter;
+    private AddRentPort addRentPort;
+    @Inject
+    private UpdateRentPort updateRentPort;
+    @Inject
+    private GetRentsPort getRentsPort;
+    @Inject
+    private RemoveRentPort removeRentPort;
     @Inject
     private UserAdapter userAdapter;
+    @Inject
+    private FilterRentsPort filterRentsPort;
     @Inject
     private CatalogAdapter catalogAdapter;
 
@@ -31,60 +45,60 @@ public class RentService implements Serializable {
                 && getUnfinishedRentsForCatalog(catalogId).isEmpty()) {
             Rent rent = new Rent((Client) userAdapter.getUser(username), catalogAdapter.getCatalog(catalogId));
             rent.setRentDateTime(year, month, day, hour, minute);
-            rentAdapter.addRent(rent);
+            addRentPort.addRent(rent);
         }
     }
 
     public void removeRent(String id) {
-        rentAdapter.removeRent(UUID.fromString(id));
+        removeRentPort.removeRent(UUID.fromString(id));
     }
 
     public List<Rent> getUnfinishedRents() {
-        return rentAdapter.getUnfinishedRents();
+        return getRentsPort.getUnfinishedRents();
     }
 
     public List<Rent> getFinishedRents() {
-        return rentAdapter.getFinishedRents();
+        return getRentsPort.getFinishedRents();
     }
 
     public List<Rent> getUnfinishedRentsForClient(String username) {
-        return rentAdapter.getUnfinishedRentsForClient(username);
+        return getRentsPort.getUnfinishedRentsForClient(username);
     }
 
     public List<Rent> getFinishedRentsForClient(String username) {
-        return rentAdapter.getFinishedRentsForClient(username);
+        return getRentsPort.getFinishedRentsForClient(username);
     }
 
     public List<Rent> getUnfinishedRentsForCatalog(int id) {
-        return rentAdapter.getUnfinishedRentsForCatalog(id);
+        return getRentsPort.getUnfinishedRentsForCatalog(id);
     }
 
     public List<Rent> getFinishedRentsForCatalog(int id) {
-        return rentAdapter.getFinishedRentsForCatalog(id);
+        return getRentsPort.getFinishedRentsForCatalog(id);
     }
 
     public List<Rent> filterUnfinishedRents(String rentFilter) {
-        return rentAdapter.filterUnfinishedRents(rentFilter);
+        return filterRentsPort.filterUnfinishedRents(rentFilter);
     }
 
     public List<Rent> filterFinishedRents(String rentFilter) {
-        return rentAdapter.filterFinishedRents(rentFilter);
+        return filterRentsPort.filterFinishedRents(rentFilter);
     }
 
     public List<Rent> filterUnfinishedRentsForClient(String username, String rentFilter) {
-        return rentAdapter.filterUnfinishedRentsForClient(username, rentFilter);
+        return filterRentsPort.filterUnfinishedRentsForClient(username, rentFilter);
     }
 
     public List<Rent> filterFinishedRentsForClient(String username, String rentFilter) {
-        return rentAdapter.filterFinishedRentsForClient(username, rentFilter);
+        return filterRentsPort.filterFinishedRentsForClient(username, rentFilter);
     }
 
     public List<Rent> filterUnfinishedRentsForCatalog(int id, String rentFilter) {
-        return rentAdapter.filterUnfinishedRentsForCatalog(id, rentFilter);
+        return filterRentsPort.filterUnfinishedRentsForCatalog(id, rentFilter);
     }
 
     public List<Rent> filterFinishedRentsForCatalog(int id, String rentFilter) {
-        return rentAdapter.filterFinishedRentsForCatalog(id, rentFilter);
+        return filterRentsPort.filterFinishedRentsForCatalog(id, rentFilter);
     }
 
     public void finishRent(String id) {
@@ -99,7 +113,7 @@ public class RentService implements Serializable {
                     LocalDateTime.now().getDayOfMonth(),
                     LocalDateTime.now().getHour(),
                     LocalDateTime.now().getMinute());
-            rentAdapter.updateRent(UUID.fromString(id), temp);
+            updateRentPort.updateRent(UUID.fromString(id), temp);
         }
     }
 }

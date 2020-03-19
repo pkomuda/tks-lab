@@ -4,6 +4,7 @@ import pl.lodz.p.it.tks.adapters.repositories.RentRepository;
 import pl.lodz.p.it.tks.domainmodel.Rent;
 import pl.lodz.p.it.tks.ports.infrastructure.RentOutput;
 import pl.lodz.p.it.tks.ports.infrastructure.rentports.AddRentPort;
+import pl.lodz.p.it.tks.ports.infrastructure.rentports.RemoveRentPort;
 import pl.lodz.p.it.tks.ports.infrastructure.rentports.UpdateRentPort;
 import pl.lodz.p.it.tks.ports.userinterface.RentInput;
 import pl.lodz.p.it.tks.ports.userinterface.rentports.FilterRentsPort;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Named
 @ApplicationScoped
-public class RentAdapter implements AddRentPort, UpdateRentPort, FilterRentsPort, GetRentsPort {
+public class RentAdapter implements AddRentPort, UpdateRentPort, FilterRentsPort, GetRentsPort, RemoveRentPort {
 
     @Inject
     private RentRepository rentRepository;
@@ -37,6 +38,7 @@ public class RentAdapter implements AddRentPort, UpdateRentPort, FilterRentsPort
         rentRepository.updateRent(id, rentOutput.convert(rent));
     }
 
+    @Override
     public void removeRent(UUID id) {
         rentRepository.removeRent(id);
     }
@@ -144,4 +146,7 @@ public class RentAdapter implements AddRentPort, UpdateRentPort, FilterRentsPort
                 .map(rentEntity -> rentInput.convert(rentEntity))
                 .collect(Collectors.toList());
     }
+
+
+
 }
