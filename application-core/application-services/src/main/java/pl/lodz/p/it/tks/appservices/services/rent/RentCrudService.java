@@ -2,10 +2,7 @@ package pl.lodz.p.it.tks.appservices.services.rent;
 
 import pl.lodz.p.it.tks.domainmodel.Rent;
 import pl.lodz.p.it.tks.domainmodel.users.Client;
-import pl.lodz.p.it.tks.ports.aggregates.CatalogAdapter;
-import pl.lodz.p.it.tks.ports.aggregates.RentRepoCrudAdapter;
-import pl.lodz.p.it.tks.ports.aggregates.RentRepoGetAdapter;
-import pl.lodz.p.it.tks.ports.aggregates.UserAdapter;
+import pl.lodz.p.it.tks.ports.aggregates.*;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -26,7 +23,7 @@ public class RentCrudService implements Serializable, RentCrudServiceInterface {
     @Inject
     CatalogAdapter catalogAdapter;
     @Inject
-    UserAdapter userAdapter;
+    UserRepoGetAdapter userAdapter;
 
     public void addRent(String username, int catalogId, int year, int month, int day, int hour, int minute) {
         if (userAdapter.getUser(username) instanceof Client
