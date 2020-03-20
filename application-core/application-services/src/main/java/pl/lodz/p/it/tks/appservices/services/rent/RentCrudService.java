@@ -1,8 +1,12 @@
 package pl.lodz.p.it.tks.appservices.services.rent;
 
+import pl.lodz.p.it.tks.appservices.services.rent.interfaces.RentCrudServiceInterface;
 import pl.lodz.p.it.tks.domainmodel.Rent;
 import pl.lodz.p.it.tks.domainmodel.users.Client;
-import pl.lodz.p.it.tks.ports.aggregates.*;
+import pl.lodz.p.it.tks.ports.aggregates.catalog.CatalogRepoGetAdapter;
+import pl.lodz.p.it.tks.ports.aggregates.rent.RentRepoCrudAdapter;
+import pl.lodz.p.it.tks.ports.aggregates.rent.RentRepoGetAdapter;
+import pl.lodz.p.it.tks.ports.aggregates.user.UserRepoGetAdapter;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -21,7 +25,7 @@ public class RentCrudService implements Serializable, RentCrudServiceInterface {
     @Inject
     RentRepoGetAdapter rentRepoGetAdapter;
     @Inject
-    CatalogAdapter catalogAdapter;
+    CatalogRepoGetAdapter catalogAdapter;
     @Inject
     UserRepoGetAdapter userAdapter;
 

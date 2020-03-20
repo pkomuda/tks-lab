@@ -2,8 +2,9 @@ package pl.lodz.p.it.tks.appservices.controllers.rents;
 
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.controllers.ViewAccessController;
-import pl.lodz.p.it.tks.appservices.services.RentService;
-import pl.lodz.p.it.tks.appservices.services.rent.*;
+import pl.lodz.p.it.tks.appservices.services.rent.interfaces.RentCrudServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.rent.interfaces.RentFilterServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.rent.interfaces.RentGetServiceInterface;
 import pl.lodz.p.it.tks.domainmodel.Rent;
 
 import javax.annotation.PostConstruct;

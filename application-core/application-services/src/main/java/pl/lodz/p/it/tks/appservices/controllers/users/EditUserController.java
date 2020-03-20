@@ -2,9 +2,8 @@ package pl.lodz.p.it.tks.appservices.controllers.users;
 
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.controllers.ViewAccessController;
-import pl.lodz.p.it.tks.appservices.services.UserService;
-import pl.lodz.p.it.tks.appservices.services.user.UserCrudServiceInterface;
-import pl.lodz.p.it.tks.appservices.services.user.UserGetServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserCrudServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserGetServiceInterface;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;

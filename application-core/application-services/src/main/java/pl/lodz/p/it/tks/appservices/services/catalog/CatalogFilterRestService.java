@@ -1,12 +1,10 @@
 package pl.lodz.p.it.tks.appservices.services.catalog;
 
+import pl.lodz.p.it.tks.appservices.services.catalog.interfaces.CatalogFilterRestServiceInterface;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Book;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Catalog;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Movie;
-import pl.lodz.p.it.tks.ports.aggregates.CatalogAdapter;
-import pl.lodz.p.it.tks.ports.aggregates.CatalogRepoFilterAdapter;
-import pl.lodz.p.it.tks.ports.aggregates.CatalogRepoGetAdapter;
-import pl.lodz.p.it.tks.ports.aggregates.RentAdapter;
+import pl.lodz.p.it.tks.ports.aggregates.catalog.CatalogRepoFilterAdapter;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -24,8 +22,7 @@ public class CatalogFilterRestService implements CatalogFilterRestServiceInterfa
 
     @Inject
     private CatalogRepoFilterAdapter catalogAdapter;
-    @Inject
-    private RentAdapter rentAdapter;
+
 
     @GET
     @Path("/catalogs/{filter}")

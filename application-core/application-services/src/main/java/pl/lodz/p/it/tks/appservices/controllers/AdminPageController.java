@@ -1,9 +1,8 @@
 package pl.lodz.p.it.tks.appservices.controllers;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.appservices.services.UserService;
-import pl.lodz.p.it.tks.appservices.services.user.UserFilterServiceInterface;
-import pl.lodz.p.it.tks.appservices.services.user.UserGetServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserFilterServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserGetServiceInterface;
 import pl.lodz.p.it.tks.domainmodel.users.Admin;
 import pl.lodz.p.it.tks.domainmodel.users.Client;
 import pl.lodz.p.it.tks.domainmodel.users.Manager;

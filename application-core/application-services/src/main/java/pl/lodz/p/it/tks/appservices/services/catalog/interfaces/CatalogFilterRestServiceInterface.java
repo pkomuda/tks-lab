@@ -11,18 +11,11 @@ import javax.ws.rs.core.Response;
 
 public interface CatalogFilterRestServiceInterface {
 
-    @GET
-    @Path("/catalogs/{filter}")
-    @Produces(MediaType.APPLICATION_JSON)
+
     public Response filterCatalogs( String catalogFilter);
 
-    @GET
-    @Path("/books/{filter}")
-    @Produces(MediaType.APPLICATION_JSON)
+
     public Response filterBooks(String catalogFilter);
 
-    @GET
-    @Path("/movies/{filter}")
-    @Produces(MediaType.APPLICATION_JSON)
     public Response filterMovies(String catalogFilter);
 }

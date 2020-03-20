@@ -1,10 +1,11 @@
 package pl.lodz.p.it.tks.appservices.services.catalog;
 
 
+import pl.lodz.p.it.tks.appservices.services.catalog.interfaces.CatalogGetRestServiceInterface;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Book;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Catalog;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Movie;
-import pl.lodz.p.it.tks.ports.aggregates.CatalogRepoGetAdapter;
+import pl.lodz.p.it.tks.ports.aggregates.catalog.CatalogRepoGetAdapter;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

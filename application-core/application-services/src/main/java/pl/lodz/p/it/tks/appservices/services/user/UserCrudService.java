@@ -1,11 +1,12 @@
 package pl.lodz.p.it.tks.appservices.services.user;
 
+import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserCrudServiceInterface;
 import pl.lodz.p.it.tks.domainmodel.users.Admin;
 import pl.lodz.p.it.tks.domainmodel.users.Client;
 import pl.lodz.p.it.tks.domainmodel.users.Manager;
 import pl.lodz.p.it.tks.domainmodel.users.User;
-import pl.lodz.p.it.tks.ports.aggregates.UserRepoCrudAdapter;
-import pl.lodz.p.it.tks.ports.aggregates.UserRepoGetAdapter;
+import pl.lodz.p.it.tks.ports.aggregates.user.UserRepoCrudAdapter;
+import pl.lodz.p.it.tks.ports.aggregates.user.UserRepoGetAdapter;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;

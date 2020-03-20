@@ -1,11 +1,15 @@
 package pl.lodz.p.it.tks.appservices.services.catalog;
 
 
+import pl.lodz.p.it.tks.appservices.services.catalog.interfaces.CatalogCrudRestServiceInterface;
 import pl.lodz.p.it.tks.domainmodel.Rent;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Book;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Movie;
 import pl.lodz.p.it.tks.domainmodel.catalogs.NoCatalog;
-import pl.lodz.p.it.tks.ports.aggregates.*;
+import pl.lodz.p.it.tks.ports.aggregates.catalog.CatalogRepoCrudAdapter;
+import pl.lodz.p.it.tks.ports.aggregates.catalog.CatalogRepoGetAdapter;
+import pl.lodz.p.it.tks.ports.aggregates.rent.RentRepoCrudAdapter;
+import pl.lodz.p.it.tks.ports.aggregates.rent.RentRepoGetAdapter;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

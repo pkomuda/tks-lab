@@ -13,18 +13,10 @@ import java.util.List;
 
 public interface CatalogGetRestServiceInterface {
 
-    @GET
-    @Path("/catalogs")
-    @Produces(MediaType.APPLICATION_JSON)
+
     public Response getCatalogs();
 
-    @GET
-    @Path("/books")
-    @Produces(MediaType.APPLICATION_JSON)
     public Response getBooks();
 
-    @GET
-    @Path("/movies")
-    @Produces(MediaType.APPLICATION_JSON)
     public Response getMovies();
 }

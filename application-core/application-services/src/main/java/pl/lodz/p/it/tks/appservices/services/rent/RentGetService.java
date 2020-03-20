@@ -1,7 +1,8 @@
 package pl.lodz.p.it.tks.appservices.services.rent;
 
+import pl.lodz.p.it.tks.appservices.services.rent.interfaces.RentGetServiceInterface;
 import pl.lodz.p.it.tks.domainmodel.Rent;
-import pl.lodz.p.it.tks.ports.aggregates.RentRepoGetAdapter;
+import pl.lodz.p.it.tks.ports.aggregates.rent.RentRepoGetAdapter;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;

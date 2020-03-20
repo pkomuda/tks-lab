@@ -1,10 +1,7 @@
 package pl.lodz.p.it.tks.appservices.controllers.users;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.appservices.services.UserService;
-import pl.lodz.p.it.tks.appservices.services.user.UserCrudService;
-import pl.lodz.p.it.tks.appservices.services.user.UserCrudServiceInterface;
-import pl.lodz.p.it.tks.appservices.services.user.UserGetService;
+import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserCrudServiceInterface;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;

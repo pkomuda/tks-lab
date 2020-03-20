@@ -3,11 +3,7 @@ package pl.lodz.p.it.tks.appservices.controllers.rents;
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.controllers.LoginController;
 import pl.lodz.p.it.tks.appservices.controllers.ViewAccessController;
-import pl.lodz.p.it.tks.appservices.services.RentService;
-import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
-import pl.lodz.p.it.tks.appservices.services.rent.RentCrudServiceInterface;
-import pl.lodz.p.it.tks.appservices.services.rent.RentFilterServiceInterface;
-import pl.lodz.p.it.tks.appservices.services.rent.RentGetServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.rent.interfaces.RentCrudServiceInterface;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
