@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.ports.aggregates;
+package pl.lodz.p.it.tks.ports.aggregates.rent;
 
 import pl.lodz.p.it.tks.ports.infrastructure.catalogports.UpdateCatalogPort;
 import pl.lodz.p.it.tks.ports.infrastructure.rentports.AddRentPort;

@@ -1,8 +1,9 @@
-package pl.lodz.p.it.tks.ports.aggregates;
+package pl.lodz.p.it.tks.ports.aggregates.rent.impl;
 
 
 import pl.lodz.p.it.tks.adapters.repositories.RentRepository;
 import pl.lodz.p.it.tks.domainmodel.Rent;
+import pl.lodz.p.it.tks.ports.aggregates.rent.RentRepoFilterAdapter;
 import pl.lodz.p.it.tks.ports.userinterface.RentInput;
 
 import javax.enterprise.context.ApplicationScoped;

@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.appservices.services.catalog;
+package pl.lodz.p.it.tks.appservices.services.catalog.interfaces;
 
 import pl.lodz.p.it.tks.domainmodel.catalogs.Movie;
 

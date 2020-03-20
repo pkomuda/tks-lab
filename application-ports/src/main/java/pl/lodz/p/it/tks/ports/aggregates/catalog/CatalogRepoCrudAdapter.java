@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.ports.aggregates;
+package pl.lodz.p.it.tks.ports.aggregates.catalog;
 
 import pl.lodz.p.it.tks.ports.infrastructure.catalogports.AddCatalogPort;
 import pl.lodz.p.it.tks.ports.infrastructure.catalogports.RemoveCatalogPort;

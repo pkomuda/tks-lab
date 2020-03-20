@@ -1,10 +1,11 @@
-package pl.lodz.p.it.tks.ports.aggregates;
+package pl.lodz.p.it.tks.ports.aggregates.user.impl;
 
 import pl.lodz.p.it.tks.adapters.repositories.UserRepository;
 import pl.lodz.p.it.tks.domainmodel.users.Admin;
 import pl.lodz.p.it.tks.domainmodel.users.Client;
 import pl.lodz.p.it.tks.domainmodel.users.Manager;
 import pl.lodz.p.it.tks.domainmodel.users.User;
+import pl.lodz.p.it.tks.ports.aggregates.user.UserRepoGetAdapter;
 import pl.lodz.p.it.tks.ports.userinterface.UserInput;
 
 import javax.enterprise.context.ApplicationScoped;

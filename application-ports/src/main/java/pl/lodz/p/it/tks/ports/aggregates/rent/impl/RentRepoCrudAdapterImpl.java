@@ -1,7 +1,8 @@
-package pl.lodz.p.it.tks.ports.aggregates;
+package pl.lodz.p.it.tks.ports.aggregates.rent.impl;
 
 import pl.lodz.p.it.tks.adapters.repositories.RentRepository;
 import pl.lodz.p.it.tks.domainmodel.Rent;
+import pl.lodz.p.it.tks.ports.aggregates.rent.RentRepoCrudAdapter;
 import pl.lodz.p.it.tks.ports.infrastructure.RentOutput;
 
 import javax.enterprise.context.Dependent;

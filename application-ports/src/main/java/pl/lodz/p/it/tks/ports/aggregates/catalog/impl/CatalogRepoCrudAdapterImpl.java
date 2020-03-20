@@ -1,7 +1,8 @@
-package pl.lodz.p.it.tks.ports.aggregates;
+package pl.lodz.p.it.tks.ports.aggregates.catalog.impl;
 
 import pl.lodz.p.it.tks.adapters.repositories.CatalogRepository;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Catalog;
+import pl.lodz.p.it.tks.ports.aggregates.catalog.CatalogRepoCrudAdapter;
 import pl.lodz.p.it.tks.ports.infrastructure.CatalogOutput;
 
 import javax.enterprise.context.Dependent;

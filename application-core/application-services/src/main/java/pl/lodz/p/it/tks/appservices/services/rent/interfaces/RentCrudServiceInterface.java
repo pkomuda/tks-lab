@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.appservices.services.rent;
+package pl.lodz.p.it.tks.appservices.services.rent.interfaces;
 
 public interface RentCrudServiceInterface {
 

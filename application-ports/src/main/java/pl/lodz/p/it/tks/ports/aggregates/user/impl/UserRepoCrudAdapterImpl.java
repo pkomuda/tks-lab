@@ -1,7 +1,8 @@
-package pl.lodz.p.it.tks.ports.aggregates;
+package pl.lodz.p.it.tks.ports.aggregates.user.impl;
 
 import pl.lodz.p.it.tks.adapters.repositories.UserRepository;
 import pl.lodz.p.it.tks.domainmodel.users.User;
+import pl.lodz.p.it.tks.ports.aggregates.user.UserRepoCrudAdapter;
 import pl.lodz.p.it.tks.ports.infrastructure.UserOutput;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -10,7 +11,7 @@ import javax.inject.Named;
 
 @Named
 @ApplicationScoped
-public class UserRepoCrudAdapterImpl implements  UserRepoCrudAdapter {
+public class UserRepoCrudAdapterImpl implements UserRepoCrudAdapter {
 
     @Inject
     private UserRepository userRepository;

@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.appservices.services.user;
+package pl.lodz.p.it.tks.appservices.services.user.interfaces;
 
 import pl.lodz.p.it.tks.domainmodel.users.Admin;
 import pl.lodz.p.it.tks.domainmodel.users.Client;
