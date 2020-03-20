@@ -3,6 +3,8 @@ package pl.lodz.p.it.tks.appservices.controllers.users;
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.controllers.ViewAccessController;
 import pl.lodz.p.it.tks.appservices.services.UserService;
+import pl.lodz.p.it.tks.appservices.services.user.UserCrudServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.user.UserGetServiceInterface;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -14,7 +16,9 @@ import javax.inject.Named;
 public @Data class EditUserController {
 
     @Inject
-    private UserService userService;
+    private UserCrudServiceInterface userService;
+    @Inject
+    private UserGetServiceInterface userGetService;
     @Inject
     private ViewAccessController viewAccessController;
     private String username;
@@ -34,6 +38,6 @@ public @Data class EditUserController {
     @PostConstruct
     public void loadUserInfo() {
         username = viewAccessController.getSelectedUsername();
-        active = userService.getUser(username).isActive();
+        active = userGetService.getUser(username).isActive();
     }
 }

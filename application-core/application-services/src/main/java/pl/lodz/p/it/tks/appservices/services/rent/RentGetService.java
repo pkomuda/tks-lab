@@ -12,7 +12,7 @@ import java.util.List;
 
 @Named
 @Dependent
-public class RentGetService implements Serializable {
+public class RentGetService implements Serializable, RentGetServiceInterface {
 
     @Inject
     private RentRepoGetAdapter rentRepoGetAdapter;

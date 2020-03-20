@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @Named
 @Dependent
-public class RentCrudService implements Serializable {
+public class RentCrudService implements Serializable, RentCrudServiceInterface {
 
     @Inject
     RentRepoCrudAdapter rentRepoCrudAdapter;

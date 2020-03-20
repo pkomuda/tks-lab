@@ -10,7 +10,7 @@ import pl.lodz.p.it.tks.ports.infrastructure.userports.AddUserPort;
 import pl.lodz.p.it.tks.ports.infrastructure.userports.UpdateUserPort;
 import pl.lodz.p.it.tks.ports.userinterface.UserInput;
 import pl.lodz.p.it.tks.ports.userinterface.userports.GetUserPort;
-import pl.lodz.p.it.tks.ports.userinterface.userports.GetUsersPort;
+import pl.lodz.p.it.tks.ports.userinterface.userports.FilterUserPort;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Named
 @ApplicationScoped
-public class UserAdapter implements AddUserPort, UpdateUserPort, GetUserPort, GetUsersPort {
+public class UserAdapter implements AddUserPort, UpdateUserPort, GetUserPort, FilterUserPort {
 
     @Inject
     private UserRepository userRepository;

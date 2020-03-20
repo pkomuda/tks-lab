@@ -7,12 +7,8 @@ import pl.lodz.p.it.tks.domainmodel.users.User;
 
 import java.util.List;
 
-public interface GetUsersPort {
+public interface FilterUserPort {
 
-    List<User> getUsers();
-    List<Admin> getAdmins();
-    List<Manager> getManagers();
-    List<Client> getClients();
     List<Admin> filterAdmins(String adminFilter);
     List<Manager> filterManagers(String managerFilter);
     List<Client> filterClients(String clientFilter);

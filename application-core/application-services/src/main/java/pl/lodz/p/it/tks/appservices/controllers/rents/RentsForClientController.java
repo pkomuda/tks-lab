@@ -18,11 +18,11 @@ import java.util.List;
 public @Data class RentsForClientController implements Serializable {
 
     @Inject
-    private RentCrudService rentCrudService;
+    private RentCrudServiceInterface rentCrudService;
     @Inject
-    private RentGetService rentGetService;
+    private RentGetServiceInterface rentGetService;
     @Inject
-    private RentFilterService rentFilterService;
+    private RentFilterServiceInterface rentFilterService;
     @Inject
     private ViewAccessController viewAccessController;
     private List<Rent> unfinishedRents;

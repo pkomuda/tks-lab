@@ -2,6 +2,8 @@ package pl.lodz.p.it.tks.appservices.controllers;
 
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.services.UserService;
+import pl.lodz.p.it.tks.appservices.services.user.UserFilterServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.user.UserGetServiceInterface;
 import pl.lodz.p.it.tks.domainmodel.users.Admin;
 import pl.lodz.p.it.tks.domainmodel.users.Client;
 import pl.lodz.p.it.tks.domainmodel.users.Manager;
@@ -19,7 +21,9 @@ import java.util.List;
 public @Data class AdminPageController implements Serializable {
 
     @Inject
-    private UserService userService;
+    private UserGetServiceInterface userGetService;
+    @Inject
+    private UserFilterServiceInterface userFilterService;
     @Inject
     private ViewAccessController viewAccessController;
     private List<Admin> admins;
@@ -42,15 +46,15 @@ public @Data class AdminPageController implements Serializable {
     }
 
     public void filterUsers() {
-        admins = userService.filterAdmins(userFilter);
-        managers = userService.filterManagers(userFilter);
-        clients = userService.filterClients(userFilter);
+        admins = userFilterService.filterAdmins(userFilter);
+        managers = userFilterService.filterManagers(userFilter);
+        clients = userFilterService.filterClients(userFilter);
     }
 
     @PostConstruct
     public void loadUsers() {
-        admins = userService.getAdmins();
-        managers = userService.getManagers();
-        clients = userService.getClients();
+        admins = userGetService.getAdmins();
+        managers = userGetService.getManagers();
+        clients = userGetService.getClients();
     }
 }

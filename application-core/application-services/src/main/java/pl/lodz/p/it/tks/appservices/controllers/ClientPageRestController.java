@@ -26,11 +26,11 @@ import java.util.stream.Collectors;
 public @Data class ClientPageRestController implements Serializable {
 
     @Inject
-    private RentCrudService rentCrudService;
+    private RentCrudServiceInterface rentCrudService;
     @Inject
-    private RentGetService rentGetService;
+    private RentGetServiceInterface rentGetService;
     @Inject
-    private RentFilterService rentFilterService;
+    private RentFilterServiceInterface rentFilterService;
     @Inject
     private ViewAccessController viewAccessController;
     @Inject

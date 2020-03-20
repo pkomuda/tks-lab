@@ -6,11 +6,9 @@ import pl.lodz.p.it.tks.domainmodel.catalogs.Movie;
 
 import java.util.List;
 
-public interface GetCatalogsPort {
+public interface FilterCatalogPort {
 
-    List<Catalog> getCatalogs();
-    List<Book> getBooks();
-    List<Movie> getMovies();
+
     List<Catalog> filterCatalogs(String catalogFilter);
     List<Book> filterBooks(String bookFilter);
     List<Movie> filterMovies(String movieFilter);

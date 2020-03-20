@@ -1,12 +1,10 @@
-package pl.lodz.p.it.tks.appservices.services;
+package pl.lodz.p.it.tks.appservices.services.user;
 
 import pl.lodz.p.it.tks.domainmodel.users.Admin;
 import pl.lodz.p.it.tks.domainmodel.users.Client;
 import pl.lodz.p.it.tks.domainmodel.users.Manager;
 import pl.lodz.p.it.tks.domainmodel.users.User;
-import pl.lodz.p.it.tks.ports.aggregates.UserAdapter;
 import pl.lodz.p.it.tks.ports.aggregates.UserRepoCrudAdapter;
-import pl.lodz.p.it.tks.ports.aggregates.UserRepoFilterAdapter;
 import pl.lodz.p.it.tks.ports.aggregates.UserRepoGetAdapter;
 
 import javax.enterprise.context.Dependent;
@@ -16,18 +14,15 @@ import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 
 @Named
 @Dependent
-public class UserService implements Serializable {
+public class UserCrudService implements Serializable, UserCrudServiceInterface {
 
     @Inject
-    private UserRepoCrudAdapter userRepoCrudAdapter;
+    UserRepoCrudAdapter userRepoCrud;
     @Inject
-    private UserRepoFilterAdapter userRepoFilterAdapter;
-    @Inject
-    private UserRepoGetAdapter userRepoGetAdapter;
+    UserRepoGetAdapter userRepoGet;
 
     private String sha256(String password) {
         MessageDigest digest = null;
@@ -52,58 +47,30 @@ public class UserService implements Serializable {
     }
 
     public void addAdmin(String username, boolean active, String firstName, String lastName, String password) {
-        if (getUser(username) == null) {
-            userRepoCrudAdapter.addUser(new Admin(username, sha256(password), firstName, lastName, active));
+        if (userRepoGet.getUser(username) == null) {
+            userRepoCrud.addUser(new Admin(username, sha256(password), firstName, lastName, active));
         }
     }
 
     public void addManager(String username, boolean active, String firstName, String lastName, String password) {
-        if (getUser(username) == null) {
-            userRepoCrudAdapter.addUser(new Manager(username, sha256(password), firstName, lastName, active));
+        if (userRepoGet.getUser(username) == null) {
+            userRepoCrud.addUser(new Manager(username, sha256(password), firstName, lastName, active));
         }
     }
 
     public void addClient(String username, boolean active, String firstName, String lastName, String password) {
-        if (getUser(username) == null) {
-            userRepoCrudAdapter.addUser(new Client(username, sha256(password), firstName, lastName, active));
+        if (userRepoGet.getUser(username) == null) {
+            userRepoCrud.addUser(new Client(username, sha256(password), firstName, lastName, active));
         }
     }
 
-    public User getUser(String username) {
-        return userRepoGetAdapter.getUser(username);
-    }
-
-    public List<Admin> getAdmins() {
-        return userRepoGetAdapter.getAdmins();
-    }
-
-    public List<Manager> getManagers() {
-        return userRepoGetAdapter.getManagers();
-    }
-
-    public List<Client> getClients() {
-        return userRepoGetAdapter.getClients();
-    }
-
-    public List<Admin> filterAdmins(String adminFilter) {
-        return userRepoFilterAdapter.filterAdmins(adminFilter);
-    }
-
-    public List<Manager> filterManagers(String managerFilter) {
-        return userRepoFilterAdapter.filterManagers(managerFilter);
-    }
-
-    public List<Client> filterClients(String clientFilter) {
-        return userRepoFilterAdapter.filterClients(clientFilter);
-    }
-
     public void updateUser(String username, String firstName, String lastName, boolean active) {
-        if (getUser(username) != null) {
-            User temp = getUser(username);
+        if (userRepoGet.getUser(username) != null) {
+            User temp = userRepoGet.getUser(username);
             temp.setFirstName(firstName);
             temp.setLastName(lastName);
             temp.setActive(active);
-            userRepoCrudAdapter.updateUser(username, temp);
+            userRepoCrud.updateUser(username, temp);
         }
     }
 }

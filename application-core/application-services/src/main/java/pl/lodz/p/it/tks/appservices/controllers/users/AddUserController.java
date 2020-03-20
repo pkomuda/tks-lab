@@ -2,6 +2,9 @@ package pl.lodz.p.it.tks.appservices.controllers.users;
 
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.services.UserService;
+import pl.lodz.p.it.tks.appservices.services.user.UserCrudService;
+import pl.lodz.p.it.tks.appservices.services.user.UserCrudServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.user.UserGetService;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
@@ -14,7 +17,7 @@ import java.io.Serializable;
 public @Data class AddUserController implements Serializable {
 
     @Inject
-    private UserService userService;
+    private UserCrudServiceInterface userCrudService;
     @Inject
     private Conversation conversation;
     private String userType;
@@ -32,13 +35,13 @@ public @Data class AddUserController implements Serializable {
     public String confirm(String userType) {
         switch (userType) {
             case "admin":
-                userService.addAdmin(username, active, firstName, lastName, password);
+                userCrudService.addAdmin(username, active, firstName, lastName, password);
                 break;
             case "manager":
-                userService.addManager(username, active, firstName, lastName, password);
+                userCrudService.addManager(username, active, firstName, lastName, password);
                 break;
             case "client":
-                userService.addClient(username, active, firstName, lastName, password);
+                userCrudService.addClient(username, active, firstName, lastName, password);
                 break;
         }
         endConversation();

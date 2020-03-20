@@ -19,7 +19,7 @@ import javax.inject.Named;
 public @Data class AddRentController {
 
     @Inject
-    private RentCrudService rentCrudService;
+    private RentCrudServiceInterface rentCrudService;
     @Inject
     private ViewAccessController viewAccessController;
     @Inject

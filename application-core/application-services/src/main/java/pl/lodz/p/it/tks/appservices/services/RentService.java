@@ -26,7 +26,7 @@ public class RentService implements Serializable {
     private UserAdapter userAdapter;
     @Inject
     private CatalogAdapter catalogAdapter;
-//
+
 //    public void addRent(String username, int catalogId, int year, int month, int day, int hour, int minute) {
 //        if (userAdapter.getUser(username) instanceof Client
 //                && userAdapter.getUser(username).isActive()

@@ -9,7 +9,7 @@ import pl.lodz.p.it.tks.ports.infrastructure.catalogports.AddCatalogPort;
 import pl.lodz.p.it.tks.ports.infrastructure.catalogports.UpdateCatalogPort;
 import pl.lodz.p.it.tks.ports.userinterface.CatalogInput;
 import pl.lodz.p.it.tks.ports.userinterface.catalogports.GetCatalogPort;
-import pl.lodz.p.it.tks.ports.userinterface.catalogports.GetCatalogsPort;
+import pl.lodz.p.it.tks.ports.userinterface.catalogports.FilterCatalogPort;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Named
 @ApplicationScoped
-public class CatalogAdapter implements AddCatalogPort, UpdateCatalogPort, GetCatalogPort, GetCatalogsPort {
+public class CatalogAdapter implements AddCatalogPort, UpdateCatalogPort, GetCatalogPort, FilterCatalogPort {
 
     @Inject
     private CatalogRepository catalogRepository;
