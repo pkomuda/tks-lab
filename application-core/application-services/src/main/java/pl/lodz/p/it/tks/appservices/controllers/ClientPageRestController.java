@@ -1,6 +1,7 @@
 package pl.lodz.p.it.tks.appservices.controllers;
 
 import lombok.Data;
+import pl.lodz.p.it.tks.appservices.services.rent.*;
 import pl.lodz.p.it.tks.appservices.services.RentService;
 import pl.lodz.p.it.tks.domainmodel.Rent;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Book;
@@ -25,7 +26,11 @@ import java.util.stream.Collectors;
 public @Data class ClientPageRestController implements Serializable {
 
     @Inject
-    private RentService rentService;
+    private RentCrudService rentCrudService;
+    @Inject
+    private RentGetService rentGetService;
+    @Inject
+    private RentFilterService rentFilterService;
     @Inject
     private ViewAccessController viewAccessController;
     @Inject
@@ -40,7 +45,7 @@ public @Data class ClientPageRestController implements Serializable {
     private WebTarget base = client.target("https://localhost:8181/tkslab/resources/api");
 
     public String prepareRentInfo(Catalog catalog) {
-        if (rentService.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
+        if (rentGetService.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
             viewAccessController.setSelectedCatalog(catalog);
             return "addRent";
         } else {
@@ -66,17 +71,17 @@ public @Data class ClientPageRestController implements Serializable {
     }
 
     public void filterRentsForClient() {
-        unfinishedRents = rentService.filterUnfinishedRentsForClient(loginController.getUsername(), rentFilter);
-        finishedRents = rentService.filterFinishedRentsForClient(loginController.getUsername(), rentFilter);
+        unfinishedRents = rentFilterService.filterUnfinishedRentsForClient(loginController.getUsername(), rentFilter);
+        finishedRents = rentFilterService.filterFinishedRentsForClient(loginController.getUsername(), rentFilter);
     }
 
     public void finishRent(String rentId) {
-        rentService.finishRent(rentId);
+        rentCrudService.finishRent(rentId);
         loadData();
     }
 
     public String getCatalogStatus(Catalog catalog) {
-        if (rentService.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
+        if (rentGetService.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
             return "Free";
         } else {
             return "Rented";
@@ -87,7 +92,7 @@ public @Data class ClientPageRestController implements Serializable {
     public void loadData() {
         books = base.path("books").request(MediaType.APPLICATION_JSON).get(new GenericType<>() {});
         movies = base.path("movies").request(MediaType.APPLICATION_JSON).get(new GenericType<>() {});
-        unfinishedRents = rentService.getUnfinishedRentsForClient(loginController.getUsername());
-        finishedRents = rentService.getFinishedRentsForClient(loginController.getUsername());
+        unfinishedRents = rentGetService.getUnfinishedRentsForClient(loginController.getUsername());
+        finishedRents = rentGetService.getFinishedRentsForClient(loginController.getUsername());
     }
 }
