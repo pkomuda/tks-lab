@@ -19,7 +19,6 @@ public class RentRepoCrudAdapterImpl implements RentRepoCrudAdapter {
     @Inject
     private RentOutput rentOutput;
 
-
     @Override
     public void addRent(Rent rent) {
         rentRepository.addRent(rentOutput.convert(rent));

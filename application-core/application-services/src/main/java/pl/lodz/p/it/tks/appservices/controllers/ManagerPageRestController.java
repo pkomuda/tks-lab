@@ -1,9 +1,9 @@
 package pl.lodz.p.it.tks.appservices.controllers;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.appservices.services.rent.interfaces.RentCrudServiceInterface;
-import pl.lodz.p.it.tks.appservices.services.rent.interfaces.RentFilterServiceInterface;
-import pl.lodz.p.it.tks.appservices.services.rent.interfaces.RentGetServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
+import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
+import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
 import pl.lodz.p.it.tks.domainmodel.Rent;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Book;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Catalog;
@@ -27,11 +27,11 @@ import java.util.stream.Collectors;
 public @Data class ManagerPageRestController implements Serializable {
 
     @Inject
-    private RentCrudServiceInterface rentCrudService;
+    private RentCrudService rentCrudService;
     @Inject
-    private RentGetServiceInterface rentGetService;
+    private RentGetService rentGetService;
     @Inject
-    private RentFilterServiceInterface rentFilterService;
+    private RentFilterService rentFilterService;
     @Inject
     private ViewAccessController viewAccessController;
     private List<Book> books;

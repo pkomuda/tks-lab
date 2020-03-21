@@ -1,6 +1,6 @@
-package pl.lodz.p.it.tks.appservices.services.user;
+package pl.lodz.p.it.tks.appservices.services.user.impl;
 
-import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserFilterServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserFilterService;
 import pl.lodz.p.it.tks.domainmodel.users.Admin;
 import pl.lodz.p.it.tks.domainmodel.users.Client;
 import pl.lodz.p.it.tks.domainmodel.users.Manager;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Named
 @Dependent
-public class UserFilterService implements Serializable, UserFilterServiceInterface {
+public class UserFilterServiceImpl implements Serializable, UserFilterService {
 
     @Inject
     UserRepoFilterAdapter userRepoFilterAdapter;

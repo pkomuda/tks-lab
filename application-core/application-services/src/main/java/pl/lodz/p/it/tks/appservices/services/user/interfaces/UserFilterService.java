@@ -6,12 +6,9 @@ import pl.lodz.p.it.tks.domainmodel.users.Manager;
 
 import java.util.List;
 
-public interface UserFilterServiceInterface {
+interface UserFilterService {
 
-    public List<Admin> filterAdmins(String adminFilter);
-
-    public List<Manager> filterManagers(String managerFilter);
-
-    public List<Client> filterClients(String clientFilter);
-
+    List<Admin> filterAdmins(String adminFilter);
+    List<Manager> filterManagers(String managerFilter);
+    List<Client> filterClients(String clientFilter);
 }

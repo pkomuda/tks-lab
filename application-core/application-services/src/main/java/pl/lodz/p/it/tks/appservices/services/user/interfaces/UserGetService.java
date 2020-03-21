@@ -7,13 +7,10 @@ import pl.lodz.p.it.tks.domainmodel.users.User;
 
 import java.util.List;
 
-public interface UserGetServiceInterface {
+interface UserGetService {
 
-    public User getUser(String username);
-
-    public List<Admin> getAdmins();
-
-    public List<Manager> getManagers();
-
-    public List<Client> getClients();
+    User getUser(String username);
+    List<Admin> getAdmins();
+    List<Manager> getManagers();
+    List<Client> getClients();
 }

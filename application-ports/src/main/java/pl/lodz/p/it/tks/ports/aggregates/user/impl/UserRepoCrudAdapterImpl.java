@@ -27,5 +27,4 @@ public class UserRepoCrudAdapterImpl implements UserRepoCrudAdapter {
     public void updateUser(String username, User user) {
         userRepository.updateUser(username, userOutput.convert(user));
     }
-
 }

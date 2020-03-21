@@ -1,8 +1,8 @@
 package pl.lodz.p.it.tks.appservices.controllers;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserFilterServiceInterface;
-import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserGetServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserFilterService;
+import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserGetService;
 import pl.lodz.p.it.tks.domainmodel.users.Admin;
 import pl.lodz.p.it.tks.domainmodel.users.Client;
 import pl.lodz.p.it.tks.domainmodel.users.Manager;
@@ -20,9 +20,9 @@ import java.util.List;
 public @Data class AdminPageController implements Serializable {
 
     @Inject
-    private UserGetServiceInterface userGetService;
+    private UserGetService userGetService;
     @Inject
-    private UserFilterServiceInterface userFilterService;
+    private UserFilterService userFilterService;
     @Inject
     private ViewAccessController viewAccessController;
     private List<Admin> admins;

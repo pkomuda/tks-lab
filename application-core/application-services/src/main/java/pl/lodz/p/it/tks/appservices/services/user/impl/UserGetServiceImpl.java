@@ -1,6 +1,6 @@
-package pl.lodz.p.it.tks.appservices.services.user;
+package pl.lodz.p.it.tks.appservices.services.user.impl;
 
-import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserGetServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserGetService;
 import pl.lodz.p.it.tks.domainmodel.users.Admin;
 import pl.lodz.p.it.tks.domainmodel.users.Client;
 import pl.lodz.p.it.tks.domainmodel.users.Manager;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Named
 @Dependent
-public class UserGetService implements Serializable, UserGetServiceInterface {
+public class UserGetServiceImpl implements Serializable, UserGetService {
 
     @Inject
     private UserRepoGetAdapter userRepoGetAdapter;

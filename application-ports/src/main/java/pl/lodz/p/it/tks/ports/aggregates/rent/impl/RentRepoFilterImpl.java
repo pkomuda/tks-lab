@@ -1,6 +1,5 @@
 package pl.lodz.p.it.tks.ports.aggregates.rent.impl;
 
-
 import pl.lodz.p.it.tks.adapters.repositories.RentRepository;
 import pl.lodz.p.it.tks.domainmodel.Rent;
 import pl.lodz.p.it.tks.ports.aggregates.rent.RentRepoFilterAdapter;
@@ -15,7 +14,6 @@ import java.util.stream.Collectors;
 @Named
 @ApplicationScoped
 public class RentRepoFilterImpl implements RentRepoFilterAdapter {
-
 
     @Inject
     RentRepository rentRepository;

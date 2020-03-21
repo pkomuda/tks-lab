@@ -31,5 +31,4 @@ public class CatalogRepoCrudAdapterImpl implements CatalogRepoCrudAdapter {
     public void updateCatalog(int id, Catalog catalog) {
         catalogRepository.updateCatalog(id, catalogOutput.convert(catalog));
     }
-
 }

@@ -2,8 +2,8 @@ package pl.lodz.p.it.tks.appservices.controllers.users;
 
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.controllers.ViewAccessController;
-import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserCrudServiceInterface;
-import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserGetServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserCrudService;
+import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserGetService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -15,9 +15,9 @@ import javax.inject.Named;
 public @Data class EditUserController {
 
     @Inject
-    private UserCrudServiceInterface userService;
+    private UserCrudService userService;
     @Inject
-    private UserGetServiceInterface userGetService;
+    private UserGetService userGetService;
     @Inject
     private ViewAccessController viewAccessController;
     private String username;

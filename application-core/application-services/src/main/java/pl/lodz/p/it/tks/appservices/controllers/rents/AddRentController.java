@@ -3,7 +3,7 @@ package pl.lodz.p.it.tks.appservices.controllers.rents;
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.controllers.LoginController;
 import pl.lodz.p.it.tks.appservices.controllers.ViewAccessController;
-import pl.lodz.p.it.tks.appservices.services.rent.interfaces.RentCrudServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -15,7 +15,7 @@ import javax.inject.Named;
 public @Data class AddRentController {
 
     @Inject
-    private RentCrudServiceInterface rentCrudService;
+    private RentCrudService rentCrudService;
     @Inject
     private ViewAccessController viewAccessController;
     @Inject

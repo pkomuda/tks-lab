@@ -2,7 +2,7 @@ package pl.lodz.p.it.tks.appservices.controllers;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserGetServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserGetService;
 import pl.lodz.p.it.tks.domainmodel.users.User;
 
 import javax.enterprise.context.SessionScoped;
@@ -20,7 +20,7 @@ import java.io.Serializable;
 public class LoginController implements Serializable {
 
     @Inject
-    private UserGetServiceInterface userService;
+    private UserGetService userService;
     @Getter @Setter
     private String username;
     @Getter @Setter

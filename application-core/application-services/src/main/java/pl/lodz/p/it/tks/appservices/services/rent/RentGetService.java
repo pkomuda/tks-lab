@@ -1,45 +1,15 @@
 package pl.lodz.p.it.tks.appservices.services.rent;
 
-import pl.lodz.p.it.tks.appservices.services.rent.interfaces.RentGetServiceInterface;
 import pl.lodz.p.it.tks.domainmodel.Rent;
-import pl.lodz.p.it.tks.ports.aggregates.rent.RentRepoGetAdapter;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.io.Serializable;
 import java.util.List;
 
+public interface RentGetService {
 
-@Named
-@Dependent
-public class RentGetService implements Serializable, RentGetServiceInterface {
-
-    @Inject
-    private RentRepoGetAdapter rentRepoGetAdapter;
-
-    public List<Rent> getUnfinishedRents() {
-        return rentRepoGetAdapter.getUnfinishedRents();
-    }
-
-    public List<Rent> getFinishedRents() {
-        return rentRepoGetAdapter.getFinishedRents();
-    }
-
-    public List<Rent> getUnfinishedRentsForClient(String username) {
-        return rentRepoGetAdapter.getUnfinishedRentsForClient(username);
-    }
-
-    public List<Rent> getFinishedRentsForClient(String username) {
-        return rentRepoGetAdapter.getFinishedRentsForClient(username);
-    }
-
-    public List<Rent> getUnfinishedRentsForCatalog(int id) {
-        return rentRepoGetAdapter.getUnfinishedRentsForCatalog(id);
-    }
-
-    public List<Rent> getFinishedRentsForCatalog(int id) {
-        return rentRepoGetAdapter.getFinishedRentsForCatalog(id);
-    }
-
+    List<Rent> getUnfinishedRents();
+    List<Rent> getFinishedRents();
+    List<Rent> getUnfinishedRentsForClient(String username);
+    List<Rent> getFinishedRentsForClient(String username);
+    List<Rent> getUnfinishedRentsForCatalog(int id);
+    List<Rent> getFinishedRentsForCatalog(int id);
 }

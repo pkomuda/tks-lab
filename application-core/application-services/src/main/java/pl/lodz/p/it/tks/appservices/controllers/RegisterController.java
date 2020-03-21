@@ -1,7 +1,7 @@
 package pl.lodz.p.it.tks.appservices.controllers;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserCrudServiceInterface;
+import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserCrudService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -12,7 +12,7 @@ import javax.inject.Named;
 public @Data class RegisterController {
 
     @Inject
-    private UserCrudServiceInterface userService;
+    private UserCrudService userService;
     private String username;
     private String password;
     private String firstName;

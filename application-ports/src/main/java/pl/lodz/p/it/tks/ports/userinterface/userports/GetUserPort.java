@@ -14,5 +14,4 @@ public interface GetUserPort {
     List<Admin> getAdmins();
     List<Manager> getManagers();
     List<Client> getClients();
-
 }
