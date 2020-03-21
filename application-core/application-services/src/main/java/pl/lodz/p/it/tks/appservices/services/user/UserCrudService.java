@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.appservices.services.user.interfaces;
+package pl.lodz.p.it.tks.appservices.services.user;
 
 public interface UserCrudService {
 

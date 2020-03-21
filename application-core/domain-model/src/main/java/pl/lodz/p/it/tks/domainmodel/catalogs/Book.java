@@ -4,10 +4,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
+
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true, includeFieldNames = false)
 public @Data class Book extends Catalog {
 
+    @NotBlank
     private String author;
 
     public Book() {

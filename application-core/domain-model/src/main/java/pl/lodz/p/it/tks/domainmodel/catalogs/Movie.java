@@ -4,11 +4,15 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
+
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true, includeFieldNames = false)
 public @Data class Movie extends Catalog {
 
+    @NotBlank
     private String director;
+    @NotBlank
     private String format;
 
     public Movie() {

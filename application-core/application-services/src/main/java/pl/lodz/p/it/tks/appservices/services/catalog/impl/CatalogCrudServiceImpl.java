@@ -1,6 +1,6 @@
 package pl.lodz.p.it.tks.appservices.services.catalog.impl;
 
-import pl.lodz.p.it.tks.appservices.services.catalog.CatalogCrudRestService;
+import pl.lodz.p.it.tks.appservices.services.catalog.CatalogCrudService;
 import pl.lodz.p.it.tks.domainmodel.Rent;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Book;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Movie;
@@ -10,15 +10,11 @@ import pl.lodz.p.it.tks.ports.aggregates.catalog.CatalogRepoGetAdapter;
 import pl.lodz.p.it.tks.ports.aggregates.rent.RentRepoCrudAdapter;
 import pl.lodz.p.it.tks.ports.aggregates.rent.RentRepoGetAdapter;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
-@RequestScoped
-@Path("api")
-public class CatalogCrudRestServiceImpl implements CatalogCrudRestService {
+@Dependent
+public class CatalogCrudServiceImpl implements CatalogCrudService {
 
     @Inject
     private CatalogRepoGetAdapter catalogRepoGetAdapter;
@@ -29,74 +25,60 @@ public class CatalogCrudRestServiceImpl implements CatalogCrudRestService {
     @Inject
     private RentRepoCrudAdapter rentRepoCrudAdapter;
 
-    @POST
-    @Path("/book")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response addBook(Book book) {
+    @Override
+    public void addBook(Book book) {
         if (catalogRepoGetAdapter.getCatalog(book.getId()) == null && book.getId() != 0) {
             catalogRepoCrudAdapter.addCatalog(book);
-            return Response.ok("Book with id: " + book.getId() + " added").build();
         } else {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Catalog with id: " + book.getId() + " already exists").build();
+            throw new IllegalArgumentException("Catalog with id: " + book.getId() + " already exists");
         }
     }
 
-    @POST
-    @Path("/movie")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response addMovie(Movie movie) {
+    @Override
+    public void addMovie(Movie movie) {
         if (catalogRepoGetAdapter.getCatalog(movie.getId()) == null && movie.getId() != 0) {
             catalogRepoCrudAdapter.addCatalog(movie);
-            return Response.ok("Movie with id: " + movie.getId() + " added").build();
         } else {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Catalog with id: " + movie.getId() + " already exists").build();
+            throw new IllegalArgumentException("Catalog with id: " + movie.getId() + " already exists");
         }
     }
 
-    @PUT
-    @Path("/book/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateBook(@PathParam("id") int id, Book book) {
+    @Override
+    public void updateBook(int id, Book book) {
         if (catalogRepoGetAdapter.getCatalog(id) != null) {
             catalogRepoCrudAdapter.updateCatalog(id, book);
             for (Rent rent : rentRepoGetAdapter.getRentsForCatalog(id)) {
                 rent.setCatalog(book);
                 rentRepoCrudAdapter.updateRent(rent.getId(), rent);
             }
-            return Response.ok("Book with id: " + book.getId() + " updated").build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).entity("Catalog with id: " + id + " not found").build();
+            throw new IllegalArgumentException("Catalog with id: " + id + " not found");
         }
     }
 
-    @PUT
-    @Path("/movie/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateMovie(@PathParam("id") int id, Movie movie) {
+    @Override
+    public void updateMovie(int id, Movie movie) {
         if (catalogRepoGetAdapter.getCatalog(id) != null) {
             catalogRepoCrudAdapter.updateCatalog(id, movie);
             for (Rent rent : rentRepoGetAdapter.getRentsForCatalog(id)) {
                 rent.setCatalog(movie);
                 rentRepoCrudAdapter.updateRent(rent.getId(), rent);
             }
-            return Response.ok("Movie with id: " + movie.getId() + " updated").build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).entity("Catalog with id: " + id + " not found").build();
+            throw new IllegalArgumentException("Catalog with id: " + id + " not found");
         }
     }
 
-    @DELETE
-    @Path("/catalog/{id}")
-    public Response removeCatalog(@PathParam("id") int id) {
+    @Override
+    public void removeCatalog(int id) {
         if (catalogRepoGetAdapter.getCatalog(id) != null) {
             for (Rent rent : rentRepoGetAdapter.getRentsForCatalog(id)) {
                 rent.setCatalog(new NoCatalog());
                 rentRepoCrudAdapter.updateRent(rent.getId(), rent);
             }
             catalogRepoCrudAdapter.removeCatalog(id);
-            return Response.ok("Catalog with id: " + id + " removed").build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).entity("Catalog with id: " + id + " not found").build();
+            throw new IllegalArgumentException("Catalog with id: " + id + " not found");
         }
     }
 }

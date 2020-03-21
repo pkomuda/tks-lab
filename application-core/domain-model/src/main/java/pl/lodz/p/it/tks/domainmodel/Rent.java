@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Catalog;
 import pl.lodz.p.it.tks.domainmodel.users.Client;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -13,8 +14,11 @@ import java.util.UUID;
 @AllArgsConstructor
 public @Data class Rent {
 
+    @NotNull
     private UUID id;
+    @NotNull
     private Client client;
+    @NotNull
     private Catalog catalog;
     private LocalDateTime rentDateTime;
     private LocalDateTime returnDateTime;

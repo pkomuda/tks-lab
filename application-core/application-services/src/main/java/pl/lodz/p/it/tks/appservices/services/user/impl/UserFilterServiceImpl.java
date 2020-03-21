@@ -1,6 +1,6 @@
 package pl.lodz.p.it.tks.appservices.services.user.impl;
 
-import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserFilterService;
+import pl.lodz.p.it.tks.appservices.services.user.UserFilterService;
 import pl.lodz.p.it.tks.domainmodel.users.Admin;
 import pl.lodz.p.it.tks.domainmodel.users.Client;
 import pl.lodz.p.it.tks.domainmodel.users.Manager;

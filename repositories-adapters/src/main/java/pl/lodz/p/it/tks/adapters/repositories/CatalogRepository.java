@@ -72,7 +72,6 @@ public class CatalogRepository {
 
     @Transactional
     public synchronized List<BookEntity> getBooks() {
-        System.out.println("BOOKS");
         return entityManager.createQuery("SELECT c FROM Book c", BookEntity.class).getResultList();
     }
 

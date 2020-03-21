@@ -1,7 +1,7 @@
 package pl.lodz.p.it.tks.appservices.controllers;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.appservices.services.user.interfaces.UserCrudService;
+import pl.lodz.p.it.tks.appservices.services.user.UserCrudService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
