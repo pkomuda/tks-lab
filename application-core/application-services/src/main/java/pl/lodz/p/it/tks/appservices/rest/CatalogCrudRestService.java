@@ -6,6 +6,7 @@ import pl.lodz.p.it.tks.domainmodel.catalogs.Movie;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -20,7 +21,7 @@ public class CatalogCrudRestService {
     @POST
     @Path("/book")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addBook(Book book) {
+    public Response addBook(@Valid Book book) {
         try {
             catalogService.addBook(book);
         } catch (IllegalArgumentException e) {
@@ -32,7 +33,7 @@ public class CatalogCrudRestService {
     @POST
     @Path("/movie")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addMovie(Movie movie) {
+    public Response addMovie(@Valid Movie movie) {
         try {
             catalogService.addMovie(movie);
         } catch (IllegalArgumentException e) {
@@ -44,7 +45,7 @@ public class CatalogCrudRestService {
     @PUT
     @Path("/book/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateBook(@PathParam("id") int id, Book book) {
+    public Response updateBook(@PathParam("id") int id, @Valid Book book) {
         try {
             catalogService.updateBook(id, book);
         } catch (IllegalArgumentException e) {
@@ -56,7 +57,7 @@ public class CatalogCrudRestService {
     @PUT
     @Path("/movie/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateMovie(@PathParam("id") int id, Movie movie) {
+    public Response updateMovie(@PathParam("id") int id, @Valid Movie movie) {
         try {
             catalogService.updateMovie(id, movie);
         } catch (IllegalArgumentException e) {
