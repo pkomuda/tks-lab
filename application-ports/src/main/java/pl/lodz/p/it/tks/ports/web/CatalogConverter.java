@@ -9,11 +9,6 @@ import pl.lodz.p.it.webapplication.webmodel.catalogs.CatalogWeb;
 import pl.lodz.p.it.webapplication.webmodel.catalogs.MovieWeb;
 import pl.lodz.p.it.webapplication.webmodel.catalogs.NoCatalogWeb;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
-
-@Named
-@Dependent
 public class CatalogConverter {
 
     public static CatalogWeb domainToWeb(Catalog catalog) {
@@ -39,26 +34,26 @@ public class CatalogConverter {
         }
     }
 
-    public static Catalog webToDomain(CatalogWeb catalogWeb) {
-        if (catalogWeb instanceof BookWeb) {
-            return new Book(
-                    catalogWeb.getId(),
-                    catalogWeb.getTitle(),
-                    ((BookWeb) catalogWeb).getAuthor(),
-                    catalogWeb.getReleaseYear()
-            );
-        } else if (catalogWeb instanceof MovieWeb) {
-            return new Movie(
-                    catalogWeb.getId(),
-                    catalogWeb.getTitle(),
-                    ((MovieWeb) catalogWeb).getDirector(),
-                    catalogWeb.getReleaseYear(),
-                    ((MovieWeb) catalogWeb).getFormat()
-            );
-        } else if (catalogWeb instanceof NoCatalogWeb) {
-            return new NoCatalog();
-        } else {
-            return null;
-        }
-    }
+//    public static Catalog webToDomain(CatalogWeb catalogWeb) {
+//        if (catalogWeb instanceof BookWeb) {
+//            return new Book(
+//                    catalogWeb.getId(),
+//                    catalogWeb.getTitle(),
+//                    ((BookWeb) catalogWeb).getAuthor(),
+//                    catalogWeb.getReleaseYear()
+//            );
+//        } else if (catalogWeb instanceof MovieWeb) {
+//            return new Movie(
+//                    catalogWeb.getId(),
+//                    catalogWeb.getTitle(),
+//                    ((MovieWeb) catalogWeb).getDirector(),
+//                    catalogWeb.getReleaseYear(),
+//                    ((MovieWeb) catalogWeb).getFormat()
+//            );
+//        } else if (catalogWeb instanceof NoCatalogWeb) {
+//            return new NoCatalog();
+//        } else {
+//            return null;
+//        }
+//    }
 }

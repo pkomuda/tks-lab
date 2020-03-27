@@ -4,6 +4,7 @@ import lombok.Data;
 import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
+import pl.lodz.p.it.tks.ports.web.RentConverter;
 import pl.lodz.p.it.webapplication.webmodel.RentWeb;
 import pl.lodz.p.it.webapplication.webmodel.catalogs.BookWeb;
 import pl.lodz.p.it.webapplication.webmodel.catalogs.CatalogWeb;
@@ -72,8 +73,8 @@ public @Data class ClientPageRestController implements Serializable {
     }
 
     public void filterRentsForClient() {
-        unfinishedRents = rentFilterService.filterUnfinishedRentsForClient(loginController.getUsername(), rentFilter);
-        finishedRents = rentFilterService.filterFinishedRentsForClient(loginController.getUsername(), rentFilter);
+        unfinishedRents = RentConverter.domainToWebRents(rentFilterService.filterUnfinishedRentsForClient(loginController.getUsername(), rentFilter));
+        finishedRents = RentConverter.domainToWebRents(rentFilterService.filterFinishedRentsForClient(loginController.getUsername(), rentFilter));
     }
 
     public void finishRent(String rentId) {
@@ -93,7 +94,7 @@ public @Data class ClientPageRestController implements Serializable {
     public void loadData() {
         books = base.path("books").request(MediaType.APPLICATION_JSON).get(new GenericType<>() {});
         movies = base.path("movies").request(MediaType.APPLICATION_JSON).get(new GenericType<>() {});
-        unfinishedRents = rentGetService.getUnfinishedRentsForClient(loginController.getUsername());
-        finishedRents = rentGetService.getFinishedRentsForClient(loginController.getUsername());
+        unfinishedRents = RentConverter.domainToWebRents(rentGetService.getUnfinishedRentsForClient(loginController.getUsername()));
+        finishedRents = RentConverter.domainToWebRents(rentGetService.getFinishedRentsForClient(loginController.getUsername()));
     }
 }

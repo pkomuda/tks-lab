@@ -4,6 +4,7 @@ import lombok.Data;
 import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
+import pl.lodz.p.it.tks.ports.web.RentConverter;
 import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
 import pl.lodz.p.it.webapplication.webmodel.RentWeb;
 import pl.lodz.p.it.webapplication.webmodel.catalogs.CatalogWeb;
@@ -34,8 +35,8 @@ public @Data class RentsForCatalogController implements Serializable {
     private String rentFilter;
 
     public void filterRents() {
-        unfinishedRents = rentFilterService.filterUnfinishedRentsForCatalog(id, rentFilter);
-        finishedRents = rentFilterService.filterFinishedRentsForCatalog(id, rentFilter);
+        unfinishedRents = RentConverter.domainToWebRents(rentFilterService.filterUnfinishedRentsForCatalog(id, rentFilter));
+        finishedRents = RentConverter.domainToWebRents(rentFilterService.filterFinishedRentsForCatalog(id, rentFilter));
     }
 
     public void removeRent(String rentId) {
@@ -52,7 +53,7 @@ public @Data class RentsForCatalogController implements Serializable {
         CatalogWeb temp = viewAccessController.getSelectedCatalog();
         id = temp.getId();
         title = temp.getTitle();
-        unfinishedRents = rentGetService.getUnfinishedRentsForCatalog(id);
-        finishedRents = rentGetService.getFinishedRentsForCatalog(id);
+        unfinishedRents = RentConverter.domainToWebRents(rentGetService.getUnfinishedRentsForCatalog(id));
+        finishedRents = RentConverter.domainToWebRents(rentGetService.getFinishedRentsForCatalog(id));
     }
 }

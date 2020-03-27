@@ -3,6 +3,7 @@ package pl.lodz.p.it.webapplication.controllers;
 import lombok.Getter;
 import lombok.Setter;
 import pl.lodz.p.it.tks.appservices.services.user.UserGetService;
+import pl.lodz.p.it.tks.ports.web.UserConverter;
 import pl.lodz.p.it.webapplication.webmodel.users.UserWeb;
 
 import javax.enterprise.context.SessionScoped;
@@ -32,7 +33,7 @@ public class LoginController implements Serializable {
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
         try {
             request.login(username, password);
-            UserWeb user = userService.getUser(username);
+            UserWeb user = UserConverter.domainToWeb(userService.getUser(username));
             if (user != null && user.isActive()) {
                 if (request.isUserInRole("Admin")) {
                     externalContext.getSessionMap().put("role", "Admin");
