@@ -23,12 +23,4 @@ public abstract @Data class User {
     private String lastName;
     @NotNull
     private boolean active;
-
-    public String getActivity() {
-        if (active) {
-            return "Active";
-        } else {
-            return "Inactive";
-        }
-    }
 }
