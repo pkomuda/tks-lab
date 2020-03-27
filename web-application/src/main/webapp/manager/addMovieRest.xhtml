@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title>Add movie</title>
+</h:head>
+<h:body>
+    <h:outputText value="Logged in as: #{request.getUserPrincipal().getName()}, access level: #{sessionScope.get('role')}"/>
+    <br/>
+    <br/>
+    <h:form>
+        ID:
+        <h:inputText value="#{addCatalogRestController.id}" required="true" requiredMessage="Movie ID cannot be empty!"/>
+        <br/>
+        Title:
+        <h:inputText value="#{addCatalogRestController.title}"/>
+        <br/>
+        Director:
+        <h:inputText value="#{addCatalogRestController.director}"/>
+        <br/>
+        Release year:
+        <h:inputText value="#{addCatalogRestController.releaseYear}" maxlength="4"/>
+        <br/>
+        Format:
+        <h:inputText value="#{addCatalogRestController.format}"/>
+        <br/>
+        <h:commandButton value="OK" action="#{addCatalogRestController.addMovie()}"/>
+        <br/>
+        <h:commandButton value="Cancel" action="#{addCatalogRestController.cancel()}"/>
+        <br/>
+        <br/>
+        <h:commandButton value="Log out" action="#{loginController.logout()}"/>
+    </h:form>
+</h:body>
+</html>
