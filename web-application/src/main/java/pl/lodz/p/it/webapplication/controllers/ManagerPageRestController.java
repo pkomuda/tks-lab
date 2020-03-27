@@ -1,13 +1,13 @@
-package pl.lodz.p.it.tks.appservices.controllers;
+package pl.lodz.p.it.webapplication.controllers;
 
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
-import pl.lodz.p.it.tks.domainmodel.Rent;
-import pl.lodz.p.it.tks.domainmodel.catalogs.Book;
-import pl.lodz.p.it.tks.domainmodel.catalogs.Catalog;
-import pl.lodz.p.it.tks.domainmodel.catalogs.Movie;
+import pl.lodz.p.it.webapplication.webmodel.RentWeb;
+import pl.lodz.p.it.webapplication.webmodel.catalogs.BookWeb;
+import pl.lodz.p.it.webapplication.webmodel.catalogs.CatalogWeb;
+import pl.lodz.p.it.webapplication.webmodel.catalogs.MovieWeb;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -34,10 +34,10 @@ public @Data class ManagerPageRestController implements Serializable {
     private RentFilterService rentFilterService;
     @Inject
     private ViewAccessController viewAccessController;
-    private List<Book> books;
-    private List<Movie> movies;
-    private List<Rent> unfinishedRents;
-    private List<Rent> finishedRents;
+    private List<BookWeb> books;
+    private List<MovieWeb> movies;
+    private List<RentWeb> unfinishedRents;
+    private List<RentWeb> finishedRents;
     private String catalogFilter;
     private String rentFilter;
     private Client client = ClientBuilder.newClient();
@@ -51,18 +51,18 @@ public @Data class ManagerPageRestController implements Serializable {
         return "addMovie";
     }
 
-    public String prepareCatalogInfo(Catalog selectedCatalog) {
+    public String prepareCatalogInfo(CatalogWeb selectedCatalog) {
         viewAccessController.setSelectedCatalog(selectedCatalog);
-        if (selectedCatalog instanceof Book) {
+        if (selectedCatalog instanceof BookWeb) {
             return "editBook";
-        } else if (selectedCatalog instanceof Movie) {
+        } else if (selectedCatalog instanceof MovieWeb) {
             return "editMovie";
         } else {
             return "";
         }
     }
 
-    public String prepareRentsInfo(Catalog selectedCatalog) {
+    public String prepareRentsInfo(CatalogWeb selectedCatalog) {
         viewAccessController.setSelectedCatalog(selectedCatalog);
         return "rentsForCatalog";
     }
@@ -71,14 +71,14 @@ public @Data class ManagerPageRestController implements Serializable {
         books = base.path("catalogs/{filter}")
                 .resolveTemplate("filter",catalogFilter)
                 .request(MediaType.APPLICATION_JSON)
-                .get(new GenericType<List<Book>>() {})
+                .get(new GenericType<List<BookWeb>>() {})
                 .stream()
                 .filter(book -> book.getAuthor() != null)
                 .collect(Collectors.toList());
         movies = base.path("catalogs/{filter}")
                 .resolveTemplate("filter",catalogFilter)
                 .request(MediaType.APPLICATION_JSON)
-                .get(new GenericType<List<Movie>>() {})
+                .get(new GenericType<List<MovieWeb>>() {})
                 .stream()
                 .filter(movie -> movie.getDirector() != null && movie.getFormat() != null)
                 .collect(Collectors.toList());

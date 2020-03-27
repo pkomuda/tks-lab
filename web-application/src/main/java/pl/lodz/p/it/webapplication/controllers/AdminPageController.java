@@ -1,12 +1,12 @@
-package pl.lodz.p.it.tks.appservices.controllers;
+package pl.lodz.p.it.webapplication.controllers;
 
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.services.user.UserFilterService;
 import pl.lodz.p.it.tks.appservices.services.user.UserGetService;
-import pl.lodz.p.it.tks.domainmodel.users.Admin;
-import pl.lodz.p.it.tks.domainmodel.users.Client;
-import pl.lodz.p.it.tks.domainmodel.users.Manager;
-import pl.lodz.p.it.tks.domainmodel.users.User;
+import pl.lodz.p.it.webapplication.webmodel.users.AdminWeb;
+import pl.lodz.p.it.webapplication.webmodel.users.ClientWeb;
+import pl.lodz.p.it.webapplication.webmodel.users.ManagerWeb;
+import pl.lodz.p.it.webapplication.webmodel.users.UserWeb;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -25,21 +25,21 @@ public @Data class AdminPageController implements Serializable {
     private UserFilterService userFilterService;
     @Inject
     private ViewAccessController viewAccessController;
-    private List<Admin> admins;
-    private List<Manager> managers;
-    private List<Client> clients;
+    private List<AdminWeb> admins;
+    private List<ManagerWeb> managers;
+    private List<ClientWeb> clients;
     private String userFilter;
 
     public String addUser() {
         return "add";
     }
 
-    public String prepareUserInfo(User selectedUser) {
+    public String prepareUserInfo(UserWeb selectedUser) {
         viewAccessController.setSelectedUsername(selectedUser.getUsername());
         return "edit";
     }
 
-    public String prepareRentsInfo(Client selectedClient) {
+    public String prepareRentsInfo(ClientWeb selectedClient) {
         viewAccessController.setSelectedUsername(selectedClient.getUsername());
         return "rentsForClient";
     }

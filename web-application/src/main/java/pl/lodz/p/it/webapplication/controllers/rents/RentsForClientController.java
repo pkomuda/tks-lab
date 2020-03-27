@@ -1,11 +1,11 @@
-package pl.lodz.p.it.tks.appservices.controllers.rents;
+package pl.lodz.p.it.webapplication.controllers.rents;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.appservices.controllers.ViewAccessController;
 import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
-import pl.lodz.p.it.tks.domainmodel.Rent;
+import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
+import pl.lodz.p.it.webapplication.webmodel.RentWeb;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -26,8 +26,8 @@ public @Data class RentsForClientController implements Serializable {
     private RentFilterService rentFilterService;
     @Inject
     private ViewAccessController viewAccessController;
-    private List<Rent> unfinishedRents;
-    private List<Rent> finishedRents;
+    private List<RentWeb> unfinishedRents;
+    private List<RentWeb> finishedRents;
     private String username;
     private String rentFilter;
 

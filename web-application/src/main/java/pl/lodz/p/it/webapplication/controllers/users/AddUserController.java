@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.appservices.controllers.users;
+package pl.lodz.p.it.webapplication.controllers.users;
 
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.services.user.UserCrudService;

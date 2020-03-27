@@ -1,8 +1,8 @@
-package pl.lodz.p.it.tks.appservices.controllers.catalogs;
+package pl.lodz.p.it.webapplication.controllers.catalogs;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.domainmodel.catalogs.Book;
-import pl.lodz.p.it.tks.domainmodel.catalogs.Movie;
+import pl.lodz.p.it.webapplication.webmodel.catalogs.BookWeb;
+import pl.lodz.p.it.webapplication.webmodel.catalogs.MovieWeb;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
@@ -44,7 +44,7 @@ public @Data class AddCatalogRestController implements Serializable {
     public String confirmBook() {
         base.path("book")
                 .request(MediaType.APPLICATION_JSON)
-                .post(Entity.json(new Book(id, title, author, releaseYear)), Response.class);
+                .post(Entity.json(new BookWeb(id, title, author, releaseYear)), Response.class);
         endConversation();
         return "manager";
     }
@@ -52,7 +52,7 @@ public @Data class AddCatalogRestController implements Serializable {
     public String confirmMovie() {
         base.path("movie")
                 .request(MediaType.APPLICATION_JSON)
-                .post(Entity.json(new Movie(id, title, director, releaseYear, format)), Response.class);
+                .post(Entity.json(new MovieWeb(id, title, director, releaseYear, format)), Response.class);
         endConversation();
         return "manager";
     }

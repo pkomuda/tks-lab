@@ -1,8 +1,8 @@
-package pl.lodz.p.it.tks.appservices.controllers.rents;
+package pl.lodz.p.it.webapplication.controllers.rents;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.appservices.controllers.LoginController;
-import pl.lodz.p.it.tks.appservices.controllers.ViewAccessController;
+import pl.lodz.p.it.webapplication.controllers.LoginController;
+import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
 import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
 
 import javax.annotation.PostConstruct;

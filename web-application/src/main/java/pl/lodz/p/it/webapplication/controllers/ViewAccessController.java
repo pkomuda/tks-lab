@@ -1,7 +1,7 @@
-package pl.lodz.p.it.tks.appservices.controllers;
+package pl.lodz.p.it.webapplication.controllers;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.domainmodel.catalogs.Catalog;
+import pl.lodz.p.it.webapplication.webmodel.catalogs.CatalogWeb;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -11,6 +11,6 @@ import java.io.Serializable;
 @SessionScoped
 public @Data class ViewAccessController implements Serializable {
 
-    private Catalog selectedCatalog;
+    private CatalogWeb selectedCatalog;
     private String selectedUsername;
 }

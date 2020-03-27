@@ -1,10 +1,10 @@
-package pl.lodz.p.it.tks.appservices.controllers.catalogs;
+package pl.lodz.p.it.webapplication.controllers.catalogs;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.appservices.controllers.ViewAccessController;
-import pl.lodz.p.it.tks.domainmodel.catalogs.Book;
-import pl.lodz.p.it.tks.domainmodel.catalogs.Catalog;
-import pl.lodz.p.it.tks.domainmodel.catalogs.Movie;
+import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
+import pl.lodz.p.it.webapplication.webmodel.catalogs.BookWeb;
+import pl.lodz.p.it.webapplication.webmodel.catalogs.CatalogWeb;
+import pl.lodz.p.it.webapplication.webmodel.catalogs.MovieWeb;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -36,7 +36,7 @@ public @Data class EditCatalogRestController {
         base.path("book/{id}")
                 .resolveTemplate("id", id)
                 .request(MediaType.APPLICATION_JSON)
-                .put(Entity.json(new Book(id, title, author, releaseYear)), Response.class);
+                .put(Entity.json(new BookWeb(id, title, author, releaseYear)), Response.class);
         return "manager";
     }
 
@@ -44,7 +44,7 @@ public @Data class EditCatalogRestController {
         base.path("movie/{id}")
                 .resolveTemplate("id", id)
                 .request(MediaType.APPLICATION_JSON)
-                .put(Entity.json(new Movie(id, title, director, releaseYear, format)), Response.class);
+                .put(Entity.json(new MovieWeb(id, title, director, releaseYear, format)), Response.class);
         return "manager";
     }
 
@@ -54,15 +54,15 @@ public @Data class EditCatalogRestController {
 
     @PostConstruct
     public void loadCatalogInfo() {
-        Catalog temp = viewAccessController.getSelectedCatalog();
+        CatalogWeb temp = viewAccessController.getSelectedCatalog();
         id = temp.getId();
         title = temp.getTitle();
         releaseYear = temp.getReleaseYear();
-        if (temp instanceof Book) {
-            author = ((Book) temp).getAuthor();
-        } else if (temp instanceof Movie) {
-            director = ((Movie) temp).getDirector();
-            format = ((Movie) temp).getFormat();
+        if (temp instanceof BookWeb) {
+            author = ((BookWeb) temp).getAuthor();
+        } else if (temp instanceof MovieWeb) {
+            director = ((MovieWeb) temp).getDirector();
+            format = ((MovieWeb) temp).getFormat();
         }
     }
 }
