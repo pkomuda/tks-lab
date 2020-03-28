@@ -4,7 +4,7 @@ import lombok.Data;
 import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
-import pl.lodz.p.it.tks.ports.web.RentConverter;
+import pl.lodz.p.it.webapplication.converters.RentConverter;
 import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
 import pl.lodz.p.it.webapplication.webmodel.RentWeb;
 

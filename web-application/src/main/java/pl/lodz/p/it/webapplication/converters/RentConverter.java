@@ -1,7 +1,6 @@
-package pl.lodz.p.it.tks.ports.web;
+package pl.lodz.p.it.webapplication.converters;
 
 import pl.lodz.p.it.tks.domainmodel.Rent;
-import pl.lodz.p.it.tks.domainmodel.users.Client;
 import pl.lodz.p.it.webapplication.webmodel.RentWeb;
 import pl.lodz.p.it.webapplication.webmodel.users.ClientWeb;
 

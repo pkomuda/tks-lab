@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.ports.web;
+package pl.lodz.p.it.webapplication.converters;
 
 import pl.lodz.p.it.tks.domainmodel.catalogs.Book;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Catalog;

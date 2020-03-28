@@ -28,3 +28,4 @@ target/
 nb-configuration.xml
 faces-config.NavData
 .DS_Store
+*.sh

@@ -3,7 +3,7 @@ package pl.lodz.p.it.webapplication.controllers;
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.services.user.UserFilterService;
 import pl.lodz.p.it.tks.appservices.services.user.UserGetService;
-import pl.lodz.p.it.tks.ports.web.UserConverter;
+import pl.lodz.p.it.webapplication.converters.UserConverter;
 import pl.lodz.p.it.webapplication.webmodel.users.AdminWeb;
 import pl.lodz.p.it.webapplication.webmodel.users.ClientWeb;
 import pl.lodz.p.it.webapplication.webmodel.users.ManagerWeb;

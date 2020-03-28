@@ -3,7 +3,7 @@ package pl.lodz.p.it.webapplication.controllers;
 import lombok.Getter;
 import lombok.Setter;
 import pl.lodz.p.it.tks.appservices.services.user.UserGetService;
-import pl.lodz.p.it.tks.ports.web.UserConverter;
+import pl.lodz.p.it.webapplication.converters.UserConverter;
 import pl.lodz.p.it.webapplication.webmodel.users.UserWeb;
 
 import javax.enterprise.context.SessionScoped;
