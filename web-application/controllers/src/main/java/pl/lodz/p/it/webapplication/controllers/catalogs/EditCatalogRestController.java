@@ -1,10 +1,11 @@
-package main.java.pl.lodz.p.it.webapplication.controllers.catalogs;
+package pl.lodz.p.it.webapplication.controllers.catalogs;
 
 import lombok.Data;
-import main.java.pl.lodz.p.it.webapplication.controllers.ViewAccessController;
-import main.java.pl.lodz.p.it.webapplication.webmodel.catalogs.BookWeb;
-import main.java.pl.lodz.p.it.webapplication.webmodel.catalogs.CatalogWeb;
-import main.java.pl.lodz.p.it.webapplication.webmodel.catalogs.MovieWeb;
+import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
+import pl.lodz.p.it.webmodel.catalogs.BookWeb;
+import pl.lodz.p.it.webmodel.catalogs.CatalogWeb;
+import pl.lodz.p.it.webmodel.catalogs.MovieWeb;
+
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;

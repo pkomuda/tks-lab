@@ -1,8 +1,9 @@
-package main.java.pl.lodz.p.it.webapplication.controllers.catalogs;
+package pl.lodz.p.it.webapplication.controllers.catalogs;
 
 import lombok.Data;
-import main.java.pl.lodz.p.it.webapplication.webmodel.catalogs.BookWeb;
-import main.java.pl.lodz.p.it.webapplication.webmodel.catalogs.MovieWeb;
+import pl.lodz.p.it.webmodel.catalogs.BookWeb;
+import pl.lodz.p.it.webmodel.catalogs.MovieWeb;
+
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;

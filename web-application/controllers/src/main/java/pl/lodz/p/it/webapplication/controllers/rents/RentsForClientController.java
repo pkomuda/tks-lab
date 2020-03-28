@@ -1,12 +1,13 @@
-package main.java.pl.lodz.p.it.webapplication.controllers.rents;
+package pl.lodz.p.it.webapplication.controllers.rents;
 
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
-import main.java.pl.lodz.p.it.webapplication.converters.RentConverter;
-import main.java.pl.lodz.p.it.webapplication.controllers.ViewAccessController;
-import main.java.pl.lodz.p.it.webapplication.webmodel.RentWeb;
+import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
+import pl.lodz.p.it.webapplication.converters.RentConverter;
+import pl.lodz.p.it.webmodel.RentWeb;
+
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;

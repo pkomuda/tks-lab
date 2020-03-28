@@ -1,9 +1,10 @@
-package main.java.pl.lodz.p.it.webapplication.controllers.users;
+package pl.lodz.p.it.webapplication.controllers.users;
 
 import lombok.Data;
-import main.java.pl.lodz.p.it.webapplication.controllers.ViewAccessController;
+
 import pl.lodz.p.it.tks.appservices.services.user.UserCrudService;
 import pl.lodz.p.it.tks.appservices.services.user.UserGetService;
+import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;

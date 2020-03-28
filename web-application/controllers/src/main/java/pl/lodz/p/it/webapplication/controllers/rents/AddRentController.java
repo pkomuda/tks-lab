@@ -1,9 +1,9 @@
-package main.java.pl.lodz.p.it.webapplication.controllers.rents;
+package pl.lodz.p.it.webapplication.controllers.rents;
 
 import lombok.Data;
-import main.java.pl.lodz.p.it.webapplication.controllers.LoginController;
-import main.java.pl.lodz.p.it.webapplication.controllers.ViewAccessController;
 import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
+import pl.lodz.p.it.webapplication.controllers.LoginController;
+import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;

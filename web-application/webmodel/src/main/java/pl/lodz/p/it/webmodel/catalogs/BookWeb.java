@@ -1,4 +1,4 @@
-package main.java.pl.lodz.p.it.webapplication.webmodel.catalogs;
+package pl.lodz.p.it.webmodel.catalogs;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
