@@ -1,4 +1,4 @@
-package pl.lodz.p.it.webmodel.catalogs;
+package pl.lodz.p.it.model.catalogs;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
