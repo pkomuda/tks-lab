@@ -1,8 +1,9 @@
-package pl.lodz.p.it.webapplication.converters;
+package pl.lodz.p.it.tks.ports.userinterface.controllerconverters;
 
-import pl.lodz.p.it.tks.domainmodel.Rent;
 import pl.lodz.p.it.model.RentWeb;
 import pl.lodz.p.it.model.users.ClientWeb;
+import pl.lodz.p.it.tks.domainmodel.Rent;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +30,7 @@ public class RentConverter {
 //        );
 //    }
 
-    public static List<RentWeb> domainToWebRents(List<Rent> rents) {
+    public static List<pl.lodz.p.it.model.RentWeb> domainToWebRents(List<Rent> rents) {
         return rents
                 .stream()
                 .map(RentConverter::domainToWeb)

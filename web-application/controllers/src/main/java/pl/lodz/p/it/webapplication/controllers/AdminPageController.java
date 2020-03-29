@@ -3,7 +3,7 @@ package pl.lodz.p.it.webapplication.controllers;
 import lombok.Data;
 import pl.lodz.p.it.tks.appservices.services.user.UserFilterService;
 import pl.lodz.p.it.tks.appservices.services.user.UserGetService;
-import pl.lodz.p.it.webapplication.converters.UserConverter;
+import pl.lodz.p.it.tks.ports.userinterface.controllerconverters.UserConverter;
 import pl.lodz.p.it.model.users.AdminWeb;
 import pl.lodz.p.it.model.users.ClientWeb;
 import pl.lodz.p.it.model.users.ManagerWeb;
@@ -47,14 +47,14 @@ public @Data class AdminPageController implements Serializable {
 
     public void filterUsers() {
         admins = UserConverter.domainToWebAdmins(userFilterService.filterAdmins(userFilter));
-        managers = UserConverter.domainToWebManagers(userFilterService.filterManagers(userFilter));
-        clients = UserConverter.domainToWebClients(userFilterService.filterClients(userFilter));
+        managers =UserConverter.domainToWebManagers(userFilterService.filterManagers(userFilter));
+        clients =UserConverter.domainToWebClients(userFilterService.filterClients(userFilter));
     }
 
     @PostConstruct
     public void loadUsers() {
         admins = UserConverter.domainToWebAdmins(userGetService.getAdmins());
-        managers = UserConverter.domainToWebManagers(userGetService.getManagers());
-        clients = UserConverter.domainToWebClients(userGetService.getClients());
+        managers =UserConverter.domainToWebManagers(userGetService.getManagers());
+        clients =UserConverter.domainToWebClients(userGetService.getClients());
     }
 }
