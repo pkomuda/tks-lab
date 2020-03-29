@@ -1,8 +1,8 @@
 package pl.lodz.p.it.webapplication.converters;
 
 import pl.lodz.p.it.tks.domainmodel.Rent;
-import pl.lodz.p.it.webmodel.RentWeb;
-import pl.lodz.p.it.webmodel.users.ClientWeb;
+import pl.lodz.p.it.model.RentWeb;
+import pl.lodz.p.it.model.users.ClientWeb;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package pl.lodz.p.it.webmodel.users;
+package pl.lodz.p.it.model.users;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -4,10 +4,10 @@ import pl.lodz.p.it.tks.domainmodel.users.Admin;
 import pl.lodz.p.it.tks.domainmodel.users.Client;
 import pl.lodz.p.it.tks.domainmodel.users.Manager;
 import pl.lodz.p.it.tks.domainmodel.users.User;
-import pl.lodz.p.it.webmodel.users.AdminWeb;
-import pl.lodz.p.it.webmodel.users.ClientWeb;
-import pl.lodz.p.it.webmodel.users.ManagerWeb;
-import pl.lodz.p.it.webmodel.users.UserWeb;
+import pl.lodz.p.it.model.users.AdminWeb;
+import pl.lodz.p.it.model.users.ClientWeb;
+import pl.lodz.p.it.model.users.ManagerWeb;
+import pl.lodz.p.it.model.users.UserWeb;
 
 import java.util.List;
 import java.util.stream.Collectors;

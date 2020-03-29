@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import pl.lodz.p.it.tks.appservices.services.user.UserGetService;
 import pl.lodz.p.it.webapplication.converters.UserConverter;
-import pl.lodz.p.it.webmodel.users.UserWeb;
+import pl.lodz.p.it.model.users.UserWeb;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;

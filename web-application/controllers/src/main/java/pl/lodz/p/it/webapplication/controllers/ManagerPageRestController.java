@@ -5,10 +5,10 @@ import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
 import pl.lodz.p.it.webapplication.converters.RentConverter;
-import pl.lodz.p.it.webmodel.RentWeb;
-import pl.lodz.p.it.webmodel.catalogs.BookWeb;
-import pl.lodz.p.it.webmodel.catalogs.CatalogWeb;
-import pl.lodz.p.it.webmodel.catalogs.MovieWeb;
+import pl.lodz.p.it.model.RentWeb;
+import pl.lodz.p.it.model.catalogs.BookWeb;
+import pl.lodz.p.it.model.catalogs.CatalogWeb;
+import pl.lodz.p.it.model.catalogs.MovieWeb;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;

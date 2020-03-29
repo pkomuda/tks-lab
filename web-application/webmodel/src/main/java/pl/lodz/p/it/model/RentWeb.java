@@ -1,10 +1,10 @@
-package pl.lodz.p.it.webmodel;
+package pl.lodz.p.it.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.lodz.p.it.webmodel.catalogs.CatalogWeb;
-import pl.lodz.p.it.webmodel.users.ClientWeb;
+import pl.lodz.p.it.model.catalogs.CatalogWeb;
+import pl.lodz.p.it.model.users.ClientWeb;
 
 
 import java.time.LocalDateTime;

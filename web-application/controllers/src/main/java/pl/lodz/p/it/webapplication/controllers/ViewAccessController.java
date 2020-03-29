@@ -1,7 +1,7 @@
 package pl.lodz.p.it.webapplication.controllers;
 
 import lombok.Data;
-import pl.lodz.p.it.webmodel.catalogs.CatalogWeb;
+import pl.lodz.p.it.model.catalogs.CatalogWeb;
 
 
 import javax.enterprise.context.SessionScoped;

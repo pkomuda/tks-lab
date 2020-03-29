@@ -6,8 +6,8 @@ import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
 import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
 import pl.lodz.p.it.webapplication.converters.RentConverter;
-import pl.lodz.p.it.webmodel.RentWeb;
-import pl.lodz.p.it.webmodel.catalogs.CatalogWeb;
+import pl.lodz.p.it.model.RentWeb;
+import pl.lodz.p.it.model.catalogs.CatalogWeb;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;

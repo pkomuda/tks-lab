@@ -1,4 +1,4 @@
-package pl.lodz.p.it.webmodel.users;
+package pl.lodz.p.it.model.users;
 
 public class AdminWeb extends UserWeb {
 

@@ -4,10 +4,10 @@ import lombok.Data;
 import pl.lodz.p.it.tks.appservices.services.user.UserFilterService;
 import pl.lodz.p.it.tks.appservices.services.user.UserGetService;
 import pl.lodz.p.it.webapplication.converters.UserConverter;
-import pl.lodz.p.it.webmodel.users.AdminWeb;
-import pl.lodz.p.it.webmodel.users.ClientWeb;
-import pl.lodz.p.it.webmodel.users.ManagerWeb;
-import pl.lodz.p.it.webmodel.users.UserWeb;
+import pl.lodz.p.it.model.users.AdminWeb;
+import pl.lodz.p.it.model.users.ClientWeb;
+import pl.lodz.p.it.model.users.ManagerWeb;
+import pl.lodz.p.it.model.users.UserWeb;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
