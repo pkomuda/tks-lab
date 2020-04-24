@@ -37,14 +37,6 @@ public class UserRepoGetAdapterImpl implements UserRepoGetAdapter {
     }
 
     @Override
-    public List<User> getUsers() {
-        return userRepository.getUsers()
-                .stream()
-                .map(userEntity -> userInput.convert(userEntity))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public List<Manager> getManagers() {
         return userRepository.getManagers()
                 .stream()

@@ -10,7 +10,6 @@ import java.util.List;
 public interface GetUserPort {
 
     User getUser(String username);
-    List<User> getUsers();
     List<Admin> getAdmins();
     List<Manager> getManagers();
     List<Client> getClients();

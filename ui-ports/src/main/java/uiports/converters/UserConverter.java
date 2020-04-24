@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.ports.userinterface.controllerconverters;
+package uiports.converters;
 
 import pl.lodz.p.it.model.users.AdminWeb;
 import pl.lodz.p.it.model.users.ClientWeb;
@@ -45,38 +45,6 @@ public class UserConverter {
             return null;
         }
     }
-
-//    public static User webToDomain(UserWeb userWeb) {
-//        if (userWeb instanceof AdminWeb) {
-//            return new Admin(
-//                    userWeb.getUsername(),
-//                    userWeb.getPassword(),
-//                    userWeb.getFirstName(),
-//                    userWeb.getLastName(),
-//                    userWeb.isActive()
-//            );
-//        }
-//        if (userWeb instanceof ManagerWeb) {
-//            return new Manager(
-//                    userWeb.getUsername(),
-//                    userWeb.getPassword(),
-//                    userWeb.getFirstName(),
-//                    userWeb.getLastName(),
-//                    userWeb.isActive()
-//            );
-//        }
-//        if (userWeb instanceof ClientWeb) {
-//            return new Client(
-//                    userWeb.getUsername(),
-//                    userWeb.getPassword(),
-//                    userWeb.getFirstName(),
-//                    userWeb.getLastName(),
-//                    userWeb.isActive()
-//            );
-//        } else {
-//            return null;
-//        }
-//    }
 
     public static List<AdminWeb> domainToWebAdmins(List<Admin> admins) {
         return admins
