@@ -5,7 +5,6 @@ import lombok.Setter;
 import pl.lodz.p.it.tks.appservices.services.user.UserGetService;
 import pl.lodz.p.it.model.users.UserWeb;
 import uiports.converters.UserConverter;
-
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
