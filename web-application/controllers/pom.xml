@@ -19,10 +19,9 @@
         </dependency>
         <dependency>
             <groupId>pl.lodz.p.it</groupId>
-            <artifactId>application-services</artifactId>
+            <artifactId>ui-ports</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
     </dependencies>
     <build>
         <plugins>

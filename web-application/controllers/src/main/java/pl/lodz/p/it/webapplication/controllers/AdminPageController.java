@@ -1,13 +1,11 @@
 package pl.lodz.p.it.webapplication.controllers;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.appservices.services.user.UserFilterServiceView;
-import pl.lodz.p.it.tks.appservices.services.user.UserGetService;
-import pl.lodz.p.it.tks.ports.userinterface.controller.converters.UserConverter;
 import pl.lodz.p.it.model.users.AdminWeb;
 import pl.lodz.p.it.model.users.ClientWeb;
 import pl.lodz.p.it.model.users.ManagerWeb;
 import pl.lodz.p.it.model.users.UserWeb;
+import uiports.aggregates.UserAdapter;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -21,11 +19,10 @@ import java.util.List;
 public @Data class AdminPageController implements Serializable {
 
     @Inject
-    private UserGetService userGetService;
-    @Inject
-    private UserFilterServiceView userFilterService;
+    private UserAdapter userAdapter;
     @Inject
     private ViewAccessController viewAccessController;
+
     private List<AdminWeb> admins;
     private List<ManagerWeb> managers;
     private List<ClientWeb> clients;
@@ -46,15 +43,17 @@ public @Data class AdminPageController implements Serializable {
     }
 
     public void filterUsers() {
-        admins = userFilterService.filterAdmins(userFilter);
-        managers =userFilterService.filterManagers(userFilter);
-        clients = userFilterService.filterClients(userFilter);
+
+//        admins = UserConverter.domainToWebAdmins(userFilterService.filterAdmins(userFilter));
+//        managers =UserConverter.domainToWebManagers(userFilterService.filterManagers(userFilter));
+//        clients =UserConverter.domainToWebClients(userFilterService.filterClients(userFilter));
+
     }
 
     @PostConstruct
     public void loadUsers() {
-        admins = UserConverter.domainToWebAdmins(userGetService.getAdmins());
-        managers =UserConverter.domainToWebManagers(userGetService.getManagers());
-        clients =UserConverter.domainToWebClients(userGetService.getClients());
+        admins = userAdapter.getAdmins();
+        managers = userAdapter.getManagers();
+        clients = userAdapter.getClients();
     }
 }

@@ -1,4 +1,6 @@
-package pl.lodz.p.it.tks.ports.userinterface.controller.converters;
+
+package uiports.converters;
+
 
 import pl.lodz.p.it.model.catalogs.BookWeb;
 import pl.lodz.p.it.model.catalogs.CatalogWeb;
@@ -8,7 +10,6 @@ import pl.lodz.p.it.tks.domainmodel.catalogs.Book;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Catalog;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Movie;
 import pl.lodz.p.it.tks.domainmodel.catalogs.NoCatalog;
-
 
 public class CatalogConverter {
 
@@ -34,27 +35,4 @@ public class CatalogConverter {
             return null;
         }
     }
-
-//    public static Catalog webToDomain(CatalogWeb catalogWeb) {
-//        if (catalogWeb instanceof BookWeb) {
-//            return new Book(
-//                    catalogWeb.getId(),
-//                    catalogWeb.getTitle(),
-//                    ((BookWeb) catalogWeb).getAuthor(),
-//                    catalogWeb.getReleaseYear()
-//            );
-//        } else if (catalogWeb instanceof MovieWeb) {
-//            return new Movie(
-//                    catalogWeb.getId(),
-//                    catalogWeb.getTitle(),
-//                    ((MovieWeb) catalogWeb).getDirector(),
-//                    catalogWeb.getReleaseYear(),
-//                    ((MovieWeb) catalogWeb).getFormat()
-//            );
-//        } else if (catalogWeb instanceof NoCatalogWeb) {
-//            return new NoCatalog();
-//        } else {
-//            return null;
-//        }
-//    }
 }
