@@ -14,6 +14,8 @@ import javax.validation.constraints.PositiveOrZero;
 @ToString(includeFieldNames = false)
 public abstract @Data class Catalog {
 
+
+
     @PositiveOrZero
     private int id;
     @NotBlank

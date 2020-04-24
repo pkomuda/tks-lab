@@ -1,8 +1,7 @@
 package pl.lodz.p.it.tks.rest;
 
 
-
-import pl.lodz.p.it.tks.appservices.services.catalog.CatalogGetService;
+import pl.lodz.p.it.tks.ports.aggregates.catalog.CatalogRepoGetAdapter;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -17,26 +16,26 @@ import javax.ws.rs.core.Response;
 public class CatalogGetRestService {
 
     @Inject
-    private CatalogGetService catalogService;
+    private CatalogRepoGetAdapter catalogRepoGetAdapter;
 
     @GET
     @Path("/catalogs")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCatalogs() {
-        return Response.ok(catalogService.getCatalogs()).build();
+        return Response.ok(catalogRepoGetAdapter.getCatalogs()).build();
     }
 
     @GET
     @Path("/books")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBooks() {
-        return Response.ok(catalogService.getBooks()).build();
+        return Response.ok(catalogRepoGetAdapter.getBooks()).build();
     }
 
     @GET
     @Path("/movies")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMovies() {
-        return Response.ok(catalogService.getMovies()).build();
+        return Response.ok(catalogRepoGetAdapter.getMovies()).build();
     }
 }

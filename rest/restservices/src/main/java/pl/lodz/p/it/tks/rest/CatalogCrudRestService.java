@@ -1,8 +1,12 @@
 package pl.lodz.p.it.tks.rest;
 
-import pl.lodz.p.it.tks.appservices.services.catalog.CatalogCrudService;
+
+import pl.lodz.p.it.tks.agregates.CatalogRepoCrudAdapter;
+import pl.lodz.p.it.tks.converters.RestConverter;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Book;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Movie;
+import pl.lodz.p.it.tks.model.BookRestModel;
+import pl.lodz.p.it.tks.model.MovieRestModel;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -16,14 +20,14 @@ import javax.ws.rs.core.Response;
 public class CatalogCrudRestService {
 
     @Inject
-    private CatalogCrudService catalogService;
+    private CatalogRepoCrudAdapter catalogRepoCrudAdapter;
 
     @POST
     @Path("/book")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addBook(@Valid Book book) {
+    public Response addBook(@Valid BookRestModel book) {
         try {
-            catalogService.addBook(book);
+            catalogRepoCrudAdapter.addBook(book);
         } catch (IllegalArgumentException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
@@ -33,9 +37,9 @@ public class CatalogCrudRestService {
     @POST
     @Path("/movie")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addMovie(@Valid Movie movie) {
+    public Response addMovie(@Valid MovieRestModel movie) {
         try {
-            catalogService.addMovie(movie);
+            catalogRepoCrudAdapter.addMovie(movie);
         } catch (IllegalArgumentException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
@@ -45,9 +49,9 @@ public class CatalogCrudRestService {
     @PUT
     @Path("/book/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateBook(@PathParam("id") int id, @Valid Book book) {
+    public Response updateBook(@PathParam("id") int id, @Valid BookRestModel book) {
         try {
-            catalogService.updateBook(id, book);
+            catalogRepoCrudAdapter.updateBook(id, book);
         } catch (IllegalArgumentException e) {
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         }
@@ -57,9 +61,9 @@ public class CatalogCrudRestService {
     @PUT
     @Path("/movie/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateMovie(@PathParam("id") int id, @Valid Movie movie) {
+    public Response updateMovie(@PathParam("id") int id, @Valid MovieRestModel movie) {
         try {
-            catalogService.updateMovie(id, movie);
+            catalogRepoCrudAdapter.updateMovie(id, movie);
         } catch (IllegalArgumentException e) {
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         }
@@ -70,7 +74,7 @@ public class CatalogCrudRestService {
     @Path("/catalog/{id}")
     public Response removeCatalog(@PathParam("id") int id) {
         try {
-            catalogService.removeCatalog(id);
+            catalogRepoCrudAdapter.removeCatalog(id);
         } catch (IllegalArgumentException e) {
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         }

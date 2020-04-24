@@ -18,6 +18,8 @@
         <module>soap</module>
 
         <module>ui-ports</module>
+        <module>restsoap</module>
+        <module>rest-ports</module>
 
     </modules>
 

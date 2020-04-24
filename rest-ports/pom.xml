@@ -3,24 +3,29 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>rest</artifactId>
+        <artifactId>tks-lab</artifactId>
         <groupId>pl.lodz.p.it</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>restservices</artifactId>
+    <artifactId>rest-ports</artifactId>
     <dependencies>
+        <dependency>
+            <groupId>pl.lodz.p.it</groupId>
+            <artifactId>domain-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.lodz.p.it</groupId>
+            <artifactId>restmodel</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>pl.lodz.p.it</groupId>
             <artifactId>application-services</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>pl.lodz.p.it</groupId>
-            <artifactId>rest-ports</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
