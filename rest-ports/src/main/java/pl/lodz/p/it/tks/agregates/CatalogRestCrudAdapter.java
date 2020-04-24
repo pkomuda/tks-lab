@@ -5,6 +5,6 @@ import pl.lodz.p.it.tks.ports.AddCatalogPort;
 import pl.lodz.p.it.tks.ports.RemoveCatalogPort;
 import pl.lodz.p.it.tks.ports.UpdateCatalogPort;
 
-public interface CatalogRepoCrudAdapter extends AddCatalogPort, UpdateCatalogPort, RemoveCatalogPort {
+public interface CatalogRestCrudAdapter extends AddCatalogPort, UpdateCatalogPort, RemoveCatalogPort {
 
 }

@@ -1,7 +1,7 @@
 package pl.lodz.p.it.tks.agregates.impl;
 
 
-import pl.lodz.p.it.tks.agregates.CatalogRepoCrudAdapter;
+import pl.lodz.p.it.tks.agregates.CatalogRestCrudAdapter;
 import pl.lodz.p.it.tks.appservices.services.catalog.CatalogCrudService;
 import pl.lodz.p.it.tks.converters.RestConverter;
 import pl.lodz.p.it.tks.model.BookRestModel;
@@ -13,7 +13,7 @@ import javax.inject.Named;
 
 @Named
 @Dependent
-public class CatalogRepoCrudAdapterImpl implements CatalogRepoCrudAdapter {
+public class CatalogRestCrudAdapterImpl implements CatalogRestCrudAdapter {
 
     @Inject
     private CatalogCrudService catalogCrudService;

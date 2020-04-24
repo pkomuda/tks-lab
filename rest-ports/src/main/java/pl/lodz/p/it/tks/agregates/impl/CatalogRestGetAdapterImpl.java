@@ -1,6 +1,6 @@
 package pl.lodz.p.it.tks.agregates.impl;
 
-import pl.lodz.p.it.tks.agregates.CatalogRepoGetAdapter;
+import pl.lodz.p.it.tks.agregates.CatalogRestGetAdapter;
 import pl.lodz.p.it.tks.appservices.services.catalog.CatalogGetService;
 import pl.lodz.p.it.tks.converters.RestConverter;
 import pl.lodz.p.it.tks.model.BookRestModel;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Named
 @Dependent
-public class CatalogRepoGetAdapterImpl implements CatalogRepoGetAdapter {
+public class CatalogRestGetAdapterImpl implements CatalogRestGetAdapter {
 
     @Inject
     private CatalogGetService catalogGetService;

@@ -1,8 +1,6 @@
 package pl.lodz.p.it.tks.rest;
 
-import pl.lodz.p.it.tks.agregates.CatalogRepoCrudAdapter;
-import pl.lodz.p.it.tks.agregates.CatalogRepoFilterAdapter;
-import pl.lodz.p.it.tks.appservices.services.catalog.CatalogFilterService;
+import pl.lodz.p.it.tks.agregates.CatalogRestFilterAdapter;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -18,26 +16,26 @@ import javax.ws.rs.core.Response;
 public class CatalogFilterRestService {
 
     @Inject
-    private CatalogRepoFilterAdapter catalogRepoFilterAdapter;
+    private CatalogRestFilterAdapter catalogRestFilterAdapter;
 
     @GET
     @Path("/catalogs/{filter}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response filterCatalogs(@PathParam("filter") String catalogFilter) {
-        return Response.ok(catalogRepoFilterAdapter.filterCatalogs(catalogFilter)).build();
+        return Response.ok(catalogRestFilterAdapter.filterCatalogs(catalogFilter)).build();
     }
 
     @GET
     @Path("/books/{filter}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response filterBooks(@PathParam("filter") String catalogFilter) {
-        return Response.ok(catalogRepoFilterAdapter.filterBooks(catalogFilter)).build();
+        return Response.ok(catalogRestFilterAdapter.filterBooks(catalogFilter)).build();
     }
 
     @GET
     @Path("/movies/{filter}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response filterMovies(@PathParam("filter") String catalogFilter) {
-        return Response.ok(catalogRepoFilterAdapter.filterMovies(catalogFilter)).build();
+        return Response.ok(catalogRestFilterAdapter.filterMovies(catalogFilter)).build();
     }
 }
