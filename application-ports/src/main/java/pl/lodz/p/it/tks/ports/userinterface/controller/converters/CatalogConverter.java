@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.ports.userinterface.controllerconverters;
+package pl.lodz.p.it.tks.ports.userinterface.controller.converters;
 
 import pl.lodz.p.it.model.catalogs.BookWeb;
 import pl.lodz.p.it.model.catalogs.CatalogWeb;

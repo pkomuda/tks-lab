@@ -1,9 +1,9 @@
 package pl.lodz.p.it.webapplication.controllers;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.appservices.services.user.UserFilterService;
+import pl.lodz.p.it.tks.appservices.services.user.UserFilterServiceView;
 import pl.lodz.p.it.tks.appservices.services.user.UserGetService;
-import pl.lodz.p.it.tks.ports.userinterface.controllerconverters.UserConverter;
+import pl.lodz.p.it.tks.ports.userinterface.controller.converters.UserConverter;
 import pl.lodz.p.it.model.users.AdminWeb;
 import pl.lodz.p.it.model.users.ClientWeb;
 import pl.lodz.p.it.model.users.ManagerWeb;
@@ -23,7 +23,7 @@ public @Data class AdminPageController implements Serializable {
     @Inject
     private UserGetService userGetService;
     @Inject
-    private UserFilterService userFilterService;
+    private UserFilterServiceView userFilterService;
     @Inject
     private ViewAccessController viewAccessController;
     private List<AdminWeb> admins;
@@ -46,9 +46,9 @@ public @Data class AdminPageController implements Serializable {
     }
 
     public void filterUsers() {
-        admins = UserConverter.domainToWebAdmins(userFilterService.filterAdmins(userFilter));
-        managers =UserConverter.domainToWebManagers(userFilterService.filterManagers(userFilter));
-        clients =UserConverter.domainToWebClients(userFilterService.filterClients(userFilter));
+        admins = userFilterService.filterAdmins(userFilter);
+        managers =userFilterService.filterManagers(userFilter);
+        clients = userFilterService.filterClients(userFilter);
     }
 
     @PostConstruct

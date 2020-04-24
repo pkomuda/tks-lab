@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.appservices.rest;
+package pl.lodz.p.it.tks.rest;
 
 import pl.lodz.p.it.tks.appservices.services.catalog.CatalogCrudService;
 import pl.lodz.p.it.tks.domainmodel.catalogs.Book;

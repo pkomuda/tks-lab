@@ -13,6 +13,8 @@
         <module>application-ports</module>
         <module>repositories-adapters</module>
         <module>web-application</module>
+        <module>rest</module>
+        <module>soap</module>
     </modules>
 
     <properties>
