@@ -1,6 +1,6 @@
-package pl.lodz.p.it.tks.rest.appservices.services.rent.impl;
+package pl.lodz.p.it.tks.appservices.services.rent.impl;
 
-import pl.lodz.p.it.tks.rest.appservices.services.rent.RentCrudService;
+import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
 import pl.lodz.p.it.tks.rest.domainmodel.Rent;
 import pl.lodz.p.it.tks.rest.domainmodel.users.Client;
 import pl.lodz.p.it.tks.rest.ports.aggregates.catalog.CatalogRepoGetAdapter;
