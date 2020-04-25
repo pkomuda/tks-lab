@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-@ApplicationScoped
+@Dependent
 public class CatalogRestCrudAdapterImpl implements CatalogRestCrudAdapter {
 
     @Inject

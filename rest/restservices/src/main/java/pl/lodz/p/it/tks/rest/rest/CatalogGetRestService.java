@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 
 @Named
 @RequestScoped
-@Path("api")
+@Path("/api")
 public class CatalogGetRestService {
 
     @Inject

@@ -14,7 +14,7 @@ import javax.inject.Named;
 import java.util.List;
 
 @Named
-@ApplicationScoped
+@Dependent
 public class CatalogRestGetAdapterImpl implements CatalogRestGetAdapter {
 
     @Inject
