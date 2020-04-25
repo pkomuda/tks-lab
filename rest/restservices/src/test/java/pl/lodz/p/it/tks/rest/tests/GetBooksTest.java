@@ -37,7 +37,7 @@ public class GetBooksTest {
     )
             .withNetwork(Network.SHARED)
             .withExposedPorts(8080, 4848, 6900)
-            .waitingFor(Wait.forHttp("/restservices-1.0-SNAPSHOT").forPort(8080).forStatusCode(200))
+            .waitingFor(Wait.forHttp("/restservices/resources/javaee8").forPort(8080).forStatusCode(200))
             .withLogConsumer(new Slf4jLogConsumer(log));
 
     @Test
