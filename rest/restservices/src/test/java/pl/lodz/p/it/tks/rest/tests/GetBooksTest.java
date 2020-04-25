@@ -1,6 +1,7 @@
 package pl.lodz.p.it.tks.rest.tests;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.junit.Test;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.Network;
@@ -12,7 +13,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import pl.lodz.p.it.model.catalogs.BookWeb;
 
 import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
@@ -42,9 +42,9 @@ public class GetBooksTest {
 
     @Test
     public void testServiceOne() {
-        Client client = ClientBuilder.newClient();
-        WebTarget base = client.target("http://localhost:8080/restservices-1.0-SNAPSHOT/resources/api");
+        Client client = ResteasyClientBuilder.newClient();
+        WebTarget base = client.target("http://localhost:8080/restservices/resources/api");
         List<BookWeb> books = base.path("books").request(MediaType.APPLICATION_JSON).get(new GenericType<>() {});
-        assertEquals(books.size(), 3);
+        assertEquals(3, books.size());
     }
 }
