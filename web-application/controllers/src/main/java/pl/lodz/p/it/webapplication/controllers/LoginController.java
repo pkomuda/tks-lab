@@ -2,9 +2,9 @@ package pl.lodz.p.it.webapplication.controllers;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.lodz.p.it.tks.appservices.services.user.UserGetService;
 import pl.lodz.p.it.model.users.UserWeb;
-import uiports.converters.UserConverter;
+import uiports.aggregates.UserAdapter;
+
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -20,7 +20,7 @@ import java.io.Serializable;
 public class LoginController implements Serializable {
 
     @Inject
-    private UserGetService userService;
+    private UserAdapter userAdapter;
     @Getter @Setter
     private String username;
     @Getter @Setter
@@ -32,7 +32,7 @@ public class LoginController implements Serializable {
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
         try {
             request.login(username, password);
-            UserWeb user = UserConverter.domainToWeb(userService.getUser(username));
+            UserWeb user = userAdapter.getUser(username);
             if (user != null && user.isActive()) {
                 if (request.isUserInRole("Admin")) {
                     externalContext.getSessionMap().put("role", "Admin");

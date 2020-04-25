@@ -43,11 +43,9 @@ public @Data class AdminPageController implements Serializable {
     }
 
     public void filterUsers() {
-
-//        admins = UserConverter.domainToWebAdmins(userFilterService.filterAdmins(userFilter));
-//        managers =UserConverter.domainToWebManagers(userFilterService.filterManagers(userFilter));
-//        clients =UserConverter.domainToWebClients(userFilterService.filterClients(userFilter));
-
+        admins = userAdapter.filterAdmins(userFilter);
+        managers = userAdapter.filterManagers(userFilter);
+        clients = userAdapter.filterClients(userFilter);
     }
 
     @PostConstruct
