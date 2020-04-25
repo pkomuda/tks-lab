@@ -4,7 +4,7 @@ package uiports.converters;
 
 import pl.lodz.p.it.model.RentWeb;
 import pl.lodz.p.it.model.users.ClientWeb;
-import pl.lodz.p.it.tks.domainmodel.Rent;
+import pl.lodz.p.it.tks.rest.domainmodel.Rent;
 
 import java.util.List;
 import java.util.stream.Collectors;

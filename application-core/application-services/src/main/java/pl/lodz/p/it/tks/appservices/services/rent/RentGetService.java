@@ -1,6 +1,6 @@
 package pl.lodz.p.it.tks.appservices.services.rent;
 
-import pl.lodz.p.it.tks.domainmodel.Rent;
+import pl.lodz.p.it.tks.rest.domainmodel.Rent;
 
 import java.util.List;
 

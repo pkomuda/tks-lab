@@ -1,12 +1,12 @@
-package pl.lodz.p.it.tks.appservices.services.rent.impl;
+package pl.lodz.p.it.tks.rest.appservices.services.rent.impl;
 
-import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
-import pl.lodz.p.it.tks.domainmodel.Rent;
-import pl.lodz.p.it.tks.domainmodel.users.Client;
-import pl.lodz.p.it.tks.ports.aggregates.catalog.CatalogRepoGetAdapter;
-import pl.lodz.p.it.tks.ports.aggregates.rent.RentRepoCrudAdapter;
-import pl.lodz.p.it.tks.ports.aggregates.rent.RentRepoGetAdapter;
-import pl.lodz.p.it.tks.ports.aggregates.user.UserRepoGetAdapter;
+import pl.lodz.p.it.tks.rest.appservices.services.rent.RentCrudService;
+import pl.lodz.p.it.tks.rest.domainmodel.Rent;
+import pl.lodz.p.it.tks.rest.domainmodel.users.Client;
+import pl.lodz.p.it.tks.rest.ports.aggregates.catalog.CatalogRepoGetAdapter;
+import pl.lodz.p.it.tks.rest.ports.aggregates.rent.RentRepoCrudAdapter;
+import pl.lodz.p.it.tks.rest.ports.aggregates.rent.RentRepoGetAdapter;
+import pl.lodz.p.it.tks.rest.ports.aggregates.user.UserRepoGetAdapter;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;

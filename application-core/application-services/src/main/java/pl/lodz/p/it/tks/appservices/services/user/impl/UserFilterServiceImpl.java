@@ -1,10 +1,10 @@
-package pl.lodz.p.it.tks.appservices.services.user.impl;
+package pl.lodz.p.it.tks.rest.appservices.services.user.impl;
 
-import pl.lodz.p.it.tks.appservices.services.user.UserFilterService;
-import pl.lodz.p.it.tks.domainmodel.users.Admin;
-import pl.lodz.p.it.tks.domainmodel.users.Client;
-import pl.lodz.p.it.tks.domainmodel.users.Manager;
-import pl.lodz.p.it.tks.ports.aggregates.user.UserRepoFilterAdapter;
+import pl.lodz.p.it.tks.rest.appservices.services.user.UserFilterService;
+import pl.lodz.p.it.tks.rest.domainmodel.users.Admin;
+import pl.lodz.p.it.tks.rest.domainmodel.users.Client;
+import pl.lodz.p.it.tks.rest.domainmodel.users.Manager;
+import pl.lodz.p.it.tks.rest.ports.aggregates.user.UserRepoFilterAdapter;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;

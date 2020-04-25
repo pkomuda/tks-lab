@@ -6,10 +6,10 @@ import pl.lodz.p.it.model.users.AdminWeb;
 import pl.lodz.p.it.model.users.ClientWeb;
 import pl.lodz.p.it.model.users.ManagerWeb;
 import pl.lodz.p.it.model.users.UserWeb;
-import pl.lodz.p.it.tks.domainmodel.users.Admin;
-import pl.lodz.p.it.tks.domainmodel.users.Client;
-import pl.lodz.p.it.tks.domainmodel.users.Manager;
-import pl.lodz.p.it.tks.domainmodel.users.User;
+import pl.lodz.p.it.tks.rest.domainmodel.users.Admin;
+import pl.lodz.p.it.tks.rest.domainmodel.users.Client;
+import pl.lodz.p.it.tks.rest.domainmodel.users.Manager;
+import pl.lodz.p.it.tks.rest.domainmodel.users.User;
 
 import java.util.List;
 import java.util.stream.Collectors;

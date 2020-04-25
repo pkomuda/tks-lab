@@ -6,10 +6,10 @@ import pl.lodz.p.it.model.catalogs.BookWeb;
 import pl.lodz.p.it.model.catalogs.CatalogWeb;
 import pl.lodz.p.it.model.catalogs.MovieWeb;
 import pl.lodz.p.it.model.catalogs.NoCatalogWeb;
-import pl.lodz.p.it.tks.domainmodel.catalogs.Book;
-import pl.lodz.p.it.tks.domainmodel.catalogs.Catalog;
-import pl.lodz.p.it.tks.domainmodel.catalogs.Movie;
-import pl.lodz.p.it.tks.domainmodel.catalogs.NoCatalog;
+import pl.lodz.p.it.tks.rest.domainmodel.catalogs.Book;
+import pl.lodz.p.it.tks.rest.domainmodel.catalogs.Catalog;
+import pl.lodz.p.it.tks.rest.domainmodel.catalogs.Movie;
+import pl.lodz.p.it.tks.rest.domainmodel.catalogs.NoCatalog;
 
 public class CatalogConverter {
 
