@@ -2,14 +2,14 @@
 <persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="TKSUnit" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <jta-data-source>jdbc/TKS</jta-data-source>
+        <jta-data-source>java:app/TKS</jta-data-source>
         <properties>
             <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL10Dialect"/>
-            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-46-137-177-160.eu-west-1.compute.amazonaws.com:5432/dfb6b8uta058g4"/>
-            <property name="javax.persistence.jdbc.user" value="mzzfxlnwofocqy"/>
-            <property name="javax.persistence.jdbc.password" value="4934643587f5dd6a9ce29d07b4ecd580524c084ca86a96ecfd21c2b947fd6652"/>
+<!--            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>-->
+<!--            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-46-137-177-160.eu-west-1.compute.amazonaws.com:5432/dfb6b8uta058g4"/>-->
+<!--            <property name="javax.persistence.jdbc.user" value="mzzfxlnwofocqy"/>-->
+<!--            <property name="javax.persistence.jdbc.password" value="4934643587f5dd6a9ce29d07b4ecd580524c084ca86a96ecfd21c2b947fd6652"/>-->
         </properties>
     </persistence-unit>
 </persistence>
