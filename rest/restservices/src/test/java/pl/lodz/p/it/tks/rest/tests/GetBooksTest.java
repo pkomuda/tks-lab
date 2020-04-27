@@ -31,7 +31,6 @@ import static io.restassured.RestAssured.given;
 @Testcontainers
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GetBooksTest {
-
     private static Client client;
     private static Integer port8080;
     private static WebTarget target;
@@ -66,11 +65,14 @@ public class GetBooksTest {
     @Test
     public void getMovieTest() {
         MovieRestModel[] movies = RestAssured.given()
+                .header("Content-Type","application-json")
                 .config(newConfig)
                 .contentType(ContentType.JSON)
                 .when()
                 .get(path +"/movies")
                 .as(MovieRestModel[].class);
+
+
         Assert.assertEquals(4, movies[1].getId());
         Assert.assertEquals("Trainspotting", movies[1].getTitle());
         Assert.assertEquals("Danny Boyle", movies[1].getDirector());
@@ -82,11 +84,13 @@ public class GetBooksTest {
     @Test
     public void checkMoviesAmount() {
         MovieRestModel[] movies = RestAssured.given()
+                .header("Content-Type","application/json")
                 .config(newConfig)
                 .contentType(ContentType.JSON)
                 .when()
                 .get(path +"/movies")
                 .as(MovieRestModel[].class);
+
         Assert.assertEquals(3, movies.length);
     }
 
@@ -94,6 +98,7 @@ public class GetBooksTest {
     @Test
     public void checkBooksAmount(){
         BookRestModel[] books = given()
+                .header("Content-Type","application/json")
                 .config(newConfig)
                 .contentType(ContentType.JSON)
                 .when()
@@ -112,6 +117,7 @@ public class GetBooksTest {
         File file = new File("F:/SEMESTR_V/TKS/tks_mkwa_czw_15_07/rest/restservices/src/test/java/pl/lodz/p/it/tks/rest/tests/book.json");
         BookRestModel bookRestModel = new BookRestModel(10,"A man with his dog","Bill Gates",1998);
         Response r = RestAssured.given()
+                .header("Content-Type","application/json")
                 .config(newConfig)
                 .contentType(ContentType.JSON)
                 .body(file)
@@ -130,6 +136,7 @@ public class GetBooksTest {
         File file = new File("F:/SEMESTR_V/TKS/tks_mkwa_czw_15_07/rest/restservices/src/test/java/pl/lodz/p/it/tks/rest/tests/book.json");
         BookRestModel bookRestModel = new BookRestModel(10,"A man with his dog","Bill Gates",1998);
         Response r = RestAssured.given()
+                .header("Content-Type","application/json")
                 .config(newConfig)
                 .contentType(ContentType.JSON)
                 .body(file)
@@ -142,6 +149,7 @@ public class GetBooksTest {
         Thread.sleep(3000);
         io.restassured.response.Response response =
                 RestAssured.given()
+                        .header("Content-Type","application/json")
                         .config(newConfig)
                         .contentType(ContentType.JSON)
                         .delete("http://localhost:" + port8080 +"/payararest/resources/api/catalog/10")
