@@ -1,40 +1,30 @@
 package pl.lodz.p.it.tks.rest.tests;
 
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
+import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.images.builder.ImageFromDockerfile;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import pl.lodz.p.it.model.catalogs.BookWeb;
-import pl.lodz.p.it.tks.rest.domainmodel.catalogs.Book;
 import pl.lodz.p.it.tks.rest.model.BookRestModel;
+import pl.lodz.p.it.tks.rest.model.MovieRestModel;
 
-import javax.swing.text.html.parser.Parser;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.junit.Assert.assertEquals;
 
 @Slf4j
 @Testcontainers
@@ -83,35 +73,10 @@ public class GetBooksTest {
     }
 
     @Test
-    public void checkBooksAmount(){
-//        JsonPath jsonPath = given()
-//                .when()
-//                .get("http://localhost:" + port8080 +"/payararest/resources/api/books")
-//                .then()
-//                .assertThat()
-//                .statusCode(Response.Status.OK.getStatusCode())
-//                .assertThat()
-//                .extract().body().jsonPath();
-
-//        List<BookRestModel> returnedbooks = jsonPath.getList("",BookRestModel.class);
+    public void checkBooksAmount() {
         BookRestModel[] books = given()
                 .contentType(MediaType.APPLICATION_JSON)
                 .when().get("http://localhost:" + port8080 +"/payararest/resources/api/books").as(BookRestModel[].class);
-//        Response r = (Response) given()
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .when()
-//                .get("http://localhost:" + port8080 +"/payararest/resources/api/books")
-//                .then()
-//                .body("", hasItem("The Shining"));
-//        assertEquals(200,r.getStatus());
-//        for(int i=0; i<3; i++){
-//            System.out.println(returnedbooks.get(i).getAuthor());
-//        }
-//        ArrayList<BookRestModel> books = client
-//                .target("http://localhost:" + port8080 +"/payararest/resources/api")
-//                .path("books")
-//                .request(MediaType.APPLICATION_JSON)
-//                .get(new GenericType<>(){});
         Assert.assertEquals(3,books.length);
         Assert.assertEquals("The Shining",books[0].getTitle());
     }
@@ -125,6 +90,30 @@ public class GetBooksTest {
 //                .post("http://localhost:" + port8080 +"/payararest/resources/api/book");
 //        assertEquals(200,.getStatus());
 
+    }
+
+    @Test
+    public void getMovieTest() {
+        MovieRestModel movie = given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("http://localhost:" + port8080 +"/payararest/resources/api/movie/4")
+                .as(MovieRestModel.class);
+        Assert.assertEquals(4, movie.getId());
+        Assert.assertEquals("Trainspotting", movie.getTitle());
+        Assert.assertEquals("Danny Boyle", movie.getDirector());
+        Assert.assertEquals(1996, movie.getReleaseYear());
+        Assert.assertEquals("DVD", movie.getFormat());
+    }
+
+    @Test
+    public void checkMoviesAmount() {
+        MovieRestModel[] movies = RestAssured.given()
+                .contentType(MediaType.APPLICATION_JSON)
+                .when()
+                .get("http://localhost:" + port8080 +"/payararest/resources/api/movies")
+                .as(MovieRestModel[].class);
+        Assert.assertEquals(3, movies.length);
     }
 
     @AfterAll
