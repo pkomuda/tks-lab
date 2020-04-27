@@ -6,10 +6,14 @@ import pl.lodz.p.it.tks.soap.model.ManagerSoap;
 import pl.lodz.p.it.tks.soap.model.UserSoap;
 import soapports.aggregates.UserSoapCrudAdapter;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.jws.WebService;
 
+@Named
 @WebService
+@RequestScoped
 public class UserCrudSoapService {
 
     @Inject

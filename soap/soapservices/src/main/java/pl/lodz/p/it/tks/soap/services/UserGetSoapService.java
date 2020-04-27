@@ -6,11 +6,15 @@ import pl.lodz.p.it.tks.soap.model.ManagerSoap;
 import pl.lodz.p.it.tks.soap.model.UserSoap;
 import soapports.aggregates.UserSoapGetAdapter;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.jws.WebService;
 import java.util.List;
 
+@Named
 @WebService
+@RequestScoped
 public class UserGetSoapService {
 
     @Inject

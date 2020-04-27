@@ -8,9 +8,13 @@ import pl.lodz.p.it.tks.soap.model.UserSoap;
 import soapports.aggregates.UserSoapGetAdapter;
 import soapports.converters.UserSoapConverter;
 
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.List;
 
+@Named
+@Dependent
 public class UserSoapGetAdapterImpl implements UserSoapGetAdapter {
 
     @Inject

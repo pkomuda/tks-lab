@@ -5,11 +5,15 @@ import pl.lodz.p.it.tks.soap.model.ClientSoap;
 import pl.lodz.p.it.tks.soap.model.ManagerSoap;
 import soapports.aggregates.UserSoapFilterAdapter;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.jws.WebService;
 import java.util.List;
 
+@Named
 @WebService
+@RequestScoped
 public class UserFilterSoapService {
 
     @Inject
