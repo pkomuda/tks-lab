@@ -11,5 +11,23 @@
 
     <artifactId>soap-ports</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>pl.lodz.p.it</groupId>
+            <artifactId>domain-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.lodz.p.it</groupId>
+            <artifactId>soapmodel</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.lodz.p.it</groupId>
+            <artifactId>application-services</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 </project>
