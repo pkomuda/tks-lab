@@ -22,7 +22,7 @@ public class RestConverter {
             catalogRestModel.setReleaseYear(catalog.getReleaseYear());
             catalogRestModel.setId(catalog.getId());
             catalogRestModel.setTitle(catalog.getTitle());
-            catalogRestModel.setAuthor(catalogRestModel.getAuthor());
+            catalogRestModel.setAuthor(((Book) catalog).getAuthor());
             return catalogRestModel;
         }
      else if (catalog instanceof Movie) {
