@@ -12,14 +12,14 @@
         <module>application-core</module>
         <module>application-ports</module>
         <module>repositories-adapters</module>
-        <module>web-application</module>
 
+        <module>web-application</module>
         <module>rest</module>
         <module>soap</module>
 
         <module>ui-ports</module>
         <module>rest-ports</module>
-
+        <module>soap-ports</module>
     </modules>
 
     <properties>

@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.rest.rest;
+package pl.lodz.p.it.webapplication.controllers;
 
 import javax.annotation.sql.DataSourceDefinition;
 import javax.enterprise.context.ApplicationScoped;

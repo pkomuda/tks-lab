@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.rest.rest;
+package pl.lodz.p.it.tks.soap.services;
 
 import javax.annotation.sql.DataSourceDefinition;
 import javax.enterprise.context.ApplicationScoped;
@@ -11,4 +11,5 @@ import javax.enterprise.context.ApplicationScoped;
 )
 @ApplicationScoped
 public class JdbcResourceBean {
+
 }
