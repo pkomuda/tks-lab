@@ -3,7 +3,7 @@ package pl.lodz.p.it.tks.soap.services;
 import javax.annotation.sql.DataSourceDefinition;
 import javax.enterprise.context.ApplicationScoped;
 
-@DataSourceDefinition(name="java:app/TKS",
+@DataSourceDefinition(name="java:global/TKS",
         className="org.postgresql.ds.PGConnectionPoolDataSource",
         url="jdbc:postgresql://ec2-46-137-177-160.eu-west-1.compute.amazonaws.com:5432/dfb6b8uta058g4",
         user="mzzfxlnwofocqy",
