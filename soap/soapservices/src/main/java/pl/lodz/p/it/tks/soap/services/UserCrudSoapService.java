@@ -4,34 +4,14 @@ import pl.lodz.p.it.tks.soap.model.AdminSoap;
 import pl.lodz.p.it.tks.soap.model.ClientSoap;
 import pl.lodz.p.it.tks.soap.model.ManagerSoap;
 import pl.lodz.p.it.tks.soap.model.UserSoap;
-import soapports.aggregates.UserSoapCrudAdapter;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.jws.WebService;
 
-@Named
 @WebService
-@RequestScoped
-public class UserCrudSoapService {
+public interface UserCrudSoapService {
 
-    @Inject
-    private UserSoapCrudAdapter userSoapCrudAdapter;
-
-    public void addAdmin(AdminSoap admin) {
-        userSoapCrudAdapter.addAdmin(admin);
-    }
-
-    public void addManager(ManagerSoap manager) {
-        userSoapCrudAdapter.addManager(manager);
-    }
-
-    public void addClient(ClientSoap client) {
-        userSoapCrudAdapter.addClient(client);
-    }
-
-    public void updateUser(String username, UserSoap user) {
-        userSoapCrudAdapter.updateUser(username, user);
-    }
+    void addAdmin(AdminSoap admin);
+    void addManager(ManagerSoap manager);
+    void addClient(ClientSoap client);
+    void updateUser(String username, UserSoap user);
 }
