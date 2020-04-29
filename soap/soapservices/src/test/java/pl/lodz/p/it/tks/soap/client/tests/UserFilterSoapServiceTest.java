@@ -16,6 +16,7 @@ public class UserFilterSoapServiceTest {
         UserFilterSoapServiceImpl userFilterSoapService = new UserFilterSoapServiceImplService().getUserFilterSoapServiceImplPort();
         List<ManagerSoap> managers = userFilterSoapService.filterManagers("Jimmy");
         assertEquals("Jimmy",managers.get(0).getFirstName());
+        assertEquals(1,managers.size());
     }
 
 }
