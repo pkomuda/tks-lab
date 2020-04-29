@@ -1,6 +1,6 @@
-package pl.lodz.p.it.tks.rest.appservices.services.catalog.impl;
+package pl.lodz.p.it.tks.appservices.services.catalog.impl;
 
-import pl.lodz.p.it.tks.rest.appservices.services.catalog.CatalogCrudService;
+import pl.lodz.p.it.tks.appservices.services.catalog.CatalogCrudService;
 import pl.lodz.p.it.tks.rest.domainmodel.Rent;
 import pl.lodz.p.it.tks.rest.domainmodel.catalogs.Book;
 import pl.lodz.p.it.tks.rest.domainmodel.catalogs.Movie;

@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.rest.appservices.services.catalog;
+package pl.lodz.p.it.tks.appservices.services.catalog;
 
 import pl.lodz.p.it.tks.rest.domainmodel.catalogs.Book;
 import pl.lodz.p.it.tks.rest.domainmodel.catalogs.Catalog;

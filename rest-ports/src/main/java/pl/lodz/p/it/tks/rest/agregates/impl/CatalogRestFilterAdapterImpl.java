@@ -2,7 +2,7 @@ package pl.lodz.p.it.tks.rest.agregates.impl;
 
 
 import pl.lodz.p.it.tks.rest.agregates.CatalogRestFilterAdapter;
-import pl.lodz.p.it.tks.rest.appservices.services.catalog.CatalogFilterService;
+import pl.lodz.p.it.tks.appservices.services.catalog.CatalogFilterService;
 import pl.lodz.p.it.tks.rest.converters.RestConverter;
 
 import pl.lodz.p.it.tks.rest.model.BookRestModel;
@@ -10,7 +10,6 @@ import pl.lodz.p.it.tks.rest.model.CatalogRestModel;
 import pl.lodz.p.it.tks.rest.model.MovieRestModel;
 
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
