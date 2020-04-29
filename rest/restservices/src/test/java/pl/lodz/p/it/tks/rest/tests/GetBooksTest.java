@@ -114,38 +114,61 @@ public class GetBooksTest {
     @Order(4)
     @Test
     public void addBookRest() throws InterruptedException {
-        File file = new File("F:/SEMESTR_V/TKS/tks_mkwa_czw_15_07/rest/restservices/src/test/java/pl/lodz/p/it/tks/rest/tests/book.json");
-        BookRestModel bookRestModel = new BookRestModel(10,"A man with his dog","Bill Gates",1998);
+        String json = "{\n" +
+                " \"id\" :  10, \n" +
+                " \"releaseYear\": 1998,\n" +
+                " \"title\": \"A man with his dog\", \n" +
+                " \"author\": \"Bill Gates\" \n" + "}";
         Response r = RestAssured.given()
                 .header("Content-Type","application/json")
                 .config(newConfig)
                 .contentType(ContentType.JSON)
-                .body(file)
+                .body(json)
                 .post(path +"/book")
                 .then()
                 .statusCode(200)
                 .extract()
                 .response();
         Assert.assertEquals(200,r.getStatusCode());
+        BookRestModel[] books = given()
+                .header("Content-Type","application/json")
+                .config(newConfig)
+                .contentType(ContentType.JSON)
+                .when()
+                .get(path+ "/books")
+                .as(BookRestModel[].class);
+        Assert.assertEquals("Bill Gates",books[3].getAuthor());
         Thread.sleep(3000);
     }
 
     @Order(5)
     @Test
     public void putBookRest() throws InterruptedException {
-        File file = new File("F:/SEMESTR_V/TKS/tks_mkwa_czw_15_07/rest/restservices/src/test/java/pl/lodz/p/it/tks/rest/tests/book.json");
+        String json = "{\n" +
+                " \"id\" :  10, \n" +
+                " \"releaseYear\": 1998,\n" +
+                " \"title\": \"A man with his dog\", \n" +
+                " \"author\": \"Cristiano Ronaldo\" \n" + "}";
         BookRestModel bookRestModel = new BookRestModel(10,"A man with his dog","Bill Gates",1998);
         Response r = RestAssured.given()
                 .header("Content-Type","application/json")
                 .config(newConfig)
                 .contentType(ContentType.JSON)
-                .body(file)
+                .body(json)
                 .put(path +"/book/10")
                 .then()
                 .statusCode(200)
                 .extract()
                 .response();
         Assert.assertEquals(200,r.getStatusCode());
+        BookRestModel[] books = given()
+                .header("Content-Type","application/json")
+                .config(newConfig)
+                .contentType(ContentType.JSON)
+                .when()
+                .get(path+ "/books")
+                .as(BookRestModel[].class);
+        Assert.assertEquals("Cristiano Ronaldo",books[3].getAuthor());
         Thread.sleep(3000);
         io.restassured.response.Response response =
                 RestAssured.given()
