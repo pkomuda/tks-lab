@@ -1,10 +1,10 @@
 package soapports.aggregates.impl;
 
 import pl.lodz.p.it.tks.appservices.services.user.UserGetService;
-import pl.lodz.p.it.tks.soap.model.AdminSoap;
-import pl.lodz.p.it.tks.soap.model.ClientSoap;
-import pl.lodz.p.it.tks.soap.model.ManagerSoap;
-import pl.lodz.p.it.tks.soap.model.UserSoap;
+import pl.lodz.p.it.tks.soap.services.model.AdminSoap;
+import pl.lodz.p.it.tks.soap.services.model.ClientSoap;
+import pl.lodz.p.it.tks.soap.services.model.ManagerSoap;
+import pl.lodz.p.it.tks.soap.services.model.UserSoap;
 import soapports.aggregates.UserSoapGetAdapter;
 import soapports.converters.UserSoapConverter;
 

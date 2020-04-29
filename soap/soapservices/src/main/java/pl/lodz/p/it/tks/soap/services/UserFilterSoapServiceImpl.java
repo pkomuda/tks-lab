@@ -1,8 +1,8 @@
 package pl.lodz.p.it.tks.soap.services;
 
-import pl.lodz.p.it.tks.soap.model.AdminSoap;
-import pl.lodz.p.it.tks.soap.model.ClientSoap;
-import pl.lodz.p.it.tks.soap.model.ManagerSoap;
+import pl.lodz.p.it.tks.soap.services.model.AdminSoap;
+import pl.lodz.p.it.tks.soap.services.model.ClientSoap;
+import pl.lodz.p.it.tks.soap.services.model.ManagerSoap;
 import soapports.aggregates.UserSoapFilterAdapter;
 
 import javax.enterprise.context.RequestScoped;
@@ -12,24 +12,21 @@ import javax.jws.WebService;
 import java.util.List;
 
 @Named
-@WebService(endpointInterface = "pl.lodz.p.it.tks.soap.services.UserFilterSoapService")
+@WebService(targetNamespace = "http://client.soap.tks.it.p.lodz.pl/", wsdlLocation = "https://raw.githubusercontent.com/pkomuda/tks-lab/master/filter.wsdl")
 @RequestScoped
-public class UserFilterSoapServiceImpl implements UserFilterSoapService {
+public class UserFilterSoapServiceImpl {
 
     @Inject
     private UserSoapFilterAdapter userSoapFilterAdapter;
 
-    @Override
     public List<AdminSoap> filterAdmins(String adminFilter) {
         return userSoapFilterAdapter.filterAdmins(adminFilter);
     }
 
-    @Override
     public List<ManagerSoap> filterManagers(String managerFilter) {
         return userSoapFilterAdapter.filterManagers(managerFilter);
     }
 
-    @Override
     public List<ClientSoap> filterClients(String clientFilter) {
         return userSoapFilterAdapter.filterClients(clientFilter);
     }

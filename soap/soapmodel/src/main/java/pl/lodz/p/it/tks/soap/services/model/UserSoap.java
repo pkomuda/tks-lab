@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.soap.model;
+package pl.lodz.p.it.tks.soap.services.model;
 
 import javax.xml.bind.annotation.*;
 

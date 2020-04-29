@@ -1,6 +1,6 @@
 package soapports.ports;
 
-import pl.lodz.p.it.tks.soap.model.UserSoap;
+import pl.lodz.p.it.tks.soap.services.model.UserSoap;
 
 public interface UpdateUserSoapPort {
 

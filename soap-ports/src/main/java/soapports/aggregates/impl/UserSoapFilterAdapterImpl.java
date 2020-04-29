@@ -1,9 +1,9 @@
 package soapports.aggregates.impl;
 
 import pl.lodz.p.it.tks.appservices.services.user.UserFilterService;
-import pl.lodz.p.it.tks.soap.model.AdminSoap;
-import pl.lodz.p.it.tks.soap.model.ClientSoap;
-import pl.lodz.p.it.tks.soap.model.ManagerSoap;
+import pl.lodz.p.it.tks.soap.services.model.AdminSoap;
+import pl.lodz.p.it.tks.soap.services.model.ClientSoap;
+import pl.lodz.p.it.tks.soap.services.model.ManagerSoap;
 import soapports.aggregates.UserSoapFilterAdapter;
 import soapports.converters.UserSoapConverter;
 

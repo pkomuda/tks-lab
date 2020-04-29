@@ -4,10 +4,10 @@ import pl.lodz.p.it.tks.rest.domainmodel.users.Admin;
 import pl.lodz.p.it.tks.rest.domainmodel.users.Client;
 import pl.lodz.p.it.tks.rest.domainmodel.users.Manager;
 import pl.lodz.p.it.tks.rest.domainmodel.users.User;
-import pl.lodz.p.it.tks.soap.model.AdminSoap;
-import pl.lodz.p.it.tks.soap.model.ClientSoap;
-import pl.lodz.p.it.tks.soap.model.ManagerSoap;
-import pl.lodz.p.it.tks.soap.model.UserSoap;
+import pl.lodz.p.it.tks.soap.services.model.AdminSoap;
+import pl.lodz.p.it.tks.soap.services.model.ClientSoap;
+import pl.lodz.p.it.tks.soap.services.model.ManagerSoap;
+import pl.lodz.p.it.tks.soap.services.model.UserSoap;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.soap.model;
+package pl.lodz.p.it.tks.soap.services.model;
 
 public class AdminSoap extends UserSoap {
 

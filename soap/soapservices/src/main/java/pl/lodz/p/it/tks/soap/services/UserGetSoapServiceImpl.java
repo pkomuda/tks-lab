@@ -1,9 +1,9 @@
 package pl.lodz.p.it.tks.soap.services;
 
-import pl.lodz.p.it.tks.soap.model.AdminSoap;
-import pl.lodz.p.it.tks.soap.model.ClientSoap;
-import pl.lodz.p.it.tks.soap.model.ManagerSoap;
-import pl.lodz.p.it.tks.soap.model.UserSoap;
+import pl.lodz.p.it.tks.soap.services.model.AdminSoap;
+import pl.lodz.p.it.tks.soap.services.model.ClientSoap;
+import pl.lodz.p.it.tks.soap.services.model.ManagerSoap;
+import pl.lodz.p.it.tks.soap.services.model.UserSoap;
 import soapports.aggregates.UserSoapGetAdapter;
 
 import javax.enterprise.context.RequestScoped;
@@ -13,29 +13,25 @@ import javax.jws.WebService;
 import java.util.List;
 
 @Named
-@WebService(endpointInterface = "pl.lodz.p.it.tks.soap.services.UserGetSoapService")
+@WebService(targetNamespace = "http://client.soap.tks.it.p.lodz.pl/", wsdlLocation = "https://raw.githubusercontent.com/pkomuda/tks-lab/master/get.wsdl")
 @RequestScoped
-public class UserGetSoapServiceImpl implements UserGetSoapService {
+public class UserGetSoapServiceImpl {
 
     @Inject
     private UserSoapGetAdapter userSoapGetAdapter;
 
-    @Override
     public UserSoap getUser(String username) {
         return userSoapGetAdapter.getUser(username);
     }
 
-    @Override
     public List<AdminSoap> getAdmins() {
         return userSoapGetAdapter.getAdmins();
     }
 
-    @Override
     public List<ManagerSoap> getManagers() {
         return userSoapGetAdapter.getManagers();
     }
 
-    @Override
     public List<ClientSoap> getClients() {
         return userSoapGetAdapter.getClients();
     }
