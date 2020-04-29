@@ -9,13 +9,13 @@ import pl.lodz.p.it.tks.rest.domainmodel.Rent;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RentConverter {
+public class RentWebConverter {
 
     public static RentWeb domainToWeb(Rent rent) {
         return new RentWeb(
                 rent.getId(),
-                (ClientWeb) UserConverter.domainToWeb(rent.getClient()),
-                CatalogConverter.domainToWeb(rent.getCatalog()),
+                (ClientWeb) UserWebConverter.domainToWeb(rent.getClient()),
+                CatalogWebConverter.domainToWeb(rent.getCatalog()),
                 rent.getRentDateTime(),
                 rent.getReturnDateTime()
         );
@@ -24,7 +24,7 @@ public class RentConverter {
     public static List<RentWeb> domainToWebRents(List<Rent> rents) {
         return rents
                 .stream()
-                .map(RentConverter::domainToWeb)
+                .map(RentWebConverter::domainToWeb)
                 .collect(Collectors.toList());
     }
 }

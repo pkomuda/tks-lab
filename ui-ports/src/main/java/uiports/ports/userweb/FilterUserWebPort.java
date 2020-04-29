@@ -1,4 +1,4 @@
-package uiports.ports.users;
+package uiports.ports.userweb;
 
 import pl.lodz.p.it.model.users.AdminWeb;
 import pl.lodz.p.it.model.users.ClientWeb;
@@ -6,7 +6,7 @@ import pl.lodz.p.it.model.users.ManagerWeb;
 
 import java.util.List;
 
-public interface FilterUserPort {
+public interface FilterUserWebPort {
 
     List<AdminWeb> filterAdmins(String adminFilter);
     List<ManagerWeb> filterManagers(String managerFilter);

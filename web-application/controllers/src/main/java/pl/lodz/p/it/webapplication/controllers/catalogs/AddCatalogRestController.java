@@ -4,7 +4,6 @@ import lombok.Data;
 import pl.lodz.p.it.model.catalogs.BookWeb;
 import pl.lodz.p.it.model.catalogs.MovieWeb;
 
-
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
@@ -30,7 +29,7 @@ public @Data class AddCatalogRestController implements Serializable {
     private String director;
     private String format;
     private Client client = ClientBuilder.newClient();
-    private WebTarget base = client.target("https://localhost:8181/tkslab/resources/api");
+    private WebTarget base = client.target("http://localhost:8080/payararest/resources/api");
 
     public String addBook() {
         beginConversation();

@@ -1,14 +1,14 @@
 package pl.lodz.p.it.webapplication.controllers;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
-import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
-import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
 import pl.lodz.p.it.model.RentWeb;
 import pl.lodz.p.it.model.catalogs.BookWeb;
 import pl.lodz.p.it.model.catalogs.CatalogWeb;
 import pl.lodz.p.it.model.catalogs.MovieWeb;
-import uiports.converters.RentConverter;
+import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
+import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
+import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
+import uiports.converters.RentWebConverter;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -42,7 +42,7 @@ public @Data class ManagerPageRestController implements Serializable {
     private String catalogFilter;
     private String rentFilter;
     private Client client = ClientBuilder.newClient();
-    private WebTarget base = client.target("https://localhost:8181/tkslab/resources/api");
+    private WebTarget base = client.target("http://localhost:8080/payararest/resources/api");
 
     public String addBook() {
         return "addBook";
@@ -86,8 +86,8 @@ public @Data class ManagerPageRestController implements Serializable {
     }
 
     public void filterRents() {
-        unfinishedRents = RentConverter.domainToWebRents(rentFilterService.filterUnfinishedRents(rentFilter));
-        finishedRents = RentConverter.domainToWebRents(rentFilterService.filterFinishedRents(rentFilter));
+        unfinishedRents = RentWebConverter.domainToWebRents(rentFilterService.filterUnfinishedRents(rentFilter));
+        finishedRents = RentWebConverter.domainToWebRents(rentFilterService.filterFinishedRents(rentFilter));
     }
 
     public void removeCatalog(int id) {
@@ -106,7 +106,7 @@ public @Data class ManagerPageRestController implements Serializable {
     public void loadData() {
         books = base.path("books").request(MediaType.APPLICATION_JSON).get(new GenericType<>() {});
         movies = base.path("movies").request(MediaType.APPLICATION_JSON).get(new GenericType<>() {});
-        unfinishedRents = RentConverter.domainToWebRents(rentGetService.getUnfinishedRents());
-        finishedRents =RentConverter.domainToWebRents(rentGetService.getFinishedRents());
+        unfinishedRents = RentWebConverter.domainToWebRents(rentGetService.getUnfinishedRents());
+        finishedRents = RentWebConverter.domainToWebRents(rentGetService.getFinishedRents());
     }
 }

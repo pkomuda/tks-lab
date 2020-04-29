@@ -11,7 +11,7 @@ import pl.lodz.p.it.tks.rest.domainmodel.catalogs.Catalog;
 import pl.lodz.p.it.tks.rest.domainmodel.catalogs.Movie;
 import pl.lodz.p.it.tks.rest.domainmodel.catalogs.NoCatalog;
 
-public class CatalogConverter {
+public class CatalogWebConverter {
 
     public static CatalogWeb domainToWeb(Catalog catalog) {
         if (catalog instanceof Book) {

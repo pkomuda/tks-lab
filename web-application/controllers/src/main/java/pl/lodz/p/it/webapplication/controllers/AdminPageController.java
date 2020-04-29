@@ -5,7 +5,8 @@ import pl.lodz.p.it.model.users.AdminWeb;
 import pl.lodz.p.it.model.users.ClientWeb;
 import pl.lodz.p.it.model.users.ManagerWeb;
 import pl.lodz.p.it.model.users.UserWeb;
-import uiports.aggregates.UserAdapter;
+import uiports.aggregates.userweb.UserWebFilterAdapter;
+import uiports.aggregates.userweb.UserWebGetAdapter;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -19,7 +20,9 @@ import java.util.List;
 public @Data class AdminPageController implements Serializable {
 
     @Inject
-    private UserAdapter userAdapter;
+    private UserWebFilterAdapter userFilterAdapter;
+    @Inject
+    private UserWebGetAdapter userGetAdapter;
     @Inject
     private ViewAccessController viewAccessController;
 
@@ -43,15 +46,15 @@ public @Data class AdminPageController implements Serializable {
     }
 
     public void filterUsers() {
-        admins = userAdapter.filterAdmins(userFilter);
-        managers = userAdapter.filterManagers(userFilter);
-        clients = userAdapter.filterClients(userFilter);
+        admins = userFilterAdapter.filterAdmins(userFilter);
+        managers = userFilterAdapter.filterManagers(userFilter);
+        clients = userFilterAdapter.filterClients(userFilter);
     }
 
     @PostConstruct
     public void loadUsers() {
-        admins = userAdapter.getAdmins();
-        managers = userAdapter.getManagers();
-        clients = userAdapter.getClients();
+        admins = userGetAdapter.getAdmins();
+        managers = userGetAdapter.getManagers();
+        clients = userGetAdapter.getClients();
     }
 }

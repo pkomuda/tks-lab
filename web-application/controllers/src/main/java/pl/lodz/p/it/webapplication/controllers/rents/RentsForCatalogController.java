@@ -1,13 +1,13 @@
 package pl.lodz.p.it.webapplication.controllers.rents;
 
 import lombok.Data;
+import pl.lodz.p.it.model.RentWeb;
+import pl.lodz.p.it.model.catalogs.CatalogWeb;
 import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
 import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
 import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
-import pl.lodz.p.it.model.RentWeb;
-import pl.lodz.p.it.model.catalogs.CatalogWeb;
-import uiports.converters.RentConverter;
+import uiports.converters.RentWebConverter;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -35,8 +35,8 @@ public @Data class RentsForCatalogController implements Serializable {
     private String rentFilter;
 
     public void filterRents() {
-        unfinishedRents = RentConverter.domainToWebRents(rentFilterService.filterUnfinishedRentsForCatalog(id, rentFilter));
-        finishedRents = RentConverter.domainToWebRents(rentFilterService.filterFinishedRentsForCatalog(id, rentFilter));
+        unfinishedRents = RentWebConverter.domainToWebRents(rentFilterService.filterUnfinishedRentsForCatalog(id, rentFilter));
+        finishedRents = RentWebConverter.domainToWebRents(rentFilterService.filterFinishedRentsForCatalog(id, rentFilter));
     }
 
     public void removeRent(String rentId) {
@@ -53,7 +53,7 @@ public @Data class RentsForCatalogController implements Serializable {
         CatalogWeb temp = viewAccessController.getSelectedCatalog();
         id = temp.getId();
         title = temp.getTitle();
-        unfinishedRents = RentConverter.domainToWebRents(rentGetService.getUnfinishedRentsForCatalog(id));
-        finishedRents = RentConverter.domainToWebRents(rentGetService.getFinishedRentsForCatalog(id));
+        unfinishedRents = RentWebConverter.domainToWebRents(rentGetService.getUnfinishedRentsForCatalog(id));
+        finishedRents = RentWebConverter.domainToWebRents(rentGetService.getFinishedRentsForCatalog(id));
     }
 }

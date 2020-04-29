@@ -1,11 +1,10 @@
 package pl.lodz.p.it.webapplication.controllers.catalogs;
 
 import lombok.Data;
-import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
 import pl.lodz.p.it.model.catalogs.BookWeb;
 import pl.lodz.p.it.model.catalogs.CatalogWeb;
 import pl.lodz.p.it.model.catalogs.MovieWeb;
-
+import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -31,7 +30,7 @@ public @Data class EditCatalogRestController {
     private String director;
     private String format;
     private Client client = ClientBuilder.newClient();
-    private WebTarget base = client.target("https://localhost:8181/tkslab/resources/api");
+    private WebTarget base = client.target("http://localhost:8080/payararest/resources/api");
 
     public String confirmEditBook() {
         base.path("book/{id}")

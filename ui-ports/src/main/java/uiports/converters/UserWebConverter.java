@@ -14,7 +14,7 @@ import pl.lodz.p.it.tks.rest.domainmodel.users.User;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UserConverter {
+public class UserWebConverter {
 
     public static UserWeb domainToWeb(User user ) {
         if (user instanceof Admin) {
@@ -51,21 +51,21 @@ public class UserConverter {
     public static List<AdminWeb> domainToWebAdmins(List<Admin> admins) {
         return admins
                 .stream()
-                .map(admin -> (AdminWeb) UserConverter.domainToWeb(admin))
+                .map(admin -> (AdminWeb) UserWebConverter.domainToWeb(admin))
                 .collect(Collectors.toList());
     }
 
     public static List<ManagerWeb> domainToWebManagers(List<Manager> managers) {
         return managers
                 .stream()
-                .map(manager -> (ManagerWeb) UserConverter.domainToWeb(manager))
+                .map(manager -> (ManagerWeb) UserWebConverter.domainToWeb(manager))
                 .collect(Collectors.toList());
     }
 
     public static List<ClientWeb> domainToWebClients(List<Client> clients) {
         return clients
                 .stream()
-                .map(client -> (ClientWeb) UserConverter.domainToWeb(client))
+                .map(client -> (ClientWeb) UserWebConverter.domainToWeb(client))
                 .collect(Collectors.toList());
     }
 }

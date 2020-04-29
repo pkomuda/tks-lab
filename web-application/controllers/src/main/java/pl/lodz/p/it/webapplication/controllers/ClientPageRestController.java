@@ -1,15 +1,14 @@
 package pl.lodz.p.it.webapplication.controllers;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
-import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
-import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
-
 import pl.lodz.p.it.model.RentWeb;
 import pl.lodz.p.it.model.catalogs.BookWeb;
 import pl.lodz.p.it.model.catalogs.CatalogWeb;
 import pl.lodz.p.it.model.catalogs.MovieWeb;
-import uiports.converters.RentConverter;
+import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
+import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
+import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
+import uiports.converters.RentWebConverter;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -45,7 +44,7 @@ public @Data class ClientPageRestController implements Serializable {
     private String catalogFilter;
     private String rentFilter;
     private Client client = ClientBuilder.newClient();
-    private WebTarget base = client.target("https://localhost:8181/tkslab/resources/api");
+    private WebTarget base = client.target("http://localhost:8080/payararest/resources/api");
 
     public String prepareRentInfo(CatalogWeb catalog) {
         if (rentGetService.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
@@ -74,8 +73,8 @@ public @Data class ClientPageRestController implements Serializable {
     }
 
     public void filterRentsForClient() {
-        unfinishedRents = RentConverter.domainToWebRents(rentFilterService.filterUnfinishedRentsForClient(loginController.getUsername(), rentFilter));
-        finishedRents = RentConverter.domainToWebRents(rentFilterService.filterFinishedRentsForClient(loginController.getUsername(), rentFilter));
+        unfinishedRents = RentWebConverter.domainToWebRents(rentFilterService.filterUnfinishedRentsForClient(loginController.getUsername(), rentFilter));
+        finishedRents = RentWebConverter.domainToWebRents(rentFilterService.filterFinishedRentsForClient(loginController.getUsername(), rentFilter));
     }
 
     public void finishRent(String rentId) {
@@ -95,7 +94,7 @@ public @Data class ClientPageRestController implements Serializable {
     public void loadData() {
         books = base.path("books").request(MediaType.APPLICATION_JSON).get(new GenericType<>() {});
         movies = base.path("movies").request(MediaType.APPLICATION_JSON).get(new GenericType<>() {});
-        unfinishedRents =RentConverter.domainToWebRents(rentGetService.getUnfinishedRentsForClient(loginController.getUsername()));
-        finishedRents = RentConverter.domainToWebRents(rentGetService.getFinishedRentsForClient(loginController.getUsername()));
+        unfinishedRents = RentWebConverter.domainToWebRents(rentGetService.getUnfinishedRentsForClient(loginController.getUsername()));
+        finishedRents = RentWebConverter.domainToWebRents(rentGetService.getFinishedRentsForClient(loginController.getUsername()));
     }
 }

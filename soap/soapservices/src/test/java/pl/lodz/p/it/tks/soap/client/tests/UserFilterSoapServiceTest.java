@@ -18,6 +18,5 @@ public class UserFilterSoapServiceTest {
         assertEquals("Jimmy",managers.get(0).getFirstName());
         assertEquals(1,managers.size());
     }
-
 }
 

@@ -1,7 +1,10 @@
 package pl.lodz.p.it.webapplication.controllers.users;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.appservices.services.user.UserCrudService;
+import pl.lodz.p.it.model.users.AdminWeb;
+import pl.lodz.p.it.model.users.ClientWeb;
+import pl.lodz.p.it.model.users.ManagerWeb;
+import uiports.aggregates.userweb.UserWebCrudAdapter;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
@@ -14,7 +17,7 @@ import java.io.Serializable;
 public @Data class AddUserController implements Serializable {
 
     @Inject
-    private UserCrudService userCrudService;
+    private UserWebCrudAdapter userCrudAdapter;
     @Inject
     private Conversation conversation;
     private String userType;
@@ -32,13 +35,13 @@ public @Data class AddUserController implements Serializable {
     public String confirm(String userType) {
         switch (userType) {
             case "admin":
-                userCrudService.addAdmin(username, active, firstName, lastName, password);
+                userCrudAdapter.addUser(new AdminWeb(username, password, firstName, lastName, active));
                 break;
             case "manager":
-                userCrudService.addManager(username, active, firstName, lastName, password);
+                userCrudAdapter.addUser(new ManagerWeb(username, password, firstName, lastName, active));
                 break;
             case "client":
-                userCrudService.addClient(username, active, firstName, lastName, password);
+                userCrudAdapter.addUser(new ClientWeb(username, password, firstName, lastName, active));
                 break;
         }
         endConversation();
