@@ -11,5 +11,6 @@ public class UserGetSoapServiceTest {
     public void getClientsTest() {
         UserGetSoapServiceImplService service = new UserGetSoapServiceImplService();
         assertEquals(3, service.getUserGetSoapServiceImplPort().getClients().size());
+        assertEquals("Jesse", service.getUserGetSoapServiceImplPort().getAdmins().get(1).getFirstName());
     }
 }
