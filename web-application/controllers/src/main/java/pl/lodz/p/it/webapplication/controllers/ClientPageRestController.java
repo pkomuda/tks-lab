@@ -5,10 +5,9 @@ import pl.lodz.p.it.model.RentWeb;
 import pl.lodz.p.it.model.catalogs.BookWeb;
 import pl.lodz.p.it.model.catalogs.CatalogWeb;
 import pl.lodz.p.it.model.catalogs.MovieWeb;
-import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
-import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
-import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
-import uiports.converters.RentWebConverter;
+import uiports.aggregates.rentweb.RentWebCrudAdapter;
+import uiports.aggregates.rentweb.RentWebFilterAdapter;
+import uiports.aggregates.rentweb.RentWebGetAdapter;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -21,6 +20,7 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Named
@@ -28,11 +28,11 @@ import java.util.stream.Collectors;
 public @Data class ClientPageRestController implements Serializable {
 
     @Inject
-    private RentCrudService rentCrudService;
+    private RentWebCrudAdapter rentCrudAdapter;
     @Inject
-    private RentGetService rentGetService;
+    private RentWebGetAdapter rentGetAdapter;
     @Inject
-    private RentFilterService rentFilterService;
+    private RentWebFilterAdapter rentFilterAdapter;
     @Inject
     private ViewAccessController viewAccessController;
     @Inject
@@ -47,7 +47,7 @@ public @Data class ClientPageRestController implements Serializable {
     private WebTarget base = client.target("http://localhost:8080/payararest/resources/api");
 
     public String prepareRentInfo(CatalogWeb catalog) {
-        if (rentGetService.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
+        if (rentGetAdapter.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
             viewAccessController.setSelectedCatalog(catalog);
             return "addRent";
         } else {
@@ -73,17 +73,17 @@ public @Data class ClientPageRestController implements Serializable {
     }
 
     public void filterRentsForClient() {
-        unfinishedRents = RentWebConverter.domainToWebRents(rentFilterService.filterUnfinishedRentsForClient(loginController.getUsername(), rentFilter));
-        finishedRents = RentWebConverter.domainToWebRents(rentFilterService.filterFinishedRentsForClient(loginController.getUsername(), rentFilter));
+        unfinishedRents = rentFilterAdapter.filterUnfinishedRentsForClient(loginController.getUsername(), rentFilter);
+        finishedRents = rentFilterAdapter.filterFinishedRentsForClient(loginController.getUsername(), rentFilter);
     }
 
     public void finishRent(String rentId) {
-        rentCrudService.finishRent(rentId);
+        rentCrudAdapter.finishRent(UUID.fromString(rentId));
         loadData();
     }
 
     public String getCatalogStatus(CatalogWeb catalog) {
-        if (rentGetService.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
+        if (rentGetAdapter.getUnfinishedRentsForCatalog(catalog.getId()).isEmpty()) {
             return "Free";
         } else {
             return "Rented";
@@ -94,7 +94,7 @@ public @Data class ClientPageRestController implements Serializable {
     public void loadData() {
         books = base.path("books").request(MediaType.APPLICATION_JSON).get(new GenericType<>() {});
         movies = base.path("movies").request(MediaType.APPLICATION_JSON).get(new GenericType<>() {});
-        unfinishedRents = RentWebConverter.domainToWebRents(rentGetService.getUnfinishedRentsForClient(loginController.getUsername()));
-        finishedRents = RentWebConverter.domainToWebRents(rentGetService.getFinishedRentsForClient(loginController.getUsername()));
+        unfinishedRents = rentGetAdapter.getUnfinishedRentsForClient(loginController.getUsername());
+        finishedRents = rentGetAdapter.getFinishedRentsForClient(loginController.getUsername());
     }
 }

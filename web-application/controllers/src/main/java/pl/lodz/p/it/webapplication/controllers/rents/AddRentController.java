@@ -1,9 +1,9 @@
 package pl.lodz.p.it.webapplication.controllers.rents;
 
 import lombok.Data;
-import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
 import pl.lodz.p.it.webapplication.controllers.LoginController;
 import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
+import uiports.aggregates.rentweb.RentWebCrudAdapter;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -15,7 +15,7 @@ import javax.inject.Named;
 public @Data class AddRentController {
 
     @Inject
-    private RentCrudService rentCrudService;
+    private RentWebCrudAdapter rentCrudAdapter;
     @Inject
     private ViewAccessController viewAccessController;
     @Inject
@@ -28,7 +28,7 @@ public @Data class AddRentController {
     private int minute;
 
     public String confirmRent() {
-        rentCrudService.addRent(loginController.getUsername(), id, year, month, day, hour, minute);
+        rentCrudAdapter.addRent(loginController.getUsername(), id, year, month, day, hour, minute);
         return "client";
     }
 

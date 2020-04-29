@@ -3,11 +3,10 @@ package pl.lodz.p.it.webapplication.controllers.rents;
 import lombok.Data;
 import pl.lodz.p.it.model.RentWeb;
 import pl.lodz.p.it.model.catalogs.CatalogWeb;
-import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
-import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
-import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
 import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
-import uiports.converters.RentWebConverter;
+import uiports.aggregates.rentweb.RentWebCrudAdapter;
+import uiports.aggregates.rentweb.RentWebFilterAdapter;
+import uiports.aggregates.rentweb.RentWebGetAdapter;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -15,17 +14,18 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 @Named
 @ViewScoped
 public @Data class RentsForCatalogController implements Serializable {
 
     @Inject
-    private RentCrudService rentCrudService;
+    private RentWebCrudAdapter rentCrudAdapter;
     @Inject
-    private RentGetService rentGetService;
+    private RentWebGetAdapter rentGetAdapter;
     @Inject
-    private RentFilterService rentFilterService;
+    private RentWebFilterAdapter rentFilterAdapter;
     @Inject
     private ViewAccessController viewAccessController;
     private List<RentWeb> unfinishedRents;
@@ -35,12 +35,12 @@ public @Data class RentsForCatalogController implements Serializable {
     private String rentFilter;
 
     public void filterRents() {
-        unfinishedRents = RentWebConverter.domainToWebRents(rentFilterService.filterUnfinishedRentsForCatalog(id, rentFilter));
-        finishedRents = RentWebConverter.domainToWebRents(rentFilterService.filterFinishedRentsForCatalog(id, rentFilter));
+        unfinishedRents = rentFilterAdapter.filterUnfinishedRentsForCatalog(id, rentFilter);
+        finishedRents = rentFilterAdapter.filterFinishedRentsForCatalog(id, rentFilter);
     }
 
     public void removeRent(String rentId) {
-        rentCrudService.removeRent(rentId);
+        rentCrudAdapter.removeRent(UUID.fromString(rentId));
         loadData();
     }
 
@@ -53,7 +53,7 @@ public @Data class RentsForCatalogController implements Serializable {
         CatalogWeb temp = viewAccessController.getSelectedCatalog();
         id = temp.getId();
         title = temp.getTitle();
-        unfinishedRents = RentWebConverter.domainToWebRents(rentGetService.getUnfinishedRentsForCatalog(id));
-        finishedRents = RentWebConverter.domainToWebRents(rentGetService.getFinishedRentsForCatalog(id));
+        unfinishedRents = rentGetAdapter.getUnfinishedRentsForCatalog(id);
+        finishedRents = rentGetAdapter.getFinishedRentsForCatalog(id);
     }
 }

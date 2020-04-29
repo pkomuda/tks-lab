@@ -2,11 +2,10 @@ package pl.lodz.p.it.webapplication.controllers.rents;
 
 import lombok.Data;
 import pl.lodz.p.it.model.RentWeb;
-import pl.lodz.p.it.tks.appservices.services.rent.RentCrudService;
-import pl.lodz.p.it.tks.appservices.services.rent.RentFilterService;
-import pl.lodz.p.it.tks.appservices.services.rent.RentGetService;
 import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
-import uiports.converters.RentWebConverter;
+import uiports.aggregates.rentweb.RentWebCrudAdapter;
+import uiports.aggregates.rentweb.RentWebFilterAdapter;
+import uiports.aggregates.rentweb.RentWebGetAdapter;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -14,17 +13,18 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 @Named
 @ViewScoped
 public @Data class RentsForClientController implements Serializable {
 
     @Inject
-    private RentCrudService rentCrudService;
+    private RentWebCrudAdapter rentCrudAdapter;
     @Inject
-    private RentGetService rentGetService;
+    private RentWebGetAdapter rentGetAdapter;
     @Inject
-    private RentFilterService rentFilterService;
+    private RentWebFilterAdapter rentFilterAdapter;
     @Inject
     private ViewAccessController viewAccessController;
     private List<RentWeb> unfinishedRents;
@@ -33,12 +33,12 @@ public @Data class RentsForClientController implements Serializable {
     private String rentFilter;
 
     public void filterRents() {
-        unfinishedRents = RentWebConverter.domainToWebRents(rentFilterService.filterUnfinishedRentsForClient(username, rentFilter));
-        finishedRents = RentWebConverter.domainToWebRents(rentFilterService.filterFinishedRentsForClient(username, rentFilter));
+        unfinishedRents = rentFilterAdapter.filterUnfinishedRentsForClient(username, rentFilter);
+        finishedRents = rentFilterAdapter.filterFinishedRentsForClient(username, rentFilter);
     }
 
     public void removeRent(String rentId) {
-        rentCrudService.removeRent(rentId);
+        rentCrudAdapter.removeRent(UUID.fromString(rentId));
         loadData();
     }
 
@@ -49,7 +49,7 @@ public @Data class RentsForClientController implements Serializable {
     @PostConstruct
     public void loadData() {
         username = viewAccessController.getSelectedUsername();
-        unfinishedRents = RentWebConverter.domainToWebRents(rentGetService.getUnfinishedRentsForClient(viewAccessController.getSelectedUsername()));
-        finishedRents = RentWebConverter.domainToWebRents(rentGetService.getFinishedRentsForClient(viewAccessController.getSelectedUsername()));
+        unfinishedRents = rentGetAdapter.getUnfinishedRentsForClient(viewAccessController.getSelectedUsername());
+        finishedRents = rentGetAdapter.getFinishedRentsForClient(viewAccessController.getSelectedUsername());
     }
 }
