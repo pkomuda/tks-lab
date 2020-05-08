@@ -30,7 +30,7 @@ public class UserFilterSoapServiceImplService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("https://raw.githubusercontent.com/pkomuda/tks-lab/master/filter.wsdl");
+            url = new URL("https://raw.githubusercontent.com/pkomuda/tks-lab/master/soap/soapservices/src/main/java/pl/lodz/p/it/tks/soap/services/filter.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

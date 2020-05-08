@@ -30,7 +30,7 @@ public class UserCrudSoapServiceImplService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("https://raw.githubusercontent.com/pkomuda/tks-lab/master/crud.wsdl");
+            url = new URL("https://raw.githubusercontent.com/pkomuda/tks-lab/master/soap/soapservices/src/main/java/pl/lodz/p/it/tks/soap/services/crud.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
