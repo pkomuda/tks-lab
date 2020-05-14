@@ -2,12 +2,10 @@ package pl.lodz.p.it.tks.userservice.datamodel;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(schema = "user_service")
 public @Data class UserEntity {
 
     @Id
