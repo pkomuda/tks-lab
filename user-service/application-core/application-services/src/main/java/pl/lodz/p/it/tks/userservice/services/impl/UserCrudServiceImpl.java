@@ -46,24 +46,13 @@ public class UserCrudServiceImpl implements UserCrudService {
     }
 
     @Override
-    public void addUser(String username, boolean active, String firstName, String lastName, String password, Type type) {
-        User user = new User();
-        user.setActive(active);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setPassword(password);
-        user.setUsername(username);
-        user.setType(type);
+    public void addUser(User user) {
         userCrudAdapter.addUser(user);
     }
 
     @Override
-    public void updateUser(String username, String firstName, String lastName, boolean active, Type type) {
-        User user = new User();
-        user.setActive(active);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setType(type);
+    public void updateUser(String username, User user) {
+
         userCrudAdapter.updateUser(username, user);
     }
 }
