@@ -7,11 +7,12 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(includeFieldNames = false)
-public abstract @Data class UserWeb {
+public abstract @Data class UserWeb implements Serializable {
 
     @NotBlank
     private String username;

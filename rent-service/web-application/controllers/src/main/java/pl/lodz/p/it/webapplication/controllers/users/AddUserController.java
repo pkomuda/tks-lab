@@ -4,6 +4,8 @@ import lombok.Data;
 import pl.lodz.p.it.model.users.AdminWeb;
 import pl.lodz.p.it.model.users.ClientWeb;
 import pl.lodz.p.it.model.users.ManagerWeb;
+import pl.lodz.p.it.model.users.UserWeb;
+import pl.lodz.p.it.webapplication.controllers.mq.RabbitTemplate;
 import uiports.aggregates.userweb.UserWebCrudAdapter;
 
 import javax.enterprise.context.Conversation;
@@ -15,6 +17,9 @@ import java.io.Serializable;
 @Named
 @ConversationScoped
 public @Data class AddUserController implements Serializable {
+
+    @Inject
+    private RabbitTemplate rabbitTemplate;
 
     @Inject
     private UserWebCrudAdapter userCrudAdapter;
@@ -33,17 +38,20 @@ public @Data class AddUserController implements Serializable {
     }
 
     public String confirm(String userType) {
+        UserWeb user = null;
         switch (userType) {
             case "admin":
-                userCrudAdapter.addUser(new AdminWeb(username, password, firstName, lastName, active));
+                user = new AdminWeb(username, password, firstName, lastName, active);
                 break;
             case "manager":
-                userCrudAdapter.addUser(new ManagerWeb(username, password, firstName, lastName, active));
+                user = new ManagerWeb(username, password, firstName, lastName, active);
                 break;
             case "client":
-                userCrudAdapter.addUser(new ClientWeb(username, password, firstName, lastName, active));
+                user = new ClientWeb(username, password, firstName, lastName, active);
                 break;
         }
+        rabbitTemplate.send("wiadmosc", "user.create");
+        userCrudAdapter.addUser(user);
         endConversation();
         return "admin";
     }
