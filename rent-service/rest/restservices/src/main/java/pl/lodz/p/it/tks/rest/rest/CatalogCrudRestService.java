@@ -1,6 +1,5 @@
 package pl.lodz.p.it.tks.rest.rest;
 
-
 import pl.lodz.p.it.tks.rest.agregates.CatalogRestCrudAdapter;
 import pl.lodz.p.it.tks.rest.model.BookRestModel;
 import pl.lodz.p.it.tks.rest.model.MovieRestModel;

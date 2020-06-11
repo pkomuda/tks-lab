@@ -6,18 +6,23 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
 @Slf4j
-public class Main {
+@Startup
+@Singleton
+public class RabbitTemplate {
 
-    private static String EXCHANGE_NAME = "user_exchange";
+    private final String EXCHANGE_NAME = "user_exchange";
     private static String bindingKey = "user.create";
 
-    public static void main(String[] args) {
+    @PostConstruct
+    public void main() {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
 
@@ -38,8 +43,9 @@ public class Main {
         log.info(" [*] Waiting for messages. To exit press CTRL+C");
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-            String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-            log.info(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + message + "'");
+            Object o = SerializationUtils.deserialize(delivery.getBody());
+            SerializationUtils.toUser(o);
+            log.info(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + o + "'");
         };
         try {
             Objects.requireNonNull(channel).basicConsume(queueName, true, deliverCallback, consumerTag -> { });
