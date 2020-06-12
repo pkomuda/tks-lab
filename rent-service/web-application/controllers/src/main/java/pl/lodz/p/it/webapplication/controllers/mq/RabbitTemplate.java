@@ -18,7 +18,7 @@ import static pl.lodz.p.it.webapplication.controllers.mq.SerializationUtils.seri
 @RequestScoped
 public class RabbitTemplate {
 
-    private final String EXCHANGE_NAME = "user_exchange";
+    private static final String EXCHANGE_NAME = "user_exchange";
     private Connection connection;
     private Channel channel;
 
@@ -38,6 +38,7 @@ public class RabbitTemplate {
     public void send(Serializable source, String routingKey) {
         try {
             channel.basicPublish(EXCHANGE_NAME, routingKey ,null, serialize(source));
+            log.info("[x] Sent '" + routingKey + ": " + source);
         } catch (IOException e) {
             log.error(e.getMessage());
         }
