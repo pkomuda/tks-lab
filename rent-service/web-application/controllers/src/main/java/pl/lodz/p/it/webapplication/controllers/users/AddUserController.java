@@ -5,7 +5,7 @@ import pl.lodz.p.it.model.users.AdminWeb;
 import pl.lodz.p.it.model.users.ClientWeb;
 import pl.lodz.p.it.model.users.ManagerWeb;
 import pl.lodz.p.it.model.users.UserWeb;
-import pl.lodz.p.it.webapplication.controllers.mq.RabbitTemplate;
+import pl.lodz.p.it.webapplication.controllers.mq.RabbitPublisher;
 import uiports.aggregates.userweb.UserWebCrudAdapter;
 
 import javax.enterprise.context.Conversation;
@@ -19,7 +19,7 @@ import java.io.Serializable;
 public @Data class AddUserController implements Serializable {
 
     @Inject
-    private RabbitTemplate rabbitTemplate;
+    private RabbitPublisher rabbitPublisher;
 
     @Inject
     private UserWebCrudAdapter userCrudAdapter;
@@ -50,7 +50,7 @@ public @Data class AddUserController implements Serializable {
                 user = new ClientWeb(username, password, firstName, lastName, active);
                 break;
         }
-        rabbitTemplate.send(user, "user.create");
+        rabbitPublisher.publish(user, "user.create");
         userCrudAdapter.addUser(user);
         endConversation();
         return "admin";

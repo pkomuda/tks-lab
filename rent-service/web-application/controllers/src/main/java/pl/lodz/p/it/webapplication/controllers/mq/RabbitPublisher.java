@@ -16,7 +16,7 @@ import static pl.lodz.p.it.webapplication.controllers.mq.SerializationUtils.seri
 
 @Slf4j
 @RequestScoped
-public class RabbitTemplate {
+public class RabbitPublisher {
 
     private static final String EXCHANGE_NAME = "user_exchange";
     private Connection connection;
@@ -35,7 +35,7 @@ public class RabbitTemplate {
         }
     }
 
-    public void send(Serializable source, String routingKey) {
+    public void publish(Serializable source, String routingKey) {
         try {
             channel.basicPublish(EXCHANGE_NAME, routingKey ,null, serialize(source));
             log.info("[x] Sent '" + routingKey + ": " + source);

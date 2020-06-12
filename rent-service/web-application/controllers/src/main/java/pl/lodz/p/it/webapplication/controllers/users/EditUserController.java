@@ -6,7 +6,7 @@ import pl.lodz.p.it.model.users.ClientWeb;
 import pl.lodz.p.it.model.users.ManagerWeb;
 import pl.lodz.p.it.model.users.UserWeb;
 import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
-import pl.lodz.p.it.webapplication.controllers.mq.RabbitTemplate;
+import pl.lodz.p.it.webapplication.controllers.mq.RabbitPublisher;
 import uiports.aggregates.userweb.UserWebCrudAdapter;
 import uiports.aggregates.userweb.UserWebGetAdapter;
 
@@ -20,7 +20,7 @@ import javax.inject.Named;
 public @Data class EditUserController {
 
     @Inject
-    private RabbitTemplate rabbitTemplate;
+    private RabbitPublisher rabbitPublisher;
 
     @Inject
     private UserWebCrudAdapter userCrudAdapter;
@@ -45,7 +45,7 @@ public @Data class EditUserController {
             temp = new ClientWeb(username, password, firstName, lastName, active);
         }
         userCrudAdapter.updateUser(username, temp);
-        rabbitTemplate.send(temp, "user.edit");
+        rabbitPublisher.publish(temp, "user.edit");
         return "admin";
     }
 
