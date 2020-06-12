@@ -1,15 +1,12 @@
 package pl.lodz.p.it.tks.userservice.services.impl;
 
 import pl.lodz.p.it.tks.userservice.adapters.aggregates.UserCrudAdapter;
-import pl.lodz.p.it.tks.userservice.domainmodel.Type;
 import pl.lodz.p.it.tks.userservice.domainmodel.User;
 import pl.lodz.p.it.tks.userservice.services.UserCrudService;
-import pl.lodz.p.it.tks.userservice.services.UserGetService;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.security.enterprise.credential.Password;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -18,10 +15,8 @@ import java.security.NoSuchAlgorithmException;
 @Dependent
 public class UserCrudServiceImpl implements UserCrudService {
 
-
     @Inject
     private UserCrudAdapter userCrudAdapter;
-
 
     private String sha256(String password) {
         MessageDigest digest = null;
@@ -47,12 +42,12 @@ public class UserCrudServiceImpl implements UserCrudService {
 
     @Override
     public void addUser(User user) {
+        user.setPassword(sha256(user.getPassword()));
         userCrudAdapter.addUser(user);
     }
 
     @Override
-    public void updateUser(String username, User user) {
-
-        userCrudAdapter.updateUser(username, user);
+    public void updateUser(User user) {
+        userCrudAdapter.updateUser(user.getUsername(), user);
     }
 }

@@ -6,6 +6,7 @@ import pl.lodz.p.it.model.users.ClientWeb;
 import pl.lodz.p.it.model.users.ManagerWeb;
 import pl.lodz.p.it.model.users.UserWeb;
 import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
+import pl.lodz.p.it.webapplication.controllers.mq.RabbitTemplate;
 import uiports.aggregates.userweb.UserWebCrudAdapter;
 import uiports.aggregates.userweb.UserWebGetAdapter;
 
@@ -17,6 +18,9 @@ import javax.inject.Named;
 @Named
 @RequestScoped
 public @Data class EditUserController {
+
+    @Inject
+    private RabbitTemplate rabbitTemplate;
 
     @Inject
     private UserWebCrudAdapter userCrudAdapter;
@@ -32,13 +36,16 @@ public @Data class EditUserController {
     private UserWeb user;
 
     public String confirmEditUser() {
+        UserWeb temp = null;
         if (user instanceof AdminWeb) {
-            userCrudAdapter.updateUser(username, new AdminWeb(username, password, firstName, lastName, active));
+            temp = new AdminWeb(username, password, firstName, lastName, active);
         } else if (user instanceof ManagerWeb) {
-            userCrudAdapter.updateUser(username, new ManagerWeb(username, password, firstName, lastName, active));
+            temp = new ManagerWeb(username, password, firstName, lastName, active);
         } else if (user instanceof ClientWeb) {
-            userCrudAdapter.updateUser(username, new ClientWeb(username, password, firstName, lastName, active));
+            temp = new ClientWeb(username, password, firstName, lastName, active);
         }
+        userCrudAdapter.updateUser(username, temp);
+        rabbitTemplate.send(temp, "user.edit");
         return "admin";
     }
 

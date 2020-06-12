@@ -8,9 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import pl.lodz.p.it.tks.userservice.domainmodel.User;
 import pl.lodz.p.it.tks.userservice.services.UserCrudService;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
@@ -26,7 +23,8 @@ import static pl.lodz.p.it.tks.mq.SerializationUtils.deserialize;
 public class RabbitTemplate {
 
     private final String EXCHANGE_NAME = "user_exchange";
-    private static String bindingKey = "user.create";
+    private final String CREATE_KEY = "user.create";
+    private final String EDIT_KEY = "user.edit";
 
     @Inject
     private UserCrudService userCrudService;
@@ -44,7 +42,8 @@ public class RabbitTemplate {
             channel = connection.createChannel();
             channel.exchangeDeclare(EXCHANGE_NAME, "topic");
             queueName = channel.queueDeclare().getQueue();
-            channel.queueBind(queueName, EXCHANGE_NAME, bindingKey);
+            channel.queueBind(queueName, EXCHANGE_NAME, CREATE_KEY);
+            channel.queueBind(queueName, EXCHANGE_NAME, EDIT_KEY);
         } catch (TimeoutException | IOException e) {
             log.error(e.getMessage());
         }
@@ -53,13 +52,27 @@ public class RabbitTemplate {
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             User user = deserialize(delivery.getBody());
-            userCrudService.addUser(user);
-            log.info(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + user + "'");
+            String routingKey = delivery.getEnvelope().getRoutingKey();
+            log.info(" [x] Received '" + routingKey + "':'" + user + "'");
+            performAction(user, routingKey);
         };
         try {
             Objects.requireNonNull(channel).basicConsume(queueName, true, deliverCallback, consumerTag -> { });
         } catch (IOException e) {
             log.error(e.getMessage());
+        }
+    }
+
+    private void performAction(User user, String routingKey) {
+        switch (routingKey) {
+            case "user.create":
+                userCrudService.addUser(user);
+                break;
+            case "user.edit":
+                userCrudService.updateUser(user);
+                break;
+            default:
+                break;
         }
     }
 }
