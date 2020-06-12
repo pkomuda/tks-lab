@@ -17,6 +17,18 @@ public class SerializationUtils {
         return str.toLowerCase().contains(searchStr.toLowerCase());
     }
 
+    private static String toJsonString(User source) {
+        return Json.createObjectBuilder()
+                .add("username", source.getUsername())
+                .add("password", source.getPassword())
+                .add("firstName", source.getFirstName())
+                .add("lastName", source.getLastName())
+                .add("active", source.isActive())
+                .add("type", source.getType().name())
+                .build()
+                .toString();
+    }
+
     private static Object toObject(byte[] source) {
         Object o = null;
         ByteArrayInputStream bis = new ByteArrayInputStream(source);
@@ -50,5 +62,22 @@ public class SerializationUtils {
         } else {
             return null;
         }
+    }
+
+    public static byte[] serialize(Serializable source) {
+        byte[] bytes = null;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try (ObjectOutputStream out = new ObjectOutputStream(bos)) {
+            if (source instanceof User) {
+                out.writeObject(toJsonString((User) source));
+            } else {
+                out.writeObject(source);
+            }
+            out.flush();
+            bytes = bos.toByteArray();
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+        return Objects.requireNonNull(bytes);
     }
 }

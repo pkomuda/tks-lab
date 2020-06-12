@@ -5,16 +5,20 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import lombok.extern.slf4j.Slf4j;
+import pl.lodz.p.it.model.users.UserWeb;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeoutException;
+
+import static pl.lodz.p.it.webapplication.controllers.mq.SerializationUtils.deserializeUser;
 
 @Slf4j
 @RequestScoped
@@ -23,6 +27,8 @@ public class RabbitRpcClient {
     private static final String QUEUE_NAME = "rpc_queue";
     private Connection connection;
     private Channel channel;
+
+    private String corrId;
 
     @PostConstruct
     public void init() {
@@ -34,10 +40,11 @@ public class RabbitRpcClient {
         } catch (TimeoutException | IOException e) {
             log.error(e.getMessage());
         }
+
+        corrId = UUID.randomUUID().toString();
     }
 
-    public Object call(String message) {
-        final String corrId = UUID.randomUUID().toString();
+    private String prepare(String username) {
         String replyQueueName = null;
         try {
             replyQueueName = channel.queueDeclare().getQueue();
@@ -52,17 +59,21 @@ public class RabbitRpcClient {
                 .build();
 
         try {
-            channel.basicPublish("", QUEUE_NAME, props, message.getBytes(StandardCharsets.UTF_8));
+            channel.basicPublish("", QUEUE_NAME, props, username.getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             log.error(e.getMessage());
         }
+        return replyQueueName;
+    }
 
-        final BlockingQueue<String> response = new ArrayBlockingQueue<>(1);
-        Object result = null;
+    public UserWeb get(String username) {
+        String replyQueueName = prepare(username);
+        final BlockingQueue<UserWeb> response = new ArrayBlockingQueue<>(1);
+        UserWeb result = null;
         try {
             String ctag = channel.basicConsume(replyQueueName, true, (consumerTag, delivery) -> {
                 if (delivery.getProperties().getCorrelationId().equals(corrId)) {
-                    response.offer(new String(delivery.getBody(), StandardCharsets.UTF_8));
+                    response.offer(Objects.requireNonNull(deserializeUser(delivery.getBody())));
                 }
             }, consumerTag -> {
             });

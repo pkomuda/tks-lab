@@ -21,7 +21,7 @@ import static pl.lodz.p.it.tks.mq.SerializationUtils.deserialize;
 
 @Slf4j
 @ApplicationScoped
-public class RabbitTemplate {
+public class RabbitSubscriber {
 
     private static final String EXCHANGE_NAME = "user_exchange";
     private static final String BASE_BINDING_KEY = "user.";
@@ -59,7 +59,7 @@ public class RabbitTemplate {
         }
     }
 
-    public void receive(@Observes @Initialized(ApplicationScoped.class) Object init) {
+    public void subscribe(@Observes @Initialized(ApplicationScoped.class) Object init) {
         init();
         log.info("[*] Waiting for messages");
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {

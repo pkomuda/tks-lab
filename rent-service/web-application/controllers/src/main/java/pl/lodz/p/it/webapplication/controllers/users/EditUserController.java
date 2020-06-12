@@ -7,6 +7,7 @@ import pl.lodz.p.it.model.users.ManagerWeb;
 import pl.lodz.p.it.model.users.UserWeb;
 import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
 import pl.lodz.p.it.webapplication.controllers.mq.RabbitPublisher;
+import pl.lodz.p.it.webapplication.controllers.mq.RabbitRpcClient;
 import uiports.aggregates.userweb.UserWebCrudAdapter;
 import uiports.aggregates.userweb.UserWebGetAdapter;
 
@@ -21,6 +22,8 @@ public @Data class EditUserController {
 
     @Inject
     private RabbitPublisher rabbitPublisher;
+    @Inject
+    private RabbitRpcClient rabbitRpcClient;
 
     @Inject
     private UserWebCrudAdapter userCrudAdapter;
@@ -56,8 +59,8 @@ public @Data class EditUserController {
     @PostConstruct
     public void loadUserInfo() {
         username = viewAccessController.getSelectedUsername();
-        active = userGetAdapter.getUser(username).isActive();
-        password = userGetAdapter.getUser(username).getPassword();
-        user = userGetAdapter.getUser(username);
+        user = rabbitRpcClient.get(username);
+        active = user.isActive();
+        password = user.getPassword();
     }
 }

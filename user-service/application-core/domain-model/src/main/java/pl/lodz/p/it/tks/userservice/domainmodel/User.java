@@ -2,7 +2,9 @@ package pl.lodz.p.it.tks.userservice.domainmodel;
 
 import lombok.Data;
 
-public @Data class User {
+import java.io.Serializable;
+
+public @Data class User implements Serializable {
 
     private String username;
     private String password;
