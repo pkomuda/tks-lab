@@ -5,24 +5,33 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 import lombok.extern.slf4j.Slf4j;
+import pl.lodz.p.it.tks.userservice.domainmodel.User;
+import pl.lodz.p.it.tks.userservice.services.UserCrudService;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Initialized;
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
+import static pl.lodz.p.it.tks.mq.SerializationUtils.deserialize;
+
 @Slf4j
-@Startup
-@Singleton
+@ApplicationScoped
 public class RabbitTemplate {
 
     private final String EXCHANGE_NAME = "user_exchange";
     private static String bindingKey = "user.create";
 
-    @PostConstruct
-    public void main() {
+    @Inject
+    private UserCrudService userCrudService;
+
+    public void init(@Observes @Initialized(ApplicationScoped.class) Object init) {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
 
@@ -43,9 +52,9 @@ public class RabbitTemplate {
         log.info(" [*] Waiting for messages. To exit press CTRL+C");
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-            Object o = SerializationUtils.deserialize(delivery.getBody());
-            SerializationUtils.toUser(o);
-            log.info(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + o + "'");
+            User user = deserialize(delivery.getBody());
+            userCrudService.addUser(user);
+            log.info(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + user + "'");
         };
         try {
             Objects.requireNonNull(channel).basicConsume(queueName, true, deliverCallback, consumerTag -> { });

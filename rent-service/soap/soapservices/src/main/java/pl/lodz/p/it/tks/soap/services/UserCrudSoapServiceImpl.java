@@ -12,7 +12,7 @@ import javax.inject.Named;
 import javax.jws.WebService;
 
 @Named
-@WebService(targetNamespace = "http://client.soap.tks.it.p.lodz.pl/", wsdlLocation = "https://raw.githubusercontent.com/pkomuda/tks-lab/master/crud.wsdl")
+@WebService(targetNamespace = "http://client.soap.tks.it.p.lodz.pl/", wsdlLocation = "https://raw.githubusercontent.com/pkomuda/tks-lab/master/rent-service/soap/soapservices/src/main/java/pl/lodz/p/it/tks/soap/services/crud.wsdl")
 @RequestScoped
 public class UserCrudSoapServiceImpl {
 

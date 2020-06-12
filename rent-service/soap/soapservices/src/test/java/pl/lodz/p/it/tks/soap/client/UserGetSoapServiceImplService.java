@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "UserGetSoapServiceImplService", targetNamespace = "http://client.soap.tks.it.p.lodz.pl/", wsdlLocation = "https://raw.githubusercontent.com/pkomuda/tks-lab/master/get.wsdl")
+@WebServiceClient(name = "UserGetSoapServiceImplService", targetNamespace = "http://client.soap.tks.it.p.lodz.pl/", wsdlLocation = "https://raw.githubusercontent.com/pkomuda/tks-lab/master/rent-service/soap/soapservices/src/main/java/pl/lodz/p/it/tks/soap/services/get.wsdl")
 public class UserGetSoapServiceImplService
     extends Service
 {
@@ -30,7 +30,7 @@ public class UserGetSoapServiceImplService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("https://raw.githubusercontent.com/pkomuda/tks-lab/master/soap/soapservices/src/main/java/pl/lodz/p/it/tks/soap/services/get.wsdl");
+            url = new URL("https://raw.githubusercontent.com/pkomuda/tks-lab/master/rent-service/soap/soapservices/src/main/java/pl/lodz/p/it/tks/soap/services/get.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
