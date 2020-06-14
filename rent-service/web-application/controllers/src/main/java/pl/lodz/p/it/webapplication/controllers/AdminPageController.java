@@ -5,8 +5,7 @@ import pl.lodz.p.it.model.users.AdminWeb;
 import pl.lodz.p.it.model.users.ClientWeb;
 import pl.lodz.p.it.model.users.ManagerWeb;
 import pl.lodz.p.it.model.users.UserWeb;
-import uiports.aggregates.userweb.UserWebFilterAdapter;
-import uiports.aggregates.userweb.UserWebGetAdapter;
+import pl.lodz.p.it.webapplication.controllers.mq.RabbitRpcClient;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -14,15 +13,15 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Named
 @ViewScoped
 public @Data class AdminPageController implements Serializable {
 
     @Inject
-    private UserWebFilterAdapter userFilterAdapter;
-    @Inject
-    private UserWebGetAdapter userGetAdapter;
+    private RabbitRpcClient rabbitRpcClient;
+
     @Inject
     private ViewAccessController viewAccessController;
 
@@ -46,15 +45,17 @@ public @Data class AdminPageController implements Serializable {
     }
 
     public void filterUsers() {
-        admins = userFilterAdapter.filterAdmins(userFilter);
-        managers = userFilterAdapter.filterManagers(userFilter);
-        clients = userFilterAdapter.filterClients(userFilter);
+        List<UserWeb> users = rabbitRpcClient.filter(userFilter);
+        admins = users.stream().filter(userWeb -> userWeb instanceof AdminWeb).map(userWeb -> (AdminWeb) userWeb).collect(Collectors.toList());
+        managers = users.stream().filter(userWeb -> userWeb instanceof ManagerWeb).map(userWeb -> (ManagerWeb) userWeb).collect(Collectors.toList());
+        clients = users.stream().filter(userWeb -> userWeb instanceof ClientWeb).map(userWeb -> (ClientWeb) userWeb).collect(Collectors.toList());
     }
 
     @PostConstruct
     public void loadUsers() {
-        admins = userGetAdapter.getAdmins();
-        managers = userGetAdapter.getManagers();
-        clients = userGetAdapter.getClients();
+        List<UserWeb> users = rabbitRpcClient.getAll();
+        admins = users.stream().filter(userWeb -> userWeb instanceof AdminWeb).map(userWeb -> (AdminWeb) userWeb).collect(Collectors.toList());
+        managers = users.stream().filter(userWeb -> userWeb instanceof ManagerWeb).map(userWeb -> (ManagerWeb) userWeb).collect(Collectors.toList());
+        clients = users.stream().filter(userWeb -> userWeb instanceof ClientWeb).map(userWeb -> (ClientWeb) userWeb).collect(Collectors.toList());
     }
 }

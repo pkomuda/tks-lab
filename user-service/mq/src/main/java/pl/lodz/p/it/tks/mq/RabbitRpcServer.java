@@ -2,7 +2,6 @@ package pl.lodz.p.it.tks.mq;
 
 import com.rabbitmq.client.*;
 import lombok.extern.slf4j.Slf4j;
-import pl.lodz.p.it.tks.userservice.domainmodel.User;
 import pl.lodz.p.it.tks.userservice.services.UserFilterService;
 import pl.lodz.p.it.tks.userservice.services.UserGetService;
 
@@ -16,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 import static pl.lodz.p.it.tks.mq.SerializationUtils.serialize;
+import static pl.lodz.p.it.tks.mq.SerializationUtils.serializeList;
 
 @Slf4j
 @ApplicationScoped
@@ -30,7 +30,7 @@ public class RabbitRpcServer {
     @Inject
     private UserFilterService userFilterService;
 
-    private void init() {
+    public void init(@Observes @Initialized(ApplicationScoped.class) Object init) {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
         try {
@@ -42,10 +42,7 @@ public class RabbitRpcServer {
         } catch (TimeoutException | IOException e) {
             log.error(e.getMessage());
         }
-    }
 
-    public void respond(@Observes @Initialized(ApplicationScoped.class) Object init) {
-        init();
         log.info("[x] Awaiting RPC requests");
         Object monitor = new Object();
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
@@ -55,10 +52,18 @@ public class RabbitRpcServer {
                     .build();
 
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-            log.info("[.] getUser(" + message + ")");
-
-            User response = userGetService.getUser(message);
-            channel.basicPublish("", delivery.getProperties().getReplyTo(), replyProps, serialize(response));
+            log.info("[.] Received RPC: " + message);
+            switch (message.substring(0, message.indexOf(' '))) {
+                case "GET":
+                    channel.basicPublish("", delivery.getProperties().getReplyTo(), replyProps, serialize(userGetService.getUser(message.substring(message.indexOf(' ') + 1))));
+                    break;
+                case "GET_ALL":
+                    channel.basicPublish("", delivery.getProperties().getReplyTo(), replyProps, serializeList(userGetService.getUsers()));
+                    break;
+                case "FILTER":
+                    channel.basicPublish("", delivery.getProperties().getReplyTo(), replyProps, serializeList(userFilterService.filterUsers(message.substring(message.indexOf(' ') + 1))));
+                    break;
+            }
             channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
             synchronized (monitor) {
                 monitor.notify();
@@ -71,13 +76,11 @@ public class RabbitRpcServer {
             log.error(e.getMessage());
         }
 
-        while (true) {
-            synchronized (monitor) {
-                try {
-                    monitor.wait();
-                } catch (InterruptedException e) {
-                    log.error(e.getMessage());
-                }
+        synchronized (monitor) {
+            try {
+                monitor.wait();
+            } catch (InterruptedException e) {
+                log.error(e.getMessage());
             }
         }
     }

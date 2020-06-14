@@ -5,19 +5,19 @@ import pl.lodz.p.it.tks.userservice.domainmodel.Type;
 import pl.lodz.p.it.tks.userservice.domainmodel.User;
 
 import javax.json.Json;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.io.*;
+import java.util.List;
 import java.util.Objects;
+
+import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 
 @Slf4j
 public class SerializationUtils {
 
-    private static boolean containsIgnoreCase(String str, String searchStr) {
-        return str.toLowerCase().contains(searchStr.toLowerCase());
-    }
-
-    private static String toJsonString(User source) {
+    private static JsonObject toJsonObject(User source) {
         return Json.createObjectBuilder()
                 .add("username", source.getUsername())
                 .add("password", source.getPassword())
@@ -25,8 +25,15 @@ public class SerializationUtils {
                 .add("lastName", source.getLastName())
                 .add("active", source.isActive())
                 .add("type", source.getType().name())
-                .build()
-                .toString();
+                .build();
+    }
+
+    private static String toJsonArray(List<User> source) {
+        JsonArrayBuilder builder = Json.createArrayBuilder();
+        for (User user : source) {
+            builder.add(toJsonObject(user));
+        }
+        return builder.build().toString();
     }
 
     private static Object toObject(byte[] source) {
@@ -69,10 +76,23 @@ public class SerializationUtils {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         try (ObjectOutputStream out = new ObjectOutputStream(bos)) {
             if (source instanceof User) {
-                out.writeObject(toJsonString((User) source));
+                out.writeObject(toJsonObject((User) source).toString());
             } else {
                 out.writeObject(source);
             }
+            out.flush();
+            bytes = bos.toByteArray();
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+        return Objects.requireNonNull(bytes);
+    }
+
+    public static byte[] serializeList(List<User> source) {
+        byte[] bytes = null;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try (ObjectOutputStream out = new ObjectOutputStream(bos)) {
+            out.writeObject(toJsonArray(source));
             out.flush();
             bytes = bos.toByteArray();
         } catch (IOException e) {

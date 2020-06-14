@@ -12,12 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
+
 @Slf4j
 public class SerializationUtils {
-
-    private static boolean containsIgnoreCase(String str, String searchStr) {
-        return str.toLowerCase().contains(searchStr.toLowerCase());
-    }
 
     private static String toJsonString(UserWeb source) {
         JsonObject value = Json.createObjectBuilder()
