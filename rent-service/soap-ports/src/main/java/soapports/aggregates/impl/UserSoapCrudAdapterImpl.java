@@ -23,8 +23,7 @@ public class UserSoapCrudAdapterImpl implements UserSoapCrudAdapter {
         userCrudService.addAdmin(admin.getUsername(),
                 admin.isActive(),
                 admin.getFirstName(),
-                admin.getLastName(),
-                admin.getPassword());
+                admin.getLastName());
     }
 
     @Override
@@ -32,8 +31,7 @@ public class UserSoapCrudAdapterImpl implements UserSoapCrudAdapter {
         userCrudService.addManager(manager.getUsername(),
                 manager.isActive(),
                 manager.getFirstName(),
-                manager.getLastName(),
-                manager.getPassword());
+                manager.getLastName());
     }
 
     @Override
@@ -41,8 +39,7 @@ public class UserSoapCrudAdapterImpl implements UserSoapCrudAdapter {
         userCrudService.addClient(client.getUsername(),
                 client.isActive(),
                 client.getFirstName(),
-                client.getLastName(),
-                client.getPassword());
+                client.getLastName());
     }
 
     @Override

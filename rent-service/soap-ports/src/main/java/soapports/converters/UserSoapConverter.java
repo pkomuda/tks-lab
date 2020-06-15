@@ -18,7 +18,7 @@ public class UserSoapConverter {
         if (user instanceof Admin) {
             return new AdminSoap(
                     user.getUsername(),
-                    user.getPassword(),
+                    null,
                     user.getFirstName(),
                     user.getLastName(),
                     user.isActive()
@@ -27,7 +27,7 @@ public class UserSoapConverter {
         if (user instanceof Manager) {
             return new ManagerSoap(
                     user.getUsername(),
-                    user.getPassword(),
+                    null,
                     user.getFirstName(),
                     user.getLastName(),
                     user.isActive()
@@ -36,7 +36,7 @@ public class UserSoapConverter {
         if (user instanceof Client) {
             return new ClientSoap(
                     user.getUsername(),
-                    user.getPassword(),
+                    null,
                     user.getFirstName(),
                     user.getLastName(),
                     user.isActive()
@@ -50,7 +50,6 @@ public class UserSoapConverter {
         if (user instanceof AdminSoap) {
             return new Admin(
                     user.getUsername(),
-                    user.getPassword(),
                     user.getFirstName(),
                     user.getLastName(),
                     user.isActive()
@@ -59,7 +58,6 @@ public class UserSoapConverter {
         if (user instanceof ManagerSoap) {
             return new Manager(
                     user.getUsername(),
-                    user.getPassword(),
                     user.getFirstName(),
                     user.getLastName(),
                     user.isActive()
@@ -68,7 +66,6 @@ public class UserSoapConverter {
         if (user instanceof ClientSoap) {
             return new Client(
                     user.getUsername(),
-                    user.getPassword(),
                     user.getFirstName(),
                     user.getLastName(),
                     user.isActive()
