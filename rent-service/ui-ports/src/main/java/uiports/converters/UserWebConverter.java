@@ -20,7 +20,7 @@ public class UserWebConverter {
         if (user instanceof Admin) {
             return new AdminWeb(
                     user.getUsername(),
-                    user.getPassword(),
+                    "",
                     user.getFirstName(),
                     user.getLastName(),
                     user.isActive()
@@ -29,7 +29,7 @@ public class UserWebConverter {
         if (user instanceof Manager) {
             return new ManagerWeb(
                     user.getUsername(),
-                    user.getPassword(),
+                    "",
                     user.getFirstName(),
                     user.getLastName(),
                     user.isActive()
@@ -38,7 +38,7 @@ public class UserWebConverter {
         if (user instanceof Client) {
             return new ClientWeb(
                     user.getUsername(),
-                    user.getPassword(),
+                    "",
                     user.getFirstName(),
                     user.getLastName(),
                     user.isActive()

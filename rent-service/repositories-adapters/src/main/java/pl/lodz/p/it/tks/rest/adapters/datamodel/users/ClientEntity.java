@@ -12,7 +12,7 @@ public class ClientEntity extends UserEntity {
         super();
     }
 
-    public ClientEntity(String username, String password, String firstName, String lastName, boolean active) {
-        super(username, password, firstName, lastName, active);
+    public ClientEntity(String username,  String firstName, String lastName, boolean active) {
+        super(username,  firstName, lastName, active);
     }
 }

@@ -6,7 +6,7 @@ public class Manager extends User {
         super();
     }
 
-    public Manager(String username, String password, String firstName, String lastName, boolean active) {
-        super(username, password, firstName, lastName, active);
+    public Manager(String username,  String firstName, String lastName, boolean active) {
+        super(username, firstName, lastName, active);
     }
 }

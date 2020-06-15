@@ -3,6 +3,7 @@ package pl.lodz.p.it.webapplication.controllers;
 import lombok.Getter;
 import lombok.Setter;
 import pl.lodz.p.it.model.users.UserWeb;
+import pl.lodz.p.it.webapplication.controllers.mq.RabbitRpcClient;
 import uiports.aggregates.userweb.UserWebGetAdapter;
 
 import javax.enterprise.context.SessionScoped;
@@ -19,12 +20,13 @@ import java.io.Serializable;
 @SessionScoped
 public class LoginController implements Serializable {
 
-    @Inject
-    private UserWebGetAdapter userGetAdapter;
+
     @Getter @Setter
     private String username;
     @Getter @Setter
     private String password;
+    @Inject
+    private RabbitRpcClient rabbitRpcClient;
 
     public void login() throws IOException {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -32,7 +34,7 @@ public class LoginController implements Serializable {
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
         try {
             request.login(username, password);
-            UserWeb user = userGetAdapter.getUser(username);
+            UserWeb user = rabbitRpcClient.get(username);
             if (user != null && user.isActive()) {
                 if (request.isUserInRole("Admin")) {
                     externalContext.getSessionMap().put("role", "Admin");

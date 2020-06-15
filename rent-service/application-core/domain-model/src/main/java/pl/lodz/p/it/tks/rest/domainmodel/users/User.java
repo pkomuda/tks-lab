@@ -16,8 +16,6 @@ public abstract @Data class User {
     @NotBlank
     private String username;
     @NotBlank
-    private String password;
-    @NotBlank
     private String firstName;
     @NotBlank
     private String lastName;

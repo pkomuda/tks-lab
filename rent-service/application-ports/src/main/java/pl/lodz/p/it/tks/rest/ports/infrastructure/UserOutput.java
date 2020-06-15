@@ -20,7 +20,6 @@ public class UserOutput {
         if (user instanceof Admin) {
             return new AdminEntity(
                     user.getUsername(),
-                    user.getPassword(),
                     user.getFirstName(),
                     user.getLastName(),
                     user.isActive()
@@ -28,7 +27,6 @@ public class UserOutput {
         } else if (user instanceof Manager) {
             return new ManagerEntity(
                     user.getUsername(),
-                    user.getPassword(),
                     user.getFirstName(),
                     user.getLastName(),
                     user.isActive()
@@ -36,7 +34,6 @@ public class UserOutput {
         } else if (user instanceof Client) {
             return new ClientEntity(
                     user.getUsername(),
-                    user.getPassword(),
                     user.getFirstName(),
                     user.getLastName(),
                     user.isActive()

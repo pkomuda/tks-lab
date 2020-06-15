@@ -6,7 +6,7 @@ public class Admin extends User {
         super();
     }
 
-    public Admin(String username, String password, String firstName, String lastName, boolean active) {
-        super(username, password, firstName, lastName, active);
+    public Admin(String username,  String firstName, String lastName, boolean active) {
+        super(username, firstName, lastName, active);
     }
 }

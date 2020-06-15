@@ -24,20 +24,17 @@ public class UserWebCrudAdapterImpl implements UserWebCrudAdapter {
             userCrudService.addAdmin(user.getUsername(),
                     user.isActive(),
                     user.getFirstName(),
-                    user.getLastName(),
-                    user.getPassword());
+                    user.getLastName());
         } else if (user instanceof ManagerWeb) {
             userCrudService.addManager(user.getUsername(),
                     user.isActive(),
                     user.getFirstName(),
-                    user.getLastName(),
-                    user.getPassword());
+                    user.getLastName());
         } else if (user instanceof ClientWeb) {
             userCrudService.addClient(user.getUsername(),
                     user.isActive(),
                     user.getFirstName(),
-                    user.getLastName(),
-                    user.getPassword());
+                    user.getLastName());
         }
     }
 

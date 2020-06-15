@@ -47,21 +47,21 @@ public class UserCrudServiceImpl implements Serializable, UserCrudService {
         return hexString.toString();
     }
 
-    public void addAdmin(String username, boolean active, String firstName, String lastName, String password) {
+    public void addAdmin(String username, boolean active, String firstName, String lastName ) {
         if (userRepoGet.getUser(username) == null) {
-            userRepoCrud.addUser(new Admin(username, sha256(password), firstName, lastName, active));
+            userRepoCrud.addUser(new Admin(username,  firstName, lastName, active));
         }
     }
 
-    public void addManager(String username, boolean active, String firstName, String lastName, String password) {
+    public void addManager(String username, boolean active, String firstName, String lastName ) {
         if (userRepoGet.getUser(username) == null) {
-            userRepoCrud.addUser(new Manager(username, sha256(password), firstName, lastName, active));
+            userRepoCrud.addUser(new Manager(username,  firstName, lastName, active));
         }
     }
 
-    public void addClient(String username, boolean active, String firstName, String lastName, String password) {
+    public void addClient(String username, boolean active, String firstName, String lastName) {
         if (userRepoGet.getUser(username) == null) {
-            userRepoCrud.addUser(new Client(username, sha256(password), firstName, lastName, active));
+            userRepoCrud.addUser(new Client(username,  firstName, lastName, active));
         }
     }
 

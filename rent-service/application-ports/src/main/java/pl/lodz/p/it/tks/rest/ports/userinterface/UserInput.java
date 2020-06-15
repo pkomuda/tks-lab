@@ -20,7 +20,6 @@ public class UserInput {
         if(userEnt instanceof AdminEntity) {
             return new Admin(
                     userEnt.getUsername(),
-                    userEnt.getPassword(),
                     userEnt.getFirstName(),
                     userEnt.getLastName(),
                     userEnt.isActive()
@@ -28,7 +27,6 @@ public class UserInput {
         } else if(userEnt instanceof ClientEntity) {
             return new Client(
                     userEnt.getUsername(),
-                    userEnt.getPassword(),
                     userEnt.getFirstName(),
                     userEnt.getLastName(),
                     userEnt.isActive()
@@ -36,7 +34,6 @@ public class UserInput {
         } else if(userEnt instanceof ManagerEntity) {
             return new Manager(
                     userEnt.getUsername(),
-                    userEnt.getPassword(),
                     userEnt.getFirstName(),
                     userEnt.getLastName(),
                     userEnt.isActive()

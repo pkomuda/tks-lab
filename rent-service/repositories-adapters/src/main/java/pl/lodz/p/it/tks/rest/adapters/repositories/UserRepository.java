@@ -43,7 +43,6 @@ public class UserRepository {
         if (temp != null) {
             entityManager.getTransaction().begin();
             entityManager.detach(temp);
-            temp.setPassword(userEntity.getPassword());
             temp.setFirstName(userEntity.getFirstName());
             temp.setLastName(userEntity.getLastName());
             temp.setActive(userEntity.isActive());

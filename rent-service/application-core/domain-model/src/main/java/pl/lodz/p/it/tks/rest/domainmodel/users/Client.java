@@ -6,7 +6,7 @@ public class Client extends User {
         super();
     }
 
-    public Client(String username, String password, String firstName, String lastName, boolean active) {
-        super(username, password, firstName, lastName, active);
+    public Client(String username,  String firstName, String lastName, boolean active) {
+        super(username, firstName, lastName, active);
     }
 }
