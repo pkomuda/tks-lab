@@ -29,6 +29,11 @@ public class RabbitPublisher {
         try {
             connection = factory.newConnection();
             channel = connection.createChannel();
+            channel.confirmSelect();
+            channel.addConfirmListener(
+                    (sequenceNumber, multiple) -> log.info("[x] Message has been ack-ed"),
+                    (sequenceNumber, multiple) -> log.info("[x] Message has been nack-ed")
+            );
             channel.exchangeDeclare(EXCHANGE_NAME, "topic");
         } catch (TimeoutException | IOException e) {
             log.error(e.getMessage());
@@ -38,7 +43,6 @@ public class RabbitPublisher {
     public void publish(Serializable source, String routingKey) {
         try {
             channel.basicPublish(EXCHANGE_NAME, routingKey ,null, serialize(source));
-            log.info("[x] Sent '" + routingKey + ": " + source);
         } catch (IOException e) {
             log.error(e.getMessage());
         }
