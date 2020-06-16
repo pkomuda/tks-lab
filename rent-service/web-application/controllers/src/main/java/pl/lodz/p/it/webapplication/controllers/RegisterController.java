@@ -27,7 +27,7 @@ public @Data class RegisterController {
     public String register() {
         UserWeb client = new ClientWeb(username, password, firstName, lastName, false);
         rabbitPublisher.publish(client, "user.create");
-        userCrudAdapter.addUser(client);
+//        userCrudAdapter.addUser(client);
         return "registered";
     }
 }

@@ -20,6 +20,7 @@
         <module>ui-ports</module>
         <module>rest-ports</module>
         <module>soap-ports</module>
+        <module>mq-rentservice</module>
     </modules>
 
     <properties>

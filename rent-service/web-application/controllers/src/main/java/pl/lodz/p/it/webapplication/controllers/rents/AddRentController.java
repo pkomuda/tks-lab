@@ -1,8 +1,10 @@
 package pl.lodz.p.it.webapplication.controllers.rents;
 
 import lombok.Data;
+import pl.lodz.p.it.tks.rest.domainmodel.Rent;
 import pl.lodz.p.it.webapplication.controllers.LoginController;
 import pl.lodz.p.it.webapplication.controllers.ViewAccessController;
+import pl.lodz.p.it.webapplication.controllers.mq.RabbitPublisher;
 import uiports.aggregates.rentweb.RentWebCrudAdapter;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +16,8 @@ import javax.inject.Named;
 @RequestScoped
 public @Data class AddRentController {
 
+    @Inject
+    private RabbitPublisher rabbitPublisher;
     @Inject
     private RentWebCrudAdapter rentCrudAdapter;
     @Inject
