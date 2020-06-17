@@ -50,8 +50,7 @@ public @Data class AddUserController implements Serializable {
                 user = new ClientWeb(username, password, firstName, lastName, active);
                 break;
         }
-        rabbitPublisher.publish(user, "`user.create`");
-//        userCrudAdapter.addUser(user);
+        rabbitPublisher.publish(user, "user.create");
         endConversation();
         return "admin";
     }

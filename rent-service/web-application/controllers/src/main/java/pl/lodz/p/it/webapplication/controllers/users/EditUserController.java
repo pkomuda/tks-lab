@@ -47,7 +47,6 @@ public @Data class EditUserController {
         } else if (user instanceof ClientWeb) {
             temp = new ClientWeb(username, password, firstName, lastName, active);
         }
-//        userCrudAdapter.updateUser(username, temp);
         rabbitPublisher.publish(temp, "user.edit");
         return "admin";
     }

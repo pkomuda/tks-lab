@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.mqrestservice;
+package pl.lodz.p.it.tks.mqrentservice;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 
-import static pl.lodz.p.it.tks.mqrestservice.SerializationUtils.deserialize;
+import static pl.lodz.p.it.tks.mqrentservice.SerializationUtils.deserialize;
 
 @Slf4j
 @ApplicationScoped
